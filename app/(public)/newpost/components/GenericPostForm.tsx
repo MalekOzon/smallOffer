@@ -119,7 +119,7 @@ export default function GenericPostForm({
               {...register("city")}
               className="mt-1 appearance-none w-full p-3 border-2 rounded-lg bg-cwhite text-gray-700 focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200"
               style={{
-                borderColor: "#34A278", // لون الحدود
+                borderColor: "#277F60", // لون الحدود
               }}
             >
               <option value="">اختر الإدخال</option>
