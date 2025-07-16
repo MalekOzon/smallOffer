@@ -12,7 +12,7 @@ const ProfileCard = () => {
   if (isLoading) return <LoadingSpinner />;
   return (
     <div className="w-full lg:h-[29vh] flex p-6 bg-white rounded-lg shadow-md text-right ">
-      <div className="flex max-lg:p-4 w-full justify-center items-center flex-col">
+      <div className="flex w-full justify-center items-center flex-col">
         <div className="w-24 h-24 rounded-full overflow-hidden  border-1 border-cgreen">
           <Image
             src={userAvatar} // استبدل بمسار صورة المستخدم الفعلي
