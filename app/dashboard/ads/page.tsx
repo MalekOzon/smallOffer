@@ -18,7 +18,7 @@ const AdsPage = () => {
   if (isLoading) return <SkeletonNotificationSettings />;
 
   return (
-    <div className="w-full  ">
+    <div className=" mt-2  ">
       <Title title="إعلاناتي" isPostPage={true} />
       {totalPages == 0 && (
         <div className="flex flex-col items-center justify-center py-16 bg-white rounded-lg shadow-sm border border-gray-100 my-8">

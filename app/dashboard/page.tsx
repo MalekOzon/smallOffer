@@ -17,7 +17,7 @@ export default function DashboardHomePage() {
   const { data, isLoading } = useGetUserPosts(1);
   const { data: dataUser } = useGetUserInfo();
   return (
-    <div className="w-full ">
+    <div className="  mt-2 ">
       {/* العنوان */}
       <Title title="متجري" isPostPage={false} />
 

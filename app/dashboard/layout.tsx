@@ -16,11 +16,13 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
       </div>
 
       {/* المحتوى الرئيسي */}
-      <div className="flex-1 flex flex-col h-full">
+      <div className="flex-1 flex flex-col h-full w-full">
         <Header onMenuClick={() => setSidebarOpen(true)} />
 
-        <main className="flex-1 overflow-y-auto sm:p-4 max-sm:w-full max-sm:-mr-1 bg-gray-200 rounded-md text-right">
-          {children}
+        <main className="w-full h-full  max-sm:w-full max-sm:-mr-1 bg-gray-200 rounded-md text-right">
+          <div className="w-[96%] mx-[2%] h-full">
+            {children}
+          </div>
         </main>
       </div>
 
