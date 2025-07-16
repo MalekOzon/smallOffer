@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap');
+
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --font-rubik: 'Rubik', cursive;
+  }
+}
+
+@theme {
+  --font-rubik: var(--font-rubik);
+
+  --color-cyellow: #FFF2B2;
+  --color-cgray: #EAEAEA;
+  --color-chgreen: #34A278;
+  --color-cwhite: #FAFAFA;
+  --color-clemon: #F3E9DC;
+  --color-clightgray:#CCCCCC ;
+  --color-cdarkgray: #666666;
+  --color-corange: #FF8541;
+  --color-cblue: #426DD1;
+  --color-cgreen: #277F60;
+  --text-1: 40px;
+  --text-2: 32px;
+  --text-3: 28px;
+  --text-4: 24px;
+  --text-5: 20px;
+  --text-6: 16px;
+  --text-p: 12px;
+}
+
+body {
+  font-family: 'Rubik', sans-serif;
+}
+
+/* تحسين أيقونات التصنيفات في النافبار */
+.category-img {
+  transition: filter 0.2s;
+  filter: none;
+  display: inline-block;
+  vertical-align: middle;
+}
+.group:hover .category-img {
+  filter: brightness(0) saturate(100%) invert(56%) sepia(16%) saturate(1162%) hue-rotate(110deg) brightness(93%) contrast(92%);
+}
+
+/* أيقونة خضراء عند الهوفر على العناصر الفرعية */
+.icon-green {
+  filter: brightness(0) saturate(100%) invert(56%) sepia(16%) saturate(1162%) hue-rotate(110deg) brightness(93%) contrast(92%) !important;
+}
+
+/* لون أخضر للـ checkbox عند التفعيل */
+.custom-checkbox:checked {
+  accent-color: #34A278;
+}
+
+.input {
+  @apply w-full px-4 py-2 border rounded focus:outline-none focus:ring focus:ring-blue-200;
+}
+

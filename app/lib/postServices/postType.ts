@@ -1,0 +1,104 @@
+
+export type GenericPostPayload  = {
+  title: string;
+  description: string;
+  price: string;
+  price_type: "fixed" | "negotiable";
+  city: string;
+  hood: string;
+  detailed_location?: string; // جعلها اختيارية
+  cover_image?: string;
+  gallery?: string[]; // جعلها اختيارية
+  category: string;
+  subcategory: string;
+};
+
+export type CarDetailsPayload = {
+  car: {
+    external_features?: string[];      // نفترض array من النصوص
+    internal_features?: string[];      // array من النصوص
+    protection?: string[];             // array من النصوص
+    number_of_doors?: "two_three" | "four" | "five" | string; // لو عندك خيارات محددة استخدم union type
+    hu?: string;                      // تاريخ بصيغة ISO string
+    environmental_sticker?: string;
+    class_of_pollutants?: string;
+    color?: string;
+    internal_materials?: string;
+    brand: string;
+    model: string;
+    mileage: number;
+    status?: "damaged" | "used" | "new" | string;  // مثال للـ union type حسب الحالات الممكنة
+    first_registration?: string;       // تاريخ ISO string
+    fuel_type?: "gasoline" | "diesel" | "electric" | "hybrid" | string;
+    performance?: string;
+    gearbox?: "manual" | "automatic" | string;
+    car_type?: "small_car" | "sedan" | "suv" | "truck" | string;
+  };
+};
+
+export type LandDetailsPayload = {
+  outdoorspace: {
+    land_type: "residential_plot" | "garden" | "agriculture_forest" | "other_property";
+    offer_type: "sale" | "rent";
+    area: number;
+    available_from?: string; 
+  };
+};
+
+export type HouseDetailsPayload = {
+  house: {
+    available_from: string;
+    general_characteristics: string[];
+    floor: string;
+    living_space: number;
+    furniture: string[];
+    bath: number;
+    real_estate_space: number;
+    house_type: string;
+    bed_room: number;
+    room: number;
+    year: number;
+    offer_type: "sale" | "rent";
+  };
+};
+
+export type ApartmentDetailsPayload = {
+  apartment: {
+    available_from: string;
+    general_characteristics: string[];
+    floor: number;
+    living_space: number;
+    furniture: string[];
+    bath: number;
+    bed_room: number;
+    room: number;
+    year: number;
+    offer_type: "sale" | "rent";
+  };
+};
+
+export type ElectronicsDetailsPayload = {
+  electronics: {
+    status: "new" | "used_very_good" | "working_good" | "defective";
+  };
+};
+
+export type MobileDetailsPayload = {
+  mobile: {
+    brand: string;
+    status: "new" | "used_very_good" | "working_good" | "defective";
+    color: string;
+    accessories: boolean;
+    
+  };
+};
+
+export type CarPostPayload = GenericPostPayload  & CarDetailsPayload;
+export type LandPostPayload = GenericPostPayload & LandDetailsPayload;
+export type HousePostPayload = GenericPostPayload & HouseDetailsPayload;
+export type ApartmentPostPayload = GenericPostPayload & ApartmentDetailsPayload;
+export type ElectronicsPostPayload = GenericPostPayload & ElectronicsDetailsPayload;
+export type MobilePostPayload = GenericPostPayload & MobileDetailsPayload;
+
+// ---------------------------------------------------------------------------------
+
