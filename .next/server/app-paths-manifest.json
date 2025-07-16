@@ -1,0 +1,7 @@
+{
+  "/(public)/newpost/page": "app/(public)/newpost/page.js",
+  "/(public)/page": "app/(public)/page.js",
+  "/_not-found/page": "app/_not-found/page.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/login/page": "app/login/page.js"
+}
