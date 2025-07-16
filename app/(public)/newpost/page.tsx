@@ -107,7 +107,7 @@ export default function NewPostPage() {
               <label className="block font-medium text-gray-700">التصنيف</label>
               <select
                 className="mt-1  w-full p-3 border-2 rounded-lg bg-cwhite text-gray-700 focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200"
-                style={{ borderColor: "#34A278" }}
+                style={{ borderColor: "#277F60" }}
                 value={category}
                 onChange={(e) => {
                   setCategory(e.target.value);
@@ -128,7 +128,7 @@ export default function NewPostPage() {
               </label>
               <select
                 className="mt-1  w-full p-3 border-2 rounded-lg bg-cwhite text-gray-700 focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200"
-                style={{ borderColor: "#34A278" }}
+                style={{ borderColor: "#277F60" }}
                 value={subcategory}
                 onChange={(e) => setSubcategory(e.target.value)}
               >
