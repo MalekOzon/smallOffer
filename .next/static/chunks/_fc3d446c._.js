@@ -626,6 +626,9 @@ function useLogin(setNotification) {
                     const detail = error.response?.data?.detail;
                     const errors = error.response?.data?.errors;
                     const messages = errors ? extractMessages(errors) : [];
+                    console.log("detail: ", detail);
+                    console.log("errors: ", errors);
+                    console.log("messages: ", messages);
                     const fallbackMessage = detail || "حدث خطأ غير معروف.";
                     const finalMessage = messages.length ? messages.join("\n") : fallbackMessage;
                     setNotification({

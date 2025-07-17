@@ -1,6 +1,12 @@
 {
+  "/(public)/newpost/page": "app/(public)/newpost/page.js",
+  "/(public)/page": "app/(public)/page.js",
   "/_not-found/page": "app/_not-found/page.js",
   "/dashboard/ads/page": "app/dashboard/ads/page.js",
+  "/dashboard/change-password/page": "app/dashboard/change-password/page.js",
+  "/dashboard/favorites/page": "app/dashboard/favorites/page.js",
   "/dashboard/page": "app/dashboard/page.js",
-  "/favicon.ico/route": "app/favicon.ico/route.js"
+  "/dashboard/profile/page": "app/dashboard/profile/page.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/login/page": "app/login/page.js"
 }

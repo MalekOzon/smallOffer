@@ -24,9 +24,13 @@ export function useCreatePost(setNotification: NotificationSetter) {
         
         const detail = error.response?.data?.detail;
         const errors = error.response?.data?.errors;
-        const messages = errors ? extractMessages(errors) : [];
+        let messages = errors ? extractMessages(errors) : [];
+        if (!messages.length) {
+          messages = extractMessages(error.response?.data || {});
+        }
+        console.log("messages: ", messages);
         const fallbackMessage = detail || "حدث خطأ غير معروف.";
-        const finalMessage = messages.length ? messages.join("\n"): fallbackMessage;
+        const finalMessage = messages.length ? messages.join("\n") : fallbackMessage;
         setNotification({
           message: finalMessage,
           type: "error",
@@ -66,9 +70,13 @@ export function useCreateCarPost(setNotification: NotificationSetter) {
         
         const detail = error.response?.data?.detail;
         const errors = error.response?.data?.errors;
-        const messages = errors ? extractMessages(errors) : [];
+        let messages = errors ? extractMessages(errors) : [];
+        if (!messages.length) {
+          messages = extractMessages(error.response?.data || {});
+        }
+        console.log("messages: ", messages);
         const fallbackMessage = detail || "حدث خطأ غير معروف.";
-        const finalMessage = messages.length ? messages.join("\n"): fallbackMessage;
+        const finalMessage = messages.length ? messages.join("\n") : fallbackMessage;
         setNotification({
           message: finalMessage,
           type: "error",
@@ -109,9 +117,13 @@ export function useCreateElectronicsPost(setNotification: NotificationSetter) {
         
         const detail = error.response?.data?.detail;
         const errors = error.response?.data?.errors;
-        const messages = errors ? extractMessages(errors) : [];
+        let messages = errors ? extractMessages(errors) : [];
+        if (!messages.length) {
+          messages = extractMessages(error.response?.data || {});
+        }
+        console.log("messages: ", messages);
         const fallbackMessage = detail || "حدث خطأ غير معروف.";
-        const finalMessage = messages.length ? messages.join("\n"): fallbackMessage;
+        const finalMessage = messages.length ? messages.join("\n") : fallbackMessage;
         setNotification({
           message: finalMessage,
           type: "error",
@@ -152,9 +164,13 @@ export function useCreateHousePost(setNotification: NotificationSetter) {
         
         const detail = error.response?.data?.detail;
         const errors = error.response?.data?.errors;
-        const messages = errors ? extractMessages(errors) : [];
+        let messages = errors ? extractMessages(errors) : [];
+        if (!messages.length) {
+          messages = extractMessages(error.response?.data || {});
+        }
+        console.log("messages: ", messages);
         const fallbackMessage = detail || "حدث خطأ غير معروف.";
-        const finalMessage = messages.length ? messages.join("\n"): fallbackMessage;
+        const finalMessage = messages.length ? messages.join("\n") : fallbackMessage;
         setNotification({
           message: finalMessage,
           type: "error",
@@ -195,9 +211,13 @@ export function useCreateLandPost(setNotification: NotificationSetter) {
         
         const detail = error.response?.data?.detail;
         const errors = error.response?.data?.errors;
-        const messages = errors ? extractMessages(errors) : [];
+        let messages = errors ? extractMessages(errors) : [];
+        if (!messages.length) {
+          messages = extractMessages(error.response?.data || {});
+        }
+        console.log("messages: ", messages);
         const fallbackMessage = detail || "حدث خطأ غير معروف.";
-        const finalMessage = messages.length ? messages.join("\n"): fallbackMessage;
+        const finalMessage = messages.length ? messages.join("\n") : fallbackMessage;
         setNotification({
           message: finalMessage,
           type: "error",
@@ -239,9 +259,13 @@ export function useCreateApartmentPost(setNotification: NotificationSetter) {
         
         const detail = error.response?.data?.detail;
         const errors = error.response?.data?.errors;
-        const messages = errors ? extractMessages(errors) : [];
+        let messages = errors ? extractMessages(errors) : [];
+        if (!messages.length) {
+          messages = extractMessages(error.response?.data || {});
+        }
+        console.log("messages: ", messages);
         const fallbackMessage = detail || "حدث خطأ غير معروف.";
-        const finalMessage = messages.length ? messages.join("\n"): fallbackMessage;
+        const finalMessage = messages.length ? messages.join("\n") : fallbackMessage;
         setNotification({
           message: finalMessage,
           type: "error",
@@ -283,9 +307,13 @@ export function useCreateMobilePost(setNotification: NotificationSetter) {
         
         const detail = error.response?.data?.detail;
         const errors = error.response?.data?.errors;
-        const messages = errors ? extractMessages(errors) : [];
+        let messages = errors ? extractMessages(errors) : [];
+        if (!messages.length) {
+          messages = extractMessages(error.response?.data || {});
+        }
+        console.log("messages: ", messages);
         const fallbackMessage = detail || "حدث خطأ غير معروف.";
-        const finalMessage = messages.length ? messages.join("\n"): fallbackMessage;
+        const finalMessage = messages.length ? messages.join("\n") : fallbackMessage;
         setNotification({
           message: finalMessage,
           type: "error",

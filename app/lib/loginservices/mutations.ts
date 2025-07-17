@@ -26,28 +26,37 @@ import { useRouter } from "next/navigation";
 import axios from "axios";
 import { useEmail } from "../context/EmailContext";
 import { usePhone } from "../context/PhoneContext";
-
+import { fieldNameMap } from "../Errors"
 // --------------Function--------------------
-// src/lib/helpers.ts
-export function extractMessages(obj: {
-  [key: string]: string[] | { [key: string]: unknown };
-}): string[] {
+export function extractMessages(
+  obj: { [key: string]: string | string[] | { [key: string]: unknown } },
+  parentKey = ""
+): string[] {
   const messages: string[] = [];
 
-  const traverse = (o: {
-    [key: string]: string[] | { [key: string]: unknown };
-  }) => {
+  const traverse = (
+    o: { [key: string]: string | string[] | { [key: string]: unknown } },
+    parentKey = ""
+  ) => {
     for (const key in o) {
       const value = o[key];
+      // استخدم الاسم العربي إذا كان موجودًا في الجدول
+      const fieldName = parentKey ? `${parentKey}.${key}` : key;
+      const displayName = fieldNameMap[key] || key;
       if (Array.isArray(value)) {
-        messages.push(...value);
+        value.forEach(msg => messages.push(`${displayName}: ${msg}`));
+      } else if (typeof value === "string") {
+        messages.push(`${displayName}: ${value}`);
       } else if (typeof value === "object" && value !== null) {
-        traverse(value as { [key: string]: string[] | { [key: string]: unknown } });
+        traverse(
+          value as { [key: string]: string | string[] | { [key: string]: unknown } },
+          fieldName
+        );
       }
     }
   };
 
-  traverse(obj);
+  traverse(obj, parentKey);
   return messages;
 }
 
@@ -249,6 +258,10 @@ export function useLogin(
 
         const messages = errors ? extractMessages(errors) : [];
 
+        console.log("detail: ", detail);
+        console.log("errors: ", errors);
+        console.log("messages: ", messages);
+        
         const fallbackMessage = detail || "حدث خطأ غير معروف.";
         const finalMessage = messages.length
           ? messages.join("\n")

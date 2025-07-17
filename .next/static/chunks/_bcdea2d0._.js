@@ -184,19 +184,25 @@ var _s = __turbopack_context__.k.signature(), _s1 = __turbopack_context__.k.sign
 ;
 ;
 ;
-function extractMessages(obj) {
+function extractMessages(obj, parentKey = "") {
     const messages = [];
-    const traverse = (o)=>{
+    const fieldNameMap;
+    const traverse = (o, parentKey = "")=>{
         for(const key in o){
             const value = o[key];
+            // استخدم الاسم العربي إذا كان موجودًا في الجدول
+            const fieldName = parentKey ? `${parentKey}.${key}` : key;
+            const displayName = fieldNameMap[key] || key;
             if (Array.isArray(value)) {
-                messages.push(...value);
+                value.forEach((msg)=>messages.push(`${displayName}: ${msg}`));
+            } else if (typeof value === "string") {
+                messages.push(`${displayName}: ${value}`);
             } else if (typeof value === "object" && value !== null) {
-                traverse(value);
+                traverse(value, fieldName);
             }
         }
     };
-    traverse(obj);
+    traverse(obj, parentKey);
     return messages;
 }
 function useCreateUserFirst(setNotification) {
@@ -426,6 +432,9 @@ function useLogin(setNotification) {
                     const detail = error.response?.data?.detail;
                     const errors = error.response?.data?.errors;
                     const messages = errors ? extractMessages(errors) : [];
+                    console.log("detail: ", detail);
+                    console.log("errors: ", errors);
+                    console.log("messages: ", messages);
                     const fallbackMessage = detail || "حدث خطأ غير معروف.";
                     const finalMessage = messages.length ? messages.join("\n") : fallbackMessage;
                     setNotification({
@@ -953,11 +962,11 @@ const getUserInfo = async ()=>{
     return response.data;
 };
 const getUserPosts = async (page)=>{
-    const res = await __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$lib$2f$loginservices$2f$api$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].get(`accounts/dashboard/posts/cards/?page=${page}&page_size=8`);
+    const res = await __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$lib$2f$loginservices$2f$api$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].get(`accounts/dashboard/posts/cards/?page=${page}&page_size=8?ordering=-created_at`);
     return res.data;
 };
 const getUserFav = async (page)=>{
-    const res = await __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$lib$2f$loginservices$2f$api$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].get(`accounts/dashboard/favorites/cards/?page=${page}&page_size=8`);
+    const res = await __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$lib$2f$loginservices$2f$api$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].get(`accounts/dashboard/favorites/cards/?page=${page}&page_size=8?ordering=-created_at`);
     return res.data;
 };
 var _c;
@@ -1249,7 +1258,7 @@ const Header = ({ onMenuClick })=>{
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
                         src: __TURBOPACK__imported__module__$5b$project$5d2f$public$2f$resourses$2f$userAvatar$2e$svg$2e$mjs__$7b$__IMAGE__$3d3e$__$225b$project$5d2f$public$2f$resourses$2f$userAvatar$2e$svg__$28$static__in__ecmascript$2922$__$7d$__$5b$app$2d$client$5d$__$28$structured__image__object$2c$__ecmascript$29$__["default"],
                         alt: "User Avatar",
-                        className: "w-14 h-14 rounded-full"
+                        className: "w-14 h-14 rounded-full object-cover border-2 border-cgreen mr-2"
                     }, void 0, false, {
                         fileName: "[project]/app/components/dashborad/Header.tsx",
                         lineNumber: 113,

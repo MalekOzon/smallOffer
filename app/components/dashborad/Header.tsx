@@ -113,7 +113,7 @@ const Header = ({ onMenuClick }: { onMenuClick?: () => void }) => {
         <Image
           src={userAvatar}
           alt="User Avatar"
-          className="w-14 h-14 rounded-full"
+          className="w-14 h-14 rounded-full object-cover border-2 border-cgreen mr-2"
         />
 
         <div className={`relative mr-1 ${!isMobile ? "group" : ""}`}>

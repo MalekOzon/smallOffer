@@ -47,7 +47,7 @@ export const getUserInfo= async () => {
 // Get user Ads
 export const getUserPosts = async (page: number) => {
   const res = await axiosInstance.get<UserAdsResponse>(
-    `accounts/dashboard/posts/cards/?page=${page}&page_size=8`
+    `accounts/dashboard/posts/cards/?page=${page}&page_size=8?ordering=-created_at`
   );
   return res.data;
 };
@@ -55,7 +55,7 @@ export const getUserPosts = async (page: number) => {
 // Get user Fav
 export const getUserFav = async (page: number) => {
   const res = await axiosInstance.get<UserAdsResponse>(
-    `accounts/dashboard/favorites/cards/?page=${page}&page_size=8`
+    `accounts/dashboard/favorites/cards/?page=${page}&page_size=8?ordering=-created_at`
   );
   return res.data;
 };

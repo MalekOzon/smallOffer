@@ -5,7 +5,7 @@
   "static/chunks/node_modules_next_18c7f1c7._.js",
   "static/chunks/node_modules_axios_lib_99999129._.js",
   "static/chunks/node_modules_ce29fb76._.js",
-  "static/chunks/_fc3d446c._.js"
+  "static/chunks/_4e7cae07._.js"
 ],
     source: "dynamic"
 });

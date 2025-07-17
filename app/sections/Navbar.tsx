@@ -557,8 +557,11 @@ const Navbar = () => {
                         alt={cat.name}
                         width={24}
                         height={24}
-                        className="mr-2 transition-all duration-200 group-hover:invert group-hover:brightness-0 group-hover:filter group-hover:drop-shadow group-hover:text-white"
-                      />
+                        className=" mr-2 transition-all duration-200 group-hover:invert group-hover:brightness-0 group-hover:filter group-hover:drop-shadow group-hover:text-white"
+                        style={{
+                          filter:
+                            "brightness(0) saturate(100%) invert(56%) sepia(16%) saturate(1162%) hue-rotate(110deg) brightness(93%) contrast(92%)",
+                        }}                      />
                       <span className="mr-2 transition-all duration-200 group-hover:text-white">
                         {cat.name}
                       </span>

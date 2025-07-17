@@ -254,19 +254,25 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$lib$2f$context$2f$Pho
 ;
 ;
 ;
-function extractMessages(obj) {
+function extractMessages(obj, parentKey = "") {
     const messages = [];
-    const traverse = (o)=>{
+    const fieldNameMap;
+    const traverse = (o, parentKey = "")=>{
         for(const key in o){
             const value = o[key];
+            // استخدم الاسم العربي إذا كان موجودًا في الجدول
+            const fieldName = parentKey ? `${parentKey}.${key}` : key;
+            const displayName = fieldNameMap[key] || key;
             if (Array.isArray(value)) {
-                messages.push(...value);
+                value.forEach((msg)=>messages.push(`${displayName}: ${msg}`));
+            } else if (typeof value === "string") {
+                messages.push(`${displayName}: ${value}`);
             } else if (typeof value === "object" && value !== null) {
-                traverse(value);
+                traverse(value, fieldName);
             }
         }
     };
-    traverse(obj);
+    traverse(obj, parentKey);
     return messages;
 }
 function useCreateUserFirst(setNotification) {
@@ -428,6 +434,9 @@ function useLogin(setNotification) {
                 const detail = error.response?.data?.detail;
                 const errors = error.response?.data?.errors;
                 const messages = errors ? extractMessages(errors) : [];
+                console.log("detail: ", detail);
+                console.log("errors: ", errors);
+                console.log("messages: ", messages);
                 const fallbackMessage = detail || "حدث خطأ غير معروف.";
                 const finalMessage = messages.length ? messages.join("\n") : fallbackMessage;
                 setNotification({
@@ -854,11 +863,11 @@ const getUserInfo = async ()=>{
     return response.data;
 };
 const getUserPosts = async (page)=>{
-    const res = await __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$lib$2f$loginservices$2f$api$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].get(`accounts/dashboard/posts/cards/?page=${page}&page_size=8`);
+    const res = await __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$lib$2f$loginservices$2f$api$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].get(`accounts/dashboard/posts/cards/?page=${page}&page_size=8?ordering=-created_at`);
     return res.data;
 };
 const getUserFav = async (page)=>{
-    const res = await __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$lib$2f$loginservices$2f$api$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].get(`accounts/dashboard/favorites/cards/?page=${page}&page_size=8`);
+    const res = await __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$lib$2f$loginservices$2f$api$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].get(`accounts/dashboard/favorites/cards/?page=${page}&page_size=8?ordering=-created_at`);
     return res.data;
 };
 }}),

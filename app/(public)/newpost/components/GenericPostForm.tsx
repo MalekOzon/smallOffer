@@ -6,6 +6,7 @@ import { syrianGovernorates } from "@/app/signup/step2/syrianGovernorates";
 import { useCreatePost } from "@/app/lib/postServices/postMutations";
 import { useState } from "react";
 import Notification from "@/app/components/ui/Notification";
+import { Search } from "lucide-react";
 
 interface GenericPostFormProps {
   Gcategory: string;
@@ -242,22 +243,29 @@ export default function GenericPostForm({
           )}
         </div>
         <hr className="mt-6 mb-3 text-clightgray" />
-        <div className="flex justify-end max-sm:flex-col max-sm:justify-center max-sm:items-center max-sm:gap-2 max-sm:my-3 mb-5 ">
-          <button
-            type="submit"
-            className="mt-8 ml-6 max-sm:ml-0 text-white rounded"
-          >
-            <span className="outline-2 outline-cgreen text-gray-800 hover:bg-chgreen hover:outline-chgreen hover:text-cwhite py-3 px-[100px] max-sm:px-[140px]  rounded text-xl">
-              معاينة
-            </span>
-          </button>
+        <div className="flex justify-end max-sm:flex-col max-sm:justify-center max-sm:items-center max-sm:gap-4 mb-5">
+        {/* زر "معاينة" */}
+        <button
+          onClick={() => (window.location.href = "/perview")}
+          type="submit"
+          className="mt-8 ml-6 max-sm:ml-0 text-white rounded"
+        >
+          <span className="flex items-center group outline-2 outline-cgreen text-gray-800 hover:bg-chgreen hover:outline-chgreen hover:text-cwhite py-3 px-12 max-sm:px-[100px] rounded text-xl transition-all duration-300">
+            <Search className="ml-1 text-cgreen group-hover:text-cwhite" />{" "}
+            معاينة
+          </span>
+        </button>
 
-          <button type="submit" className="mt-8 text-white rounded  ">
-            <span className="bg-cgreen hover:bg-chgreen py-3 px-[150px] rounded text-xl">
-              {isLoading ? "جار النشر ..." : "نشر"}
-            </span>
-          </button>
-        </div>
+        {/* زر "نشر" */}
+        <button
+          type="submit"
+          className="mt-8 ml-6 max-sm:ml-0 text-white rounded"
+        >
+          <span className="bg-cgreen hover:bg-chgreen py-3 px-32  rounded text-xl transition-all duration-300">
+            {isLoading ? "جار النشر ..." : "نشر"}
+          </span>
+        </button>
+      </div>
       </section>
     </form>
   );

@@ -250,7 +250,7 @@ const schema = z.object({
   lastName: z.string().min(2, "الاسم الأخير يجب أن يكون أطول من حرفين"),
   username: z.string().min(2, "اسم المستخدم يجب أن يكون أطول من 2 أحرف"),
   phoneCode: z.string(),
-  phoneNumber: z.string().min(1, "رقم الهاتف غير صحيح"),
+  phoneNumber: z.string().min(9, "رقم الهاتف غير صحيح"),
   city: z.string(),
   hood: z.string().min(2, "المنطقة يجب أن تكون صحيحة"),
   detailed_location: z.string().min(5, "تفاصيل العنوان يجب أن تكون صحيحة"),

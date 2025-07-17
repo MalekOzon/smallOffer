@@ -4,8 +4,7 @@ import Notification from "@/app/components/ui/Notification";
 import { ElectronicsPostPayload } from "@/app/lib/postServices/postType";
 import { useCreateElectronicsPost } from "@/app/lib/postServices/postMutations";
 import { syrianGovernorates } from "@/app/signup/step2/syrianGovernorates";
-
-
+import { Search } from "lucide-react";
 
 interface PostFormProps {
   Gcategory: string;
@@ -20,15 +19,14 @@ export default function ElectronicsForm({
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<ElectronicsPostPayload>({
-  });
+  } = useForm<ElectronicsPostPayload>({});
 
-  const STATUS_CHOICES=[
+  const STATUS_CHOICES = [
     ["new", "جديد"],
     ["used_very_good", "مستعمل جيد جداً"],
     ["working_good", "يعمل بشكل جيد"],
     ["defective", "عيب (يحتاج صيانة)"],
-    ]
+  ];
 
   console.log({
     category: Gcategory,
@@ -43,10 +41,9 @@ export default function ElectronicsForm({
   const { isPending: isLoading } = CreateElectronicsPost;
 
   const onSubmit = (data: ElectronicsPostPayload) => {
-
-    console.log("daTA: ",data)
+    console.log("daTA: ", data);
     const formData = new FormData();
-  
+
     formData.append("title", data.title ?? "");
     formData.append("description", data.description ?? "");
     formData.append("price", data.price ?? "");
@@ -54,11 +51,8 @@ export default function ElectronicsForm({
     formData.append("city", data.city ?? "");
     formData.append("hood", data.hood ?? "");
     formData.append("detailed_location", data.detailed_location ?? "");
-  
-    if (
-      data.cover_image &&
-      typeof window !== "undefined"
-    ) {
+
+    if (data.cover_image && typeof window !== "undefined") {
       if (
         typeof data.cover_image === "object" &&
         "length" in data.cover_image &&
@@ -71,18 +65,21 @@ export default function ElectronicsForm({
         formData.append("cover_image", data.cover_image);
       }
     }
-  
-    formData.append("category",  Gcategory ); 
-    formData.append("subcategory",  Gsubcategory );
-  
+
+    formData.append("category", Gcategory);
+    formData.append("subcategory", Gsubcategory);
+
     const electronicsDetails = {
       status: data.electronics.status,
     };
-  
+
     formData.append("electronics_details", JSON.stringify(electronicsDetails));
-  
+
     if (data.gallery && data.gallery.length > 0) {
-      if (typeof globalThis.FileList !== 'undefined' && data.gallery instanceof globalThis.FileList) {
+      if (
+        typeof globalThis.FileList !== "undefined" &&
+        data.gallery instanceof globalThis.FileList
+      ) {
         Array.from(data.gallery).forEach((img: File) => {
           formData.append("gallery", img);
         });
@@ -93,21 +90,18 @@ export default function ElectronicsForm({
       }
     }
 
-  
     CreateElectronicsPost.mutate(formData);
   };
-  
+
   function isBlob(obj: unknown): obj is Blob {
     return (
       typeof window !== "undefined" &&
       typeof obj === "object" &&
       obj !== null &&
-      typeof (window.Blob) !== "undefined" &&
+      typeof window.Blob !== "undefined" &&
       obj instanceof window.Blob
     );
   }
-
- 
 
   return (
     <form
@@ -133,15 +127,17 @@ export default function ElectronicsForm({
           العام والموقع.
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-          <div className="flex flex-col gap-2">
+          <div className="sm:ml-16">
             <label className="block font-medium text-gray-700">
               اسم المنتج
             </label>
             <input
               {...register("title")}
-              className="input w-full border-2 border-cgreen bg-cwhite  text-gray-800 rounded-lg px-4 py-3  focus:outline-none focus:ring-2 focus:ring-green-400"
+              type="text"
               placeholder="اسم المنتج"
+              className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
             />
+
             {errors.title && (
               <p className="text-red-600 text-sm mt-1">
                 {String(errors.title.message)}
@@ -149,7 +145,7 @@ export default function ElectronicsForm({
             )}
           </div>
 
-          <div className="flex flex-col gap-2">
+          <div className="sm:ml-16">
             <label className="block font-medium text-gray-700">
               صور المنتج
             </label>
@@ -157,16 +153,19 @@ export default function ElectronicsForm({
               type="file"
               multiple
               {...register("gallery")}
-              className="input w-full border-2 border-cgreen bg-cwhite  text-gray-800 rounded-lg px-4 py-2"
+              className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
             />
           </div>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-          <div className="flex flex-col gap-2">
+          <div className="sm:ml-16">
             <label className="block font-medium text-gray-700">المحافظة</label>
             <select
               {...register("city")}
-              className="input w-full border-2 border-cgreen bg-cwhite  text-gray-800 rounded-lg px-4 py-3"
+              className="mt-1  w-full p-3 border-2 rounded-lg bg-cwhite text-gray-700 focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200"
+              style={{
+                borderColor: "#277F60", // لون الحدود
+              }}
             >
               <option value="">اختر الإدخال</option>
               {syrianGovernorates.map((gov) => (
@@ -181,11 +180,12 @@ export default function ElectronicsForm({
               </p>
             )}
           </div>
-          <div className="flex flex-col gap-2">
+
+          <div className="sm:ml-16">
             <label className="block font-medium text-gray-700">المنطقة</label>
             <input
               {...register("hood")}
-              className="input w-full border-2 border-cgreen bg-cwhite  text-gray-800 rounded-lg px-4 py-3"
+              className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
               placeholder="المنطقة"
             />
             {errors.hood && (
@@ -195,14 +195,14 @@ export default function ElectronicsForm({
             )}
           </div>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6 sm:ml-16">
           <div className="flex flex-col gap-2 md:col-span-2">
             <label className="block font-medium text-gray-700">
               تفاصيل العنوان
             </label>
             <input
               {...register("detailed_location")}
-              className="input w-full border-2 border-cgreen bg-cwhite  text-gray-800 rounded-lg px-4 py-3"
+              className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
               placeholder="تفاصيل العنوان"
             />
             {errors.detailed_location && (
@@ -212,14 +212,14 @@ export default function ElectronicsForm({
             )}
           </div>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:ml-16">
           <div className="flex flex-col gap-2 md:col-span-2">
             <label className="block font-medium text-gray-700">
               وصف المنتج
             </label>
             <textarea
               {...register("description")}
-              className="input w-full h-28 border-2 border-cgreen bg-cwhite  text-gray-800 rounded-lg px-4 py-3  focus:outline-none focus:ring-2 focus:ring-green-400 resize-none"
+              className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
               placeholder="ادخل وصف المنتج هنا"
             />
             {errors.description && (
@@ -241,13 +241,13 @@ export default function ElectronicsForm({
           معرفة القيمة بسهولة.
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-          <div className="flex flex-col gap-2">
+          <div className="sm:ml-16">
             <label className="block font-medium text-gray-700">
               سعر المنتج (السعر بالليرة السورية)
             </label>
             <input
               {...register("price")}
-              className="input w-full border-2 border-cgreen bg-cwhite  text-gray-800 rounded-lg px-4 py-3  focus:outline-none focus:ring-2 focus:ring-green-400"
+              className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
               placeholder="ادخل سعر المنتج"
             />
             {errors.price && (
@@ -257,10 +257,11 @@ export default function ElectronicsForm({
             )}
           </div>
         </div>
+
         <div className="flex flex-col gap-2">
           <label className="block font-medium text-gray-700">نوع السعر</label>
-          <div className="flex gap-8 mt-3">
-            <label className="flex items-center gap-3 text-gray-700 cursor-pointer">
+          <div className="flex flex-wrap gap-4 mt-2">
+            <label className="ml-2 flex items-center gap-2 text-gray-700 cursor-pointer">
               <input
                 type="radio"
                 value="negotiable"
@@ -269,7 +270,7 @@ export default function ElectronicsForm({
               />
               <span>سعر قابل للتفاوض</span>
             </label>
-            <label className="flex items-center gap-3 text-gray-700 cursor-pointer">
+            <label className="flex items-center gap-2 text-gray-700 cursor-pointer">
               <input
                 type="radio"
                 value="fixed"
@@ -286,24 +287,64 @@ export default function ElectronicsForm({
           )}
         </div>
       </section>
+      {/* ------------------------------------------- */}
       <h2 className="font-bold text-lg mb-2">تفاصيل الإلكترونيات</h2>
-      
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div>
-          <label className="block font-medium mb-1">الحالة</label>
-          <select {...register("electronics.status")} className="input w-full" dir="rtl">
-            <option value="">اختر حالة الجهاز </option>
-            {STATUS_CHOICES.map(([value, label]) => (
-              <option key={value} value={value}>{label}</option>
-            ))}
-          </select>
-        </div>
+
+      <div className="sm:ml-16 bg-cwhite rounded-md p-4 shadow-md ">
+            <label className="block font-medium text-gray-700">
+              حالة الجهاز
+            </label>
+            {/* قائمة الخيارات */}
+            <div className="flex flex-wrap gap-4 mt-2">
+              {STATUS_CHOICES.map(([value, label]) => (
+                <label
+                  key={value}
+                  className="flex items-center gap-1 ml-2 text-gray-700 cursor-pointer"
+                >
+                  <input
+                    type="radio"
+                    value={value}
+                    {...register("electronics.status")} // اسم الحقل في النموذج
+                    className="accent-cgreen"
+                  />
+                  <span>{label}</span>
+                </label>
+              ))}
+            </div>
+            {/* عرض رسالة الخطأ إذا كانت موجودة */}
+            {errors.electronics?.status && (
+              <p className="text-red-600 text-sm mt-1">
+                {String(errors.electronics?.status.message)}
+              </p>
+            )}
+          </div>
+
+
+
+      <hr className="mt-6 mb-3 text-clightgray" />
+      <div className="flex justify-end max-sm:flex-col max-sm:justify-center max-sm:items-center max-sm:gap-4 mb-5">
+        {/* زر "معاينة" */}
+        <button
+          onClick={() => (window.location.href = "/perview")}
+          type="submit"
+          className="mt-8 ml-6 max-sm:ml-0 text-white rounded"
+        >
+          <span className="flex items-center group outline-2 outline-cgreen text-gray-800 hover:bg-chgreen hover:outline-chgreen hover:text-cwhite py-3 px-12 max-sm:px-[100px] rounded text-xl transition-all duration-300">
+            <Search className="ml-1 text-cgreen group-hover:text-cwhite" />{" "}
+            معاينة
+          </span>
+        </button>
+
+        {/* زر "نشر" */}
+        <button
+          type="submit"
+          className="mt-8 ml-6 max-sm:ml-0 text-white rounded"
+        >
+          <span className="bg-cgreen hover:bg-chgreen py-3 px-32  rounded text-xl transition-all duration-300">
+            {isLoading ? "جار النشر ..." : "نشر"}
+          </span>
+        </button>
       </div>
-
-
-      <button type="submit" className="bg-green-600 text-white px-6 py-2 rounded hover:bg-green-700 w-full">
-        {isLoading ? "جار نشر الإعلان ..." : "نشر"}
-      </button>
     </form>
   );
-} 
+}

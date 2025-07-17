@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useCreateCarPost } from "@/app/lib/postServices/postMutations";
 import Notification from "@/app/components/ui/Notification";
 import { syrianGovernorates } from "@/app/signup/step2/syrianGovernorates";
+import { Search } from "lucide-react";
 
 interface GenericPostFormProps {
   Gcategory: string;
@@ -266,7 +267,7 @@ export default function CarForm({
       )}
 
       {/* معلومات أساسية */}
-      <section className="bg-white rounded-2xl shadow-lg border border-gray-200 p-8 mb-6">
+      <section className="bg-white rounded-2xl shadow-lg border border-gray-200 p-8 mb-6 ">
         <h2 className="font-bold text-xl text-gray-800 mb-2 text-right">
           معلومات أساسية
         </h2>
@@ -398,11 +399,6 @@ export default function CarForm({
               className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
               placeholder="ادخل سعر المنتج"
             />
-            {errors.price && (
-              <p className="text-red-600 text-sm mt-1">
-                {String(errors.price.message)}
-              </p>
-            )}
           </div>
         </div>
 
@@ -428,11 +424,6 @@ export default function CarForm({
               <span>سعر ثابت</span>
             </label>
           </div>
-          {errors.price_type && (
-            <p className="text-red-600 text-sm mt-1">
-              {String(errors.price_type.message)}
-            </p>
-          )}
         </div>
       </section>
       {/* --------------------------------------------------------------------------------------------------------------------------------------------------- */}
@@ -457,14 +448,7 @@ export default function CarForm({
                 </option>
               ))}
             </select>
-            {errors.car?.brand && (
-              <p className="text-red-500 text-sm">
-                {errors.car?.brand.message}
-              </p>
-            )}
           </div>
-          {/* --------------------- */}
-
           <div className="sm:ml-16">
             <label className="block font-medium text-gray-700">الموديل</label>
             <input
@@ -472,11 +456,6 @@ export default function CarForm({
               className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
               dir="rtl"
             />
-            {errors.car?.model && (
-              <p className="text-red-500 text-sm">
-                {errors.car?.model.message}
-              </p>
-            )}
           </div>
 
           <div className="sm:ml-16">
@@ -489,11 +468,6 @@ export default function CarForm({
               className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
               dir="rtl"
             />
-            {errors.car?.mileage && (
-              <p className="text-red-500 text-sm">
-                {errors.car?.mileage.message}
-              </p>
-            )}
           </div>
 
           <div className="sm:ml-16">
@@ -504,11 +478,6 @@ export default function CarForm({
               dir="rtl"
               placeholder="مثال: 150 حصان"
             />
-            {errors.car?.performance && (
-              <p className="text-red-500 text-sm">
-                {errors.car?.performance.message}
-              </p>
-            )}
           </div>
 
           <div className="sm:ml-16">
@@ -528,11 +497,6 @@ export default function CarForm({
                 </option>
               ))}
             </select>
-            {errors.car?.color && (
-              <p className="text-red-500 text-sm">
-                {errors.car?.color.message}
-              </p>
-            )}
           </div>
 
           <div className="sm:ml-16">
@@ -548,11 +512,6 @@ export default function CarForm({
               }}
               dir="rtl"
             />
-            {errors.car?.first_registration && (
-              <p className="text-red-500 text-sm">
-                {errors.car?.first_registration.message}
-              </p>
-            )}
           </div>
 
           <div className="sm:ml-16">
@@ -582,11 +541,6 @@ export default function CarForm({
               className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
               dir="rtl"
             />
-            {errors.car?.environmental_sticker && (
-              <p className="text-red-500 text-sm">
-                {errors.car?.environmental_sticker.message}
-              </p>
-            )}
           </div>
 
           <div className="sm:ml-16">
@@ -598,11 +552,6 @@ export default function CarForm({
               className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
               dir="rtl"
             />
-            {errors.car?.class_of_pollutants && (
-              <p className="text-red-500 text-sm">
-                {errors.car?.class_of_pollutants.message}
-              </p>
-            )}
           </div>
         </div>
 
@@ -630,12 +579,6 @@ export default function CarForm({
                 </label>
               ))}
             </div>
-            {/* عرض رسالة الخطأ إذا كانت موجودة */}
-            {errors.car?.gearbox && (
-              <p className="text-red-600 text-sm mt-1">
-                {String(errors.car?.gearbox.message)}
-              </p>
-            )}
           </div>
           <div className="sm:ml-16 bg-cwhite rounded-md p-2 shadow-md">
             {/* عنوان اختيار ناقل الحركة */}
@@ -659,12 +602,6 @@ export default function CarForm({
                 </label>
               ))}
             </div>
-            {/* عرض رسالة الخطأ إذا كانت موجودة */}
-            {errors.car?.gearbox && (
-              <p className="text-red-600 text-sm mt-1">
-                {String(errors.car?.gearbox.message)}
-              </p>
-            )}
           </div>
 
           <div className="sm:ml-16 bg-cwhite rounded-md p-2 shadow-md">
@@ -689,12 +626,6 @@ export default function CarForm({
                 </label>
               ))}
             </div>
-            {/* عرض رسالة الخطأ إذا كانت موجودة */}
-            {errors.car?.gearbox && (
-              <p className="text-red-600 text-sm mt-1">
-                {String(errors.car?.gearbox.message)}
-              </p>
-            )}
           </div>
 
           <div className="sm:ml-16 bg-cwhite rounded-md p-2 shadow-md">
@@ -719,12 +650,6 @@ export default function CarForm({
                 </label>
               ))}
             </div>
-            {/* عرض رسالة الخطأ إذا كانت موجودة */}
-            {errors.car?.gearbox && (
-              <p className="text-red-600 text-sm mt-1">
-                {String(errors.car?.gearbox.message)}
-              </p>
-            )}
           </div>
 
           <div className="sm:ml-16 bg-cwhite rounded-md p-2 shadow-md">
@@ -749,11 +674,6 @@ export default function CarForm({
                 </label>
               ))}
             </div>
-            {errors.car?.fuel_type && (
-              <p className="text-red-600 text-sm mt-1">
-                {String(errors.car?.fuel_type.message)}
-              </p>
-            )}
           </div>
           <div className="sm:ml-16 bg-cwhite rounded-md p-2 shadow-md">
             {/* عنوان اختيار نوع السيارة */}
@@ -777,12 +697,6 @@ export default function CarForm({
                 </label>
               ))}
             </div>
-            {/* عرض رسالة الخطأ إذا كانت موجودة */}
-            {errors.car?.gearbox && (
-              <p className="text-red-600 text-sm mt-1">
-                {String(errors.car?.gearbox.message)}
-              </p>
-            )}
           </div>
 
           <div className="sm:ml-16 bg-cwhite rounded-md p-2 shadow-md">
@@ -805,11 +719,6 @@ export default function CarForm({
                 </label>
               ))}
             </div>
-            {errors.car?.protection && (
-              <p className="text-red-500 text-sm">
-                {errors.car?.protection.message}
-              </p>
-            )}
           </div>
 
           <div className="sm:ml-16 bg-cwhite rounded-md p-2 shadow-md">
@@ -832,11 +741,6 @@ export default function CarForm({
                 </label>
               ))}
             </div>
-            {errors.car?.external_features && (
-              <p className="text-red-500 text-sm">
-                {errors.car?.external_features.message}
-              </p>
-            )}
           </div>
 
           <div className="sm:ml-16 bg-cwhite rounded-md p-2 shadow-md">
@@ -859,27 +763,29 @@ export default function CarForm({
                 </label>
               ))}
             </div>
-            {errors.car?.internal_features && (
-              <p className="text-red-500 text-sm">
-                {errors.car?.internal_features.message}
-              </p>
-            )}
           </div>
         </div>
 
         <hr className="mt-6 mb-3 text-clightgray" />
-        <div className="flex justify-end max-sm:flex-col max-sm:justify-center max-sm:items-center max-sm:gap-2 max-sm:my-3 mb-5 ">
+        <div className="flex justify-end max-sm:flex-col max-sm:justify-center max-sm:items-center max-sm:gap-4 mb-5">
+          {/* زر "معاينة" */}
           <button
+            onClick={() => (window.location.href = "/perview")}
             type="submit"
             className="mt-8 ml-6 max-sm:ml-0 text-white rounded"
           >
-            <span className="outline-2 outline-cgreen text-gray-800 hover:bg-chgreen hover:outline-chgreen hover:text-cwhite py-3 px-[100px] max-sm:px-[140px]  rounded text-xl">
+            <span className="flex items-center group outline-2 outline-cgreen text-gray-800 hover:bg-chgreen hover:outline-chgreen hover:text-cwhite py-3 px-12 max-sm:px-[100px] rounded text-xl transition-all duration-300">
+              <Search className="ml-1 text-cgreen group-hover:text-cwhite" />{" "}
               معاينة
             </span>
           </button>
 
-          <button type="submit" className="mt-8 text-white rounded  ">
-            <span className="bg-cgreen hover:bg-chgreen py-3 px-[150px] rounded text-xl">
+          {/* زر "نشر" */}
+          <button
+            type="submit"
+            className="mt-8 ml-6 max-sm:ml-0 text-white rounded"
+          >
+            <span className="bg-cgreen hover:bg-chgreen py-3 px-32  rounded text-xl transition-all duration-300">
               {isLoading ? "جار النشر ..." : "نشر"}
             </span>
           </button>
