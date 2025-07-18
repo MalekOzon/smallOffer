@@ -743,20 +743,31 @@ function GenericPostForm({ Gcategory, Gsubcategory }) {
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                         className: "block font-medium text-gray-700",
-                                        children: "اسم المنتج"
-                                    }, void 0, false, {
+                                        children: [
+                                            "اسم المنتج",
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                className: "text-red-500 text-xl mr-1",
+                                                children: "*"
+                                            }, void 0, false, {
+                                                fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
+                                                lineNumber: 89,
+                                                columnNumber: 15
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
                                         lineNumber: 87,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                        required: true,
                                         ...register("title"),
                                         type: "text",
                                         placeholder: "اسم المنتج",
                                         className: "w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                                        lineNumber: 90,
+                                        lineNumber: 91,
                                         columnNumber: 13
                                     }, this),
                                     errors.title && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -764,7 +775,7 @@ function GenericPostForm({ Gcategory, Gsubcategory }) {
                                         children: String(errors.title.message)
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                                        lineNumber: 98,
+                                        lineNumber: 100,
                                         columnNumber: 15
                                     }, this)
                                 ]
@@ -781,7 +792,7 @@ function GenericPostForm({ Gcategory, Gsubcategory }) {
                                         children: "صور المنتج"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                                        lineNumber: 105,
+                                        lineNumber: 107,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -791,13 +802,13 @@ function GenericPostForm({ Gcategory, Gsubcategory }) {
                                         className: "w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                                        lineNumber: 108,
+                                        lineNumber: 110,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                                lineNumber: 104,
+                                lineNumber: 106,
                                 columnNumber: 11
                             }, this)
                         ]
@@ -814,13 +825,24 @@ function GenericPostForm({ Gcategory, Gsubcategory }) {
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                         className: "block font-medium text-gray-700",
-                                        children: "المحافظة"
-                                    }, void 0, false, {
+                                        children: [
+                                            "المحافظة",
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                className: "text-red-500 text-xl mr-1",
+                                                children: "*"
+                                            }, void 0, false, {
+                                                fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
+                                                lineNumber: 121,
+                                                columnNumber: 13
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                                        lineNumber: 118,
+                                        lineNumber: 120,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
+                                        required: true,
                                         ...register("city"),
                                         className: "mt-1  w-full p-3 border-2 rounded-lg bg-cwhite text-gray-700 focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200",
                                         style: {
@@ -832,7 +854,7 @@ function GenericPostForm({ Gcategory, Gsubcategory }) {
                                                 children: "اختر الإدخال"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                                                lineNumber: 126,
+                                                lineNumber: 132,
                                                 columnNumber: 15
                                             }, this),
                                             __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$signup$2f$step2$2f$syrianGovernorates$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["syrianGovernorates"].map((gov)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -840,13 +862,13 @@ function GenericPostForm({ Gcategory, Gsubcategory }) {
                                                     children: gov.name
                                                 }, gov.value, false, {
                                                     fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                                                    lineNumber: 128,
+                                                    lineNumber: 134,
                                                     columnNumber: 17
                                                 }, this))
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                                        lineNumber: 119,
+                                        lineNumber: 124,
                                         columnNumber: 13
                                     }, this),
                                     errors.city && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -854,13 +876,13 @@ function GenericPostForm({ Gcategory, Gsubcategory }) {
                                         children: String(errors.city.message)
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                                        lineNumber: 134,
+                                        lineNumber: 140,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                                lineNumber: 117,
+                                lineNumber: 119,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -868,19 +890,30 @@ function GenericPostForm({ Gcategory, Gsubcategory }) {
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                         className: "block font-medium text-gray-700",
-                                        children: "المنطقة"
-                                    }, void 0, false, {
+                                        children: [
+                                            "المنطقة",
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                className: "text-red-500 text-xl mr-1",
+                                                children: "*"
+                                            }, void 0, false, {
+                                                fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
+                                                lineNumber: 148,
+                                                columnNumber: 13
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                                        lineNumber: 141,
+                                        lineNumber: 147,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                        required: true,
                                         ...register("hood"),
                                         className: "w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm",
                                         placeholder: "المنطقة"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                                        lineNumber: 142,
+                                        lineNumber: 151,
                                         columnNumber: 13
                                     }, this),
                                     errors.hood && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -888,19 +921,19 @@ function GenericPostForm({ Gcategory, Gsubcategory }) {
                                         children: String(errors.hood.message)
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                                        lineNumber: 148,
+                                        lineNumber: 158,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                                lineNumber: 140,
+                                lineNumber: 146,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                        lineNumber: 116,
+                        lineNumber: 118,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -913,7 +946,7 @@ function GenericPostForm({ Gcategory, Gsubcategory }) {
                                     children: "تفاصيل العنوان"
                                 }, void 0, false, {
                                     fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                                    lineNumber: 156,
+                                    lineNumber: 166,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -922,7 +955,7 @@ function GenericPostForm({ Gcategory, Gsubcategory }) {
                                     placeholder: "تفاصيل العنوان"
                                 }, void 0, false, {
                                     fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                                    lineNumber: 159,
+                                    lineNumber: 169,
                                     columnNumber: 13
                                 }, this),
                                 errors.detailed_location && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -930,18 +963,18 @@ function GenericPostForm({ Gcategory, Gsubcategory }) {
                                     children: String(errors.detailed_location.message)
                                 }, void 0, false, {
                                     fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                                    lineNumber: 165,
+                                    lineNumber: 175,
                                     columnNumber: 15
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                            lineNumber: 155,
+                            lineNumber: 165,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                        lineNumber: 154,
+                        lineNumber: 164,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -951,19 +984,30 @@ function GenericPostForm({ Gcategory, Gsubcategory }) {
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                     className: "block font-medium text-gray-700",
-                                    children: "وصف المنتج"
-                                }, void 0, false, {
+                                    children: [
+                                        "وصف المنتج",
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                            className: "text-red-500 text-xl mr-1",
+                                            children: "*"
+                                        }, void 0, false, {
+                                            fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
+                                            lineNumber: 185,
+                                            columnNumber: 15
+                                        }, this)
+                                    ]
+                                }, void 0, true, {
                                     fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                                    lineNumber: 173,
+                                    lineNumber: 183,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("textarea", {
+                                    required: true,
                                     ...register("description"),
                                     className: "w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm",
                                     placeholder: "ادخل وصف المنتج هنا"
                                 }, void 0, false, {
                                     fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                                    lineNumber: 176,
+                                    lineNumber: 188,
                                     columnNumber: 13
                                 }, this),
                                 errors.description && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -971,18 +1015,18 @@ function GenericPostForm({ Gcategory, Gsubcategory }) {
                                     children: String(errors.description.message)
                                 }, void 0, false, {
                                     fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                                    lineNumber: 182,
+                                    lineNumber: 195,
                                     columnNumber: 15
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                            lineNumber: 172,
+                            lineNumber: 182,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                        lineNumber: 171,
+                        lineNumber: 181,
                         columnNumber: 9
                     }, this)
                 ]
@@ -999,7 +1043,7 @@ function GenericPostForm({ Gcategory, Gsubcategory }) {
                         children: "سعر المنتج"
                     }, void 0, false, {
                         fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                        lineNumber: 192,
+                        lineNumber: 205,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1007,7 +1051,7 @@ function GenericPostForm({ Gcategory, Gsubcategory }) {
                         children: "حدد سعر الإعلان أو اختر إذا كان قابل للتفاوض، وسيساعد المستخدمين على معرفة القيمة بسهولة."
                     }, void 0, false, {
                         fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                        lineNumber: 195,
+                        lineNumber: 209,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1017,19 +1061,30 @@ function GenericPostForm({ Gcategory, Gsubcategory }) {
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                     className: "block font-medium text-gray-700",
-                                    children: "سعر المنتج (السعر بالليرة السورية)"
-                                }, void 0, false, {
+                                    children: [
+                                        "سعر المنتج (السعر بالليرة السورية)",
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                            className: "text-red-500 text-xl mr-1",
+                                            children: "*"
+                                        }, void 0, false, {
+                                            fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
+                                            lineNumber: 217,
+                                            columnNumber: 15
+                                        }, this)
+                                    ]
+                                }, void 0, true, {
                                     fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                                    lineNumber: 201,
+                                    lineNumber: 215,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                    required: true,
                                     ...register("price"),
                                     className: "w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm",
                                     placeholder: "ادخل سعر المنتج"
                                 }, void 0, false, {
                                     fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                                    lineNumber: 204,
+                                    lineNumber: 220,
                                     columnNumber: 13
                                 }, this),
                                 errors.price && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1037,18 +1092,18 @@ function GenericPostForm({ Gcategory, Gsubcategory }) {
                                     children: String(errors.price.message)
                                 }, void 0, false, {
                                     fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                                    lineNumber: 210,
+                                    lineNumber: 227,
                                     columnNumber: 15
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                            lineNumber: 200,
+                            lineNumber: 214,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                        lineNumber: 199,
+                        lineNumber: 213,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1056,10 +1111,20 @@ function GenericPostForm({ Gcategory, Gsubcategory }) {
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                 className: "block font-medium text-gray-700",
-                                children: "نوع السعر"
-                            }, void 0, false, {
+                                children: [
+                                    "نوع السعر",
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                        className: "text-red-500 text-xl mr-1",
+                                        children: "*"
+                                    }, void 0, false, {
+                                        fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
+                                        lineNumber: 236,
+                                        columnNumber: 11
+                                    }, this)
+                                ]
+                            }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                                lineNumber: 218,
+                                lineNumber: 235,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1069,26 +1134,27 @@ function GenericPostForm({ Gcategory, Gsubcategory }) {
                                         className: "ml-2 flex items-center gap-2 text-gray-700 cursor-pointer",
                                         children: [
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                                required: true,
                                                 type: "radio",
                                                 value: "negotiable",
                                                 ...register("price_type"),
                                                 className: "accent-cgreen"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                                                lineNumber: 221,
+                                                lineNumber: 241,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                 children: "سعر قابل للتفاوض"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                                                lineNumber: 227,
+                                                lineNumber: 248,
                                                 columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                                        lineNumber: 220,
+                                        lineNumber: 240,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
@@ -1101,26 +1167,26 @@ function GenericPostForm({ Gcategory, Gsubcategory }) {
                                                 className: "accent-cgreen"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                                                lineNumber: 230,
+                                                lineNumber: 251,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                 children: "سعر ثابت"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                                                lineNumber: 236,
+                                                lineNumber: 257,
                                                 columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                                        lineNumber: 229,
+                                        lineNumber: 250,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                                lineNumber: 219,
+                                lineNumber: 239,
                                 columnNumber: 11
                             }, this),
                             errors.price_type && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1128,20 +1194,20 @@ function GenericPostForm({ Gcategory, Gsubcategory }) {
                                 children: String(errors.price_type.message)
                             }, void 0, false, {
                                 fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                                lineNumber: 240,
+                                lineNumber: 261,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                        lineNumber: 217,
+                        lineNumber: 234,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("hr", {
                         className: "mt-6 mb-3 text-clightgray"
                     }, void 0, false, {
                         fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                        lineNumber: 245,
+                        lineNumber: 266,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1158,21 +1224,21 @@ function GenericPostForm({ Gcategory, Gsubcategory }) {
                                             className: "ml-1 text-cgreen group-hover:text-cwhite"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                                            lineNumber: 254,
-                                            columnNumber: 13
+                                            lineNumber: 275,
+                                            columnNumber: 15
                                         }, this),
                                         " ",
                                         "معاينة"
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                                    lineNumber: 253,
-                                    columnNumber: 11
+                                    lineNumber: 274,
+                                    columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                                lineNumber: 248,
-                                columnNumber: 9
+                                lineNumber: 269,
+                                columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                 type: "submit",
@@ -1182,24 +1248,24 @@ function GenericPostForm({ Gcategory, Gsubcategory }) {
                                     children: isLoading ? "جار النشر ..." : "نشر"
                                 }, void 0, false, {
                                     fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                                    lineNumber: 264,
-                                    columnNumber: 11
+                                    lineNumber: 285,
+                                    columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                                lineNumber: 260,
-                                columnNumber: 9
+                                lineNumber: 281,
+                                columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                        lineNumber: 246,
+                        lineNumber: 267,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                lineNumber: 191,
+                lineNumber: 204,
                 columnNumber: 7
             }, this)
         ]
@@ -1777,20 +1843,31 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                         className: "block font-medium text-gray-700",
-                                        children: "اسم المنتج"
-                                    }, void 0, false, {
+                                        children: [
+                                            "اسم المنتج",
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                className: "text-red-500 text-xl mr-1",
+                                                children: "*"
+                                            }, void 0, false, {
+                                                fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
+                                                lineNumber: 282,
+                                                columnNumber: 15
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
                                         lineNumber: 280,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                        required: true,
                                         ...register("title"),
                                         type: "text",
                                         placeholder: "اسم المنتج",
                                         className: "w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 283,
+                                        lineNumber: 284,
                                         columnNumber: 13
                                     }, this),
                                     errors.title && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1798,7 +1875,7 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                         children: String(errors.title.message)
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 291,
+                                        lineNumber: 293,
                                         columnNumber: 15
                                     }, this)
                                 ]
@@ -1815,7 +1892,7 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                         children: "صور المنتج"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 298,
+                                        lineNumber: 300,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -1825,13 +1902,13 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                         className: "w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 301,
+                                        lineNumber: 303,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                lineNumber: 297,
+                                lineNumber: 299,
                                 columnNumber: 11
                             }, this)
                         ]
@@ -1848,13 +1925,24 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                         className: "block font-medium text-gray-700",
-                                        children: "المحافظة"
-                                    }, void 0, false, {
+                                        children: [
+                                            "المحافظة",
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                className: "text-red-500 text-xl mr-1",
+                                                children: "*"
+                                            }, void 0, false, {
+                                                fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
+                                                lineNumber: 314,
+                                                columnNumber: 13
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 311,
+                                        lineNumber: 313,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
+                                        required: true,
                                         ...register("city"),
                                         className: "mt-1  w-full p-3 border-2 rounded-lg bg-cwhite text-gray-700 focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200",
                                         style: {
@@ -1866,7 +1954,7 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                                 children: "اختر الإدخال"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                                lineNumber: 319,
+                                                lineNumber: 324,
                                                 columnNumber: 15
                                             }, this),
                                             __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$signup$2f$step2$2f$syrianGovernorates$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["syrianGovernorates"].map((gov)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -1874,13 +1962,13 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                                     children: gov.name
                                                 }, gov.value, false, {
                                                     fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                                    lineNumber: 321,
+                                                    lineNumber: 326,
                                                     columnNumber: 17
                                                 }, this))
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 312,
+                                        lineNumber: 316,
                                         columnNumber: 13
                                     }, this),
                                     errors.city && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1888,13 +1976,13 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                         children: String(errors.city.message)
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 327,
+                                        lineNumber: 332,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                lineNumber: 310,
+                                lineNumber: 312,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1902,19 +1990,30 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                         className: "block font-medium text-gray-700",
-                                        children: "المنطقة"
-                                    }, void 0, false, {
+                                        children: [
+                                            "المنطقة",
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                className: "text-red-500 text-xl mr-1",
+                                                children: "*"
+                                            }, void 0, false, {
+                                                fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
+                                                lineNumber: 340,
+                                                columnNumber: 13
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 334,
+                                        lineNumber: 339,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                        required: true,
                                         ...register("hood"),
                                         className: "w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm",
                                         placeholder: "المنطقة"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 335,
+                                        lineNumber: 342,
                                         columnNumber: 13
                                     }, this),
                                     errors.hood && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1922,19 +2021,19 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                         children: String(errors.hood.message)
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 341,
+                                        lineNumber: 349,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                lineNumber: 333,
+                                lineNumber: 338,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                        lineNumber: 309,
+                        lineNumber: 311,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1947,7 +2046,7 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                     children: "تفاصيل العنوان"
                                 }, void 0, false, {
                                     fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                    lineNumber: 349,
+                                    lineNumber: 357,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -1956,7 +2055,7 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                     placeholder: "تفاصيل العنوان"
                                 }, void 0, false, {
                                     fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                    lineNumber: 352,
+                                    lineNumber: 360,
                                     columnNumber: 13
                                 }, this),
                                 errors.detailed_location && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1964,18 +2063,18 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                     children: String(errors.detailed_location.message)
                                 }, void 0, false, {
                                     fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                    lineNumber: 358,
+                                    lineNumber: 366,
                                     columnNumber: 15
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                            lineNumber: 348,
+                            lineNumber: 356,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                        lineNumber: 347,
+                        lineNumber: 355,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1985,19 +2084,30 @@ function CarForm({ Gcategory, Gsubcategory }) {
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                     className: "block font-medium text-gray-700",
-                                    children: "وصف المنتج"
-                                }, void 0, false, {
+                                    children: [
+                                        "وصف المنتج",
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                            className: "text-red-500 text-xl mr-1",
+                                            children: "*"
+                                        }, void 0, false, {
+                                            fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
+                                            lineNumber: 376,
+                                            columnNumber: 15
+                                        }, this)
+                                    ]
+                                }, void 0, true, {
                                     fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                    lineNumber: 366,
+                                    lineNumber: 374,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("textarea", {
+                                    required: true,
                                     ...register("description"),
                                     className: "w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm",
                                     placeholder: "ادخل وصف المنتج هنا"
                                 }, void 0, false, {
                                     fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                    lineNumber: 369,
+                                    lineNumber: 378,
                                     columnNumber: 13
                                 }, this),
                                 errors.description && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2005,18 +2115,18 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                     children: String(errors.description.message)
                                 }, void 0, false, {
                                     fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                    lineNumber: 375,
+                                    lineNumber: 385,
                                     columnNumber: 15
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                            lineNumber: 365,
+                            lineNumber: 373,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                        lineNumber: 364,
+                        lineNumber: 372,
                         columnNumber: 9
                     }, this)
                 ]
@@ -2033,7 +2143,7 @@ function CarForm({ Gcategory, Gsubcategory }) {
                         children: "سعر المنتج"
                     }, void 0, false, {
                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                        lineNumber: 385,
+                        lineNumber: 395,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2041,7 +2151,7 @@ function CarForm({ Gcategory, Gsubcategory }) {
                         children: "حدد سعر الإعلان أو اختر إذا كان قابل للتفاوض، وسيساعد المستخدمين على معرفة القيمة بسهولة."
                     }, void 0, false, {
                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                        lineNumber: 388,
+                        lineNumber: 398,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2051,30 +2161,41 @@ function CarForm({ Gcategory, Gsubcategory }) {
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                     className: "block font-medium text-gray-700",
-                                    children: "سعر المنتج (السعر بالليرة السورية)"
-                                }, void 0, false, {
+                                    children: [
+                                        "سعر المنتج (السعر بالليرة السورية)",
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                            className: "text-red-500 text-xl mr-1",
+                                            children: "*"
+                                        }, void 0, false, {
+                                            fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
+                                            lineNumber: 406,
+                                            columnNumber: 15
+                                        }, this)
+                                    ]
+                                }, void 0, true, {
                                     fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                    lineNumber: 394,
+                                    lineNumber: 404,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                    required: true,
                                     ...register("price"),
                                     className: "w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm",
                                     placeholder: "ادخل سعر المنتج"
                                 }, void 0, false, {
                                     fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                    lineNumber: 397,
+                                    lineNumber: 408,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                            lineNumber: 393,
+                            lineNumber: 403,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                        lineNumber: 392,
+                        lineNumber: 402,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2082,10 +2203,20 @@ function CarForm({ Gcategory, Gsubcategory }) {
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                 className: "block font-medium text-gray-700",
-                                children: "نوع السعر"
-                            }, void 0, false, {
+                                children: [
+                                    "نوع السعر",
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                        className: "text-red-500 text-xl mr-1",
+                                        children: "*"
+                                    }, void 0, false, {
+                                        fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
+                                        lineNumber: 419,
+                                        columnNumber: 11
+                                    }, this)
+                                ]
+                            }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                lineNumber: 406,
+                                lineNumber: 418,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2095,26 +2226,27 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                         className: "ml-2 flex items-center gap-2 text-gray-700 cursor-pointer",
                                         children: [
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                                required: true,
                                                 type: "radio",
                                                 value: "negotiable",
                                                 ...register("price_type"),
                                                 className: "accent-cgreen"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                                lineNumber: 409,
+                                                lineNumber: 423,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                 children: "سعر قابل للتفاوض"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                                lineNumber: 415,
+                                                lineNumber: 430,
                                                 columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 408,
+                                        lineNumber: 422,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
@@ -2127,38 +2259,38 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                                 className: "accent-cgreen"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                                lineNumber: 418,
+                                                lineNumber: 433,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                 children: "سعر ثابت"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                                lineNumber: 424,
+                                                lineNumber: 439,
                                                 columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 417,
+                                        lineNumber: 432,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                lineNumber: 407,
+                                lineNumber: 421,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                        lineNumber: 405,
+                        lineNumber: 417,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                lineNumber: 384,
+                lineNumber: 394,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
@@ -2169,7 +2301,7 @@ function CarForm({ Gcategory, Gsubcategory }) {
                         children: "تفاصيل السيارة"
                     }, void 0, false, {
                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                        lineNumber: 431,
+                        lineNumber: 446,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2180,13 +2312,24 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                         className: "block font-medium text-gray-700",
-                                        children: "الماركة"
-                                    }, void 0, false, {
+                                        children: [
+                                            "الماركة",
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                className: "text-red-500 text-xl mr-1",
+                                                children: "*"
+                                            }, void 0, false, {
+                                                fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
+                                                lineNumber: 451,
+                                                columnNumber: 13
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 435,
+                                        lineNumber: 450,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
+                                        required: true,
                                         ...register("car.brand"),
                                         className: "mt-1  w-full p-3 py-3.5 border-2 rounded-lg bg-cwhite text-gray-700 focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200",
                                         style: {
@@ -2199,7 +2342,7 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                                 children: "اختر الماركة"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                                lineNumber: 444,
+                                                lineNumber: 462,
                                                 columnNumber: 15
                                             }, this),
                                             BRAND_CHOICES.map(([value, label])=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -2207,19 +2350,19 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                                     children: label
                                                 }, value, false, {
                                                     fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                                    lineNumber: 446,
+                                                    lineNumber: 464,
                                                     columnNumber: 17
                                                 }, this))
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 436,
+                                        lineNumber: 453,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                lineNumber: 434,
+                                lineNumber: 449,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2230,7 +2373,7 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                         children: "الموديل"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 453,
+                                        lineNumber: 471,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -2239,13 +2382,13 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                         dir: "rtl"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 454,
+                                        lineNumber: 472,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                lineNumber: 452,
+                                lineNumber: 470,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2253,13 +2396,24 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                         className: "block font-medium text-gray-700",
-                                        children: "عدد الكيلومترات"
-                                    }, void 0, false, {
+                                        children: [
+                                            "عدد الكيلومترات",
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                className: "text-red-500 text-xl mr-1",
+                                                children: "*"
+                                            }, void 0, false, {
+                                                fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
+                                                lineNumber: 482,
+                                                columnNumber: 15
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 462,
+                                        lineNumber: 480,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                        required: true,
                                         type: "number",
                                         ...register("car.mileage", {
                                             valueAsNumber: true
@@ -2268,13 +2422,13 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                         dir: "rtl"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 465,
+                                        lineNumber: 484,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                lineNumber: 461,
+                                lineNumber: 479,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2285,23 +2439,24 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                         children: "الأداء"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 474,
+                                        lineNumber: 494,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                        type: "number",
                                         ...register("car.performance"),
                                         className: "w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm",
                                         dir: "rtl",
                                         placeholder: "مثال: 150 حصان"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 475,
+                                        lineNumber: 495,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                lineNumber: 473,
+                                lineNumber: 493,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2312,7 +2467,7 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                         children: "اللون"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 484,
+                                        lineNumber: 505,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
@@ -2328,7 +2483,7 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                                 children: "اختر اللون"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                                lineNumber: 493,
+                                                lineNumber: 514,
                                                 columnNumber: 15
                                             }, this),
                                             COLOR_CHOICES.map(([value, label])=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -2336,19 +2491,19 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                                     children: label
                                                 }, value, false, {
                                                     fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                                    lineNumber: 495,
+                                                    lineNumber: 516,
                                                     columnNumber: 17
                                                 }, this))
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 485,
+                                        lineNumber: 506,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                lineNumber: 483,
+                                lineNumber: 504,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2356,14 +2511,26 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                         className: "block font-medium text-gray-700",
-                                        children: "تاريخ التسجيل الأول"
-                                    }, void 0, false, {
+                                        children: [
+                                            "تاريخ التسجيل الأول",
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                className: "text-red-500 text-xl mr-1",
+                                                children: "*"
+                                            }, void 0, false, {
+                                                fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
+                                                lineNumber: 526,
+                                                columnNumber: 15
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 503,
+                                        lineNumber: 524,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
-                                        type: "date",
+                                        required: true,
+                                        type: "number",
+                                        placeholder: "ادخل سنة التسجيل",
                                         ...register("car.first_registration"),
                                         className: "mt-1  w-full p-3 py-3.5 border-2 rounded-lg bg-cwhite text-gray-700 focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200",
                                         style: {
@@ -2372,13 +2539,13 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                         dir: "rtl"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 506,
+                                        lineNumber: 528,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                lineNumber: 502,
+                                lineNumber: 523,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2389,7 +2556,7 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                         children: "تاريخ الفحص الفني"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 518,
+                                        lineNumber: 542,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -2402,7 +2569,7 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                         dir: "rtl"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 521,
+                                        lineNumber: 545,
                                         columnNumber: 13
                                     }, this),
                                     errors.car?.hu && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2410,13 +2577,13 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                         children: errors.car?.hu.message
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 531,
+                                        lineNumber: 555,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                lineNumber: 517,
+                                lineNumber: 541,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2424,25 +2591,36 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                         className: "block font-medium text-gray-700",
-                                        children: "ملصق البيئة"
-                                    }, void 0, false, {
+                                        children: [
+                                            "ملصق البيئة",
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                className: "text-red-500 text-xl mr-1",
+                                                children: "*"
+                                            }, void 0, false, {
+                                                fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
+                                                lineNumber: 562,
+                                                columnNumber: 15
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 536,
+                                        lineNumber: 560,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                        required: true,
                                         ...register("car.environmental_sticker"),
                                         className: "w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm",
                                         dir: "rtl"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 539,
+                                        lineNumber: 564,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                lineNumber: 535,
+                                lineNumber: 559,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2450,31 +2628,42 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                         className: "block font-medium text-gray-700",
-                                        children: "فئة الملوثات"
-                                    }, void 0, false, {
+                                        children: [
+                                            "فئة الملوثات",
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                className: "text-red-500 text-xl mr-1",
+                                                children: "*"
+                                            }, void 0, false, {
+                                                fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
+                                                lineNumber: 575,
+                                                columnNumber: 15
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 547,
+                                        lineNumber: 573,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                        required: true,
                                         ...register("car.class_of_pollutants"),
                                         className: "w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm",
                                         dir: "rtl"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 550,
+                                        lineNumber: 577,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                lineNumber: 546,
+                                lineNumber: 572,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                        lineNumber: 433,
+                        lineNumber: 448,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2485,10 +2674,20 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                         className: "block font-medium text-gray-700",
-                                        children: "اختر حالة السيارة"
-                                    }, void 0, false, {
+                                        children: [
+                                            "اختر حالة السيارة",
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                className: "text-red-500 text-xl mr-1",
+                                                children: "*"
+                                            }, void 0, false, {
+                                                fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
+                                                lineNumber: 591,
+                                                columnNumber: 15
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 562,
+                                        lineNumber: 589,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2497,37 +2696,38 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                                 className: "flex items-center gap-1 ml-2 text-gray-700 cursor-pointer",
                                                 children: [
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                                        required: true,
                                                         type: "radio",
                                                         value: value,
                                                         ...register("car.status"),
                                                         className: "accent-cgreen"
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                                        lineNumber: 572,
+                                                        lineNumber: 600,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                         children: label
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                                        lineNumber: 578,
+                                                        lineNumber: 607,
                                                         columnNumber: 19
                                                     }, this)
                                                 ]
                                             }, value, true, {
                                                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                                lineNumber: 568,
+                                                lineNumber: 596,
                                                 columnNumber: 17
                                             }, this))
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 566,
+                                        lineNumber: 594,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                lineNumber: 560,
+                                lineNumber: 588,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2535,10 +2735,20 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                         className: "block font-medium text-gray-700",
-                                        children: "اختر ناقل الحركة"
-                                    }, void 0, false, {
+                                        children: [
+                                            "اختر ناقل الحركة",
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                className: "text-red-500 text-xl mr-1",
+                                                children: "*"
+                                            }, void 0, false, {
+                                                fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
+                                                lineNumber: 615,
+                                                columnNumber: 15
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 585,
+                                        lineNumber: 613,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2547,37 +2757,38 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                                 className: "flex items-center gap-1 ml-2 text-gray-700 cursor-pointer",
                                                 children: [
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                                        required: true,
                                                         type: "radio",
                                                         value: value,
                                                         ...register("car.gearbox"),
                                                         className: "accent-cgreen"
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                                        lineNumber: 595,
+                                                        lineNumber: 624,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                         children: label
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                                        lineNumber: 601,
+                                                        lineNumber: 631,
                                                         columnNumber: 19
                                                     }, this)
                                                 ]
                                             }, value, true, {
                                                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                                lineNumber: 591,
+                                                lineNumber: 620,
                                                 columnNumber: 17
                                             }, this))
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 589,
+                                        lineNumber: 618,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                lineNumber: 583,
+                                lineNumber: 612,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2588,7 +2799,7 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                         children: "عدد الأبواب"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 609,
+                                        lineNumber: 639,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2603,31 +2814,31 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                                         className: "accent-cgreen"
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                                        lineNumber: 619,
+                                                        lineNumber: 649,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                         children: label
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                                        lineNumber: 625,
+                                                        lineNumber: 655,
                                                         columnNumber: 19
                                                     }, this)
                                                 ]
                                             }, value, true, {
                                                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                                lineNumber: 615,
+                                                lineNumber: 645,
                                                 columnNumber: 17
                                             }, this))
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 613,
+                                        lineNumber: 643,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                lineNumber: 607,
+                                lineNumber: 637,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2638,7 +2849,7 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                         children: "المواد الداخلية"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 633,
+                                        lineNumber: 663,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2653,31 +2864,31 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                                         className: "accent-cgreen"
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                                        lineNumber: 643,
+                                                        lineNumber: 673,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                         children: label
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                                        lineNumber: 649,
+                                                        lineNumber: 679,
                                                         columnNumber: 19
                                                     }, this)
                                                 ]
                                             }, value, true, {
                                                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                                lineNumber: 639,
+                                                lineNumber: 669,
                                                 columnNumber: 17
                                             }, this))
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 637,
+                                        lineNumber: 667,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                lineNumber: 631,
+                                lineNumber: 661,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2685,10 +2896,20 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                         className: "block font-medium text-gray-700",
-                                        children: "اختر نوع الوقود"
-                                    }, void 0, false, {
+                                        children: [
+                                            "اختر نوع الوقود",
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                className: "text-red-500 text-xl mr-1",
+                                                children: "*"
+                                            }, void 0, false, {
+                                                fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
+                                                lineNumber: 689,
+                                                columnNumber: 15
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 657,
+                                        lineNumber: 687,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2698,37 +2919,38 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                                 children: [
                                                     " ",
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                                        required: true,
                                                         type: "radio",
                                                         value: value,
                                                         ...register("car.fuel_type"),
                                                         className: "accent-cgreen"
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                                        lineNumber: 667,
+                                                        lineNumber: 698,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                         children: label
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                                        lineNumber: 673,
+                                                        lineNumber: 705,
                                                         columnNumber: 19
                                                     }, this)
                                                 ]
                                             }, value, true, {
                                                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                                lineNumber: 662,
+                                                lineNumber: 693,
                                                 columnNumber: 17
                                             }, this))
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 660,
+                                        lineNumber: 691,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                lineNumber: 655,
+                                lineNumber: 685,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2739,7 +2961,7 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                         children: "نوع السيارة"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 680,
+                                        lineNumber: 712,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2754,31 +2976,31 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                                         className: "accent-cgreen"
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                                        lineNumber: 690,
+                                                        lineNumber: 722,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                         children: label
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                                        lineNumber: 696,
+                                                        lineNumber: 728,
                                                         columnNumber: 19
                                                     }, this)
                                                 ]
                                             }, value, true, {
                                                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                                lineNumber: 686,
+                                                lineNumber: 718,
                                                 columnNumber: 17
                                             }, this))
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 684,
+                                        lineNumber: 716,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                lineNumber: 678,
+                                lineNumber: 710,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2789,7 +3011,7 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                         children: "أنظمة الحماية"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 703,
+                                        lineNumber: 735,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2804,25 +3026,25 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                                         ...register("car.protection")
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                                        lineNumber: 712,
+                                                        lineNumber: 744,
                                                         columnNumber: 19
                                                     }, this),
                                                     label
                                                 ]
                                             }, value, true, {
                                                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                                lineNumber: 708,
+                                                lineNumber: 740,
                                                 columnNumber: 17
                                             }, this))
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 706,
+                                        lineNumber: 738,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                lineNumber: 702,
+                                lineNumber: 734,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2833,7 +3055,7 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                         children: "المميزات الخارجية"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 725,
+                                        lineNumber: 757,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2848,25 +3070,25 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                                         ...register("car.external_features")
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                                        lineNumber: 734,
+                                                        lineNumber: 766,
                                                         columnNumber: 19
                                                     }, this),
                                                     label
                                                 ]
                                             }, value, true, {
                                                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                                lineNumber: 730,
+                                                lineNumber: 762,
                                                 columnNumber: 17
                                             }, this))
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 728,
+                                        lineNumber: 760,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                lineNumber: 724,
+                                lineNumber: 756,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2877,7 +3099,7 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                         children: "المميزات الداخلية"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 747,
+                                        lineNumber: 779,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2892,38 +3114,38 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                                         ...register("car.internal_features")
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                                        lineNumber: 756,
+                                                        lineNumber: 788,
                                                         columnNumber: 19
                                                     }, this),
                                                     label
                                                 ]
                                             }, value, true, {
                                                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                                lineNumber: 752,
+                                                lineNumber: 784,
                                                 columnNumber: 17
                                             }, this))
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 750,
+                                        lineNumber: 782,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                lineNumber: 746,
+                                lineNumber: 778,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                        lineNumber: 559,
+                        lineNumber: 587,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("hr", {
                         className: "mt-6 mb-3 text-clightgray"
                     }, void 0, false, {
                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                        lineNumber: 769,
+                        lineNumber: 801,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2940,7 +3162,7 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                             className: "ml-1 text-cgreen group-hover:text-cwhite"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                            lineNumber: 778,
+                                            lineNumber: 810,
                                             columnNumber: 15
                                         }, this),
                                         " ",
@@ -2948,12 +3170,12 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                    lineNumber: 777,
+                                    lineNumber: 809,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                lineNumber: 772,
+                                lineNumber: 804,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -2964,24 +3186,24 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                     children: isLoading ? "جار النشر ..." : "نشر"
                                 }, void 0, false, {
                                     fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                    lineNumber: 788,
+                                    lineNumber: 820,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                lineNumber: 784,
+                                lineNumber: 816,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                        lineNumber: 770,
+                        lineNumber: 802,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                lineNumber: 430,
+                lineNumber: 445,
                 columnNumber: 7
             }, this)
         ]
@@ -3018,8 +3240,10 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$components$2f$ui$2f$N
 var __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$signup$2f$step2$2f$syrianGovernorates$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/app/signup/step2/syrianGovernorates.ts [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$lib$2f$postServices$2f$postMutations$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/app/lib/postServices/postMutations.ts [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$search$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Search$3e$__ = __turbopack_context__.i("[project]/node_modules/lucide-react/dist/esm/icons/search.js [app-client] (ecmascript) <export default as Search>");
 ;
 var _s = __turbopack_context__.k.signature();
+;
 ;
 ;
 ;
@@ -3117,18 +3341,18 @@ function LandForm({ Gcategory, Gsubcategory }) {
                 onClose: ()=>setNotification(null)
             }, void 0, false, {
                 fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
-                lineNumber: 118,
+                lineNumber: 119,
                 columnNumber: 9
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
-                className: "bg-white rounded-2xl shadow-lg border border-gray-200 p-8 mb-6",
+                className: "bg-white rounded-2xl shadow-lg border border-gray-200 p-8 mb-6 ",
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
                         className: "font-bold text-xl text-gray-800 mb-2 text-right",
                         children: "معلومات أساسية"
                     }, void 0, false, {
                         fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
-                        lineNumber: 127,
+                        lineNumber: 128,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -3136,30 +3360,42 @@ function LandForm({ Gcategory, Gsubcategory }) {
                         children: "أدخل معلومات الإعلان الأساسية لتظهر بوضوح للمشترين، مثل العنوان والوصف العام والموقع."
                     }, void 0, false, {
                         fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
-                        lineNumber: 130,
+                        lineNumber: 131,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         className: "grid grid-cols-1 md:grid-cols-2 gap-6 mb-6",
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                className: "flex flex-col gap-2",
+                                className: "sm:ml-16",
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                         className: "block font-medium text-gray-700",
-                                        children: "اسم المنتج"
-                                    }, void 0, false, {
+                                        children: [
+                                            "اسم المنتج",
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                className: "text-red-500 text-xl mr-1",
+                                                children: "*"
+                                            }, void 0, false, {
+                                                fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
+                                                lineNumber: 139,
+                                                columnNumber: 15
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
-                                        lineNumber: 136,
+                                        lineNumber: 137,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                        required: true,
                                         ...register("title"),
-                                        className: "input w-full border-2 border-cgreen bg-cwhite  text-gray-800 rounded-lg px-4 py-3  focus:outline-none focus:ring-2 focus:ring-green-400",
-                                        placeholder: "اسم المنتج"
+                                        type: "text",
+                                        placeholder: "اسم المنتج",
+                                        className: "w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
-                                        lineNumber: 139,
+                                        lineNumber: 141,
                                         columnNumber: 13
                                     }, this),
                                     errors.title && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -3167,72 +3403,86 @@ function LandForm({ Gcategory, Gsubcategory }) {
                                         children: String(errors.title.message)
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
-                                        lineNumber: 145,
+                                        lineNumber: 150,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
-                                lineNumber: 135,
+                                lineNumber: 136,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                className: "flex flex-col gap-2",
+                                className: "sm:ml-16",
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                         className: "block font-medium text-gray-700",
                                         children: "صور المنتج"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
-                                        lineNumber: 152,
+                                        lineNumber: 157,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
                                         type: "file",
                                         multiple: true,
                                         ...register("gallery"),
-                                        className: "input w-full border-2 border-cgreen bg-cwhite  text-gray-800 rounded-lg px-4 py-2"
+                                        className: "w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
-                                        lineNumber: 155,
+                                        lineNumber: 160,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
-                                lineNumber: 151,
+                                lineNumber: 156,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
-                        lineNumber: 134,
+                        lineNumber: 135,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         className: "grid grid-cols-1 md:grid-cols-2 gap-6 mb-6",
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                className: "flex flex-col gap-2",
+                                className: "sm:ml-16",
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                         className: "block font-medium text-gray-700",
-                                        children: "المحافظة"
-                                    }, void 0, false, {
+                                        children: [
+                                            "المحافظة",
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                className: "text-red-500 text-xl mr-1",
+                                                children: "*"
+                                            }, void 0, false, {
+                                                fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
+                                                lineNumber: 172,
+                                                columnNumber: 15
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
-                                        lineNumber: 165,
+                                        lineNumber: 170,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
+                                        required: true,
                                         ...register("city"),
-                                        className: "input w-full border-2 border-cgreen bg-cwhite  text-gray-800 rounded-lg px-4 py-3",
+                                        className: "mt-1  w-full p-3 border-2 rounded-lg bg-cwhite text-gray-700 focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200",
+                                        style: {
+                                            borderColor: "#277F60"
+                                        },
                                         children: [
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
                                                 value: "",
                                                 children: "اختر الإدخال"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
-                                                lineNumber: 170,
+                                                lineNumber: 182,
                                                 columnNumber: 15
                                             }, this),
                                             __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$signup$2f$step2$2f$syrianGovernorates$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["syrianGovernorates"].map((gov)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -3240,13 +3490,13 @@ function LandForm({ Gcategory, Gsubcategory }) {
                                                     children: gov.name
                                                 }, gov.value, false, {
                                                     fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
-                                                    lineNumber: 172,
+                                                    lineNumber: 184,
                                                     columnNumber: 17
                                                 }, this))
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
-                                        lineNumber: 166,
+                                        lineNumber: 174,
                                         columnNumber: 13
                                     }, this),
                                     errors.city && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -3254,33 +3504,44 @@ function LandForm({ Gcategory, Gsubcategory }) {
                                         children: String(errors.city.message)
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
-                                        lineNumber: 178,
+                                        lineNumber: 190,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
-                                lineNumber: 164,
+                                lineNumber: 169,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                className: "flex flex-col gap-2",
+                                className: "sm:ml-16",
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                         className: "block font-medium text-gray-700",
-                                        children: "المنطقة"
-                                    }, void 0, false, {
+                                        children: [
+                                            "المنطقة",
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                className: "text-red-500 text-xl mr-1",
+                                                children: "*"
+                                            }, void 0, false, {
+                                                fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
+                                                lineNumber: 199,
+                                                columnNumber: 15
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
-                                        lineNumber: 184,
+                                        lineNumber: 197,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                        required: true,
                                         ...register("hood"),
-                                        className: "input w-full border-2 border-cgreen bg-cwhite  text-gray-800 rounded-lg px-4 py-3",
+                                        className: "w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm",
                                         placeholder: "المنطقة"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
-                                        lineNumber: 185,
+                                        lineNumber: 201,
                                         columnNumber: 13
                                     }, this),
                                     errors.hood && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -3288,23 +3549,23 @@ function LandForm({ Gcategory, Gsubcategory }) {
                                         children: String(errors.hood.message)
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
-                                        lineNumber: 191,
+                                        lineNumber: 208,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
-                                lineNumber: 183,
+                                lineNumber: 196,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
-                        lineNumber: 163,
+                        lineNumber: 168,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "grid grid-cols-1 md:grid-cols-2 gap-6 mb-6",
+                        className: "grid grid-cols-1 md:grid-cols-2 gap-6 mb-6 sm:ml-16",
                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                             className: "flex flex-col gap-2 md:col-span-2",
                             children: [
@@ -3313,62 +3574,21 @@ function LandForm({ Gcategory, Gsubcategory }) {
                                     children: "تفاصيل العنوان"
                                 }, void 0, false, {
                                     fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
-                                    lineNumber: 199,
+                                    lineNumber: 216,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
                                     ...register("detailed_location"),
-                                    className: "input w-full border-2 border-cgreen bg-cwhite  text-gray-800 rounded-lg px-4 py-3",
+                                    className: "w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm",
                                     placeholder: "تفاصيل العنوان"
-                                }, void 0, false, {
-                                    fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
-                                    lineNumber: 202,
-                                    columnNumber: 13
-                                }, this),
-                                errors.detailed_location && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                    className: "text-red-600 text-sm mt-1",
-                                    children: String(errors.detailed_location.message)
-                                }, void 0, false, {
-                                    fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
-                                    lineNumber: 208,
-                                    columnNumber: 15
-                                }, this)
-                            ]
-                        }, void 0, true, {
-                            fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
-                            lineNumber: 198,
-                            columnNumber: 11
-                        }, this)
-                    }, void 0, false, {
-                        fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
-                        lineNumber: 197,
-                        columnNumber: 9
-                    }, this),
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "grid grid-cols-1 md:grid-cols-2 gap-6",
-                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            className: "flex flex-col gap-2 md:col-span-2",
-                            children: [
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                    className: "block font-medium text-gray-700",
-                                    children: "وصف المنتج"
-                                }, void 0, false, {
-                                    fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
-                                    lineNumber: 216,
-                                    columnNumber: 13
-                                }, this),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("textarea", {
-                                    ...register("description"),
-                                    className: "input w-full h-28 border-2 border-cgreen bg-cwhite  text-gray-800 rounded-lg px-4 py-3  focus:outline-none focus:ring-2 focus:ring-green-400 resize-none",
-                                    placeholder: "ادخل وصف المنتج هنا"
                                 }, void 0, false, {
                                     fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
                                     lineNumber: 219,
                                     columnNumber: 13
                                 }, this),
-                                errors.description && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                errors.detailed_location && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                     className: "text-red-600 text-sm mt-1",
-                                    children: String(errors.description.message)
+                                    children: String(errors.detailed_location.message)
                                 }, void 0, false, {
                                     fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
                                     lineNumber: 225,
@@ -3384,11 +3604,63 @@ function LandForm({ Gcategory, Gsubcategory }) {
                         fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
                         lineNumber: 214,
                         columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        className: "grid grid-cols-1 md:grid-cols-2 gap-6 sm:ml-16",
+                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                            className: "flex flex-col gap-2 md:col-span-2",
+                            children: [
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
+                                    className: "block font-medium text-gray-700",
+                                    children: [
+                                        "وصف المنتج",
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                            className: "text-red-500 text-xl mr-1",
+                                            children: "*"
+                                        }, void 0, false, {
+                                            fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
+                                            lineNumber: 235,
+                                            columnNumber: 15
+                                        }, this)
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
+                                    lineNumber: 233,
+                                    columnNumber: 13
+                                }, this),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("textarea", {
+                                    required: true,
+                                    ...register("description"),
+                                    className: "w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm",
+                                    placeholder: "ادخل وصف المنتج هنا"
+                                }, void 0, false, {
+                                    fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
+                                    lineNumber: 237,
+                                    columnNumber: 13
+                                }, this),
+                                errors.description && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                    className: "text-red-600 text-sm mt-1",
+                                    children: String(errors.description.message)
+                                }, void 0, false, {
+                                    fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
+                                    lineNumber: 244,
+                                    columnNumber: 15
+                                }, this)
+                            ]
+                        }, void 0, true, {
+                            fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
+                            lineNumber: 232,
+                            columnNumber: 11
+                        }, this)
+                    }, void 0, false, {
+                        fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
+                        lineNumber: 231,
+                        columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
-                lineNumber: 126,
+                lineNumber: 127,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
@@ -3399,7 +3671,7 @@ function LandForm({ Gcategory, Gsubcategory }) {
                         children: "سعر المنتج"
                     }, void 0, false, {
                         fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
-                        lineNumber: 235,
+                        lineNumber: 254,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -3407,48 +3679,51 @@ function LandForm({ Gcategory, Gsubcategory }) {
                         children: "حدد سعر الإعلان أو اختر إذا كان قابل للتفاوض، وسيساعد المستخدمين على معرفة القيمة بسهولة."
                     }, void 0, false, {
                         fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
-                        lineNumber: 238,
+                        lineNumber: 257,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         className: "grid grid-cols-1 md:grid-cols-2 gap-6 mb-6",
                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            className: "flex flex-col gap-2",
+                            className: "sm:ml-16",
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                     className: "block font-medium text-gray-700",
-                                    children: "سعر المنتج (السعر بالليرة السورية)"
-                                }, void 0, false, {
+                                    children: [
+                                        "سعر المنتج (السعر بالليرة السورية)",
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                            className: "text-red-500 text-xl mr-1",
+                                            children: "*"
+                                        }, void 0, false, {
+                                            fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
+                                            lineNumber: 265,
+                                            columnNumber: 15
+                                        }, this)
+                                    ]
+                                }, void 0, true, {
                                     fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
-                                    lineNumber: 244,
+                                    lineNumber: 263,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                    required: true,
                                     ...register("price"),
-                                    className: "input w-full border-2 border-cgreen bg-cwhite  text-gray-800 rounded-lg px-4 py-3  focus:outline-none focus:ring-2 focus:ring-green-400",
+                                    className: "w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm",
                                     placeholder: "ادخل سعر المنتج"
                                 }, void 0, false, {
                                     fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
-                                    lineNumber: 247,
+                                    lineNumber: 267,
                                     columnNumber: 13
-                                }, this),
-                                errors.price && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                    className: "text-red-600 text-sm mt-1",
-                                    children: String(errors.price.message)
-                                }, void 0, false, {
-                                    fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
-                                    lineNumber: 253,
-                                    columnNumber: 15
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
-                            lineNumber: 243,
+                            lineNumber: 262,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
-                        lineNumber: 242,
+                        lineNumber: 261,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3456,43 +3731,54 @@ function LandForm({ Gcategory, Gsubcategory }) {
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                 className: "block font-medium text-gray-700",
-                                children: "نوع السعر"
-                            }, void 0, false, {
+                                children: [
+                                    "نوع السعر",
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                        className: "text-red-500 text-xl mr-1",
+                                        children: "*"
+                                    }, void 0, false, {
+                                        fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
+                                        lineNumber: 279,
+                                        columnNumber: 13
+                                    }, this)
+                                ]
+                            }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
-                                lineNumber: 260,
+                                lineNumber: 277,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                className: "flex gap-8 mt-3",
+                                className: "flex flex-wrap gap-4 mt-2",
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                        className: "flex items-center gap-3 text-gray-700 cursor-pointer",
+                                        className: "ml-2 flex items-center gap-2 text-gray-700 cursor-pointer",
                                         children: [
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                                required: true,
                                                 type: "radio",
                                                 value: "negotiable",
                                                 ...register("price_type"),
                                                 className: "accent-cgreen"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
-                                                lineNumber: 263,
+                                                lineNumber: 283,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                 children: "سعر قابل للتفاوض"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
-                                                lineNumber: 269,
+                                                lineNumber: 290,
                                                 columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
-                                        lineNumber: 262,
+                                        lineNumber: 282,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                        className: "flex items-center gap-3 text-gray-700 cursor-pointer",
+                                        className: "flex items-center gap-2 text-gray-700 cursor-pointer",
                                         children: [
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
                                                 type: "radio",
@@ -3501,236 +3787,311 @@ function LandForm({ Gcategory, Gsubcategory }) {
                                                 className: "accent-cgreen"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
-                                                lineNumber: 272,
+                                                lineNumber: 293,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                 children: "سعر ثابت"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
-                                                lineNumber: 278,
+                                                lineNumber: 299,
                                                 columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
-                                        lineNumber: 271,
+                                        lineNumber: 292,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
-                                lineNumber: 261,
+                                lineNumber: 281,
                                 columnNumber: 11
-                            }, this),
-                            errors.price_type && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                className: "text-red-600 text-sm mt-1",
-                                children: String(errors.price_type.message)
-                            }, void 0, false, {
-                                fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
-                                lineNumber: 282,
-                                columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
-                        lineNumber: 259,
+                        lineNumber: 276,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
-                lineNumber: 234,
+                lineNumber: 253,
                 columnNumber: 7
             }, this),
-            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
-                className: "text-xl font-bold mb-4",
-                children: "تفاصيل الأرض"
-            }, void 0, false, {
-                fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
-                lineNumber: 288,
-                columnNumber: 7
-            }, this),
-            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "grid grid-cols-1 md:grid-cols-2 gap-4",
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
+                className: "rounded-2xl shadow-lg border bg-white border-gray-200 p-8 mb-6 w-full",
                 children: [
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        children: [
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                className: "block font-medium mb-1",
-                                children: "نوع الأرض"
-                            }, void 0, false, {
-                                fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
-                                lineNumber: 291,
-                                columnNumber: 11
-                            }, this),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
-                                ...register("outdoorspace.land_type"),
-                                className: "input w-full",
-                                dir: "rtl",
-                                children: [
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
-                                        value: "",
-                                        children: "اختر نوع الأرض"
-                                    }, void 0, false, {
-                                        fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
-                                        lineNumber: 297,
-                                        columnNumber: 13
-                                    }, this),
-                                    TYPE_CHOICES.map(([value, label])=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
-                                            value: value,
-                                            children: label
-                                        }, value, false, {
-                                            fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
-                                            lineNumber: 299,
-                                            columnNumber: 15
-                                        }, this))
-                                ]
-                            }, void 0, true, {
-                                fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
-                                lineNumber: 292,
-                                columnNumber: 11
-                            }, this)
-                        ]
-                    }, void 0, true, {
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
+                        className: "text-xl font-bold mb-4",
+                        children: "تفاصيل الأرض"
+                    }, void 0, false, {
                         fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
-                        lineNumber: 290,
+                        lineNumber: 307,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        className: "grid grid-cols-1 md:grid-cols-2 gap-4",
                         children: [
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                className: "block font-medium mb-1",
-                                children: "نوع العرض"
-                            }, void 0, false, {
-                                fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
-                                lineNumber: 307,
-                                columnNumber: 11
-                            }, this),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
-                                ...register("outdoorspace.offer_type"),
-                                className: "input w-full",
-                                dir: "rtl",
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "sm:ml-16",
                                 children: [
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
-                                        value: "",
-                                        children: "اختر نوع العرض"
-                                    }, void 0, false, {
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
+                                        className: "block font-medium text-gray-700",
+                                        children: [
+                                            "نوع العرض",
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                className: "text-red-500 text-xl mr-1",
+                                                children: "*"
+                                            }, void 0, false, {
+                                                fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
+                                                lineNumber: 311,
+                                                columnNumber: 13
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
+                                        lineNumber: 310,
+                                        columnNumber: 13
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
+                                        required: true,
+                                        ...register("outdoorspace.offer_type"),
+                                        className: "mt-2  w-full p-3 py-3.5 border-2 rounded-lg bg-cwhite text-cdarkgray focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200",
+                                        style: {
+                                            borderColor: "#277F60"
+                                        },
+                                        dir: "rtl",
+                                        children: [
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
+                                                value: "",
+                                                children: "اختر نوع العرض"
+                                            }, void 0, false, {
+                                                fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
+                                                lineNumber: 322,
+                                                columnNumber: 15
+                                            }, this),
+                                            OFFER_TYPE_CHOICES.map(([value, label])=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
+                                                    value: value,
+                                                    children: label
+                                                }, value, false, {
+                                                    fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
+                                                    lineNumber: 324,
+                                                    columnNumber: 17
+                                                }, this))
+                                        ]
+                                    }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
                                         lineNumber: 313,
                                         columnNumber: 13
-                                    }, this),
-                                    OFFER_TYPE_CHOICES.map(([value, label])=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
-                                            value: value,
-                                            children: label
-                                        }, value, false, {
-                                            fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
-                                            lineNumber: 315,
-                                            columnNumber: 15
-                                        }, this))
+                                    }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
-                                lineNumber: 308,
+                                lineNumber: 309,
+                                columnNumber: 11
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "sm:ml-16",
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
+                                        className: "block font-medium text-gray-700",
+                                        children: [
+                                            "نوع الأرض",
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                className: "text-red-500 text-xl mr-1",
+                                                children: "*"
+                                            }, void 0, false, {
+                                                fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
+                                                lineNumber: 333,
+                                                columnNumber: 13
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
+                                        lineNumber: 332,
+                                        columnNumber: 13
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
+                                        required: true,
+                                        ...register("outdoorspace.land_type"),
+                                        className: "mt-2  w-full p-3 py-3.5 border-2 rounded-lg bg-cwhite text-cdarkgray focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200",
+                                        style: {
+                                            borderColor: "#277F60"
+                                        },
+                                        dir: "rtl",
+                                        children: [
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
+                                                value: "",
+                                                children: "اختر نوع الأرض"
+                                            }, void 0, false, {
+                                                fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
+                                                lineNumber: 344,
+                                                columnNumber: 15
+                                            }, this),
+                                            TYPE_CHOICES.map(([value, label])=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
+                                                    value: value,
+                                                    children: label
+                                                }, value, false, {
+                                                    fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
+                                                    lineNumber: 346,
+                                                    columnNumber: 17
+                                                }, this))
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
+                                        lineNumber: 335,
+                                        columnNumber: 13
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
+                                lineNumber: 331,
+                                columnNumber: 11
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "sm:ml-16",
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
+                                        className: "block font-medium text-gray-700",
+                                        children: [
+                                            "المساحة العقارية (م²)",
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                className: "text-red-500 text-xl mr-1",
+                                                children: "*"
+                                            }, void 0, false, {
+                                                fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
+                                                lineNumber: 356,
+                                                columnNumber: 15
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
+                                        lineNumber: 354,
+                                        columnNumber: 13
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                        required: true,
+                                        type: "number",
+                                        ...register("outdoorspace.area", {
+                                            valueAsNumber: true
+                                        }),
+                                        className: "w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm",
+                                        min: 0
+                                    }, void 0, false, {
+                                        fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
+                                        lineNumber: 358,
+                                        columnNumber: 13
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
+                                lineNumber: 353,
+                                columnNumber: 11
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "sm:ml-16",
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
+                                        className: "block font-medium text-gray-700",
+                                        children: "متاح من تاريخ"
+                                    }, void 0, false, {
+                                        fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
+                                        lineNumber: 368,
+                                        columnNumber: 13
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                        type: "date",
+                                        ...register("outdoorspace.available_from"),
+                                        className: "w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
+                                    }, void 0, false, {
+                                        fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
+                                        lineNumber: 371,
+                                        columnNumber: 13
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
+                                lineNumber: 367,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
-                        lineNumber: 306,
+                        lineNumber: 308,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("hr", {
+                        className: "mt-6 mb-3 text-clightgray"
+                    }, void 0, false, {
+                        fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
+                        lineNumber: 378,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        className: "flex justify-end max-sm:flex-col max-sm:justify-center max-sm:items-center max-sm:gap-4 mb-5",
                         children: [
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                className: "block font-medium mb-1",
-                                children: "المساحة (متر مربع) *"
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                onClick: ()=>window.location.href = "/perview",
+                                type: "submit",
+                                className: "mt-8 ml-6 max-sm:ml-0 text-white rounded",
+                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                    className: "flex items-center group outline-2 outline-cgreen text-gray-800 hover:bg-chgreen hover:outline-chgreen hover:text-cwhite py-3 px-12 max-sm:px-[100px] rounded text-xl transition-all duration-300",
+                                    children: [
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$search$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Search$3e$__["Search"], {
+                                            className: "ml-1 text-cgreen group-hover:text-cwhite"
+                                        }, void 0, false, {
+                                            fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
+                                            lineNumber: 387,
+                                            columnNumber: 15
+                                        }, this),
+                                        " ",
+                                        "معاينة"
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
+                                    lineNumber: 386,
+                                    columnNumber: 13
+                                }, this)
                             }, void 0, false, {
                                 fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
-                                lineNumber: 322,
+                                lineNumber: 381,
                                 columnNumber: 11
                             }, this),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
-                                type: "number",
-                                ...register("outdoorspace.area", {
-                                    valueAsNumber: true
-                                }),
-                                className: "input w-full",
-                                dir: "rtl",
-                                min: "1",
-                                placeholder: "مثال: 500"
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                type: "submit",
+                                className: "mt-8 ml-6 max-sm:ml-0 text-white rounded",
+                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                    className: "bg-cgreen hover:bg-chgreen py-3 px-32  rounded text-xl transition-all duration-300",
+                                    children: isLoading ? "جار النشر ..." : "نشر"
+                                }, void 0, false, {
+                                    fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
+                                    lineNumber: 397,
+                                    columnNumber: 13
+                                }, this)
                             }, void 0, false, {
                                 fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
-                                lineNumber: 323,
+                                lineNumber: 393,
                                 columnNumber: 11
-                            }, this),
-                            errors.outdoorspace?.area && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                className: "text-red-500 text-sm",
-                                children: errors.outdoorspace.area.message
-                            }, void 0, false, {
-                                fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
-                                lineNumber: 332,
-                                columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
-                        lineNumber: 321,
-                        columnNumber: 9
-                    }, this),
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        children: [
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                className: "block font-medium mb-1",
-                                children: "متاح من تاريخ"
-                            }, void 0, false, {
-                                fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
-                                lineNumber: 339,
-                                columnNumber: 11
-                            }, this),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
-                                type: "date",
-                                ...register("outdoorspace.available_from"),
-                                className: "input w-full",
-                                dir: "rtl"
-                            }, void 0, false, {
-                                fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
-                                lineNumber: 340,
-                                columnNumber: 11
-                            }, this),
-                            errors.outdoorspace?.available_from && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                className: "text-red-500 text-sm",
-                                children: errors.outdoorspace.available_from.message
-                            }, void 0, false, {
-                                fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
-                                lineNumber: 347,
-                                columnNumber: 13
-                            }, this)
-                        ]
-                    }, void 0, true, {
-                        fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
-                        lineNumber: 338,
+                        lineNumber: 379,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
-                lineNumber: 289,
-                columnNumber: 7
-            }, this),
-            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                type: "submit",
-                className: "bg-green-600 text-white px-6 py-2 rounded hover:bg-green-700 w-full",
-                children: isLoading ? "جار نشر الإعلان ..." : "نشر"
-            }, void 0, false, {
-                fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
-                lineNumber: 353,
+                lineNumber: 306,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/app/(public)/newpost/components/LandForm.tsx",
-        lineNumber: 112,
+        lineNumber: 113,
         columnNumber: 5
     }, this);
 }
@@ -3908,8 +4269,6 @@ function HouseForm({ Gcategory, Gsubcategory }) {
         const houseDetails = {
             available_from: data.house.available_from,
             general_characteristics: data.house.general_characteristics,
-            floor: data.house.floor,
-            living_space: data.house.living_space,
             furniture: data.house.furniture,
             bath: data.house.bath,
             real_estate_space: data.house.real_estate_space,
@@ -3947,18 +4306,18 @@ function HouseForm({ Gcategory, Gsubcategory }) {
                 onClose: ()=>setNotification(null)
             }, void 0, false, {
                 fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                lineNumber: 149,
+                lineNumber: 147,
                 columnNumber: 9
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
-                className: "bg-white rounded-2xl shadow-lg border border-gray-200 p-8 mb-6",
+                className: "bg-white rounded-2xl shadow-lg border border-gray-200 p-8 mb-6 ",
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
                         className: "font-bold text-xl text-gray-800 mb-2 text-right",
                         children: "معلومات أساسية"
                     }, void 0, false, {
                         fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                        lineNumber: 158,
+                        lineNumber: 156,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -3966,7 +4325,7 @@ function HouseForm({ Gcategory, Gsubcategory }) {
                         children: "أدخل معلومات الإعلان الأساسية لتظهر بوضوح للمشترين، مثل العنوان والوصف العام والموقع."
                     }, void 0, false, {
                         fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                        lineNumber: 161,
+                        lineNumber: 159,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3977,20 +4336,31 @@ function HouseForm({ Gcategory, Gsubcategory }) {
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                         className: "block font-medium text-gray-700",
-                                        children: "اسم المنتج"
-                                    }, void 0, false, {
+                                        children: [
+                                            "اسم المنتج",
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                className: "text-red-500 text-xl mr-1",
+                                                children: "*"
+                                            }, void 0, false, {
+                                                fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
+                                                lineNumber: 167,
+                                                columnNumber: 15
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                                        lineNumber: 167,
+                                        lineNumber: 165,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                        required: true,
                                         ...register("title"),
                                         type: "text",
                                         placeholder: "اسم المنتج",
                                         className: "w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                                        lineNumber: 170,
+                                        lineNumber: 169,
                                         columnNumber: 13
                                     }, this),
                                     errors.title && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -4004,7 +4374,7 @@ function HouseForm({ Gcategory, Gsubcategory }) {
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                                lineNumber: 166,
+                                lineNumber: 164,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4037,7 +4407,7 @@ function HouseForm({ Gcategory, Gsubcategory }) {
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                        lineNumber: 165,
+                        lineNumber: 163,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4048,13 +4418,24 @@ function HouseForm({ Gcategory, Gsubcategory }) {
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                         className: "block font-medium text-gray-700",
-                                        children: "المحافظة"
-                                    }, void 0, false, {
+                                        children: [
+                                            "المحافظة",
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                className: "text-red-500 text-xl mr-1",
+                                                children: "*"
+                                            }, void 0, false, {
+                                                fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
+                                                lineNumber: 200,
+                                                columnNumber: 15
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
                                         lineNumber: 198,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
+                                        required: true,
                                         ...register("city"),
                                         className: "mt-1  w-full p-3 border-2 rounded-lg bg-cwhite text-gray-700 focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200",
                                         style: {
@@ -4066,7 +4447,7 @@ function HouseForm({ Gcategory, Gsubcategory }) {
                                                 children: "اختر الإدخال"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                                                lineNumber: 206,
+                                                lineNumber: 210,
                                                 columnNumber: 15
                                             }, this),
                                             __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$signup$2f$step2$2f$syrianGovernorates$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["syrianGovernorates"].map((gov)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -4074,13 +4455,13 @@ function HouseForm({ Gcategory, Gsubcategory }) {
                                                     children: gov.name
                                                 }, gov.value, false, {
                                                     fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                                                    lineNumber: 208,
+                                                    lineNumber: 212,
                                                     columnNumber: 17
                                                 }, this))
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                                        lineNumber: 199,
+                                        lineNumber: 202,
                                         columnNumber: 13
                                     }, this),
                                     errors.city && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -4088,7 +4469,7 @@ function HouseForm({ Gcategory, Gsubcategory }) {
                                         children: String(errors.city.message)
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                                        lineNumber: 214,
+                                        lineNumber: 218,
                                         columnNumber: 15
                                     }, this)
                                 ]
@@ -4102,19 +4483,30 @@ function HouseForm({ Gcategory, Gsubcategory }) {
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                         className: "block font-medium text-gray-700",
-                                        children: "المنطقة"
-                                    }, void 0, false, {
+                                        children: [
+                                            "المنطقة",
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                className: "text-red-500 text-xl mr-1",
+                                                children: "*"
+                                            }, void 0, false, {
+                                                fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
+                                                lineNumber: 227,
+                                                columnNumber: 15
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                                        lineNumber: 221,
+                                        lineNumber: 225,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                        required: true,
                                         ...register("hood"),
                                         className: "w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm",
                                         placeholder: "المنطقة"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                                        lineNumber: 222,
+                                        lineNumber: 229,
                                         columnNumber: 13
                                     }, this),
                                     errors.hood && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -4122,13 +4514,13 @@ function HouseForm({ Gcategory, Gsubcategory }) {
                                         children: String(errors.hood.message)
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                                        lineNumber: 228,
+                                        lineNumber: 236,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                                lineNumber: 220,
+                                lineNumber: 224,
                                 columnNumber: 11
                             }, this)
                         ]
@@ -4147,7 +4539,7 @@ function HouseForm({ Gcategory, Gsubcategory }) {
                                     children: "تفاصيل العنوان"
                                 }, void 0, false, {
                                     fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                                    lineNumber: 236,
+                                    lineNumber: 244,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -4156,7 +4548,7 @@ function HouseForm({ Gcategory, Gsubcategory }) {
                                     placeholder: "تفاصيل العنوان"
                                 }, void 0, false, {
                                     fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                                    lineNumber: 239,
+                                    lineNumber: 247,
                                     columnNumber: 13
                                 }, this),
                                 errors.detailed_location && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -4164,18 +4556,18 @@ function HouseForm({ Gcategory, Gsubcategory }) {
                                     children: String(errors.detailed_location.message)
                                 }, void 0, false, {
                                     fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                                    lineNumber: 245,
+                                    lineNumber: 253,
                                     columnNumber: 15
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                            lineNumber: 235,
+                            lineNumber: 243,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                        lineNumber: 234,
+                        lineNumber: 242,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4185,19 +4577,30 @@ function HouseForm({ Gcategory, Gsubcategory }) {
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                     className: "block font-medium text-gray-700",
-                                    children: "وصف المنتج"
-                                }, void 0, false, {
+                                    children: [
+                                        "وصف المنتج",
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                            className: "text-red-500 text-xl mr-1",
+                                            children: "*"
+                                        }, void 0, false, {
+                                            fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
+                                            lineNumber: 263,
+                                            columnNumber: 15
+                                        }, this)
+                                    ]
+                                }, void 0, true, {
                                     fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                                    lineNumber: 253,
+                                    lineNumber: 261,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("textarea", {
+                                    required: true,
                                     ...register("description"),
                                     className: "w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm",
                                     placeholder: "ادخل وصف المنتج هنا"
                                 }, void 0, false, {
                                     fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                                    lineNumber: 256,
+                                    lineNumber: 265,
                                     columnNumber: 13
                                 }, this),
                                 errors.description && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -4205,24 +4608,24 @@ function HouseForm({ Gcategory, Gsubcategory }) {
                                     children: String(errors.description.message)
                                 }, void 0, false, {
                                     fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                                    lineNumber: 262,
+                                    lineNumber: 272,
                                     columnNumber: 15
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                            lineNumber: 252,
+                            lineNumber: 260,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                        lineNumber: 251,
+                        lineNumber: 259,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                lineNumber: 157,
+                lineNumber: 155,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
@@ -4233,7 +4636,7 @@ function HouseForm({ Gcategory, Gsubcategory }) {
                         children: "سعر المنتج"
                     }, void 0, false, {
                         fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                        lineNumber: 272,
+                        lineNumber: 282,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -4241,7 +4644,7 @@ function HouseForm({ Gcategory, Gsubcategory }) {
                         children: "حدد سعر الإعلان أو اختر إذا كان قابل للتفاوض، وسيساعد المستخدمين على معرفة القيمة بسهولة."
                     }, void 0, false, {
                         fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                        lineNumber: 275,
+                        lineNumber: 285,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4251,38 +4654,41 @@ function HouseForm({ Gcategory, Gsubcategory }) {
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                     className: "block font-medium text-gray-700",
-                                    children: "سعر المنتج (السعر بالليرة السورية)"
-                                }, void 0, false, {
+                                    children: [
+                                        "سعر المنتج (السعر بالليرة السورية)",
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                            className: "text-red-500 text-xl mr-1",
+                                            children: "*"
+                                        }, void 0, false, {
+                                            fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
+                                            lineNumber: 293,
+                                            columnNumber: 15
+                                        }, this)
+                                    ]
+                                }, void 0, true, {
                                     fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                                    lineNumber: 281,
+                                    lineNumber: 291,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                    required: true,
                                     ...register("price"),
                                     className: "w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm",
                                     placeholder: "ادخل سعر المنتج"
                                 }, void 0, false, {
                                     fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                                    lineNumber: 284,
+                                    lineNumber: 295,
                                     columnNumber: 13
-                                }, this),
-                                errors.price && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                    className: "text-red-600 text-sm mt-1",
-                                    children: String(errors.price.message)
-                                }, void 0, false, {
-                                    fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                                    lineNumber: 290,
-                                    columnNumber: 15
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                            lineNumber: 280,
+                            lineNumber: 290,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                        lineNumber: 279,
+                        lineNumber: 289,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4290,10 +4696,20 @@ function HouseForm({ Gcategory, Gsubcategory }) {
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                 className: "block font-medium text-gray-700",
-                                children: "نوع السعر"
-                            }, void 0, false, {
+                                children: [
+                                    "نوع السعر",
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                        className: "text-red-500 text-xl mr-1",
+                                        children: "*"
+                                    }, void 0, false, {
+                                        fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
+                                        lineNumber: 307,
+                                        columnNumber: 13
+                                    }, this)
+                                ]
+                            }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                                lineNumber: 298,
+                                lineNumber: 305,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4303,26 +4719,27 @@ function HouseForm({ Gcategory, Gsubcategory }) {
                                         className: "ml-2 flex items-center gap-2 text-gray-700 cursor-pointer",
                                         children: [
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                                required: true,
                                                 type: "radio",
                                                 value: "negotiable",
                                                 ...register("price_type"),
                                                 className: "accent-cgreen"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                                                lineNumber: 301,
+                                                lineNumber: 311,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                 children: "سعر قابل للتفاوض"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                                                lineNumber: 307,
+                                                lineNumber: 318,
                                                 columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                                        lineNumber: 300,
+                                        lineNumber: 310,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
@@ -4335,101 +4752,135 @@ function HouseForm({ Gcategory, Gsubcategory }) {
                                                 className: "accent-cgreen"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                                                lineNumber: 310,
+                                                lineNumber: 321,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                 children: "سعر ثابت"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                                                lineNumber: 316,
+                                                lineNumber: 327,
                                                 columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                                        lineNumber: 309,
+                                        lineNumber: 320,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                                lineNumber: 299,
+                                lineNumber: 309,
                                 columnNumber: 11
-                            }, this),
-                            errors.price_type && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                className: "text-red-600 text-sm mt-1",
-                                children: String(errors.price_type.message)
-                            }, void 0, false, {
-                                fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                                lineNumber: 320,
-                                columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                        lineNumber: 297,
+                        lineNumber: 304,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                lineNumber: 271,
+                lineNumber: 281,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
-                className: "rounded-2xl shadow-lg border border-gray-200 p-8 mb-6 w-full",
+                className: "rounded-2xl shadow-lg border bg-white border-gray-200 p-8 mb-6 w-full",
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
                         className: "font-bold text-lg mb-2",
                         children: "تفاصيل المنزل"
                     }, void 0, false, {
                         fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                        lineNumber: 328,
+                        lineNumber: 334,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         className: "grid grid-cols-1 md:grid-cols-2 gap-4",
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "sm:ml-16",
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                        className: "block font-medium mb-1",
-                                        children: "مساحة غرفة المعيشة (م²)"
-                                    }, void 0, false, {
+                                        className: "block font-medium text-gray-700",
+                                        children: [
+                                            "نوع العرض",
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                className: "text-red-500 text-xl mr-1",
+                                                children: "*"
+                                            }, void 0, false, {
+                                                fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
+                                                lineNumber: 338,
+                                                columnNumber: 13
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                                        lineNumber: 331,
+                                        lineNumber: 337,
                                         columnNumber: 13
                                     }, this),
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
-                                        type: "number",
-                                        ...register("house.living_space", {
-                                            valueAsNumber: true
-                                        }),
-                                        className: "w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm",
-                                        min: 0
-                                    }, void 0, false, {
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
+                                        required: true,
+                                        ...register("house.offer_type"),
+                                        className: "mt-2  w-full p-3 py-3.5 border-2 rounded-lg bg-cwhite text-cdarkgray focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200",
+                                        style: {
+                                            borderColor: "#277F60"
+                                        },
+                                        dir: "rtl",
+                                        children: [
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
+                                                value: "",
+                                                children: "اختر العرض"
+                                            }, void 0, false, {
+                                                fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
+                                                lineNumber: 349,
+                                                columnNumber: 15
+                                            }, this),
+                                            OFFER_TYPE_CHOICES.map(([value, label])=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
+                                                    value: value,
+                                                    children: label
+                                                }, value, false, {
+                                                    fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
+                                                    lineNumber: 351,
+                                                    columnNumber: 17
+                                                }, this))
+                                        ]
+                                    }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                                        lineNumber: 332,
+                                        lineNumber: 340,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                                lineNumber: 330,
+                                lineNumber: 336,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "sm:ml-16",
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                        className: "block font-medium mb-1",
-                                        children: "عدد الغرف"
-                                    }, void 0, false, {
+                                        className: "block font-medium text-gray-700",
+                                        children: [
+                                            "عدد الغرف",
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                className: "text-red-500 text-xl mr-1",
+                                                children: "*"
+                                            }, void 0, false, {
+                                                fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
+                                                lineNumber: 360,
+                                                columnNumber: 13
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                                        lineNumber: 340,
+                                        lineNumber: 359,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                        required: true,
                                         type: "number",
                                         ...register("house.room", {
                                             valueAsNumber: true
@@ -4438,23 +4889,24 @@ function HouseForm({ Gcategory, Gsubcategory }) {
                                         min: 0
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                                        lineNumber: 341,
+                                        lineNumber: 362,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                                lineNumber: 339,
+                                lineNumber: 358,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "sm:ml-16",
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                        className: "block font-medium mb-1",
+                                        className: "block font-medium text-gray-700",
                                         children: "عدد غرف النوم"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                                        lineNumber: 349,
+                                        lineNumber: 371,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -4466,23 +4918,24 @@ function HouseForm({ Gcategory, Gsubcategory }) {
                                         min: 0
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                                        lineNumber: 350,
+                                        lineNumber: 374,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                                lineNumber: 348,
+                                lineNumber: 370,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "sm:ml-16",
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                        className: "block font-medium mb-1",
+                                        className: "block font-medium text-gray-700",
                                         children: "عدد الحمامات"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                                        lineNumber: 358,
+                                        lineNumber: 382,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -4494,26 +4947,38 @@ function HouseForm({ Gcategory, Gsubcategory }) {
                                         min: 0
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                                        lineNumber: 359,
+                                        lineNumber: 385,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                                lineNumber: 357,
+                                lineNumber: 381,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "sm:ml-16",
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                        className: "block font-medium mb-1",
-                                        children: "المساحة العقارية (م²)"
-                                    }, void 0, false, {
+                                        className: "block font-medium text-gray-700",
+                                        children: [
+                                            "المساحة العقارية (م²)",
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                className: "text-red-500 text-xl mr-1",
+                                                children: "*"
+                                            }, void 0, false, {
+                                                fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
+                                                lineNumber: 395,
+                                                columnNumber: 15
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                                        lineNumber: 367,
+                                        lineNumber: 393,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                        required: true,
                                         type: "number",
                                         ...register("house.real_estate_space", {
                                             valueAsNumber: true
@@ -4522,23 +4987,24 @@ function HouseForm({ Gcategory, Gsubcategory }) {
                                         min: 0
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                                        lineNumber: 370,
+                                        lineNumber: 397,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                                lineNumber: 366,
+                                lineNumber: 392,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "sm:ml-16",
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                        className: "block font-medium mb-1",
+                                        className: "block font-medium text-gray-700",
                                         children: "متاح من تاريخ"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                                        lineNumber: 378,
+                                        lineNumber: 406,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -4547,48 +5013,24 @@ function HouseForm({ Gcategory, Gsubcategory }) {
                                         className: "w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                                        lineNumber: 379,
+                                        lineNumber: 409,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                                lineNumber: 377,
+                                lineNumber: 405,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "sm:ml-16",
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                        className: "block font-medium mb-1",
-                                        children: "الطابق"
-                                    }, void 0, false, {
-                                        fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                                        lineNumber: 387,
-                                        columnNumber: 13
-                                    }, this),
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
-                                        type: "text",
-                                        ...register("house.floor"),
-                                        className: "w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
-                                    }, void 0, false, {
-                                        fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                                        lineNumber: 388,
-                                        columnNumber: 13
-                                    }, this)
-                                ]
-                            }, void 0, true, {
-                                fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                                lineNumber: 386,
-                                columnNumber: 11
-                            }, this),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                children: [
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                        className: "block font-medium mb-1",
+                                        className: "block font-medium text-gray-700",
                                         children: "سنة البناء"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                                        lineNumber: 396,
+                                        lineNumber: 417,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -4601,19 +5043,19 @@ function HouseForm({ Gcategory, Gsubcategory }) {
                                         max: 2100
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                                        lineNumber: 397,
+                                        lineNumber: 420,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                                lineNumber: 395,
+                                lineNumber: 416,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                        lineNumber: 329,
+                        lineNumber: 335,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4627,7 +5069,7 @@ function HouseForm({ Gcategory, Gsubcategory }) {
                                         children: "نوع المنزل"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                                        lineNumber: 411,
+                                        lineNumber: 434,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4642,81 +5084,31 @@ function HouseForm({ Gcategory, Gsubcategory }) {
                                                         className: "accent-cgreen"
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                                                        lineNumber: 420,
+                                                        lineNumber: 443,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                         children: label
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                                                        lineNumber: 426,
+                                                        lineNumber: 449,
                                                         columnNumber: 19
                                                     }, this)
                                                 ]
                                             }, value, true, {
                                                 fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                                                lineNumber: 416,
+                                                lineNumber: 439,
                                                 columnNumber: 17
                                             }, this))
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                                        lineNumber: 414,
+                                        lineNumber: 437,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                                lineNumber: 410,
-                                columnNumber: 11
-                            }, this),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                className: "sm:ml-16 bg-cwhite rounded-md p-4 w-full shadow-md ",
-                                children: [
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                        className: "block font-medium text-gray-700",
-                                        children: "نوع العرض"
-                                    }, void 0, false, {
-                                        fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                                        lineNumber: 433,
-                                        columnNumber: 13
-                                    }, this),
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                        className: "flex flex-wrap gap-4 mt-2",
-                                        children: OFFER_TYPE_CHOICES.map(([value, label])=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                                className: "flex items-center gap-1 ml-2 text-gray-700 cursor-pointer",
-                                                children: [
-                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
-                                                        type: "radio",
-                                                        value: value,
-                                                        ...register("house.offer_type"),
-                                                        className: "accent-cgreen"
-                                                    }, void 0, false, {
-                                                        fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                                                        lineNumber: 440,
-                                                        columnNumber: 19
-                                                    }, this),
-                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                        children: label
-                                                    }, void 0, false, {
-                                                        fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                                                        lineNumber: 446,
-                                                        columnNumber: 19
-                                                    }, this)
-                                                ]
-                                            }, value, true, {
-                                                fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                                                lineNumber: 436,
-                                                columnNumber: 17
-                                            }, this))
-                                    }, void 0, false, {
-                                        fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                                        lineNumber: 434,
-                                        columnNumber: 13
-                                    }, this)
-                                ]
-                            }, void 0, true, {
-                                fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                                lineNumber: 432,
+                                lineNumber: 433,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4727,7 +5119,7 @@ function HouseForm({ Gcategory, Gsubcategory }) {
                                         children: "الأثاث"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                                        lineNumber: 453,
+                                        lineNumber: 456,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4742,25 +5134,25 @@ function HouseForm({ Gcategory, Gsubcategory }) {
                                                         ...register("house.furniture")
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                                                        lineNumber: 460,
+                                                        lineNumber: 463,
                                                         columnNumber: 19
                                                     }, this),
                                                     label
                                                 ]
                                             }, value, true, {
                                                 fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                                                lineNumber: 456,
+                                                lineNumber: 459,
                                                 columnNumber: 17
                                             }, this))
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                                        lineNumber: 454,
+                                        lineNumber: 457,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                                lineNumber: 452,
+                                lineNumber: 455,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4771,7 +5163,7 @@ function HouseForm({ Gcategory, Gsubcategory }) {
                                         children: "حالة المبنى"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                                        lineNumber: 473,
+                                        lineNumber: 476,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4786,38 +5178,38 @@ function HouseForm({ Gcategory, Gsubcategory }) {
                                                         ...register("house.general_characteristics")
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                                                        lineNumber: 482,
+                                                        lineNumber: 485,
                                                         columnNumber: 19
                                                     }, this),
                                                     label
                                                 ]
                                             }, value, true, {
                                                 fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                                                lineNumber: 478,
+                                                lineNumber: 481,
                                                 columnNumber: 17
                                             }, this))
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                                        lineNumber: 476,
+                                        lineNumber: 479,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                                lineNumber: 472,
+                                lineNumber: 475,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                        lineNumber: 409,
+                        lineNumber: 432,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("hr", {
                         className: "mt-6 mb-3 text-clightgray"
                     }, void 0, false, {
                         fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                        lineNumber: 495,
+                        lineNumber: 497,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4834,7 +5226,7 @@ function HouseForm({ Gcategory, Gsubcategory }) {
                                             className: "ml-1 text-cgreen group-hover:text-cwhite"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                                            lineNumber: 504,
+                                            lineNumber: 506,
                                             columnNumber: 15
                                         }, this),
                                         " ",
@@ -4842,12 +5234,12 @@ function HouseForm({ Gcategory, Gsubcategory }) {
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                                    lineNumber: 503,
+                                    lineNumber: 505,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                                lineNumber: 498,
+                                lineNumber: 500,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -4858,30 +5250,30 @@ function HouseForm({ Gcategory, Gsubcategory }) {
                                     children: isLoading ? "جار النشر ..." : "نشر"
                                 }, void 0, false, {
                                     fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                                    lineNumber: 514,
+                                    lineNumber: 516,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                                lineNumber: 510,
+                                lineNumber: 512,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                        lineNumber: 496,
+                        lineNumber: 498,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-                lineNumber: 327,
+                lineNumber: 333,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/app/(public)/newpost/components/HouseForm.tsx",
-        lineNumber: 143,
+        lineNumber: 141,
         columnNumber: 5
     }, this);
 }
@@ -5035,10 +5427,10 @@ function ApartmentForm({ Gcategory, Gsubcategory }) {
         formData.append("category", Gcategory);
         formData.append("subcategory", Gsubcategory);
         const apartmentDetails = {
+            real_estate_space: data.apartment.real_estate_space,
             available_from: data.apartment.available_from,
             general_characteristics: data.apartment.general_characteristics,
             floor: data.apartment.floor,
-            living_space: data.apartment.living_space,
             furniture: data.apartment.furniture,
             bath: data.apartment.bath,
             bed_room: data.apartment.bed_room,
@@ -5078,7 +5470,7 @@ function ApartmentForm({ Gcategory, Gsubcategory }) {
                 columnNumber: 9
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
-                className: "bg-white rounded-2xl shadow-lg border border-gray-200 p-8 mb-6",
+                className: "bg-white rounded-2xl shadow-lg border border-gray-200 p-8 mb-6 ",
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
                         className: "font-bold text-xl text-gray-800 mb-2 text-right",
@@ -5104,20 +5496,31 @@ function ApartmentForm({ Gcategory, Gsubcategory }) {
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                         className: "block font-medium text-gray-700",
-                                        children: "اسم المنتج"
-                                    }, void 0, false, {
+                                        children: [
+                                            "اسم المنتج",
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                className: "text-red-500 text-xl mr-1",
+                                                children: "*"
+                                            }, void 0, false, {
+                                                fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
+                                                lineNumber: 162,
+                                                columnNumber: 15
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
                                         lineNumber: 160,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                        required: true,
                                         ...register("title"),
                                         type: "text",
                                         placeholder: "اسم المنتج",
                                         className: "w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                        lineNumber: 163,
+                                        lineNumber: 164,
                                         columnNumber: 13
                                     }, this),
                                     errors.title && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -5125,7 +5528,7 @@ function ApartmentForm({ Gcategory, Gsubcategory }) {
                                         children: String(errors.title.message)
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                        lineNumber: 171,
+                                        lineNumber: 173,
                                         columnNumber: 15
                                     }, this)
                                 ]
@@ -5142,7 +5545,7 @@ function ApartmentForm({ Gcategory, Gsubcategory }) {
                                         children: "صور المنتج"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                        lineNumber: 178,
+                                        lineNumber: 180,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -5152,13 +5555,13 @@ function ApartmentForm({ Gcategory, Gsubcategory }) {
                                         className: "w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                        lineNumber: 181,
+                                        lineNumber: 183,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                lineNumber: 177,
+                                lineNumber: 179,
                                 columnNumber: 11
                             }, this)
                         ]
@@ -5175,13 +5578,24 @@ function ApartmentForm({ Gcategory, Gsubcategory }) {
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                         className: "block font-medium text-gray-700",
-                                        children: "المحافظة"
-                                    }, void 0, false, {
+                                        children: [
+                                            "المحافظة",
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                className: "text-red-500 text-xl mr-1",
+                                                children: "*"
+                                            }, void 0, false, {
+                                                fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
+                                                lineNumber: 195,
+                                                columnNumber: 15
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                        lineNumber: 191,
+                                        lineNumber: 193,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
+                                        required: true,
                                         ...register("city"),
                                         className: "mt-1  w-full p-3 border-2 rounded-lg bg-cwhite text-gray-700 focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200",
                                         style: {
@@ -5193,7 +5607,7 @@ function ApartmentForm({ Gcategory, Gsubcategory }) {
                                                 children: "اختر الإدخال"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                                lineNumber: 199,
+                                                lineNumber: 205,
                                                 columnNumber: 15
                                             }, this),
                                             __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$signup$2f$step2$2f$syrianGovernorates$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["syrianGovernorates"].map((gov)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -5201,13 +5615,13 @@ function ApartmentForm({ Gcategory, Gsubcategory }) {
                                                     children: gov.name
                                                 }, gov.value, false, {
                                                     fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                                    lineNumber: 201,
+                                                    lineNumber: 207,
                                                     columnNumber: 17
                                                 }, this))
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                        lineNumber: 192,
+                                        lineNumber: 197,
                                         columnNumber: 13
                                     }, this),
                                     errors.city && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -5215,13 +5629,13 @@ function ApartmentForm({ Gcategory, Gsubcategory }) {
                                         children: String(errors.city.message)
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                        lineNumber: 207,
+                                        lineNumber: 213,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                lineNumber: 190,
+                                lineNumber: 192,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5229,19 +5643,30 @@ function ApartmentForm({ Gcategory, Gsubcategory }) {
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                         className: "block font-medium text-gray-700",
-                                        children: "المنطقة"
-                                    }, void 0, false, {
+                                        children: [
+                                            "المنطقة",
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                className: "text-red-500 text-xl mr-1",
+                                                children: "*"
+                                            }, void 0, false, {
+                                                fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
+                                                lineNumber: 222,
+                                                columnNumber: 15
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                        lineNumber: 214,
+                                        lineNumber: 220,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                        required: true,
                                         ...register("hood"),
                                         className: "w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm",
                                         placeholder: "المنطقة"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                        lineNumber: 215,
+                                        lineNumber: 224,
                                         columnNumber: 13
                                     }, this),
                                     errors.hood && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -5249,19 +5674,19 @@ function ApartmentForm({ Gcategory, Gsubcategory }) {
                                         children: String(errors.hood.message)
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                        lineNumber: 221,
+                                        lineNumber: 231,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                lineNumber: 213,
+                                lineNumber: 219,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                        lineNumber: 189,
+                        lineNumber: 191,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5274,7 +5699,7 @@ function ApartmentForm({ Gcategory, Gsubcategory }) {
                                     children: "تفاصيل العنوان"
                                 }, void 0, false, {
                                     fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                    lineNumber: 229,
+                                    lineNumber: 239,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -5283,7 +5708,7 @@ function ApartmentForm({ Gcategory, Gsubcategory }) {
                                     placeholder: "تفاصيل العنوان"
                                 }, void 0, false, {
                                     fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                    lineNumber: 232,
+                                    lineNumber: 242,
                                     columnNumber: 13
                                 }, this),
                                 errors.detailed_location && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -5291,18 +5716,18 @@ function ApartmentForm({ Gcategory, Gsubcategory }) {
                                     children: String(errors.detailed_location.message)
                                 }, void 0, false, {
                                     fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                    lineNumber: 238,
+                                    lineNumber: 248,
                                     columnNumber: 15
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                            lineNumber: 228,
+                            lineNumber: 238,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                        lineNumber: 227,
+                        lineNumber: 237,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5312,19 +5737,30 @@ function ApartmentForm({ Gcategory, Gsubcategory }) {
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                     className: "block font-medium text-gray-700",
-                                    children: "وصف المنتج"
-                                }, void 0, false, {
+                                    children: [
+                                        "وصف المنتج",
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                            className: "text-red-500 text-xl mr-1",
+                                            children: "*"
+                                        }, void 0, false, {
+                                            fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
+                                            lineNumber: 258,
+                                            columnNumber: 15
+                                        }, this)
+                                    ]
+                                }, void 0, true, {
                                     fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                    lineNumber: 246,
+                                    lineNumber: 256,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("textarea", {
+                                    required: true,
                                     ...register("description"),
                                     className: "w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm",
                                     placeholder: "ادخل وصف المنتج هنا"
                                 }, void 0, false, {
                                     fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                    lineNumber: 249,
+                                    lineNumber: 260,
                                     columnNumber: 13
                                 }, this),
                                 errors.description && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -5332,18 +5768,18 @@ function ApartmentForm({ Gcategory, Gsubcategory }) {
                                     children: String(errors.description.message)
                                 }, void 0, false, {
                                     fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                    lineNumber: 255,
+                                    lineNumber: 267,
                                     columnNumber: 15
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                            lineNumber: 245,
+                            lineNumber: 255,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                        lineNumber: 244,
+                        lineNumber: 254,
                         columnNumber: 9
                     }, this)
                 ]
@@ -5360,7 +5796,7 @@ function ApartmentForm({ Gcategory, Gsubcategory }) {
                         children: "سعر المنتج"
                     }, void 0, false, {
                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                        lineNumber: 265,
+                        lineNumber: 277,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -5368,7 +5804,7 @@ function ApartmentForm({ Gcategory, Gsubcategory }) {
                         children: "حدد سعر الإعلان أو اختر إذا كان قابل للتفاوض، وسيساعد المستخدمين على معرفة القيمة بسهولة."
                     }, void 0, false, {
                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                        lineNumber: 268,
+                        lineNumber: 280,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5378,38 +5814,41 @@ function ApartmentForm({ Gcategory, Gsubcategory }) {
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                     className: "block font-medium text-gray-700",
-                                    children: "سعر المنتج (السعر بالليرة السورية)"
-                                }, void 0, false, {
+                                    children: [
+                                        "سعر المنتج (السعر بالليرة السورية)",
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                            className: "text-red-500 text-xl mr-1",
+                                            children: "*"
+                                        }, void 0, false, {
+                                            fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
+                                            lineNumber: 288,
+                                            columnNumber: 15
+                                        }, this)
+                                    ]
+                                }, void 0, true, {
                                     fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                    lineNumber: 274,
+                                    lineNumber: 286,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                    required: true,
                                     ...register("price"),
                                     className: "w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm",
                                     placeholder: "ادخل سعر المنتج"
                                 }, void 0, false, {
                                     fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                    lineNumber: 277,
+                                    lineNumber: 290,
                                     columnNumber: 13
-                                }, this),
-                                errors.price && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                    className: "text-red-600 text-sm mt-1",
-                                    children: String(errors.price.message)
-                                }, void 0, false, {
-                                    fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                    lineNumber: 283,
-                                    columnNumber: 15
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                            lineNumber: 273,
+                            lineNumber: 285,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                        lineNumber: 272,
+                        lineNumber: 284,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5417,10 +5856,20 @@ function ApartmentForm({ Gcategory, Gsubcategory }) {
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                 className: "block font-medium text-gray-700",
-                                children: "نوع السعر"
-                            }, void 0, false, {
+                                children: [
+                                    "نوع السعر",
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                        className: "text-red-500 text-xl mr-1",
+                                        children: "*"
+                                    }, void 0, false, {
+                                        fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
+                                        lineNumber: 302,
+                                        columnNumber: 13
+                                    }, this)
+                                ]
+                            }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                lineNumber: 291,
+                                lineNumber: 300,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5430,26 +5879,27 @@ function ApartmentForm({ Gcategory, Gsubcategory }) {
                                         className: "ml-2 flex items-center gap-2 text-gray-700 cursor-pointer",
                                         children: [
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                                required: true,
                                                 type: "radio",
                                                 value: "negotiable",
                                                 ...register("price_type"),
                                                 className: "accent-cgreen"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                                lineNumber: 294,
+                                                lineNumber: 306,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                 children: "سعر قابل للتفاوض"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                                lineNumber: 300,
+                                                lineNumber: 313,
                                                 columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                        lineNumber: 293,
+                                        lineNumber: 305,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
@@ -5462,101 +5912,175 @@ function ApartmentForm({ Gcategory, Gsubcategory }) {
                                                 className: "accent-cgreen"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                                lineNumber: 303,
+                                                lineNumber: 316,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                 children: "سعر ثابت"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                                lineNumber: 309,
+                                                lineNumber: 322,
                                                 columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                        lineNumber: 302,
+                                        lineNumber: 315,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                lineNumber: 292,
+                                lineNumber: 304,
                                 columnNumber: 11
-                            }, this),
-                            errors.price_type && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                className: "text-red-600 text-sm mt-1",
-                                children: String(errors.price_type.message)
-                            }, void 0, false, {
-                                fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                lineNumber: 313,
-                                columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                        lineNumber: 290,
+                        lineNumber: 299,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                lineNumber: 264,
+                lineNumber: 276,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
-                className: "rounded-2xl shadow-lg border border-gray-200 p-8 mb-6 w-full",
+                className: "rounded-2xl shadow-lg border bg-white border-gray-200 p-8 mb-6 w-full",
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
                         className: "font-bold text-lg mb-2",
                         children: "تفاصيل الشقة"
                     }, void 0, false, {
                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                        lineNumber: 322,
+                        lineNumber: 330,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         className: "grid grid-cols-1 md:grid-cols-2 gap-4",
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "sm:ml-16",
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                        className: "block font-medium mb-1",
-                                        children: "مساحة غرفة المعيشة (م²)"
-                                    }, void 0, false, {
+                                        className: "block font-medium text-gray-700",
+                                        children: [
+                                            "نوع العرض",
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                className: "text-red-500 text-xl mr-1",
+                                                children: "*"
+                                            }, void 0, false, {
+                                                fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
+                                                lineNumber: 334,
+                                                columnNumber: 13
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                        lineNumber: 327,
+                                        lineNumber: 333,
+                                        columnNumber: 13
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
+                                        required: true,
+                                        ...register("apartment.offer_type"),
+                                        className: "mt-2  w-full p-3 py-3.5 border-2 rounded-lg bg-cwhite text-cdarkgray focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200",
+                                        style: {
+                                            borderColor: "#277F60"
+                                        },
+                                        dir: "rtl",
+                                        children: [
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
+                                                value: "",
+                                                children: "اختر نوع العرض"
+                                            }, void 0, false, {
+                                                fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
+                                                lineNumber: 345,
+                                                columnNumber: 15
+                                            }, this),
+                                            OFFER_TYPE_CHOICES.map(([value, label])=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
+                                                    value: value,
+                                                    children: label
+                                                }, value, false, {
+                                                    fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
+                                                    lineNumber: 347,
+                                                    columnNumber: 17
+                                                }, this))
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
+                                        lineNumber: 336,
+                                        columnNumber: 13
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
+                                lineNumber: 332,
+                                columnNumber: 11
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "sm:ml-16",
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
+                                        className: "block font-medium text-gray-700",
+                                        children: [
+                                            "المساحة العقارية (م²)",
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                className: "text-red-500 text-xl mr-1",
+                                                children: "*"
+                                            }, void 0, false, {
+                                                fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
+                                                lineNumber: 357,
+                                                columnNumber: 15
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
+                                        lineNumber: 355,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                        required: true,
                                         type: "number",
-                                        ...register("apartment.living_space", {
+                                        ...register("apartment.real_estate_space", {
                                             valueAsNumber: true
                                         }),
                                         className: "w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm",
                                         min: 0
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                        lineNumber: 330,
+                                        lineNumber: 359,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                lineNumber: 326,
+                                lineNumber: 354,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "sm:ml-16",
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                        className: "block font-medium mb-1",
-                                        children: "عدد الغرف"
-                                    }, void 0, false, {
+                                        className: "block font-medium text-gray-700",
+                                        children: [
+                                            "عدد الغرف",
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                className: "text-red-500 text-xl mr-1",
+                                                children: "*"
+                                            }, void 0, false, {
+                                                fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
+                                                lineNumber: 372,
+                                                columnNumber: 13
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                        lineNumber: 339,
+                                        lineNumber: 371,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                        required: true,
                                         type: "number",
                                         ...register("apartment.room", {
                                             valueAsNumber: true
@@ -5565,23 +6089,24 @@ function ApartmentForm({ Gcategory, Gsubcategory }) {
                                         min: 0
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                        lineNumber: 340,
+                                        lineNumber: 374,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                lineNumber: 338,
+                                lineNumber: 370,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "sm:ml-16",
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                        className: "block font-medium mb-1",
+                                        className: "block font-medium text-gray-700",
                                         children: "عدد غرف النوم"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                        lineNumber: 349,
+                                        lineNumber: 384,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -5593,23 +6118,24 @@ function ApartmentForm({ Gcategory, Gsubcategory }) {
                                         min: 0
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                        lineNumber: 350,
+                                        lineNumber: 387,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                lineNumber: 348,
+                                lineNumber: 383,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "sm:ml-16",
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                        className: "block font-medium mb-1",
+                                        className: "block font-medium text-gray-700",
                                         children: "عدد الحمامات"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                        lineNumber: 359,
+                                        lineNumber: 396,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -5621,23 +6147,24 @@ function ApartmentForm({ Gcategory, Gsubcategory }) {
                                         min: 0
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                        lineNumber: 360,
+                                        lineNumber: 399,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                lineNumber: 358,
+                                lineNumber: 395,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "sm:ml-16",
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                        className: "block font-medium mb-1",
+                                        className: "block font-medium text-gray-700",
                                         children: "متاح من تاريخ"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                        lineNumber: 369,
+                                        lineNumber: 408,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -5646,26 +6173,38 @@ function ApartmentForm({ Gcategory, Gsubcategory }) {
                                         className: "w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                        lineNumber: 370,
+                                        lineNumber: 411,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                lineNumber: 368,
+                                lineNumber: 407,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "sm:ml-16",
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                        className: "block font-medium mb-1",
-                                        children: "الطابق"
-                                    }, void 0, false, {
+                                        className: "block font-medium text-gray-700",
+                                        children: [
+                                            "الطابق",
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                className: "text-red-500 text-xl mr-1",
+                                                children: "*"
+                                            }, void 0, false, {
+                                                fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
+                                                lineNumber: 420,
+                                                columnNumber: 13
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                        lineNumber: 378,
+                                        lineNumber: 419,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                        required: true,
                                         type: "text",
                                         ...register("apartment.floor", {
                                             valueAsNumber: true
@@ -5673,23 +6212,24 @@ function ApartmentForm({ Gcategory, Gsubcategory }) {
                                         className: "w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                        lineNumber: 379,
+                                        lineNumber: 422,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                lineNumber: 377,
+                                lineNumber: 418,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "sm:ml-16",
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                        className: "block font-medium mb-1",
+                                        className: "block font-medium text-gray-700",
                                         children: "سنة البناء"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                        lineNumber: 387,
+                                        lineNumber: 431,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -5702,19 +6242,19 @@ function ApartmentForm({ Gcategory, Gsubcategory }) {
                                         max: 2100
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                        lineNumber: 388,
+                                        lineNumber: 434,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                lineNumber: 386,
+                                lineNumber: 430,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                        lineNumber: 323,
+                        lineNumber: 331,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5725,60 +6265,10 @@ function ApartmentForm({ Gcategory, Gsubcategory }) {
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                         className: "block font-medium text-gray-700",
-                                        children: "نوع العرض"
-                                    }, void 0, false, {
-                                        fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                        lineNumber: 403,
-                                        columnNumber: 13
-                                    }, this),
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                        className: "flex flex-wrap gap-4 mt-2",
-                                        children: OFFER_TYPE_CHOICES.map(([value, label])=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                                className: "flex items-center gap-1 ml-2 text-gray-700 cursor-pointer",
-                                                children: [
-                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
-                                                        type: "radio",
-                                                        value: value,
-                                                        ...register("apartment.offer_type"),
-                                                        className: "accent-cgreen"
-                                                    }, void 0, false, {
-                                                        fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                                        lineNumber: 410,
-                                                        columnNumber: 19
-                                                    }, this),
-                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                        children: label
-                                                    }, void 0, false, {
-                                                        fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                                        lineNumber: 416,
-                                                        columnNumber: 19
-                                                    }, this)
-                                                ]
-                                            }, value, true, {
-                                                fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                                lineNumber: 406,
-                                                columnNumber: 17
-                                            }, this))
-                                    }, void 0, false, {
-                                        fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                        lineNumber: 404,
-                                        columnNumber: 13
-                                    }, this)
-                                ]
-                            }, void 0, true, {
-                                fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                lineNumber: 402,
-                                columnNumber: 11
-                            }, this),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                className: "sm:ml-16 bg-cwhite rounded-md p-4 w-full shadow-md ",
-                                children: [
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                        className: "block font-medium text-gray-700",
                                         children: "الأثاث"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                        lineNumber: 422,
+                                        lineNumber: 448,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5793,25 +6283,25 @@ function ApartmentForm({ Gcategory, Gsubcategory }) {
                                                         ...register("apartment.furniture")
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                                        lineNumber: 429,
+                                                        lineNumber: 455,
                                                         columnNumber: 19
                                                     }, this),
                                                     label
                                                 ]
                                             }, value, true, {
                                                 fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                                lineNumber: 425,
+                                                lineNumber: 451,
                                                 columnNumber: 17
                                             }, this))
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                        lineNumber: 423,
+                                        lineNumber: 449,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                lineNumber: 421,
+                                lineNumber: 447,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5822,7 +6312,7 @@ function ApartmentForm({ Gcategory, Gsubcategory }) {
                                         children: "حالة المبنى"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                        lineNumber: 442,
+                                        lineNumber: 468,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5837,38 +6327,38 @@ function ApartmentForm({ Gcategory, Gsubcategory }) {
                                                         ...register("apartment.general_characteristics")
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                                        lineNumber: 451,
+                                                        lineNumber: 477,
                                                         columnNumber: 19
                                                     }, this),
                                                     label
                                                 ]
                                             }, value, true, {
                                                 fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                                lineNumber: 447,
+                                                lineNumber: 473,
                                                 columnNumber: 17
                                             }, this))
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                        lineNumber: 445,
+                                        lineNumber: 471,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                lineNumber: 441,
+                                lineNumber: 467,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                        lineNumber: 400,
+                        lineNumber: 446,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("hr", {
                         className: "mt-6 mb-3 text-clightgray"
                     }, void 0, false, {
                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                        lineNumber: 464,
+                        lineNumber: 490,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5885,7 +6375,7 @@ function ApartmentForm({ Gcategory, Gsubcategory }) {
                                             className: "ml-1 text-cgreen group-hover:text-cwhite"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                            lineNumber: 473,
+                                            lineNumber: 499,
                                             columnNumber: 15
                                         }, this),
                                         " ",
@@ -5893,12 +6383,12 @@ function ApartmentForm({ Gcategory, Gsubcategory }) {
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                    lineNumber: 472,
+                                    lineNumber: 498,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                lineNumber: 467,
+                                lineNumber: 493,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -5909,24 +6399,24 @@ function ApartmentForm({ Gcategory, Gsubcategory }) {
                                     children: isLoading ? "جار النشر ..." : "نشر"
                                 }, void 0, false, {
                                     fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                    lineNumber: 483,
+                                    lineNumber: 509,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                lineNumber: 479,
+                                lineNumber: 505,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                        lineNumber: 465,
+                        lineNumber: 491,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                lineNumber: 321,
+                lineNumber: 329,
                 columnNumber: 7
             }, this)
         ]
@@ -6055,7 +6545,7 @@ function ElectronicsForm({ Gcategory, Gsubcategory }) {
                 columnNumber: 9
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
-                className: "bg-white rounded-2xl shadow-lg border border-gray-200 p-8 mb-6",
+                className: "bg-white rounded-2xl shadow-lg border border-gray-200 p-8 mb-6 ",
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
                         className: "font-bold text-xl text-gray-800 mb-2 text-right",
@@ -6081,20 +6571,31 @@ function ElectronicsForm({ Gcategory, Gsubcategory }) {
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                         className: "block font-medium text-gray-700",
-                                        children: "اسم المنتج"
-                                    }, void 0, false, {
+                                        children: [
+                                            "اسم المنتج",
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                className: "text-red-500 text-xl mr-1",
+                                                children: "*"
+                                            }, void 0, false, {
+                                                fileName: "[project]/app/(public)/newpost/components/ElectronicsForm.tsx",
+                                                lineNumber: 133,
+                                                columnNumber: 15
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/ElectronicsForm.tsx",
                                         lineNumber: 131,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                        required: true,
                                         ...register("title"),
                                         type: "text",
                                         placeholder: "اسم المنتج",
                                         className: "w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/ElectronicsForm.tsx",
-                                        lineNumber: 134,
+                                        lineNumber: 135,
                                         columnNumber: 13
                                     }, this),
                                     errors.title && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -6102,7 +6603,7 @@ function ElectronicsForm({ Gcategory, Gsubcategory }) {
                                         children: String(errors.title.message)
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/ElectronicsForm.tsx",
-                                        lineNumber: 142,
+                                        lineNumber: 144,
                                         columnNumber: 15
                                     }, this)
                                 ]
@@ -6119,7 +6620,7 @@ function ElectronicsForm({ Gcategory, Gsubcategory }) {
                                         children: "صور المنتج"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/ElectronicsForm.tsx",
-                                        lineNumber: 149,
+                                        lineNumber: 151,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -6129,13 +6630,13 @@ function ElectronicsForm({ Gcategory, Gsubcategory }) {
                                         className: "w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/ElectronicsForm.tsx",
-                                        lineNumber: 152,
+                                        lineNumber: 154,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/ElectronicsForm.tsx",
-                                lineNumber: 148,
+                                lineNumber: 150,
                                 columnNumber: 11
                             }, this)
                         ]
@@ -6152,13 +6653,24 @@ function ElectronicsForm({ Gcategory, Gsubcategory }) {
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                         className: "block font-medium text-gray-700",
-                                        children: "المحافظة"
-                                    }, void 0, false, {
+                                        children: [
+                                            "المحافظة",
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                className: "text-red-500 text-xl mr-1",
+                                                children: "*"
+                                            }, void 0, false, {
+                                                fileName: "[project]/app/(public)/newpost/components/ElectronicsForm.tsx",
+                                                lineNumber: 165,
+                                                columnNumber: 13
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/ElectronicsForm.tsx",
-                                        lineNumber: 162,
+                                        lineNumber: 164,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
+                                        required: true,
                                         ...register("city"),
                                         className: "mt-1  w-full p-3 border-2 rounded-lg bg-cwhite text-gray-700 focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200",
                                         style: {
@@ -6170,7 +6682,7 @@ function ElectronicsForm({ Gcategory, Gsubcategory }) {
                                                 children: "اختر الإدخال"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/newpost/components/ElectronicsForm.tsx",
-                                                lineNumber: 170,
+                                                lineNumber: 175,
                                                 columnNumber: 15
                                             }, this),
                                             __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$signup$2f$step2$2f$syrianGovernorates$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["syrianGovernorates"].map((gov)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -6178,13 +6690,13 @@ function ElectronicsForm({ Gcategory, Gsubcategory }) {
                                                     children: gov.name
                                                 }, gov.value, false, {
                                                     fileName: "[project]/app/(public)/newpost/components/ElectronicsForm.tsx",
-                                                    lineNumber: 172,
+                                                    lineNumber: 177,
                                                     columnNumber: 17
                                                 }, this))
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/ElectronicsForm.tsx",
-                                        lineNumber: 163,
+                                        lineNumber: 167,
                                         columnNumber: 13
                                     }, this),
                                     errors.city && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -6192,13 +6704,13 @@ function ElectronicsForm({ Gcategory, Gsubcategory }) {
                                         children: String(errors.city.message)
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/ElectronicsForm.tsx",
-                                        lineNumber: 178,
+                                        lineNumber: 183,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/ElectronicsForm.tsx",
-                                lineNumber: 161,
+                                lineNumber: 163,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -6206,19 +6718,30 @@ function ElectronicsForm({ Gcategory, Gsubcategory }) {
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                         className: "block font-medium text-gray-700",
-                                        children: "المنطقة"
-                                    }, void 0, false, {
+                                        children: [
+                                            "المنطقة",
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                className: "text-red-500 text-xl mr-1",
+                                                children: "*"
+                                            }, void 0, false, {
+                                                fileName: "[project]/app/(public)/newpost/components/ElectronicsForm.tsx",
+                                                lineNumber: 191,
+                                                columnNumber: 13
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/ElectronicsForm.tsx",
-                                        lineNumber: 185,
+                                        lineNumber: 190,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                        required: true,
                                         ...register("hood"),
                                         className: "w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm",
                                         placeholder: "المنطقة"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/ElectronicsForm.tsx",
-                                        lineNumber: 186,
+                                        lineNumber: 193,
                                         columnNumber: 13
                                     }, this),
                                     errors.hood && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -6226,19 +6749,19 @@ function ElectronicsForm({ Gcategory, Gsubcategory }) {
                                         children: String(errors.hood.message)
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/ElectronicsForm.tsx",
-                                        lineNumber: 192,
+                                        lineNumber: 200,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/ElectronicsForm.tsx",
-                                lineNumber: 184,
+                                lineNumber: 189,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/(public)/newpost/components/ElectronicsForm.tsx",
-                        lineNumber: 160,
+                        lineNumber: 162,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -6251,7 +6774,7 @@ function ElectronicsForm({ Gcategory, Gsubcategory }) {
                                     children: "تفاصيل العنوان"
                                 }, void 0, false, {
                                     fileName: "[project]/app/(public)/newpost/components/ElectronicsForm.tsx",
-                                    lineNumber: 200,
+                                    lineNumber: 208,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -6260,7 +6783,7 @@ function ElectronicsForm({ Gcategory, Gsubcategory }) {
                                     placeholder: "تفاصيل العنوان"
                                 }, void 0, false, {
                                     fileName: "[project]/app/(public)/newpost/components/ElectronicsForm.tsx",
-                                    lineNumber: 203,
+                                    lineNumber: 211,
                                     columnNumber: 13
                                 }, this),
                                 errors.detailed_location && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -6268,18 +6791,18 @@ function ElectronicsForm({ Gcategory, Gsubcategory }) {
                                     children: String(errors.detailed_location.message)
                                 }, void 0, false, {
                                     fileName: "[project]/app/(public)/newpost/components/ElectronicsForm.tsx",
-                                    lineNumber: 209,
+                                    lineNumber: 217,
                                     columnNumber: 15
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/(public)/newpost/components/ElectronicsForm.tsx",
-                            lineNumber: 199,
+                            lineNumber: 207,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/app/(public)/newpost/components/ElectronicsForm.tsx",
-                        lineNumber: 198,
+                        lineNumber: 206,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -6289,19 +6812,30 @@ function ElectronicsForm({ Gcategory, Gsubcategory }) {
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                     className: "block font-medium text-gray-700",
-                                    children: "وصف المنتج"
-                                }, void 0, false, {
+                                    children: [
+                                        "وصف المنتج",
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                            className: "text-red-500 text-xl mr-1",
+                                            children: "*"
+                                        }, void 0, false, {
+                                            fileName: "[project]/app/(public)/newpost/components/ElectronicsForm.tsx",
+                                            lineNumber: 227,
+                                            columnNumber: 15
+                                        }, this)
+                                    ]
+                                }, void 0, true, {
                                     fileName: "[project]/app/(public)/newpost/components/ElectronicsForm.tsx",
-                                    lineNumber: 217,
+                                    lineNumber: 225,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("textarea", {
+                                    required: true,
                                     ...register("description"),
                                     className: "w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm",
                                     placeholder: "ادخل وصف المنتج هنا"
                                 }, void 0, false, {
                                     fileName: "[project]/app/(public)/newpost/components/ElectronicsForm.tsx",
-                                    lineNumber: 220,
+                                    lineNumber: 229,
                                     columnNumber: 13
                                 }, this),
                                 errors.description && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -6309,18 +6843,18 @@ function ElectronicsForm({ Gcategory, Gsubcategory }) {
                                     children: String(errors.description.message)
                                 }, void 0, false, {
                                     fileName: "[project]/app/(public)/newpost/components/ElectronicsForm.tsx",
-                                    lineNumber: 226,
+                                    lineNumber: 236,
                                     columnNumber: 15
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/(public)/newpost/components/ElectronicsForm.tsx",
-                            lineNumber: 216,
+                            lineNumber: 224,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/app/(public)/newpost/components/ElectronicsForm.tsx",
-                        lineNumber: 215,
+                        lineNumber: 223,
                         columnNumber: 9
                     }, this)
                 ]
@@ -6337,7 +6871,7 @@ function ElectronicsForm({ Gcategory, Gsubcategory }) {
                         children: "سعر المنتج"
                     }, void 0, false, {
                         fileName: "[project]/app/(public)/newpost/components/ElectronicsForm.tsx",
-                        lineNumber: 236,
+                        lineNumber: 246,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -6345,7 +6879,7 @@ function ElectronicsForm({ Gcategory, Gsubcategory }) {
                         children: "حدد سعر الإعلان أو اختر إذا كان قابل للتفاوض، وسيساعد المستخدمين على معرفة القيمة بسهولة."
                     }, void 0, false, {
                         fileName: "[project]/app/(public)/newpost/components/ElectronicsForm.tsx",
-                        lineNumber: 239,
+                        lineNumber: 249,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -6355,38 +6889,41 @@ function ElectronicsForm({ Gcategory, Gsubcategory }) {
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                     className: "block font-medium text-gray-700",
-                                    children: "سعر المنتج (السعر بالليرة السورية)"
-                                }, void 0, false, {
+                                    children: [
+                                        "سعر المنتج (السعر بالليرة السورية)",
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                            className: "text-red-500 text-xl mr-1",
+                                            children: "*"
+                                        }, void 0, false, {
+                                            fileName: "[project]/app/(public)/newpost/components/ElectronicsForm.tsx",
+                                            lineNumber: 257,
+                                            columnNumber: 15
+                                        }, this)
+                                    ]
+                                }, void 0, true, {
                                     fileName: "[project]/app/(public)/newpost/components/ElectronicsForm.tsx",
-                                    lineNumber: 245,
+                                    lineNumber: 255,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                    required: true,
                                     ...register("price"),
                                     className: "w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm",
                                     placeholder: "ادخل سعر المنتج"
                                 }, void 0, false, {
                                     fileName: "[project]/app/(public)/newpost/components/ElectronicsForm.tsx",
-                                    lineNumber: 248,
+                                    lineNumber: 259,
                                     columnNumber: 13
-                                }, this),
-                                errors.price && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                    className: "text-red-600 text-sm mt-1",
-                                    children: String(errors.price.message)
-                                }, void 0, false, {
-                                    fileName: "[project]/app/(public)/newpost/components/ElectronicsForm.tsx",
-                                    lineNumber: 254,
-                                    columnNumber: 15
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/(public)/newpost/components/ElectronicsForm.tsx",
-                            lineNumber: 244,
+                            lineNumber: 254,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/app/(public)/newpost/components/ElectronicsForm.tsx",
-                        lineNumber: 243,
+                        lineNumber: 253,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -6394,10 +6931,20 @@ function ElectronicsForm({ Gcategory, Gsubcategory }) {
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                 className: "block font-medium text-gray-700",
-                                children: "نوع السعر"
-                            }, void 0, false, {
+                                children: [
+                                    "نوع السعر",
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                        className: "text-red-500 text-xl mr-1",
+                                        children: "*"
+                                    }, void 0, false, {
+                                        fileName: "[project]/app/(public)/newpost/components/ElectronicsForm.tsx",
+                                        lineNumber: 270,
+                                        columnNumber: 11
+                                    }, this)
+                                ]
+                            }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/ElectronicsForm.tsx",
-                                lineNumber: 262,
+                                lineNumber: 269,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -6407,26 +6954,27 @@ function ElectronicsForm({ Gcategory, Gsubcategory }) {
                                         className: "ml-2 flex items-center gap-2 text-gray-700 cursor-pointer",
                                         children: [
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                                required: true,
                                                 type: "radio",
                                                 value: "negotiable",
                                                 ...register("price_type"),
                                                 className: "accent-cgreen"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/newpost/components/ElectronicsForm.tsx",
-                                                lineNumber: 265,
+                                                lineNumber: 274,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                 children: "سعر قابل للتفاوض"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/newpost/components/ElectronicsForm.tsx",
-                                                lineNumber: 271,
+                                                lineNumber: 281,
                                                 columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/ElectronicsForm.tsx",
-                                        lineNumber: 264,
+                                        lineNumber: 273,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
@@ -6439,171 +6987,175 @@ function ElectronicsForm({ Gcategory, Gsubcategory }) {
                                                 className: "accent-cgreen"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/newpost/components/ElectronicsForm.tsx",
-                                                lineNumber: 274,
+                                                lineNumber: 284,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                 children: "سعر ثابت"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/newpost/components/ElectronicsForm.tsx",
-                                                lineNumber: 280,
+                                                lineNumber: 290,
                                                 columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/ElectronicsForm.tsx",
-                                        lineNumber: 273,
+                                        lineNumber: 283,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/ElectronicsForm.tsx",
-                                lineNumber: 263,
+                                lineNumber: 272,
                                 columnNumber: 11
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "[project]/app/(public)/newpost/components/ElectronicsForm.tsx",
+                        lineNumber: 268,
+                        columnNumber: 9
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "[project]/app/(public)/newpost/components/ElectronicsForm.tsx",
+                lineNumber: 245,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
+                className: "rounded-2xl shadow-lg border bg-white border-gray-200 p-8 mb-6 w-full",
+                children: [
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
+                        className: "font-bold text-lg mb-2",
+                        children: "تفاصيل الإلكترونيات"
+                    }, void 0, false, {
+                        fileName: "[project]/app/(public)/newpost/components/ElectronicsForm.tsx",
+                        lineNumber: 298,
+                        columnNumber: 7
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        className: "sm:ml-16 bg-cwhite rounded-md p-4 shadow-md ",
+                        children: [
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
+                                className: "block font-medium text-gray-700",
+                                children: [
+                                    "حالة الجهاز",
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                        className: "text-red-500 text-xl mr-1",
+                                        children: "*"
+                                    }, void 0, false, {
+                                        fileName: "[project]/app/(public)/newpost/components/ElectronicsForm.tsx",
+                                        lineNumber: 303,
+                                        columnNumber: 15
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "[project]/app/(public)/newpost/components/ElectronicsForm.tsx",
+                                lineNumber: 301,
+                                columnNumber: 13
                             }, this),
-                            errors.price_type && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                className: "text-red-600 text-sm mt-1",
-                                children: String(errors.price_type.message)
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "flex flex-wrap gap-4 mt-2",
+                                children: STATUS_CHOICES.map(([value, label])=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
+                                        className: "flex items-center gap-1 ml-2 text-gray-700 cursor-pointer",
+                                        children: [
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                                required: true,
+                                                type: "radio",
+                                                value: value,
+                                                ...register("electronics.status"),
+                                                className: "accent-cgreen"
+                                            }, void 0, false, {
+                                                fileName: "[project]/app/(public)/newpost/components/ElectronicsForm.tsx",
+                                                lineNumber: 312,
+                                                columnNumber: 19
+                                            }, this),
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                children: label
+                                            }, void 0, false, {
+                                                fileName: "[project]/app/(public)/newpost/components/ElectronicsForm.tsx",
+                                                lineNumber: 319,
+                                                columnNumber: 19
+                                            }, this)
+                                        ]
+                                    }, value, true, {
+                                        fileName: "[project]/app/(public)/newpost/components/ElectronicsForm.tsx",
+                                        lineNumber: 308,
+                                        columnNumber: 17
+                                    }, this))
                             }, void 0, false, {
                                 fileName: "[project]/app/(public)/newpost/components/ElectronicsForm.tsx",
-                                lineNumber: 284,
+                                lineNumber: 306,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/(public)/newpost/components/ElectronicsForm.tsx",
-                        lineNumber: 261,
-                        columnNumber: 9
-                    }, this)
-                ]
-            }, void 0, true, {
-                fileName: "[project]/app/(public)/newpost/components/ElectronicsForm.tsx",
-                lineNumber: 235,
-                columnNumber: 7
-            }, this),
-            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
-                className: "font-bold text-lg mb-2",
-                children: "تفاصيل الإلكترونيات"
-            }, void 0, false, {
-                fileName: "[project]/app/(public)/newpost/components/ElectronicsForm.tsx",
-                lineNumber: 291,
-                columnNumber: 7
-            }, this),
-            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "sm:ml-16 bg-cwhite rounded-md p-4 shadow-md ",
-                children: [
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                        className: "block font-medium text-gray-700",
-                        children: "حالة الجهاز"
-                    }, void 0, false, {
-                        fileName: "[project]/app/(public)/newpost/components/ElectronicsForm.tsx",
-                        lineNumber: 294,
-                        columnNumber: 13
+                        lineNumber: 300,
+                        columnNumber: 7
                     }, this),
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "flex flex-wrap gap-4 mt-2",
-                        children: STATUS_CHOICES.map(([value, label])=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                className: "flex items-center gap-1 ml-2 text-gray-700 cursor-pointer",
-                                children: [
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
-                                        type: "radio",
-                                        value: value,
-                                        ...register("electronics.status"),
-                                        className: "accent-cgreen"
-                                    }, void 0, false, {
-                                        fileName: "[project]/app/(public)/newpost/components/ElectronicsForm.tsx",
-                                        lineNumber: 304,
-                                        columnNumber: 19
-                                    }, this),
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                        children: label
-                                    }, void 0, false, {
-                                        fileName: "[project]/app/(public)/newpost/components/ElectronicsForm.tsx",
-                                        lineNumber: 310,
-                                        columnNumber: 19
-                                    }, this)
-                                ]
-                            }, value, true, {
-                                fileName: "[project]/app/(public)/newpost/components/ElectronicsForm.tsx",
-                                lineNumber: 300,
-                                columnNumber: 17
-                            }, this))
-                    }, void 0, false, {
-                        fileName: "[project]/app/(public)/newpost/components/ElectronicsForm.tsx",
-                        lineNumber: 298,
-                        columnNumber: 13
-                    }, this),
-                    errors.electronics?.status && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                        className: "text-red-600 text-sm mt-1",
-                        children: String(errors.electronics?.status.message)
-                    }, void 0, false, {
-                        fileName: "[project]/app/(public)/newpost/components/ElectronicsForm.tsx",
-                        lineNumber: 316,
-                        columnNumber: 15
-                    }, this)
-                ]
-            }, void 0, true, {
-                fileName: "[project]/app/(public)/newpost/components/ElectronicsForm.tsx",
-                lineNumber: 293,
-                columnNumber: 7
-            }, this),
-            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("hr", {
-                className: "mt-6 mb-3 text-clightgray"
-            }, void 0, false, {
-                fileName: "[project]/app/(public)/newpost/components/ElectronicsForm.tsx",
-                lineNumber: 324,
-                columnNumber: 7
-            }, this),
-            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "flex justify-end max-sm:flex-col max-sm:justify-center max-sm:items-center max-sm:gap-4 mb-5",
-                children: [
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                        onClick: ()=>window.location.href = "/perview",
-                        type: "submit",
-                        className: "mt-8 ml-6 max-sm:ml-0 text-white rounded",
-                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                            className: "flex items-center group outline-2 outline-cgreen text-gray-800 hover:bg-chgreen hover:outline-chgreen hover:text-cwhite py-3 px-12 max-sm:px-[100px] rounded text-xl transition-all duration-300",
-                            children: [
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$search$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Search$3e$__["Search"], {
-                                    className: "ml-1 text-cgreen group-hover:text-cwhite"
-                                }, void 0, false, {
-                                    fileName: "[project]/app/(public)/newpost/components/ElectronicsForm.tsx",
-                                    lineNumber: 333,
-                                    columnNumber: 13
-                                }, this),
-                                " ",
-                                "معاينة"
-                            ]
-                        }, void 0, true, {
-                            fileName: "[project]/app/(public)/newpost/components/ElectronicsForm.tsx",
-                            lineNumber: 332,
-                            columnNumber: 11
-                        }, this)
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("hr", {
+                        className: "mt-6 mb-3 text-clightgray"
                     }, void 0, false, {
                         fileName: "[project]/app/(public)/newpost/components/ElectronicsForm.tsx",
                         lineNumber: 327,
-                        columnNumber: 9
+                        columnNumber: 7
                     }, this),
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                        type: "submit",
-                        className: "mt-8 ml-6 max-sm:ml-0 text-white rounded",
-                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                            className: "bg-cgreen hover:bg-chgreen py-3 px-32  rounded text-xl transition-all duration-300",
-                            children: isLoading ? "جار النشر ..." : "نشر"
-                        }, void 0, false, {
-                            fileName: "[project]/app/(public)/newpost/components/ElectronicsForm.tsx",
-                            lineNumber: 343,
-                            columnNumber: 11
-                        }, this)
-                    }, void 0, false, {
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        className: "flex justify-end max-sm:flex-col max-sm:justify-center max-sm:items-center max-sm:gap-4 mb-5",
+                        children: [
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                onClick: ()=>window.location.href = "/perview",
+                                type: "submit",
+                                className: "mt-8 ml-6 max-sm:ml-0 text-white rounded",
+                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                    className: "flex items-center group outline-2 outline-cgreen text-gray-800 hover:bg-chgreen hover:outline-chgreen hover:text-cwhite py-3 px-12 max-sm:px-[100px] rounded text-xl transition-all duration-300",
+                                    children: [
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$search$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Search$3e$__["Search"], {
+                                            className: "ml-1 text-cgreen group-hover:text-cwhite"
+                                        }, void 0, false, {
+                                            fileName: "[project]/app/(public)/newpost/components/ElectronicsForm.tsx",
+                                            lineNumber: 336,
+                                            columnNumber: 13
+                                        }, this),
+                                        " ",
+                                        "معاينة"
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "[project]/app/(public)/newpost/components/ElectronicsForm.tsx",
+                                    lineNumber: 335,
+                                    columnNumber: 11
+                                }, this)
+                            }, void 0, false, {
+                                fileName: "[project]/app/(public)/newpost/components/ElectronicsForm.tsx",
+                                lineNumber: 330,
+                                columnNumber: 9
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                type: "submit",
+                                className: "mt-8 ml-6 max-sm:ml-0 text-white rounded",
+                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                    className: "bg-cgreen hover:bg-chgreen py-3 px-32  rounded text-xl transition-all duration-300",
+                                    children: isLoading ? "جار النشر ..." : "نشر"
+                                }, void 0, false, {
+                                    fileName: "[project]/app/(public)/newpost/components/ElectronicsForm.tsx",
+                                    lineNumber: 346,
+                                    columnNumber: 11
+                                }, this)
+                            }, void 0, false, {
+                                fileName: "[project]/app/(public)/newpost/components/ElectronicsForm.tsx",
+                                lineNumber: 342,
+                                columnNumber: 9
+                            }, this)
+                        ]
+                    }, void 0, true, {
                         fileName: "[project]/app/(public)/newpost/components/ElectronicsForm.tsx",
-                        lineNumber: 339,
-                        columnNumber: 9
+                        lineNumber: 328,
+                        columnNumber: 7
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/app/(public)/newpost/components/ElectronicsForm.tsx",
-                lineNumber: 325,
+                lineNumber: 296,
                 columnNumber: 7
             }, this)
         ]
@@ -6778,7 +7330,7 @@ function MobileForm({ Gcategory, Gsubcategory }) {
     const [notification, setNotification] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
     const createMobilePost = (0, __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$lib$2f$postServices$2f$postMutations$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useCreateMobilePost"])(setNotification);
     const { isPending: isLoading } = createMobilePost;
-    const [accessoriesValue, setAccessoriesValue] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(undefined);
+    const [accessoriesValue, setAccessoriesValue] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
     const onSubmit = (data)=>{
         console.log("daTA: ", data);
         const formData = new FormData();
@@ -6837,7 +7389,7 @@ function MobileForm({ Gcategory, Gsubcategory }) {
                 columnNumber: 9
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
-                className: "bg-white rounded-2xl shadow-lg border border-gray-200 p-8 mb-6",
+                className: "bg-white rounded-2xl shadow-lg border border-gray-200 p-8 mb-6 ",
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
                         className: "font-bold text-xl text-gray-800 mb-2 text-right",
@@ -6863,20 +7415,31 @@ function MobileForm({ Gcategory, Gsubcategory }) {
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                         className: "block font-medium text-gray-700",
-                                        children: "اسم المنتج"
-                                    }, void 0, false, {
+                                        children: [
+                                            "اسم المنتج",
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                className: "text-red-500 text-xl mr-1",
+                                                children: "*"
+                                            }, void 0, false, {
+                                                fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
+                                                lineNumber: 155,
+                                                columnNumber: 15
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
                                         lineNumber: 153,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                        required: true,
                                         ...register("title"),
                                         type: "text",
                                         placeholder: "اسم المنتج",
                                         className: "w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                        lineNumber: 156,
+                                        lineNumber: 157,
                                         columnNumber: 13
                                     }, this),
                                     errors.title && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -6884,7 +7447,7 @@ function MobileForm({ Gcategory, Gsubcategory }) {
                                         children: String(errors.title.message)
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                        lineNumber: 164,
+                                        lineNumber: 166,
                                         columnNumber: 15
                                     }, this)
                                 ]
@@ -6901,7 +7464,7 @@ function MobileForm({ Gcategory, Gsubcategory }) {
                                         children: "صور المنتج"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                        lineNumber: 171,
+                                        lineNumber: 173,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -6911,13 +7474,13 @@ function MobileForm({ Gcategory, Gsubcategory }) {
                                         className: "w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                        lineNumber: 174,
+                                        lineNumber: 176,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                lineNumber: 170,
+                                lineNumber: 172,
                                 columnNumber: 11
                             }, this)
                         ]
@@ -6934,13 +7497,24 @@ function MobileForm({ Gcategory, Gsubcategory }) {
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                         className: "block font-medium text-gray-700",
-                                        children: "المحافظة"
-                                    }, void 0, false, {
+                                        children: [
+                                            "المحافظة",
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                className: "text-red-500 text-xl mr-1",
+                                                children: "*"
+                                            }, void 0, false, {
+                                                fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
+                                                lineNumber: 187,
+                                                columnNumber: 13
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                        lineNumber: 184,
+                                        lineNumber: 186,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
+                                        required: true,
                                         ...register("city"),
                                         className: "mt-1  w-full p-3 border-2 rounded-lg bg-cwhite text-gray-700 focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200",
                                         style: {
@@ -6952,7 +7526,7 @@ function MobileForm({ Gcategory, Gsubcategory }) {
                                                 children: "اختر الإدخال"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                                lineNumber: 192,
+                                                lineNumber: 197,
                                                 columnNumber: 15
                                             }, this),
                                             __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$signup$2f$step2$2f$syrianGovernorates$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["syrianGovernorates"].map((gov)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -6960,13 +7534,13 @@ function MobileForm({ Gcategory, Gsubcategory }) {
                                                     children: gov.name
                                                 }, gov.value, false, {
                                                     fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                                    lineNumber: 194,
+                                                    lineNumber: 199,
                                                     columnNumber: 17
                                                 }, this))
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                        lineNumber: 185,
+                                        lineNumber: 189,
                                         columnNumber: 13
                                     }, this),
                                     errors.city && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -6974,13 +7548,13 @@ function MobileForm({ Gcategory, Gsubcategory }) {
                                         children: String(errors.city.message)
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                        lineNumber: 200,
+                                        lineNumber: 205,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                lineNumber: 183,
+                                lineNumber: 185,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -6988,19 +7562,30 @@ function MobileForm({ Gcategory, Gsubcategory }) {
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                         className: "block font-medium text-gray-700",
-                                        children: "المنطقة"
-                                    }, void 0, false, {
+                                        children: [
+                                            "المنطقة",
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                className: "text-red-500 text-xl mr-1",
+                                                children: "*"
+                                            }, void 0, false, {
+                                                fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
+                                                lineNumber: 213,
+                                                columnNumber: 13
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                        lineNumber: 207,
+                                        lineNumber: 212,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                        required: true,
                                         ...register("hood"),
                                         className: "w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm",
                                         placeholder: "المنطقة"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                        lineNumber: 208,
+                                        lineNumber: 215,
                                         columnNumber: 13
                                     }, this),
                                     errors.hood && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -7008,19 +7593,19 @@ function MobileForm({ Gcategory, Gsubcategory }) {
                                         children: String(errors.hood.message)
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                        lineNumber: 214,
+                                        lineNumber: 222,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                lineNumber: 206,
+                                lineNumber: 211,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                        lineNumber: 182,
+                        lineNumber: 184,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -7033,7 +7618,7 @@ function MobileForm({ Gcategory, Gsubcategory }) {
                                     children: "تفاصيل العنوان"
                                 }, void 0, false, {
                                     fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                    lineNumber: 222,
+                                    lineNumber: 230,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -7042,7 +7627,7 @@ function MobileForm({ Gcategory, Gsubcategory }) {
                                     placeholder: "تفاصيل العنوان"
                                 }, void 0, false, {
                                     fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                    lineNumber: 225,
+                                    lineNumber: 233,
                                     columnNumber: 13
                                 }, this),
                                 errors.detailed_location && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -7050,18 +7635,18 @@ function MobileForm({ Gcategory, Gsubcategory }) {
                                     children: String(errors.detailed_location.message)
                                 }, void 0, false, {
                                     fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                    lineNumber: 231,
+                                    lineNumber: 239,
                                     columnNumber: 15
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                            lineNumber: 221,
+                            lineNumber: 229,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                        lineNumber: 220,
+                        lineNumber: 228,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -7071,19 +7656,30 @@ function MobileForm({ Gcategory, Gsubcategory }) {
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                     className: "block font-medium text-gray-700",
-                                    children: "وصف المنتج"
-                                }, void 0, false, {
+                                    children: [
+                                        "وصف المنتج",
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                            className: "text-red-500 text-xl mr-1",
+                                            children: "*"
+                                        }, void 0, false, {
+                                            fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
+                                            lineNumber: 249,
+                                            columnNumber: 15
+                                        }, this)
+                                    ]
+                                }, void 0, true, {
                                     fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                    lineNumber: 239,
+                                    lineNumber: 247,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("textarea", {
+                                    required: true,
                                     ...register("description"),
                                     className: "w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm",
                                     placeholder: "ادخل وصف المنتج هنا"
                                 }, void 0, false, {
                                     fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                    lineNumber: 242,
+                                    lineNumber: 251,
                                     columnNumber: 13
                                 }, this),
                                 errors.description && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -7091,18 +7687,18 @@ function MobileForm({ Gcategory, Gsubcategory }) {
                                     children: String(errors.description.message)
                                 }, void 0, false, {
                                     fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                    lineNumber: 248,
+                                    lineNumber: 258,
                                     columnNumber: 15
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                            lineNumber: 238,
+                            lineNumber: 246,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                        lineNumber: 237,
+                        lineNumber: 245,
                         columnNumber: 9
                     }, this)
                 ]
@@ -7119,7 +7715,7 @@ function MobileForm({ Gcategory, Gsubcategory }) {
                         children: "سعر المنتج"
                     }, void 0, false, {
                         fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                        lineNumber: 258,
+                        lineNumber: 268,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -7127,7 +7723,7 @@ function MobileForm({ Gcategory, Gsubcategory }) {
                         children: "حدد سعر الإعلان أو اختر إذا كان قابل للتفاوض، وسيساعد المستخدمين على معرفة القيمة بسهولة."
                     }, void 0, false, {
                         fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                        lineNumber: 261,
+                        lineNumber: 271,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -7137,38 +7733,41 @@ function MobileForm({ Gcategory, Gsubcategory }) {
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                     className: "block font-medium text-gray-700",
-                                    children: "سعر المنتج (السعر بالليرة السورية)"
-                                }, void 0, false, {
+                                    children: [
+                                        "سعر المنتج (السعر بالليرة السورية)",
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                            className: "text-red-500 text-xl mr-1",
+                                            children: "*"
+                                        }, void 0, false, {
+                                            fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
+                                            lineNumber: 279,
+                                            columnNumber: 15
+                                        }, this)
+                                    ]
+                                }, void 0, true, {
                                     fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                    lineNumber: 267,
+                                    lineNumber: 277,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                    required: true,
                                     ...register("price"),
                                     className: "w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm",
                                     placeholder: "ادخل سعر المنتج"
                                 }, void 0, false, {
                                     fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                    lineNumber: 270,
+                                    lineNumber: 281,
                                     columnNumber: 13
-                                }, this),
-                                errors.price && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                    className: "text-red-600 text-sm mt-1",
-                                    children: String(errors.price.message)
-                                }, void 0, false, {
-                                    fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                    lineNumber: 276,
-                                    columnNumber: 15
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                            lineNumber: 266,
+                            lineNumber: 276,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                        lineNumber: 265,
+                        lineNumber: 275,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -7176,10 +7775,20 @@ function MobileForm({ Gcategory, Gsubcategory }) {
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                 className: "block font-medium text-gray-700",
-                                children: "نوع السعر"
-                            }, void 0, false, {
+                                children: [
+                                    "نوع السعر",
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                        className: "text-red-500 text-xl mr-1",
+                                        children: "*"
+                                    }, void 0, false, {
+                                        fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
+                                        lineNumber: 292,
+                                        columnNumber: 11
+                                    }, this)
+                                ]
+                            }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                lineNumber: 284,
+                                lineNumber: 291,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -7189,26 +7798,27 @@ function MobileForm({ Gcategory, Gsubcategory }) {
                                         className: "ml-2 flex items-center gap-2 text-gray-700 cursor-pointer",
                                         children: [
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                                required: true,
                                                 type: "radio",
                                                 value: "negotiable",
                                                 ...register("price_type"),
                                                 className: "accent-cgreen"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                                lineNumber: 287,
+                                                lineNumber: 296,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                 children: "سعر قابل للتفاوض"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                                lineNumber: 293,
+                                                lineNumber: 303,
                                                 columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                        lineNumber: 286,
+                                        lineNumber: 295,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
@@ -7221,46 +7831,38 @@ function MobileForm({ Gcategory, Gsubcategory }) {
                                                 className: "accent-cgreen"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                                lineNumber: 296,
+                                                lineNumber: 306,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                 children: "سعر ثابت"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                                lineNumber: 302,
+                                                lineNumber: 312,
                                                 columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                        lineNumber: 295,
+                                        lineNumber: 305,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                lineNumber: 285,
+                                lineNumber: 294,
                                 columnNumber: 11
-                            }, this),
-                            errors.price_type && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                className: "text-red-600 text-sm mt-1",
-                                children: String(errors.price_type.message)
-                            }, void 0, false, {
-                                fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                lineNumber: 306,
-                                columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                        lineNumber: 283,
+                        lineNumber: 290,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                lineNumber: 257,
+                lineNumber: 267,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
@@ -7271,7 +7873,7 @@ function MobileForm({ Gcategory, Gsubcategory }) {
                         children: "تفاصيل الموبايل"
                     }, void 0, false, {
                         fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                        lineNumber: 315,
+                        lineNumber: 320,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -7282,25 +7884,36 @@ function MobileForm({ Gcategory, Gsubcategory }) {
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                         className: "block font-medium text-gray-700",
-                                        children: "أدخل ماركة الموبايل"
-                                    }, void 0, false, {
+                                        children: [
+                                            "أدخل ماركة الموبايل",
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                className: "text-red-500 text-xl mr-1",
+                                                children: "*"
+                                            }, void 0, false, {
+                                                fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
+                                                lineNumber: 326,
+                                                columnNumber: 11
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                        lineNumber: 319,
-                                        columnNumber: 13
+                                        lineNumber: 324,
+                                        columnNumber: 11
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                        required: true,
                                         ...register("mobile.brand"),
                                         className: "w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm",
                                         dir: "rtl"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                        lineNumber: 322,
+                                        lineNumber: 328,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                lineNumber: 318,
+                                lineNumber: 323,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -7311,7 +7924,7 @@ function MobileForm({ Gcategory, Gsubcategory }) {
                                         children: "اللون"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                        lineNumber: 330,
+                                        lineNumber: 337,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
@@ -7327,7 +7940,7 @@ function MobileForm({ Gcategory, Gsubcategory }) {
                                                 children: "اختر اللون"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                                lineNumber: 339,
+                                                lineNumber: 346,
                                                 columnNumber: 15
                                             }, this),
                                             COLOR_CHOICES.map(([value, label])=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -7335,25 +7948,25 @@ function MobileForm({ Gcategory, Gsubcategory }) {
                                                     children: label
                                                 }, value, false, {
                                                     fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                                    lineNumber: 341,
+                                                    lineNumber: 348,
                                                     columnNumber: 17
                                                 }, this))
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                        lineNumber: 331,
+                                        lineNumber: 338,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                lineNumber: 329,
+                                lineNumber: 336,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                        lineNumber: 317,
+                        lineNumber: 322,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -7364,10 +7977,20 @@ function MobileForm({ Gcategory, Gsubcategory }) {
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                         className: "block font-medium text-gray-700",
-                                        children: "اختر حالة السيارة"
-                                    }, void 0, false, {
+                                        children: [
+                                            "اختر الحالة",
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                className: "text-red-500 text-xl mr-1",
+                                                children: "*"
+                                            }, void 0, false, {
+                                                fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
+                                                lineNumber: 360,
+                                                columnNumber: 15
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                        lineNumber: 352,
+                                        lineNumber: 358,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -7376,49 +7999,50 @@ function MobileForm({ Gcategory, Gsubcategory }) {
                                                 className: "flex items-center gap-1 ml-2 text-gray-700 cursor-pointer",
                                                 children: [
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                                        required: true,
                                                         type: "radio",
                                                         value: value,
                                                         ...register("mobile.status"),
                                                         className: "accent-cgreen"
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                                        lineNumber: 362,
+                                                        lineNumber: 369,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                         children: label
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                                        lineNumber: 368,
+                                                        lineNumber: 376,
                                                         columnNumber: 19
                                                     }, this)
                                                 ]
                                             }, value, true, {
                                                 fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                                lineNumber: 358,
+                                                lineNumber: 365,
                                                 columnNumber: 17
                                             }, this))
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                        lineNumber: 356,
+                                        lineNumber: 363,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                lineNumber: 350,
+                                lineNumber: 357,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
-                                className: "font-medium mb-3",
+                                className: "font-medium mb-3 mt-6 ",
                                 children: "الملحقات المتوفرة"
                             }, void 0, false, {
                                 fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                lineNumber: 375,
+                                lineNumber: 383,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                className: "w-full mt-6 max-w-sm mx-auto lg:mx-0 border-2 border-clightgray p-1 rounded-xl mb-6 flex",
+                                className: "w-full mt-2 max-w-sm mx-auto lg:mx-0 border-2 border-clightgray p-1.5 rounded-xl mb-6 flex",
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$app$2f$components$2f$ui$2f$Button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
                                         type: "button",
@@ -7428,10 +8052,10 @@ function MobileForm({ Gcategory, Gsubcategory }) {
                                             setAccessoriesValue(true);
                                             setValue("mobile.accessories", true);
                                         },
-                                        children: "هل معه ملحقات"
+                                        children: "يوجد ملحقات"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                        lineNumber: 377,
+                                        lineNumber: 385,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$app$2f$components$2f$ui$2f$Button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
@@ -7445,26 +8069,26 @@ function MobileForm({ Gcategory, Gsubcategory }) {
                                         children: "لا يوجد ملحقات"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                        lineNumber: 388,
+                                        lineNumber: 396,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                lineNumber: 376,
+                                lineNumber: 384,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                        lineNumber: 349,
+                        lineNumber: 356,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("hr", {
                         className: "mt-6 mb-3 text-clightgray"
                     }, void 0, false, {
                         fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                        lineNumber: 403,
+                        lineNumber: 412,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -7481,7 +8105,7 @@ function MobileForm({ Gcategory, Gsubcategory }) {
                                             className: "ml-1 text-cgreen group-hover:text-cwhite"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                            lineNumber: 412,
+                                            lineNumber: 421,
                                             columnNumber: 15
                                         }, this),
                                         " ",
@@ -7489,12 +8113,12 @@ function MobileForm({ Gcategory, Gsubcategory }) {
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                    lineNumber: 411,
+                                    lineNumber: 420,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                lineNumber: 406,
+                                lineNumber: 415,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -7505,24 +8129,24 @@ function MobileForm({ Gcategory, Gsubcategory }) {
                                     children: isLoading ? "جار النشر ..." : "نشر"
                                 }, void 0, false, {
                                     fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                    lineNumber: 422,
+                                    lineNumber: 431,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                lineNumber: 418,
+                                lineNumber: 427,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                        lineNumber: 404,
+                        lineNumber: 413,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                lineNumber: 314,
+                lineNumber: 319,
                 columnNumber: 7
             }, this)
         ]
@@ -7532,7 +8156,7 @@ function MobileForm({ Gcategory, Gsubcategory }) {
         columnNumber: 5
     }, this);
 }
-_s(MobileForm, "a2qQYmvrrOT//0d1t+Bt5wE60SU=", false, function() {
+_s(MobileForm, "mBpZZSrzte01X8f/rwV0sDE30fU=", false, function() {
     return [
         __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$hook$2d$form$2f$dist$2f$index$2e$esm$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useForm"],
         __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$lib$2f$postServices$2f$postMutations$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useCreateMobilePost"]
@@ -7736,8 +8360,18 @@ function NewPostPage() {
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                             className: "block font-medium text-gray-700",
-                                            children: "التصنيف"
-                                        }, void 0, false, {
+                                            children: [
+                                                "التصنيف",
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                    className: "text-red-500 text-xl mr-1",
+                                                    children: "*"
+                                                }, void 0, false, {
+                                                    fileName: "[project]/app/(public)/newpost/page.tsx",
+                                                    lineNumber: 108,
+                                                    columnNumber: 15
+                                                }, this)
+                                            ]
+                                        }, void 0, true, {
                                             fileName: "[project]/app/(public)/newpost/page.tsx",
                                             lineNumber: 107,
                                             columnNumber: 15
@@ -7758,12 +8392,12 @@ function NewPostPage() {
                                                     children: cat
                                                 }, cat, false, {
                                                     fileName: "[project]/app/(public)/newpost/page.tsx",
-                                                    lineNumber: 118,
+                                                    lineNumber: 121,
                                                     columnNumber: 19
                                                 }, this))
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/newpost/page.tsx",
-                                            lineNumber: 108,
+                                            lineNumber: 111,
                                             columnNumber: 15
                                         }, this)
                                     ]
@@ -7777,10 +8411,20 @@ function NewPostPage() {
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                             className: "block font-medium text-gray-700",
-                                            children: "التصنيف الفرعي"
-                                        }, void 0, false, {
+                                            children: [
+                                                "التصنيف الفرعي",
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                    className: "text-red-500 text-xl mr-1",
+                                                    children: "*"
+                                                }, void 0, false, {
+                                                    fileName: "[project]/app/(public)/newpost/page.tsx",
+                                                    lineNumber: 131,
+                                                    columnNumber: 17
+                                                }, this)
+                                            ]
+                                        }, void 0, true, {
                                             fileName: "[project]/app/(public)/newpost/page.tsx",
-                                            lineNumber: 126,
+                                            lineNumber: 129,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
@@ -7795,18 +8439,18 @@ function NewPostPage() {
                                                     children: sub
                                                 }, sub, false, {
                                                     fileName: "[project]/app/(public)/newpost/page.tsx",
-                                                    lineNumber: 136,
+                                                    lineNumber: 141,
                                                     columnNumber: 19
                                                 }, this))
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/newpost/page.tsx",
-                                            lineNumber: 129,
+                                            lineNumber: 134,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/newpost/page.tsx",
-                                    lineNumber: 125,
+                                    lineNumber: 128,
                                     columnNumber: 13
                                 }, this)
                             ]
@@ -7826,7 +8470,7 @@ function NewPostPage() {
                     children: formToShow
                 }, void 0, false, {
                     fileName: "[project]/app/(public)/newpost/page.tsx",
-                    lineNumber: 145,
+                    lineNumber: 150,
                     columnNumber: 9
                 }, this)
             ]

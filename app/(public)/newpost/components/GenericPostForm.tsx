@@ -86,8 +86,10 @@ export default function GenericPostForm({
           <div className="sm:ml-16">
             <label className="block font-medium text-gray-700">
               اسم المنتج
+              <span className="text-red-500 text-xl mr-1">*</span>
             </label>
             <input
+              required
               {...register("title")}
               type="text"
               placeholder="اسم المنتج"
@@ -115,8 +117,12 @@ export default function GenericPostForm({
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
           <div className="sm:ml-16">
-            <label className="block font-medium text-gray-700">المحافظة</label>
+            <label className="block font-medium text-gray-700">المحافظة
+            <span className="text-red-500 text-xl mr-1">*</span>
+
+            </label>
             <select
+              required
               {...register("city")}
               className="mt-1  w-full p-3 border-2 rounded-lg bg-cwhite text-gray-700 focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200"
               style={{
@@ -138,8 +144,12 @@ export default function GenericPostForm({
           </div>
 
           <div className="sm:ml-16">
-            <label className="block font-medium text-gray-700">المنطقة</label>
+            <label className="block font-medium text-gray-700">المنطقة
+            <span className="text-red-500 text-xl mr-1">*</span>
+
+            </label>
             <input
+              required
               {...register("hood")}
               className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
               placeholder="المنطقة"
@@ -172,8 +182,11 @@ export default function GenericPostForm({
           <div className="flex flex-col gap-2 md:col-span-2">
             <label className="block font-medium text-gray-700">
               وصف المنتج
+              <span className="text-red-500 text-xl mr-1">*</span>
+
             </label>
             <textarea
+              required
               {...register("description")}
               className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
               placeholder="ادخل وصف المنتج هنا"
@@ -191,6 +204,7 @@ export default function GenericPostForm({
       <section className="bg-white rounded-2xl shadow-lg border border-gray-200 p-8">
         <h2 className="font-bold text-xl text-gray-800 mb-2 text-right">
           سعر المنتج
+          
         </h2>
         <p className="text-gray-600 mb-6 text-right">
           حدد سعر الإعلان أو اختر إذا كان قابل للتفاوض، وسيساعد المستخدمين على
@@ -200,8 +214,11 @@ export default function GenericPostForm({
           <div className="sm:ml-16">
             <label className="block font-medium text-gray-700">
               سعر المنتج (السعر بالليرة السورية)
+              <span className="text-red-500 text-xl mr-1">*</span>
+
             </label>
             <input
+              required
               {...register("price")}
               className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
               placeholder="ادخل سعر المنتج"
@@ -215,10 +232,14 @@ export default function GenericPostForm({
         </div>
 
         <div className="flex flex-col gap-2">
-          <label className="block font-medium text-gray-700">نوع السعر</label>
+          <label className="block font-medium text-gray-700">نوع السعر
+          <span className="text-red-500 text-xl mr-1">*</span>
+
+          </label>
           <div className="flex flex-wrap gap-4 mt-2">
             <label className="ml-2 flex items-center gap-2 text-gray-700 cursor-pointer">
               <input
+                required
                 type="radio"
                 value="negotiable"
                 {...register("price_type")}
@@ -244,28 +265,28 @@ export default function GenericPostForm({
         </div>
         <hr className="mt-6 mb-3 text-clightgray" />
         <div className="flex justify-end max-sm:flex-col max-sm:justify-center max-sm:items-center max-sm:gap-4 mb-5">
-        {/* زر "معاينة" */}
-        <button
-          onClick={() => (window.location.href = "/perview")}
-          type="submit"
-          className="mt-8 ml-6 max-sm:ml-0 text-white rounded"
-        >
-          <span className="flex items-center group outline-2 outline-cgreen text-gray-800 hover:bg-chgreen hover:outline-chgreen hover:text-cwhite py-3 px-12 max-sm:px-[100px] rounded text-xl transition-all duration-300">
-            <Search className="ml-1 text-cgreen group-hover:text-cwhite" />{" "}
-            معاينة
-          </span>
-        </button>
+          {/* زر "معاينة" */}
+          <button
+            onClick={() => (window.location.href = "/perview")}
+            type="submit"
+            className="mt-8 ml-6 max-sm:ml-0 text-white rounded"
+          >
+            <span className="flex items-center group outline-2 outline-cgreen text-gray-800 hover:bg-chgreen hover:outline-chgreen hover:text-cwhite py-3 px-12 max-sm:px-[100px] rounded text-xl transition-all duration-300">
+              <Search className="ml-1 text-cgreen group-hover:text-cwhite" />{" "}
+              معاينة
+            </span>
+          </button>
 
-        {/* زر "نشر" */}
-        <button
-          type="submit"
-          className="mt-8 ml-6 max-sm:ml-0 text-white rounded"
-        >
-          <span className="bg-cgreen hover:bg-chgreen py-3 px-32  rounded text-xl transition-all duration-300">
-            {isLoading ? "جار النشر ..." : "نشر"}
-          </span>
-        </button>
-      </div>
+          {/* زر "نشر" */}
+          <button
+            type="submit"
+            className="mt-8 ml-6 max-sm:ml-0 text-white rounded"
+          >
+            <span className="bg-cgreen hover:bg-chgreen py-3 px-32  rounded text-xl transition-all duration-300">
+              {isLoading ? "جار النشر ..." : "نشر"}
+            </span>
+          </button>
+        </div>
       </section>
     </form>
   );

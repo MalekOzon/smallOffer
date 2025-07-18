@@ -104,7 +104,10 @@ export default function NewPostPage() {
           <hr className="mb-6 text-clightgray" />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="sm:ml-16">
-              <label className="block font-medium text-gray-700">التصنيف</label>
+              <label className="block font-medium text-gray-700">التصنيف
+              <span className="text-red-500 text-xl mr-1">*</span>
+
+              </label>
               <select
                 className="mt-1  w-full p-3 border-2 rounded-lg bg-cwhite text-gray-700 focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200"
                 style={{ borderColor: "#277F60" }}
@@ -125,6 +128,8 @@ export default function NewPostPage() {
             <div className="sm:ml-16">
               <label className="block font-medium text-gray-700">
                 التصنيف الفرعي
+                <span className="text-red-500 text-xl mr-1">*</span>
+
               </label>
               <select
                 className="mt-1  w-full p-3 border-2 rounded-lg bg-cwhite text-gray-700 focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200"

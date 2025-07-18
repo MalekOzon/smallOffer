@@ -118,7 +118,7 @@ export default function ElectronicsForm({
       )}
 
       {/* معلومات أساسية */}
-      <section className="bg-white rounded-2xl shadow-lg border border-gray-200 p-8 mb-6">
+      <section className="bg-white rounded-2xl shadow-lg border border-gray-200 p-8 mb-6 ">
         <h2 className="font-bold text-xl text-gray-800 mb-2 text-right">
           معلومات أساسية
         </h2>
@@ -130,8 +130,10 @@ export default function ElectronicsForm({
           <div className="sm:ml-16">
             <label className="block font-medium text-gray-700">
               اسم المنتج
+              <span className="text-red-500 text-xl mr-1">*</span>
             </label>
             <input
+            required
               {...register("title")}
               type="text"
               placeholder="اسم المنتج"
@@ -159,8 +161,11 @@ export default function ElectronicsForm({
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
           <div className="sm:ml-16">
-            <label className="block font-medium text-gray-700">المحافظة</label>
+            <label className="block font-medium text-gray-700">المحافظة
+            <span className="text-red-500 text-xl mr-1">*</span>
+            </label>
             <select
+            required
               {...register("city")}
               className="mt-1  w-full p-3 border-2 rounded-lg bg-cwhite text-gray-700 focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200"
               style={{
@@ -182,8 +187,11 @@ export default function ElectronicsForm({
           </div>
 
           <div className="sm:ml-16">
-            <label className="block font-medium text-gray-700">المنطقة</label>
+            <label className="block font-medium text-gray-700">المنطقة
+            <span className="text-red-500 text-xl mr-1">*</span>
+            </label>
             <input
+            required
               {...register("hood")}
               className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
               placeholder="المنطقة"
@@ -216,8 +224,10 @@ export default function ElectronicsForm({
           <div className="flex flex-col gap-2 md:col-span-2">
             <label className="block font-medium text-gray-700">
               وصف المنتج
+              <span className="text-red-500 text-xl mr-1">*</span>
             </label>
             <textarea
+            required
               {...register("description")}
               className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
               placeholder="ادخل وصف المنتج هنا"
@@ -244,25 +254,25 @@ export default function ElectronicsForm({
           <div className="sm:ml-16">
             <label className="block font-medium text-gray-700">
               سعر المنتج (السعر بالليرة السورية)
+              <span className="text-red-500 text-xl mr-1">*</span>
             </label>
             <input
+            required
               {...register("price")}
               className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
               placeholder="ادخل سعر المنتج"
             />
-            {errors.price && (
-              <p className="text-red-600 text-sm mt-1">
-                {String(errors.price.message)}
-              </p>
-            )}
           </div>
         </div>
 
         <div className="flex flex-col gap-2">
-          <label className="block font-medium text-gray-700">نوع السعر</label>
+          <label className="block font-medium text-gray-700">نوع السعر
+          <span className="text-red-500 text-xl mr-1">*</span>
+          </label>
           <div className="flex flex-wrap gap-4 mt-2">
             <label className="ml-2 flex items-center gap-2 text-gray-700 cursor-pointer">
               <input
+              required
                 type="radio"
                 value="negotiable"
                 {...register("price_type")}
@@ -280,19 +290,17 @@ export default function ElectronicsForm({
               <span>سعر ثابت</span>
             </label>
           </div>
-          {errors.price_type && (
-            <p className="text-red-600 text-sm mt-1">
-              {String(errors.price_type.message)}
-            </p>
-          )}
         </div>
       </section>
       {/* ------------------------------------------- */}
+      <section className="rounded-2xl shadow-lg border bg-white border-gray-200 p-8 mb-6 w-full">
+
       <h2 className="font-bold text-lg mb-2">تفاصيل الإلكترونيات</h2>
 
       <div className="sm:ml-16 bg-cwhite rounded-md p-4 shadow-md ">
             <label className="block font-medium text-gray-700">
               حالة الجهاز
+              <span className="text-red-500 text-xl mr-1">*</span>
             </label>
             {/* قائمة الخيارات */}
             <div className="flex flex-wrap gap-4 mt-2">
@@ -302,6 +310,7 @@ export default function ElectronicsForm({
                   className="flex items-center gap-1 ml-2 text-gray-700 cursor-pointer"
                 >
                   <input
+                  required
                     type="radio"
                     value={value}
                     {...register("electronics.status")} // اسم الحقل في النموذج
@@ -311,12 +320,6 @@ export default function ElectronicsForm({
                 </label>
               ))}
             </div>
-            {/* عرض رسالة الخطأ إذا كانت موجودة */}
-            {errors.electronics?.status && (
-              <p className="text-red-600 text-sm mt-1">
-                {String(errors.electronics?.status.message)}
-              </p>
-            )}
           </div>
 
 
@@ -345,6 +348,7 @@ export default function ElectronicsForm({
           </span>
         </button>
       </div>
+      </section>
     </form>
   );
 }

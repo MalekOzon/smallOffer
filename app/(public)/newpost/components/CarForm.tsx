@@ -279,8 +279,10 @@ export default function CarForm({
           <div className="sm:ml-16">
             <label className="block font-medium text-gray-700">
               اسم المنتج
+              <span className="text-red-500 text-xl mr-1">*</span>
             </label>
             <input
+            required
               {...register("title")}
               type="text"
               placeholder="اسم المنتج"
@@ -308,8 +310,11 @@ export default function CarForm({
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
           <div className="sm:ml-16">
-            <label className="block font-medium text-gray-700">المحافظة</label>
+            <label className="block font-medium text-gray-700">المحافظة
+            <span className="text-red-500 text-xl mr-1">*</span>
+            </label>
             <select
+            required
               {...register("city")}
               className="mt-1  w-full p-3 border-2 rounded-lg bg-cwhite text-gray-700 focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200"
               style={{
@@ -331,8 +336,11 @@ export default function CarForm({
           </div>
 
           <div className="sm:ml-16">
-            <label className="block font-medium text-gray-700">المنطقة</label>
+            <label className="block font-medium text-gray-700">المنطقة
+            <span className="text-red-500 text-xl mr-1">*</span>
+            </label>
             <input
+            required
               {...register("hood")}
               className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
               placeholder="المنطقة"
@@ -365,8 +373,10 @@ export default function CarForm({
           <div className="flex flex-col gap-2 md:col-span-2">
             <label className="block font-medium text-gray-700">
               وصف المنتج
+              <span className="text-red-500 text-xl mr-1">*</span>
             </label>
             <textarea
+            required
               {...register("description")}
               className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
               placeholder="ادخل وصف المنتج هنا"
@@ -393,8 +403,10 @@ export default function CarForm({
           <div className="sm:ml-16">
             <label className="block font-medium text-gray-700">
               سعر المنتج (السعر بالليرة السورية)
+              <span className="text-red-500 text-xl mr-1">*</span>
             </label>
             <input
+            required
               {...register("price")}
               className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
               placeholder="ادخل سعر المنتج"
@@ -403,10 +415,13 @@ export default function CarForm({
         </div>
 
         <div className="flex flex-col gap-2">
-          <label className="block font-medium text-gray-700">نوع السعر</label>
+          <label className="block font-medium text-gray-700">نوع السعر
+          <span className="text-red-500 text-xl mr-1">*</span>
+          </label>
           <div className="flex flex-wrap gap-4 mt-2">
             <label className="ml-2 flex items-center gap-2 text-gray-700 cursor-pointer">
               <input
+              required
                 type="radio"
                 value="negotiable"
                 {...register("price_type")}
@@ -432,8 +447,11 @@ export default function CarForm({
         {/* ---------------------------- */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="sm:ml-16">
-            <label className="block font-medium text-gray-700">الماركة</label>
+            <label className="block font-medium text-gray-700">الماركة
+            <span className="text-red-500 text-xl mr-1">*</span>
+            </label>
             <select
+            required
               {...register("car.brand")}
               className="mt-1  w-full p-3 py-3.5 border-2 rounded-lg bg-cwhite text-gray-700 focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200"
               style={{
@@ -461,8 +479,10 @@ export default function CarForm({
           <div className="sm:ml-16">
             <label className="block font-medium text-gray-700">
               عدد الكيلومترات
+              <span className="text-red-500 text-xl mr-1">*</span>
             </label>
             <input
+            required
               type="number"
               {...register("car.mileage", { valueAsNumber: true })}
               className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
@@ -473,6 +493,7 @@ export default function CarForm({
           <div className="sm:ml-16">
             <label className="block font-medium text-gray-700">الأداء</label>
             <input
+            type="number"
               {...register("car.performance")}
               className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
               dir="rtl"
@@ -502,9 +523,12 @@ export default function CarForm({
           <div className="sm:ml-16">
             <label className="block font-medium text-gray-700">
               تاريخ التسجيل الأول
+              <span className="text-red-500 text-xl mr-1">*</span>
             </label>
             <input
-              type="date"
+            required
+              type="number"
+              placeholder="ادخل سنة التسجيل"
               {...register("car.first_registration")}
               className="mt-1  w-full p-3 py-3.5 border-2 rounded-lg bg-cwhite text-gray-700 focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200"
               style={{
@@ -535,8 +559,10 @@ export default function CarForm({
           <div className="sm:ml-16">
             <label className="block font-medium text-gray-700">
               ملصق البيئة
+              <span className="text-red-500 text-xl mr-1">*</span>
             </label>
             <input
+            required
               {...register("car.environmental_sticker")}
               className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
               dir="rtl"
@@ -546,8 +572,10 @@ export default function CarForm({
           <div className="sm:ml-16">
             <label className="block font-medium text-gray-700">
               فئة الملوثات
+              <span className="text-red-500 text-xl mr-1">*</span>
             </label>
             <input
+            required
               {...register("car.class_of_pollutants")}
               className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
               dir="rtl"
@@ -558,9 +586,9 @@ export default function CarForm({
         {/* حقول المصفوفات -------------------------------------------------------------------------------------*/}
         <div className="space-y-4 mt-6">
           <div className="sm:ml-16 bg-cwhite rounded-md p-2 shadow-md">
-            {/* عنوان اختيار ناقل الحركة */}
             <label className="block font-medium text-gray-700">
               اختر حالة السيارة
+              <span className="text-red-500 text-xl mr-1">*</span>
             </label>
             {/* قائمة الخيارات */}
             <div className="flex flex-wrap gap-4 mt-2">
@@ -570,6 +598,7 @@ export default function CarForm({
                   className="flex items-center gap-1 ml-2 text-gray-700 cursor-pointer"
                 >
                   <input
+                  required
                     type="radio"
                     value={value}
                     {...register("car.status")} // اسم الحقل في النموذج
@@ -581,9 +610,9 @@ export default function CarForm({
             </div>
           </div>
           <div className="sm:ml-16 bg-cwhite rounded-md p-2 shadow-md">
-            {/* عنوان اختيار ناقل الحركة */}
             <label className="block font-medium text-gray-700">
               اختر ناقل الحركة
+              <span className="text-red-500 text-xl mr-1">*</span>
             </label>
             {/* قائمة الخيارات */}
             <div className="flex flex-wrap gap-4 mt-2">
@@ -593,6 +622,7 @@ export default function CarForm({
                   className="flex items-center gap-1 ml-2 text-gray-700 cursor-pointer"
                 >
                   <input
+                  required
                     type="radio"
                     value={value}
                     {...register("car.gearbox")} // اسم الحقل في النموذج
@@ -656,6 +686,7 @@ export default function CarForm({
             {/* اختيار نوع الوقود */}
             <label className="block font-medium text-gray-700">
               اختر نوع الوقود
+              <span className="text-red-500 text-xl mr-1">*</span>  
             </label>
             <div className="flex flex-wrap gap-2 mt-2 ">
               {FUEL_CHOICES.map(([value, label]) => (
@@ -665,6 +696,7 @@ export default function CarForm({
                 >
                   {" "}
                   <input
+                  required
                     type="radio"
                     value={value}
                     {...register("car.fuel_type")} // اسم الحقل في النموذج

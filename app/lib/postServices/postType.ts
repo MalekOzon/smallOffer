@@ -20,18 +20,18 @@ export type CarDetailsPayload = {
     protection?: string[];             // array من النصوص
     number_of_doors?: "two_three" | "four" | "five" | string; // لو عندك خيارات محددة استخدم union type
     hu?: string;                      // تاريخ بصيغة ISO string
-    environmental_sticker?: string;
-    class_of_pollutants?: string;
+    environmental_sticker: string;
+    class_of_pollutants: string;
     color?: string;
     internal_materials?: string;
     brand: string;
-    model: string;
+    model?: string;
     mileage: number;
-    status?: "damaged" | "used" | "new" | string;  // مثال للـ union type حسب الحالات الممكنة
-    first_registration?: string;       // تاريخ ISO string
-    fuel_type?: "gasoline" | "diesel" | "electric" | "hybrid" | string;
-    performance?: string;
-    gearbox?: "manual" | "automatic" | string;
+    status: "damaged" | "used" | "new" | string;  // مثال للـ union type حسب الحالات الممكنة
+    first_registration: number;       // تاريخ ISO string
+    fuel_type: "gasoline" | "diesel" | "electric" | "hybrid" | string;
+    performance?: number;
+    gearbox: "manual" | "automatic" | string;
     car_type?: "small_car" | "sedan" | "suv" | "truck" | string;
   };
 };
@@ -47,32 +47,30 @@ export type LandDetailsPayload = {
 
 export type HouseDetailsPayload = {
   house: {
-    available_from: string;
-    general_characteristics: string[];
-    floor: string;
-    living_space: number;
-    furniture: string[];
-    bath: number;
+    available_from?: string;
+    general_characteristics?: string[];
+    furniture?: string[];
+    bath?: number;
     real_estate_space: number;
-    house_type: string;
-    bed_room: number;
+    house_type?: string;
+    bed_room?: number;
     room: number;
-    year: number;
+    year?: number;
     offer_type: "sale" | "rent";
   };
 };
 
 export type ApartmentDetailsPayload = {
   apartment: {
-    available_from: string;
-    general_characteristics: string[];
+    available_from?: string;
+    real_estate_space: number;
+    general_characteristics?: string[];
     floor: number;
-    living_space: number;
-    furniture: string[];
-    bath: number;
-    bed_room: number;
+    furniture?: string[];
+    bath?: number;
+    bed_room?: number;
     room: number;
-    year: number;
+    year?: number;
     offer_type: "sale" | "rent";
   };
 };
@@ -87,8 +85,8 @@ export type MobileDetailsPayload = {
   mobile: {
     brand: string;
     status: "new" | "used_very_good" | "working_good" | "defective";
-    color: string;
-    accessories: boolean;
+    color?: string;
+    accessories?: boolean;
     
   };
 };

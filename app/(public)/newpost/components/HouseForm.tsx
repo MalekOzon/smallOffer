@@ -96,8 +96,6 @@ export default function HouseForm({ Gcategory, Gsubcategory }: PostFormProps) {
     const houseDetails = {
       available_from: data.house.available_from,
       general_characteristics: data.house.general_characteristics,
-      floor: data.house.floor,
-      living_space: data.house.living_space,
       furniture: data.house.furniture,
       bath: data.house.bath,
       real_estate_space: data.house.real_estate_space,
@@ -154,7 +152,7 @@ export default function HouseForm({ Gcategory, Gsubcategory }: PostFormProps) {
       )}
 
       {/* معلومات أساسية */}
-      <section className="bg-white rounded-2xl shadow-lg border border-gray-200 p-8 mb-6">
+      <section className="bg-white rounded-2xl shadow-lg border border-gray-200 p-8 mb-6 ">
         <h2 className="font-bold text-xl text-gray-800 mb-2 text-right">
           معلومات أساسية
         </h2>
@@ -166,8 +164,10 @@ export default function HouseForm({ Gcategory, Gsubcategory }: PostFormProps) {
           <div className="sm:ml-16">
             <label className="block font-medium text-gray-700">
               اسم المنتج
+              <span className="text-red-500 text-xl mr-1">*</span>
             </label>
             <input
+              required
               {...register("title")}
               type="text"
               placeholder="اسم المنتج"
@@ -195,8 +195,12 @@ export default function HouseForm({ Gcategory, Gsubcategory }: PostFormProps) {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
           <div className="sm:ml-16">
-            <label className="block font-medium text-gray-700">المحافظة</label>
+            <label className="block font-medium text-gray-700">
+              المحافظة
+              <span className="text-red-500 text-xl mr-1">*</span>
+            </label>
             <select
+              required
               {...register("city")}
               className="mt-1  w-full p-3 border-2 rounded-lg bg-cwhite text-gray-700 focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200"
               style={{
@@ -218,8 +222,12 @@ export default function HouseForm({ Gcategory, Gsubcategory }: PostFormProps) {
           </div>
 
           <div className="sm:ml-16">
-            <label className="block font-medium text-gray-700">المنطقة</label>
+            <label className="block font-medium text-gray-700">
+              المنطقة
+              <span className="text-red-500 text-xl mr-1">*</span>
+            </label>
             <input
+              required
               {...register("hood")}
               className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
               placeholder="المنطقة"
@@ -252,8 +260,10 @@ export default function HouseForm({ Gcategory, Gsubcategory }: PostFormProps) {
           <div className="flex flex-col gap-2 md:col-span-2">
             <label className="block font-medium text-gray-700">
               وصف المنتج
+              <span className="text-red-500 text-xl mr-1">*</span>
             </label>
             <textarea
+              required
               {...register("description")}
               className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
               placeholder="ادخل وصف المنتج هنا"
@@ -280,25 +290,26 @@ export default function HouseForm({ Gcategory, Gsubcategory }: PostFormProps) {
           <div className="sm:ml-16">
             <label className="block font-medium text-gray-700">
               سعر المنتج (السعر بالليرة السورية)
+              <span className="text-red-500 text-xl mr-1">*</span>
             </label>
             <input
+              required
               {...register("price")}
               className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
               placeholder="ادخل سعر المنتج"
             />
-            {errors.price && (
-              <p className="text-red-600 text-sm mt-1">
-                {String(errors.price.message)}
-              </p>
-            )}
           </div>
         </div>
 
         <div className="flex flex-col gap-2">
-          <label className="block font-medium text-gray-700">نوع السعر</label>
+          <label className="block font-medium text-gray-700">
+            نوع السعر
+            <span className="text-red-500 text-xl mr-1">*</span>
+          </label>
           <div className="flex flex-wrap gap-4 mt-2">
             <label className="ml-2 flex items-center gap-2 text-gray-700 cursor-pointer">
               <input
+                required
                 type="radio"
                 value="negotiable"
                 {...register("price_type")}
@@ -316,37 +327,50 @@ export default function HouseForm({ Gcategory, Gsubcategory }: PostFormProps) {
               <span>سعر ثابت</span>
             </label>
           </div>
-          {errors.price_type && (
-            <p className="text-red-600 text-sm mt-1">
-              {String(errors.price_type.message)}
-            </p>
-          )}
         </div>
       </section>
       {/* ------------------------------------------- */}
-      <section className="rounded-2xl shadow-lg border border-gray-200 p-8 mb-6 w-full">
+      <section className="rounded-2xl shadow-lg border bg-white border-gray-200 p-8 mb-6 w-full">
         <h2 className="font-bold text-lg mb-2">تفاصيل المنزل</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div>
-            <label className="block font-medium mb-1">مساحة غرفة المعيشة (م²)</label>
-            <input
-              type="number"
-              {...register("house.living_space", { valueAsNumber: true })}
-              className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
-              min={0}
-            />
+          <div className="sm:ml-16">
+            <label className="block font-medium text-gray-700">نوع العرض
+            <span className="text-red-500 text-xl mr-1">*</span>
+            </label>
+            <select
+              required
+              {...register("house.offer_type")}
+              className="mt-2  w-full p-3 py-3.5 border-2 rounded-lg bg-cwhite text-cdarkgray focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200"
+              style={{
+                borderColor: "#277F60",
+              }}
+              dir="rtl"
+            >
+              <option value="">اختر العرض</option>
+              {OFFER_TYPE_CHOICES.map(([value, label]) => (
+                <option key={value} value={value}>
+                  {label}
+                </option>
+              ))}
+            </select>
           </div>
-          <div>
-            <label className="block font-medium mb-1">عدد الغرف</label>
+
+          <div className="sm:ml-16">
+            <label className="block font-medium text-gray-700">عدد الغرف
+            <span className="text-red-500 text-xl mr-1">*</span>
+            </label>
             <input
+              required
               type="number"
               {...register("house.room", { valueAsNumber: true })}
               className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
               min={0}
             />
           </div>
-          <div>
-            <label className="block font-medium mb-1">عدد غرف النوم</label>
+          <div className="sm:ml-16">
+            <label className="block font-medium text-gray-700">
+              عدد غرف النوم
+            </label>
             <input
               type="number"
               {...register("house.bed_room", { valueAsNumber: true })}
@@ -354,8 +378,10 @@ export default function HouseForm({ Gcategory, Gsubcategory }: PostFormProps) {
               min={0}
             />
           </div>
-          <div>
-            <label className="block font-medium mb-1">عدد الحمامات</label>
+          <div className="sm:ml-16">
+            <label className="block font-medium text-gray-700">
+              عدد الحمامات
+            </label>
             <input
               type="number"
               {...register("house.bath", { valueAsNumber: true })}
@@ -363,19 +389,23 @@ export default function HouseForm({ Gcategory, Gsubcategory }: PostFormProps) {
               min={0}
             />
           </div>
-          <div>
-            <label className="block font-medium mb-1">
+          <div className="sm:ml-16">
+            <label className="block font-medium text-gray-700">
               المساحة العقارية (م²)
+              <span className="text-red-500 text-xl mr-1">*</span>
             </label>
             <input
+              required
               type="number"
               {...register("house.real_estate_space", { valueAsNumber: true })}
               className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
               min={0}
             />
           </div>
-          <div>
-            <label className="block font-medium mb-1">متاح من تاريخ</label>
+          <div className="sm:ml-16">
+            <label className="block font-medium text-gray-700">
+              متاح من تاريخ
+            </label>
             <input
               type="date"
               {...register("house.available_from")}
@@ -383,17 +413,10 @@ export default function HouseForm({ Gcategory, Gsubcategory }: PostFormProps) {
             />
           </div>
 
-          <div>
-            <label className="block font-medium mb-1">الطابق</label>
-            <input
-              type="text"
-              {...register("house.floor")}
-              className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
-            />
-          </div>
-
-          <div>
-            <label className="block font-medium mb-1">سنة البناء</label>
+          <div className="sm:ml-16">
+            <label className="block font-medium text-gray-700">
+              سنة البناء
+            </label>
             <input
               type="number"
               {...register("house.year", { valueAsNumber: true })}
@@ -421,26 +444,6 @@ export default function HouseForm({ Gcategory, Gsubcategory }: PostFormProps) {
                     type="radio"
                     value={value}
                     {...register("house.house_type")}
-                    className="accent-cgreen"
-                  />
-                  <span>{label}</span>
-                </label>
-              ))}
-            </div>
-          </div>
-
-          <div className="sm:ml-16 bg-cwhite rounded-md p-4 w-full shadow-md ">
-            <label className="block font-medium text-gray-700">نوع العرض</label>
-            <div className="flex flex-wrap gap-4 mt-2">
-              {OFFER_TYPE_CHOICES.map(([value, label]) => (
-                <label
-                  key={value}
-                  className="flex items-center gap-1 ml-2 text-gray-700 cursor-pointer"
-                >
-                  <input
-                    type="radio"
-                    value={value}
-                    {...register("house.offer_type")}
                     className="accent-cgreen"
                   />
                   <span>{label}</span>
@@ -490,7 +493,6 @@ export default function HouseForm({ Gcategory, Gsubcategory }: PostFormProps) {
               ))}
             </div>
           </div>
-
         </div>
         <hr className="mt-6 mb-3 text-clightgray" />
         <div className="flex justify-end max-sm:flex-col max-sm:justify-center max-sm:items-center max-sm:gap-4 mb-5">
