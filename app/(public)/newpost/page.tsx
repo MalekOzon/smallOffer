@@ -109,6 +109,7 @@ export default function NewPostPage() {
 
               </label>
               <select
+              required
                 className="mt-1  w-full p-3 border-2 rounded-lg bg-cwhite text-gray-700 focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200"
                 style={{ borderColor: "#277F60" }}
                 value={category}
@@ -132,6 +133,7 @@ export default function NewPostPage() {
 
               </label>
               <select
+              required
                 className="mt-1  w-full p-3 border-2 rounded-lg bg-cwhite text-gray-700 focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200"
                 style={{ borderColor: "#277F60" }}
                 value={subcategory}

@@ -8377,6 +8377,7 @@ function NewPostPage() {
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
+                                            required: true,
                                             className: "mt-1  w-full p-3 border-2 rounded-lg bg-cwhite text-gray-700 focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200",
                                             style: {
                                                 borderColor: "#277F60"
@@ -8392,7 +8393,7 @@ function NewPostPage() {
                                                     children: cat
                                                 }, cat, false, {
                                                     fileName: "[project]/app/(public)/newpost/page.tsx",
-                                                    lineNumber: 121,
+                                                    lineNumber: 122,
                                                     columnNumber: 19
                                                 }, this))
                                         }, void 0, false, {
@@ -8418,16 +8419,17 @@ function NewPostPage() {
                                                     children: "*"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/newpost/page.tsx",
-                                                    lineNumber: 131,
+                                                    lineNumber: 132,
                                                     columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/(public)/newpost/page.tsx",
-                                            lineNumber: 129,
+                                            lineNumber: 130,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
+                                            required: true,
                                             className: "mt-1  w-full p-3 border-2 rounded-lg bg-cwhite text-gray-700 focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200",
                                             style: {
                                                 borderColor: "#277F60"
@@ -8439,18 +8441,18 @@ function NewPostPage() {
                                                     children: sub
                                                 }, sub, false, {
                                                     fileName: "[project]/app/(public)/newpost/page.tsx",
-                                                    lineNumber: 141,
+                                                    lineNumber: 143,
                                                     columnNumber: 19
                                                 }, this))
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/newpost/page.tsx",
-                                            lineNumber: 134,
+                                            lineNumber: 135,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/newpost/page.tsx",
-                                    lineNumber: 128,
+                                    lineNumber: 129,
                                     columnNumber: 13
                                 }, this)
                             ]
@@ -8470,7 +8472,7 @@ function NewPostPage() {
                     children: formToShow
                 }, void 0, false, {
                     fileName: "[project]/app/(public)/newpost/page.tsx",
-                    lineNumber: 150,
+                    lineNumber: 152,
                     columnNumber: 9
                 }, this)
             ]
