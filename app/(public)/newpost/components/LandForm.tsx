@@ -383,7 +383,7 @@ export default function LandForm({ Gcategory, Gsubcategory }: PostFormProps) {
             type="submit"
             className="mt-8 ml-6 max-sm:ml-0 text-white rounded"
           >
-            <span className="flex items-center group outline-2 outline-cgreen text-gray-800 hover:bg-chgreen hover:outline-chgreen hover:text-cwhite py-3 px-12 max-sm:px-[100px] rounded text-xl transition-all duration-300">
+            <span className="flex items-center group outline-2 outline-cgreen text-gray-800 hover:bg-chgreen hover:outline-chgreen hover:text-cwhite py-3 px-12 max-sm:px-[55px] rounded text-xl transition-all duration-300">
               <Search className="ml-1 text-cgreen group-hover:text-cwhite" />{" "}
               معاينة
             </span>
@@ -394,7 +394,7 @@ export default function LandForm({ Gcategory, Gsubcategory }: PostFormProps) {
             type="submit"
             className="mt-8 ml-6 max-sm:ml-0 text-white rounded"
           >
-            <span className="bg-cgreen hover:bg-chgreen py-3 px-32  rounded text-xl transition-all duration-300">
+            <span className="bg-cgreen hover:bg-chgreen py-3 px-32 max-sm:px-20 rounded text-xl transition-all duration-300">
               {isLoading ? "جار النشر ..." : "نشر"}
             </span>
           </button>

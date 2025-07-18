@@ -1528,6 +1528,14 @@
     padding-inline: calc(var(--spacing) * 12);
   }
 
+  .px-20 {
+    padding-inline: calc(var(--spacing) * 20);
+  }
+
+  .px-28 {
+    padding-inline: calc(var(--spacing) * 28);
+  }
+
   .px-32 {
     padding-inline: calc(var(--spacing) * 32);
   }
@@ -2581,8 +2589,50 @@
   }
 
   @media (width < 40rem) {
+    .max-sm\:px-20 {
+      padding-inline: calc(var(--spacing) * 20);
+    }
+  }
+
+  @media (width < 40rem) {
+    .max-sm\:px-\[55px\] {
+      padding-inline: 55px;
+    }
+  }
+
+  @media (width < 40rem) {
+    .max-sm\:px-\[56px\] {
+      padding-inline: 56px;
+    }
+  }
+
+  @media (width < 40rem) {
+    .max-sm\:px-\[58px\] {
+      padding-inline: 58px;
+    }
+  }
+
+  @media (width < 40rem) {
+    .max-sm\:px-\[60px\] {
+      padding-inline: 60px;
+    }
+  }
+
+  @media (width < 40rem) {
+    .max-sm\:px-\[80px\] {
+      padding-inline: 80px;
+    }
+  }
+
+  @media (width < 40rem) {
     .max-sm\:px-\[100px\] {
       padding-inline: 100px;
+    }
+  }
+
+  @media (width < 40rem) {
+    .max-sm\:px-\[px\] {
+      padding-inline: px;
     }
   }
 
