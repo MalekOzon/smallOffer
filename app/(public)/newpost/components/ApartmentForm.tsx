@@ -288,6 +288,8 @@ export default function ApartmentForm({
               <span className="text-red-500 text-xl mr-1">*</span>
             </label>
             <input
+                        type="number"
+
               required
               {...register("price")}
               className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"

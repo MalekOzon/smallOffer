@@ -1,0 +1,3 @@
+{
+  "/(public)/editpost/editCar/[id]/page": "app/(public)/editpost/editCar/[id]/page.js"
+}

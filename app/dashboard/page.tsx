@@ -65,6 +65,7 @@ export default function DashboardHomePage() {
             isFav={false}
             imageUrl={ad.cover_image ?? placeholderPost }
             id={ad.id}
+            subcat={ad.subcategory}
           />
           ))}
         </div>)}

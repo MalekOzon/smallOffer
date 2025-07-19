@@ -21,7 +21,7 @@ const HeaderLogin = () => {
         <h5 className="font-bold text-lg max-lg:hidden">
           ليس لديك حساب؟ قم{" "}
           <Link
-            href="/login"
+            href="/signup"
             className="text-cgreen hover:text-chgreen transition duration-300"
           >
             بإنشاء حساب

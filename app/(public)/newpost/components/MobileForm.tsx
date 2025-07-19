@@ -57,7 +57,9 @@ export default function MobileForm({ Gcategory, Gsubcategory }: PostFormProps) {
   const createMobilePost = useCreateMobilePost(setNotification);
   const { isPending: isLoading } = createMobilePost;
 
-  const [accessoriesValue, setAccessoriesValue] = useState<boolean | undefined>(false);
+  const [accessoriesValue, setAccessoriesValue] = useState<boolean | undefined>(
+    false
+  );
 
   const onSubmit = (data: MobilePostPayload) => {
     console.log("daTA: ", data);
@@ -155,7 +157,7 @@ export default function MobileForm({ Gcategory, Gsubcategory }: PostFormProps) {
               <span className="text-red-500 text-xl mr-1">*</span>
             </label>
             <input
-            required
+              required
               {...register("title")}
               type="text"
               placeholder="اسم المنتج"
@@ -183,11 +185,12 @@ export default function MobileForm({ Gcategory, Gsubcategory }: PostFormProps) {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
           <div className="sm:ml-16">
-            <label className="block font-medium text-gray-700">المحافظة
-            <span className="text-red-500 text-xl mr-1">*</span>
+            <label className="block font-medium text-gray-700">
+              المحافظة
+              <span className="text-red-500 text-xl mr-1">*</span>
             </label>
             <select
-            required
+              required
               {...register("city")}
               className="mt-1  w-full p-3 border-2 rounded-lg bg-cwhite text-gray-700 focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200"
               style={{
@@ -209,11 +212,12 @@ export default function MobileForm({ Gcategory, Gsubcategory }: PostFormProps) {
           </div>
 
           <div className="sm:ml-16">
-            <label className="block font-medium text-gray-700">المنطقة
-            <span className="text-red-500 text-xl mr-1">*</span>
+            <label className="block font-medium text-gray-700">
+              المنطقة
+              <span className="text-red-500 text-xl mr-1">*</span>
             </label>
             <input
-            required
+              required
               {...register("hood")}
               className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
               placeholder="المنطقة"
@@ -249,7 +253,7 @@ export default function MobileForm({ Gcategory, Gsubcategory }: PostFormProps) {
               <span className="text-red-500 text-xl mr-1">*</span>
             </label>
             <textarea
-            required
+              required
               {...register("description")}
               className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
               placeholder="ادخل وصف المنتج هنا"
@@ -279,7 +283,8 @@ export default function MobileForm({ Gcategory, Gsubcategory }: PostFormProps) {
               <span className="text-red-500 text-xl mr-1">*</span>
             </label>
             <input
-            required
+              type="number"
+              required
               {...register("price")}
               className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
               placeholder="ادخل سعر المنتج"
@@ -288,13 +293,14 @@ export default function MobileForm({ Gcategory, Gsubcategory }: PostFormProps) {
         </div>
 
         <div className="flex flex-col gap-2">
-          <label className="block font-medium text-gray-700">نوع السعر
-          <span className="text-red-500 text-xl mr-1">*</span>
+          <label className="block font-medium text-gray-700">
+            نوع السعر
+            <span className="text-red-500 text-xl mr-1">*</span>
           </label>
           <div className="flex flex-wrap gap-4 mt-2">
             <label className="ml-2 flex items-center gap-2 text-gray-700 cursor-pointer">
               <input
-              required
+                required
                 type="radio"
                 value="negotiable"
                 {...register("price_type")}
@@ -321,12 +327,12 @@ export default function MobileForm({ Gcategory, Gsubcategory }: PostFormProps) {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="sm:ml-16">
-          <label className="block font-medium text-gray-700">
-          أدخل ماركة الموبايل
-          <span className="text-red-500 text-xl mr-1">*</span>
+            <label className="block font-medium text-gray-700">
+              أدخل ماركة الموبايل
+              <span className="text-red-500 text-xl mr-1">*</span>
             </label>
             <input
-            required
+              required
               {...register("mobile.brand")}
               className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
               dir="rtl"
@@ -356,7 +362,7 @@ export default function MobileForm({ Gcategory, Gsubcategory }: PostFormProps) {
         <div className="space-y-4 mt-6">
           <div className="sm:ml-16 bg-cwhite rounded-md p-2 shadow-md">
             <label className="block font-medium text-gray-700">
-              اختر الحالة 
+              اختر الحالة
               <span className="text-red-500 text-xl mr-1">*</span>
             </label>
             {/* قائمة الخيارات */}
@@ -367,7 +373,7 @@ export default function MobileForm({ Gcategory, Gsubcategory }: PostFormProps) {
                   className="flex items-center gap-1 ml-2 text-gray-700 cursor-pointer"
                 >
                   <input
-                  required
+                    required
                     type="radio"
                     value={value}
                     {...register("mobile.status")}
@@ -395,7 +401,6 @@ export default function MobileForm({ Gcategory, Gsubcategory }: PostFormProps) {
             </Button>
             <Button
               type="button"
-              
               className="w-1/2 text-6 font-semibold"
               variant={accessoriesValue === false ? "primary" : "none"}
               onClick={() => {
@@ -406,7 +411,6 @@ export default function MobileForm({ Gcategory, Gsubcategory }: PostFormProps) {
               لا يوجد ملحقات
             </Button>
           </div>
-
         </div>
 
         <hr className="mt-6 mb-3 text-clightgray" />

@@ -293,6 +293,7 @@ export default function HouseForm({ Gcategory, Gsubcategory }: PostFormProps) {
               <span className="text-red-500 text-xl mr-1">*</span>
             </label>
             <input
+              type="number"
               required
               {...register("price")}
               className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
@@ -334,8 +335,9 @@ export default function HouseForm({ Gcategory, Gsubcategory }: PostFormProps) {
         <h2 className="font-bold text-lg mb-2">تفاصيل المنزل</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="sm:ml-16">
-            <label className="block font-medium text-gray-700">نوع العرض
-            <span className="text-red-500 text-xl mr-1">*</span>
+            <label className="block font-medium text-gray-700">
+              نوع العرض
+              <span className="text-red-500 text-xl mr-1">*</span>
             </label>
             <select
               required
@@ -356,8 +358,9 @@ export default function HouseForm({ Gcategory, Gsubcategory }: PostFormProps) {
           </div>
 
           <div className="sm:ml-16">
-            <label className="block font-medium text-gray-700">عدد الغرف
-            <span className="text-red-500 text-xl mr-1">*</span>
+            <label className="block font-medium text-gray-700">
+              عدد الغرف
+              <span className="text-red-500 text-xl mr-1">*</span>
             </label>
             <input
               required

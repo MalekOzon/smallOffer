@@ -31,32 +31,90 @@ export default function GenericPostForm({
   const createPost = useCreatePost(setNotification);
   const { isPending: isLoading } = createPost;
 
-  const onSubmit = (data: GenericPostPayload) => {
-    if (!Gcategory || !Gsubcategory) {
-      setNotification({
-        message: "يجب اختيار التصنيف العام والفرعي قبل إرسال الإعلان.",
-        type: "error",
-      });
-      return;
-    }
-    setNotification(null);
-    console.log("بيانات الإعلان العام:", JSON.stringify(data, null, 2));
-    const jsonData = JSON.stringify({
-      title: data.title,
-      description: data.description,
-      price: data.price,
-      price_type: data.price_type || "fixed",
-      city: data.city,
-      hood: data.hood,
-      detailed_location: data.detailed_location,
-      cover_image: data.cover_image,
-      gallery: null,
-      category: Gcategory,
-      subcategory: Gsubcategory,
-    });
-    console.log("json:", jsonData);
+  // const onSubmit = (data: GenericPostPayload) => {
+  //   if (!Gcategory || !Gsubcategory) {
+  //     setNotification({
+  //       message: "يجب اختيار التصنيف العام والفرعي قبل إرسال الإعلان.",
+  //       type: "error",
+  //     });
+  //     return;
+  //   }
+  //   setNotification(null);
+  //   console.log("بيانات الإعلان العام:", JSON.stringify(data, null, 2));
+  //   const jsonData = JSON.stringify({
+  //     title: data.title,
+  //     description: data.description,
+  //     price: data.price,
+  //     price_type: data.price_type || "fixed",
+  //     city: data.city,
+  //     hood: data.hood,
+  //     detailed_location: data.detailed_location,
+  //     cover_image: data.cover_image,
+  //     gallery: null,
+  //     category: Gcategory,
+  //     subcategory: Gsubcategory,
+  //   });
+  //   console.log("json:", jsonData);
 
-    createPost.mutate(JSON.parse(jsonData));
+  //   createPost.mutate(JSON.parse(jsonData));
+  // };
+
+  function isBlob(obj: unknown): obj is Blob {
+    return (
+      typeof window !== "undefined" &&
+      typeof obj === "object" &&
+      obj !== null &&
+      typeof window.Blob !== "undefined" &&
+      obj instanceof window.Blob
+    );
+  }
+
+  const onSubmit = (data: GenericPostPayload) => {
+    console.log("daTA: ", data);
+    const formData = new FormData();
+
+    formData.append("title", data.title ?? "");
+    formData.append("description", data.description ?? "");
+    formData.append("price", data.price ?? "");
+    formData.append("price_type", data.price_type ?? "fixed");
+    formData.append("city", data.city ?? "");
+    formData.append("hood", data.hood ?? "");
+    formData.append("detailed_location", data.detailed_location ?? "");
+
+    if (data.cover_image && typeof window !== "undefined") {
+      if (
+        typeof data.cover_image === "object" &&
+        "length" in data.cover_image &&
+        typeof (data.cover_image as FileList).item === "function"
+      ) {
+        // Likely a FileList
+        formData.append("cover_image", (data.cover_image as FileList)[0]);
+      } else if (isBlob(data.cover_image)) {
+        // File inherits from Blob
+        formData.append("cover_image", data.cover_image);
+      }
+    }
+
+    formData.append("category", Gcategory);
+    formData.append("subcategory", Gsubcategory);
+
+
+    if (data.gallery && data.gallery.length > 0) {
+      if (
+        typeof globalThis.FileList !== "undefined" &&
+        data.gallery instanceof globalThis.FileList
+      ) {
+        Array.from(data.gallery).forEach((img: File) => {
+          formData.append("gallery", img);
+        });
+      } else if (Array.isArray(data.gallery)) {
+        (data.gallery as string[]).forEach((img) => {
+          formData.append("gallery", img);
+        });
+      }
+    }
+
+    createPost.mutate(formData);
   };
 
   return (
@@ -74,7 +132,7 @@ export default function GenericPostForm({
       )}
 
       {/* معلومات أساسية */}
-      <section className="bg-white rounded-2xl shadow-lg border border-gray-200 p-8 mb-6">
+      <section className="bg-white rounded-2xl shadow-lg border border-gray-200 p-8 mb-6 ">
         <h2 className="font-bold text-xl text-gray-800 mb-2 text-right">
           معلومات أساسية
         </h2>
@@ -117,9 +175,9 @@ export default function GenericPostForm({
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
           <div className="sm:ml-16">
-            <label className="block font-medium text-gray-700">المحافظة
-            <span className="text-red-500 text-xl mr-1">*</span>
-
+            <label className="block font-medium text-gray-700">
+              المحافظة
+              <span className="text-red-500 text-xl mr-1">*</span>
             </label>
             <select
               required
@@ -144,9 +202,9 @@ export default function GenericPostForm({
           </div>
 
           <div className="sm:ml-16">
-            <label className="block font-medium text-gray-700">المنطقة
-            <span className="text-red-500 text-xl mr-1">*</span>
-
+            <label className="block font-medium text-gray-700">
+              المنطقة
+              <span className="text-red-500 text-xl mr-1">*</span>
             </label>
             <input
               required
@@ -183,7 +241,6 @@ export default function GenericPostForm({
             <label className="block font-medium text-gray-700">
               وصف المنتج
               <span className="text-red-500 text-xl mr-1">*</span>
-
             </label>
             <textarea
               required
@@ -204,7 +261,6 @@ export default function GenericPostForm({
       <section className="bg-white rounded-2xl shadow-lg border border-gray-200 p-8">
         <h2 className="font-bold text-xl text-gray-800 mb-2 text-right">
           سعر المنتج
-          
         </h2>
         <p className="text-gray-600 mb-6 text-right">
           حدد سعر الإعلان أو اختر إذا كان قابل للتفاوض، وسيساعد المستخدمين على
@@ -215,26 +271,21 @@ export default function GenericPostForm({
             <label className="block font-medium text-gray-700">
               سعر المنتج (السعر بالليرة السورية)
               <span className="text-red-500 text-xl mr-1">*</span>
-
             </label>
             <input
+            type="number"
               required
               {...register("price")}
               className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
               placeholder="ادخل سعر المنتج"
             />
-            {errors.price && (
-              <p className="text-red-600 text-sm mt-1">
-                {String(errors.price.message)}
-              </p>
-            )}
           </div>
         </div>
 
         <div className="flex flex-col gap-2">
-          <label className="block font-medium text-gray-700">نوع السعر
-          <span className="text-red-500 text-xl mr-1">*</span>
-
+          <label className="block font-medium text-gray-700">
+            نوع السعر
+            <span className="text-red-500 text-xl mr-1">*</span>
           </label>
           <div className="flex flex-wrap gap-4 mt-2">
             <label className="ml-2 flex items-center gap-2 text-gray-700 cursor-pointer">
@@ -257,12 +308,8 @@ export default function GenericPostForm({
               <span>سعر ثابت</span>
             </label>
           </div>
-          {errors.price_type && (
-            <p className="text-red-600 text-sm mt-1">
-              {String(errors.price_type.message)}
-            </p>
-          )}
         </div>
+
         <hr className="mt-6 mb-3 text-clightgray" />
         <div className="flex justify-end max-sm:flex-col max-sm:justify-center max-sm:items-center max-sm:gap-4 mb-5">
           {/* زر "معاينة" */}

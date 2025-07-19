@@ -41,8 +41,7 @@ export default function NewPostPage() {
       <ApartmentForm Gcategory={categorySlug} Gsubcategory={subcategorySlug} />
     );
   } else if (
-    category === "الإلكترونيات والكهربائيات" &&
-    subcategory === "موبايلات"
+    category === "الإلكترونيات والكهربائيات" && subcategory === "موبايلات"
   ) {
     formToShow = (
       <MobileForm Gcategory={categorySlug} Gsubcategory={subcategorySlug} />

@@ -41,6 +41,7 @@ import bird from "../../public/resourses/bird.svg"
 import barn from "../../public/resourses/barn.svg"
 import bag from "../../public/resourses/bag.svg"
 import art from "../../public/resourses/art.svg"
+import kid from "../../public/resourses/kid.svg"
 
 export const categories = [
   {
@@ -64,7 +65,7 @@ export const categories = [
     slug: "fashion_beauty",
     items: [
       { label: "ملابس نسائية", icon: dress, slug: "womens_clothes", href: "/categories/fashion/womens_clothing" },
-      { label: "ملابس أطفال", icon: dress, slug: "childrens_clothing", href: "/categories/fashion/kids_clothing" },
+      { label: "ملابس أطفال", icon: kid, slug: "childrens_clothing", href: "/categories/fashion/kids_clothing" },
       { label: "ملابس رجالية", icon: suit, slug: "menswear", href: "/categories/fashion/mens_clothing" },
       { label: "حقائب واكسسوارات", icon: bag, slug: "bags_accessories", href: "/categories/fashion/bags_accessories" },
       { label: "مكياج وعناية شخصية", icon: make_up, slug: "makeup", href: "/categories/fashion/makeup" },

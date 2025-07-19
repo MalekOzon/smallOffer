@@ -8,6 +8,7 @@ import Notification from "../components/ui/Notification";
 import userAvatar from "../../public/resourses/userAvatar.svg";
 import { useGetUserInfo } from "../lib/dashboardServices/dashboardQueries";
 import { categories } from "./categories";
+import LoadingSpinner from "../components/ui/LoadingSpinner";
 
 const Navbar = () => {
   const [isMobile, setIsMobile] = useState(false);
@@ -25,6 +26,8 @@ const Navbar = () => {
   const logout = useLogout(setNotification);
   const { isPending: isLoading } = logout;
   const getUserInfo = useGetUserInfo();
+  const { isPending: isLoadingGet } = getUserInfo;
+  
   const isLoggedIn = getUserInfo.data?.username;
 
   const confirmLogout = () => {
@@ -123,6 +126,8 @@ const Navbar = () => {
     rowConfig.first + rowConfig.second
   );
 
+  if(isLoadingGet)return (<LoadingSpinner />)
+
   return (
     <>
       {/* Header */}
@@ -133,7 +138,7 @@ const Navbar = () => {
           <div
             className="flex items-center gap-2 relative md:hidden"
             ref={userMenuRef}
-          >
+            >
             {isLoggedIn ? (
               <>
                 <div
@@ -206,7 +211,7 @@ const Navbar = () => {
             )}
           </div>
           {/* زر القلب */}
-          <Link href="/dashboard/favorites" className="text-cdarkgray mx-2">
+          <Link href="/dashboard/favorites" className="text-cdarkgray max-sm:ml-16">
             <Heart />
           </Link>
           {/* اللوغو */}

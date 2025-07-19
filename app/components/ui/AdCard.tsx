@@ -5,6 +5,7 @@ import { Heart, MapPin, Pencil } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import clsx from "clsx";
+import { useRouter } from "next/navigation";
 
 type AdCardProps = {
   id: number;
@@ -15,10 +16,12 @@ type AdCardProps = {
   imageUrl?: string;
   published?: "accepted" | "pending" | "declined";
   isFav: boolean;
+  subcat: string;
 };
 
 const AdCard: FC<AdCardProps> = ({
   id,
+  subcat,
   title,
   description,
   city,
@@ -27,6 +30,7 @@ const AdCard: FC<AdCardProps> = ({
   published,
   isFav = false,
 }) => {
+  const router = useRouter();
   const status = {
     accepted: {
       label: "تم النشر",
@@ -50,22 +54,44 @@ const AdCard: FC<AdCardProps> = ({
           className: "text-gray-400 border-gray-400 bg-gray-100",
         };
 
+  function goToEdit() {
+    console.log("sub= ",subcat)
+    if (subcat === "cars") {
+      router.push(`/editpost/editCar/${id}`);
+    } else if (subcat === "outdoor-space") {
+      router.push(`/editpost/editOutdoorspace/${id}`);
+    }else if( subcat === "houses"){
+      router.push(`/editpost/editHouse/${id}`);
+    }else if( subcat === "pc" || subcat === "tablets" || subcat === "screens" || subcat === "games" || subcat === "tv" || subcat === "home_appliances"  || subcat === "audio_video_accessories" || subcat === "parts_accessories"){
+      router.push(`/editpost/editElectronics/${id}`);
+    }else if( subcat === "mobiles"){
+      console.log("why ",subcat)
+      router.push(`/editpost/editMobile/${id}`);
+    }else if( subcat === "apartments"){
+      router.push(`/editpost/editApartment/${id}`);
+    }else {
+      router.push(`/editpost/editGeneric/${id}`);
+    }
+  }
+
   return (
-    <Link href={`/previewpost/${id}`} className="block">
+    <div className="block">
       <div className="rounded-xl border border-gray-200 bg-cwhite overflow-hidden shadow-sm hover:shadow-md transition duration-200 flex flex-col">
         {/* الصورة */}
         <div className="relative h-32 bg-gray-100">
-          {imageUrl ? (
-            <Image src={imageUrl} alt={title} fill className="object-cover" />
-          ) : null}
+          <Link href={`/previewpost/${id}`}>
+            {imageUrl ? (
+              <Image src={imageUrl} alt={title} fill className="object-cover" />
+            ) : null}
+          </Link>
 
           {!isFav && (
-            <Link
-              href={`/editpost/${id}`}
-              className="absolute top-2 right-2 p-1.5 bg-white rounded-md shadow hover:bg-gray-50"
+            <button
+              onClick={goToEdit}
+              className="hover:bg-chgreen group absolute top-2 right-2 p-1.5 bg-white rounded-md shadow "
             >
-                <Pencil className="w-5 h-5 text-cdarkgray" />
-            </Link>
+              <Pencil className="group-hover:text-white w-5 h-5 text-cdarkgray" />
+            </button>
           )}
 
           {isFav && (
@@ -79,6 +105,7 @@ const AdCard: FC<AdCardProps> = ({
         </div>
 
         {/* المحتوى */}
+        <Link href={`/previewpost/${id}`}>
         <div className="p-3 flex flex-col justify-between gap-2 flex-grow">
           <div className="flex justify-between items-center">
             <h3 className="text-sm font-bold truncate">{title}</h3>
@@ -108,8 +135,9 @@ const AdCard: FC<AdCardProps> = ({
             </span>
           </div>
         </div>
+        </Link>
       </div>
-    </Link>
+    </div>
   );
 };
 

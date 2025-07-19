@@ -1,6 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
-import { GenericPostPayload } from "./postType";
 import { createCarPost, createPost, createLandPost, createHousePost, createApartmentPost, createElectronicsPost, createMobilePost } from "./postApi";
 import { extractMessages } from "../loginservices/mutations";
 
@@ -11,7 +10,8 @@ export function useCreatePost(setNotification: NotificationSetter) {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (data: GenericPostPayload ) => createPost(data),
+    mutationFn: (formData: FormData) => createPost(formData),
+
     onMutate: () => {
       console.log("جاري إنشاء إعلان جديد...");
     },

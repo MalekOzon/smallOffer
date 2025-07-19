@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 7, "column": 0}, "map": {"version":3,"sources":["file:///E:/WebProjects/smallOffer/app/%28public%29/editpost/editGeneric/%5Bid%5D/page.tsx"],"sourcesContent":["'use client';\r\nimport { useParams } from 'next/navigation';\r\nimport React from 'react';\r\n\r\nconst EditGeneric = () => {\r\n  // استخراج البارامترات الديناميكية من المسار\r\n  const params = useParams();\r\n\r\n  // طباعة البارامترات في الكونسول\r\n  console.log(\"Params: \", params);\r\n\r\nconst getPostDetail = useGet\r\n\r\n  return (\r\n    <div>\r\n      {/* عرض البارامترات بشكل صحيح */}\r\n      <h1>Edit Generic Page</h1>\r\n      <p>Parameters:</p>\r\n      <ul>\r\n        {Object.entries(params).map(([key, value]) => (\r\n          <li key={key}>\r\n            {key}: {value}\r\n          </li>\r\n        ))}\r\n      </ul>\r\n    </div>\r\n  );\r\n};\r\n\r\nexport default EditGeneric;"],"names":[],"mappings":";;;;AACA;;;AADA;;AAIA,MAAM,cAAc;;IAClB,4CAA4C;IAC5C,MAAM,SAAS,CAAA,GAAA,qIAAA,CAAA,YAAS,AAAD;IAEvB,gCAAgC;IAChC,QAAQ,GAAG,CAAC,YAAY;IAE1B,MAAM,gBAAgB;IAEpB,qBACE,6LAAC;;0BAEC,6LAAC;0BAAG;;;;;;0BACJ,6LAAC;0BAAE;;;;;;0BACH,6LAAC;0BACE,OAAO,OAAO,CAAC,QAAQ,GAAG,CAAC,CAAC,CAAC,KAAK,MAAM,iBACvC,6LAAC;;4BACE;4BAAI;4BAAG;;uBADD;;;;;;;;;;;;;;;;AAOnB;GAvBM;;QAEW,qIAAA,CAAA,YAAS;;;KAFpB;uCAyBS","debugId":null}}]
+}
