@@ -44,6 +44,7 @@ const Favorites = () => {
               isFav={true}
               imageUrl={ad.cover_image ?? placeholderPost }
               id={ad.id}
+              subcat={ad.subcategory}
             />
             ))}
           </div>
