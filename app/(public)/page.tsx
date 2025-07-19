@@ -1,10 +1,73 @@
+'use client'
 import Link from "next/link";
+import { useState, useEffect } from "react";
+import { useGetUserPosts } from "../lib/dashboardServices/dashboardQueries";
+import SkeletonNotificationSettings from "../components/ui/SkeletonNotificationSettings";
+import AdCard from "../components/ui/AdCard";
+import { Ad } from "../types/authTypes";
+import  placeholderPost  from "../../public/resourses/placeholderPost.svg"
 
 const HomePage = () => {
+
+  const [page, setPage] = useState(1);
+  const pageSize = 10;
+  const [ads, setAds] = useState<Ad[]>([]);
+  const { data, isLoading, isFetching } = useGetUserPosts(page, pageSize);
+  const [hasMore, setHasMore] = useState(true);
+
+  console.log("d===== ",data)
+  useEffect(() => {
+    if (data && page === 1) {
+      setAds(data.results);
+      setHasMore(data.count > data.results.length);
+    } else if (data && page > 1) {
+      setAds((prev) => [...prev, ...data.results]);
+      setHasMore(ads.length + data.results.length < data.count);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data]);
+
+  if (isLoading && page === 1) return <SkeletonNotificationSettings />;
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
       {/* Hero Section */}
-      <section className="relative py-20 px-4 sm:px-6 lg:px-8">
+      <section className="relative py-10 px-4 sm:px-6 lg:px-8">
+
+      {ads.length > 0 && 
+      <div className="h-full   rounded-md max-sm:mt-2 mb-10 ">
+        <div className="grid gap-4 grid-cols-2 md:grid-cols-4 xl:grid-cols-5">
+          {ads.map((ad: Ad) => (
+            <AdCard
+              key={ad.id}
+              title={ad.title}
+              description={ad.description}
+              city={ad.city}
+              price={parseFloat(ad.price)}
+              published={ad.status}
+              isFav={false}
+              imageUrl={ad.cover_image ?? placeholderPost }
+              id={ad.id}
+              subcat={ad.subcategory}
+            />
+          ))}
+        </div>
+
+        {/* زر تحميل المزيد */}
+        {hasMore && (
+          <div className="flex justify-center mt-5">
+            <button
+              onClick={() => setPage((p) => p + 1)}
+              disabled={isFetching}
+              className="px-6 py-2 rounded-full border bg-white text-gray-600 hover:bg-gray-100 font-semibold shadow"
+            >
+              {isFetching ? "...جاري التحميل" : "تحميل المزيد"}
+            </button>
+          </div>
+        )}
+      </div>
+      }
+
         <div className="max-w-7xl mx-auto">
           <div className="text-center">
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-6">

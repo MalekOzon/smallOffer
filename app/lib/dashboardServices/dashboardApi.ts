@@ -45,17 +45,17 @@ export const getUserInfo= async () => {
 };
 
 // Get user Ads
-export const getUserPosts = async (page: number) => {
+export const getUserPosts = async (page: number , page_size : number) => {
   const res = await axiosInstance.get<UserAdsResponse>(
-    `accounts/dashboard/posts/cards/?page=${page}&page_size=8?ordering=-created_at`
+    `accounts/dashboard/posts/cards/?page=${page}&page_size=${page_size}?ordering=-created_at`
   );
   return res.data;
 };
 
 // Get user Fav
-export const getUserFav = async (page: number) => {
+export const getUserFav = async (page: number , page_size : number) => {
   const res = await axiosInstance.get<UserAdsResponse>(
-    `accounts/dashboard/favorites/cards/?page=${page}&page_size=8?ordering=-created_at`
+    `accounts/dashboard/favorites/cards/?page=${page}&page_size=${page_size}?ordering=-created_at`
   );
   return res.data;
 };

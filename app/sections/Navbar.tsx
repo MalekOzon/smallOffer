@@ -8,7 +8,6 @@ import Notification from "../components/ui/Notification";
 import userAvatar from "../../public/resourses/userAvatar.svg";
 import { useGetUserInfo } from "../lib/dashboardServices/dashboardQueries";
 import { categories } from "./categories";
-import LoadingSpinner from "../components/ui/LoadingSpinner";
 
 const Navbar = () => {
   const [isMobile, setIsMobile] = useState(false);
@@ -26,7 +25,6 @@ const Navbar = () => {
   const logout = useLogout(setNotification);
   const { isPending: isLoading } = logout;
   const getUserInfo = useGetUserInfo();
-  const { isPending: isLoadingGet } = getUserInfo;
   
   const isLoggedIn = getUserInfo.data?.username;
 
@@ -126,7 +124,6 @@ const Navbar = () => {
     rowConfig.first + rowConfig.second
   );
 
-  if(isLoadingGet)return (<LoadingSpinner />)
 
   return (
     <>
@@ -243,6 +240,8 @@ const Navbar = () => {
             <Menu size={28} />
           </button>
         </div>
+
+
         {/* ديسكتوب: الهيدر القديم */}
         <div className="hidden md:flex items-center justify-between py-2 px-3">
           <Link href="/" className="text-2xl font-bold text-cgreen">
@@ -461,7 +460,7 @@ const Navbar = () => {
                 <Link
                   href={cat.slug || "#"}
                   className="block sm:inline-block px-2 py-3 rounded-lg font-bold text-base transition-all duration-200
-                          bg-transparent text-cdarkgray group-hover:bg-cgreen group-hover:text-white focus:bg-chgreen focus:text-white"
+                          bg-transparent text-cdarkgray group-hover:bg-cgreen group-hover:text-white "
                 >
                   <div className="flex items-center justify-center sm:justify-start">
                     <Image
@@ -554,7 +553,7 @@ const Navbar = () => {
                   <Link
                     href={cat.slug || "#"}
                     className="block sm:inline-block px-1 py-3 rounded-lg font-bold text-base transition-all duration-200
-      bg-transparent text-cdarkgray group-hover:bg-cgreen group-hover:text-white focus:bg-cgreen focus:text-white"
+      bg-transparent text-cdarkgray group-hover:bg-cgreen group-hover:text-white "
                   >
                     <div className="flex items-center justify-center sm:justify-start">
                       <Image
@@ -582,6 +581,11 @@ const Navbar = () => {
                           alt={cat.name}
                           width={20}
                           height={20}
+                          className=" mr-2 transition-all duration-200 group-hover:invert group-hover:brightness-0 group-hover:filter group-hover:drop-shadow group-hover:text-white"
+                          style={{
+                            filter:
+                              "brightness(0) saturate(100%) invert(56%) sepia(16%) saturate(1162%) hue-rotate(110deg) brightness(93%) contrast(92%)",
+                          }}
                         />
                         {cat.name}
                       </h3>

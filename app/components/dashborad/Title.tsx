@@ -7,7 +7,7 @@ interface TitleProps {
 
 const Title: React.FC<TitleProps> = ({ title, isPostPage }) => {
   return (
-    <div className="flex justify-between max-sm:mt-4 max-sm:mx-6">
+    <div className="flex justify-between max-sm:mt-4 max-sm:mx-6 mt-4">
       <h1 className="text-2xl font-bold text-gray-800 pb-4">{title}</h1>
       {isPostPage &&
       (<button className=" py-2 px-6  mb-2 bg-cgreen text-white text-6 font-semibold hover:bg-chgreen rounded-md">

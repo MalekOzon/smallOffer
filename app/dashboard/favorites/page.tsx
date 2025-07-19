@@ -11,7 +11,7 @@ import  placeholderPost  from "../../../public/resourses/placeholderPost.svg"
 const Favorites = () => {
   const [page, setPage] = useState(1);
   const pageSize = 8;
-  const { data, isLoading, isFetching } = useGetUserFav(page);
+  const { data, isLoading, isFetching } = useGetUserFav(page,pageSize);
 
   const totalPages = data ? Math.ceil(data.count / pageSize) : 1;
 

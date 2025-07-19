@@ -9,8 +9,8 @@ import React, { useState } from 'react';
 import  placeholderPost  from "../../../public/resourses/placeholderPost.svg"
 const AdsPage = () => {
   const [page, setPage] = useState(1);
-  const pageSize = 8;
-  const { data, isLoading, isFetching } = useGetUserPosts(page);
+  const pageSize = 10;
+  const { data, isLoading, isFetching } = useGetUserPosts(page,pageSize);
   console.log("DATA::   ",data)
   
   const totalPages = data ? Math.ceil(data.count / pageSize) : 1;
@@ -28,7 +28,7 @@ const AdsPage = () => {
         </div>
       )}
       {totalPages > 0 && 
-      <div className="h-full px-4 py-4 bg-gray-50 rounded-md max-sm:mt-2">
+      <div className="h-full px-4 pt-2 bg-gray-50 rounded-md max-sm:mt-2">
         <div className="grid gap-4 grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
           {data?.results.map((ad: Ad) => (
             <AdCard
@@ -47,7 +47,7 @@ const AdsPage = () => {
         </div>
 
         {/* ✅ أزرار التصفح */}
-        <div className="flex justify-center mt-5 gap-2 flex-wrap">
+        <div className="flex justify-center mt-2 pb-4 gap-2 flex-wrap">
           <button
             onClick={() => setPage((p) => Math.max(1, p - 1))}
             disabled={page === 1}

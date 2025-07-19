@@ -31,34 +31,6 @@ export default function GenericPostForm({
   const createPost = useCreatePost(setNotification);
   const { isPending: isLoading } = createPost;
 
-  // const onSubmit = (data: GenericPostPayload) => {
-  //   if (!Gcategory || !Gsubcategory) {
-  //     setNotification({
-  //       message: "يجب اختيار التصنيف العام والفرعي قبل إرسال الإعلان.",
-  //       type: "error",
-  //     });
-  //     return;
-  //   }
-  //   setNotification(null);
-  //   console.log("بيانات الإعلان العام:", JSON.stringify(data, null, 2));
-  //   const jsonData = JSON.stringify({
-  //     title: data.title,
-  //     description: data.description,
-  //     price: data.price,
-  //     price_type: data.price_type || "fixed",
-  //     city: data.city,
-  //     hood: data.hood,
-  //     detailed_location: data.detailed_location,
-  //     cover_image: data.cover_image,
-  //     gallery: null,
-  //     category: Gcategory,
-  //     subcategory: Gsubcategory,
-  //   });
-  //   console.log("json:", jsonData);
-
-  //   createPost.mutate(JSON.parse(jsonData));
-  // };
-
   function isBlob(obj: unknown): obj is Blob {
     return (
       typeof window !== "undefined" &&
@@ -194,11 +166,6 @@ export default function GenericPostForm({
                 </option>
               ))}
             </select>
-            {errors.city && (
-              <p className="text-red-600 text-sm mt-1">
-                {String(errors.city.message)}
-              </p>
-            )}
           </div>
 
           <div className="sm:ml-16">

@@ -24,17 +24,17 @@ export function useGetUserInfo() {
 }
 
 // Get user Ads
-export const useGetUserPosts = (page: number) => {
+export const useGetUserPosts = (page: number , page_size : number) => {
   return useQuery({
     queryKey: ['user-ads', page],
-    queryFn: () => getUserPosts(page),
+    queryFn: () => getUserPosts(page , page_size),
   });
 };
 
 // Get user Fav
-export const useGetUserFav = (page: number) => {
+export const useGetUserFav = (page: number, page_size : number) => {
   return useQuery({
     queryKey: ['user-fav', page],
-    queryFn: () => getUserFav(page),
+    queryFn: () => getUserFav(page , page_size),
   });
 };

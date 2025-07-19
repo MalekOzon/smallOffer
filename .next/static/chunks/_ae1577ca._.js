@@ -3701,7 +3701,8 @@ const Navbar = ()=>{
                                                             lineNumber: 492,
                                                             columnNumber: 23
                                                         }, this),
-                                                        cat.name
+                                                        cat.name,
+                                                        "شسيشسي"
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/app/sections/Navbar.tsx",
@@ -3879,7 +3880,11 @@ const Navbar = ()=>{
                                                             src: cat.icon,
                                                             alt: cat.name,
                                                             width: 20,
-                                                            height: 20
+                                                            height: 20,
+                                                            className: " mr-2 transition-all duration-200 group-hover:invert group-hover:brightness-0 group-hover:filter group-hover:drop-shadow group-hover:text-white",
+                                                            style: {
+                                                                filter: "brightness(0) saturate(100%) invert(56%) sepia(16%) saturate(1162%) hue-rotate(110deg) brightness(93%) contrast(92%)"
+                                                            }
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/sections/Navbar.tsx",
                                                             lineNumber: 580,
@@ -3914,7 +3919,7 @@ const Navbar = ()=>{
                                                                     }
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/app/sections/Navbar.tsx",
-                                                                    lineNumber: 597,
+                                                                    lineNumber: 602,
                                                                     columnNumber: 29
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -3922,23 +3927,23 @@ const Navbar = ()=>{
                                                                     children: item.label
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/app/sections/Navbar.tsx",
-                                                                    lineNumber: 607,
+                                                                    lineNumber: 612,
                                                                     columnNumber: 29
                                                                 }, this)
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/app/sections/Navbar.tsx",
-                                                            lineNumber: 593,
+                                                            lineNumber: 598,
                                                             columnNumber: 27
                                                         }, this)
                                                     }, i, false, {
                                                         fileName: "[project]/app/sections/Navbar.tsx",
-                                                        lineNumber: 592,
+                                                        lineNumber: 597,
                                                         columnNumber: 25
                                                     }, this))
                                             }, void 0, false, {
                                                 fileName: "[project]/app/sections/Navbar.tsx",
-                                                lineNumber: 590,
+                                                lineNumber: 595,
                                                 columnNumber: 21
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3951,19 +3956,19 @@ const Navbar = ()=>{
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/app/sections/Navbar.tsx",
-                                                    lineNumber: 614,
+                                                    lineNumber: 619,
                                                     columnNumber: 23
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/app/sections/Navbar.tsx",
-                                                lineNumber: 613,
+                                                lineNumber: 618,
                                                 columnNumber: 21
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                 className: "border-t border-clightgray"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/sections/Navbar.tsx",
-                                                lineNumber: 619,
+                                                lineNumber: 624,
                                                 columnNumber: 21
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3973,7 +3978,7 @@ const Navbar = ()=>{
                                                         children: "لديك اقتراح؟ تواصل معنا واقترح تصنيف جديد."
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/sections/Navbar.tsx",
-                                                        lineNumber: 622,
+                                                        lineNumber: 627,
                                                         columnNumber: 23
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -3981,13 +3986,13 @@ const Navbar = ()=>{
                                                         children: "تواصل معنا"
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/sections/Navbar.tsx",
-                                                        lineNumber: 623,
+                                                        lineNumber: 628,
                                                         columnNumber: 23
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/app/sections/Navbar.tsx",
-                                                lineNumber: 621,
+                                                lineNumber: 626,
                                                 columnNumber: 21
                                             }, this)
                                         ]

@@ -75,11 +75,11 @@ const AdCard: FC<AdCardProps> = ({
   }
 
   return (
-    <div className="block">
-      <div className="rounded-xl border border-gray-200 bg-cwhite overflow-hidden shadow-sm hover:shadow-md transition duration-200 flex flex-col">
+    <div className="block h-64 ">
+      <div className="rounded-xl h-full border border-gray-200 bg-cwhite overflow-hidden shadow-sm hover:shadow-md transition duration-200 flex flex-col">
         {/* الصورة */}
-        <div className="relative h-32 bg-gray-100">
-          <Link href={`/previewpost/${id}`}>
+        <div className="relative h-full ">
+          <Link href={`/previewpost/${id}`} >
             {imageUrl ? (
               <Image src={imageUrl} alt={title} fill className="object-cover" />
             ) : null}
@@ -105,7 +105,7 @@ const AdCard: FC<AdCardProps> = ({
         </div>
 
         {/* المحتوى */}
-        <Link href={`/previewpost/${id}`}>
+        <Link href={`/previewpost/${id}`} >
         <div className="p-3 flex flex-col justify-between gap-2 flex-grow">
           <div className="flex justify-between items-center">
             <h3 className="text-sm font-bold truncate">{title}</h3>

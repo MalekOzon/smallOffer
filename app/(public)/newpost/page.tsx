@@ -77,6 +77,8 @@ export default function NewPostPage() {
   return (
     <div className="min-h-screen py-4 bg-gray-100  flex flex-col items-center ">
       <div className="w-[90%]    ">
+
+
         {/* العنوان والوصف */}
         <div className=" mb-6 w-full  ">
           <h1 className="text-3xl font-bold mb-2 flex justify-start max-sm:text-2xl">
@@ -145,6 +147,8 @@ export default function NewPostPage() {
                 ))}
               </select>
             </div>
+
+            
           </div>
         </div>
         {/* عرض الفورم المناسب */}
