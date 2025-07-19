@@ -14,7 +14,7 @@ import Link from "next/link";
 import  placeholderPost  from "../../public/resourses/placeholderPost.svg"
 
 export default function DashboardHomePage() {
-  const { data, isLoading } = useGetUserPosts(1);
+  const { data, isLoading } = useGetUserPosts(1 , 4);
   const { data: dataUser } = useGetUserInfo();
   return (
     <div className="  mt-2 ">
