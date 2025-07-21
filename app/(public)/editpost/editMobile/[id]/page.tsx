@@ -128,9 +128,18 @@ const EditMobile = () => {
     setAccessoriesValue(val);
     setFormData((prev) => ({
       ...prev,
-      mobile: { ...prev.mobile, accessories: val },
+      mobile: {
+        ...(prev.mobile ?? {
+          brand: "",
+          status: "new",
+          color: "",
+          accessories: false,
+        }),
+        accessories: val,
+      },
     }));
   };
+  
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
