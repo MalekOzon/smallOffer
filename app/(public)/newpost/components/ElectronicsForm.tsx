@@ -5,12 +5,19 @@ import { ElectronicsPostPayload } from "@/app/lib/postServices/postType";
 import { useCreateElectronicsPost } from "@/app/lib/postServices/postMutations";
 import { syrianGovernorates } from "@/app/signup/step2/syrianGovernorates";
 import { Search } from "lucide-react";
+import Button from "@/app/components/ui/Button";
 
 interface PostFormProps {
   Gcategory: string;
   Gsubcategory: string;
 }
 
+export const STATUS_CHOICES = [
+  ["new", "جديد"],
+  ["used_very_good", "مستعمل جيد جداً"],
+  ["working_good", "يعمل بشكل جيد"],
+  ["defective", "عيب (يحتاج صيانة)"],
+];
 export default function ElectronicsForm({
   Gcategory,
   Gsubcategory,
@@ -18,20 +25,12 @@ export default function ElectronicsForm({
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm<ElectronicsPostPayload>({});
 
-  const STATUS_CHOICES = [
-    ["new", "جديد"],
-    ["used_very_good", "مستعمل جيد جداً"],
-    ["working_good", "يعمل بشكل جيد"],
-    ["defective", "عيب (يحتاج صيانة)"],
-  ];
 
-  console.log({
-    category: Gcategory,
-    subcategory: Gsubcategory,
-  });
+
 
   const [notification, setNotification] = useState<{
     message: string;
@@ -40,10 +39,13 @@ export default function ElectronicsForm({
   const CreateElectronicsPost = useCreateElectronicsPost(setNotification);
   const { isPending: isLoading } = CreateElectronicsPost;
 
+  const [isSearch, setIsSearch] = useState<boolean | undefined>(false);
+  
   const onSubmit = (data: ElectronicsPostPayload) => {
     console.log("daTA: ", data);
     const formData = new FormData();
-
+    
+    formData.append("offer_type", data.offer_type ?? "sell");
     formData.append("title", data.title ?? "");
     formData.append("description", data.description ?? "");
     formData.append("price", data.price ?? "");
@@ -104,7 +106,7 @@ export default function ElectronicsForm({
   }
 
   return (
-    <form
+<form
       onSubmit={handleSubmit(onSubmit)}
       className="w-full mx-auto space-y-10"
     >
@@ -126,6 +128,38 @@ export default function ElectronicsForm({
           أدخل معلومات الإعلان الأساسية لتظهر بوضوح للمشترين، مثل العنوان والوصف
           العام والموقع.
         </p>
+        <div className=" mb-6 sm:ml-16 border-b border-clightgray">
+          {/* SEARCH || SELL */}
+          <h3 className="font-medium mb-3 mt-6 text-lg text-gray-700">
+            نوع المنشور
+            <span className="text-red-500 text-xl mr-1">*</span>
+          </h3>
+          <div className="w-full mt-2 max-w-sm  border-2 border-clightgray p-1.5 rounded-xl mb-6 flex">
+            <Button
+              type="button"
+              className="w-1/2 text-6 font-semibold"
+              variant={isSearch === false ? "primary" : "none"}
+              onClick={() => {
+                setIsSearch(false);
+                setValue("offer_type", "sell");
+              }}
+            >
+              أنا أعرض
+            </Button>
+            <Button
+              type="button"
+              className="w-1/2 text-6 font-semibold"
+              variant={isSearch === true ? "primary" : "none"}
+              onClick={() => {
+                setIsSearch(true);
+                setValue("offer_type", "search");
+              }}
+            >
+              أنا أبحث
+            </Button>
+          </div>
+        </div>
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
           <div className="sm:ml-16">
             <label className="block font-medium text-gray-700">
@@ -133,18 +167,12 @@ export default function ElectronicsForm({
               <span className="text-red-500 text-xl mr-1">*</span>
             </label>
             <input
-            required
+              required
               {...register("title")}
               type="text"
               placeholder="اسم المنتج"
               className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
             />
-
-            {errors.title && (
-              <p className="text-red-600 text-sm mt-1">
-                {String(errors.title.message)}
-              </p>
-            )}
           </div>
 
           <div className="sm:ml-16">
@@ -158,14 +186,14 @@ export default function ElectronicsForm({
               className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
             />
           </div>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+
           <div className="sm:ml-16">
-            <label className="block font-medium text-gray-700">المحافظة
-            <span className="text-red-500 text-xl mr-1">*</span>
+            <label className="block font-medium text-gray-700">
+              المحافظة
+              <span className="text-red-500 text-xl mr-1">*</span>
             </label>
             <select
-            required
+              required
               {...register("city")}
               className="mt-1  w-full p-3 border-2 rounded-lg bg-cwhite text-gray-700 focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200"
               style={{
@@ -179,19 +207,15 @@ export default function ElectronicsForm({
                 </option>
               ))}
             </select>
-            {errors.city && (
-              <p className="text-red-600 text-sm mt-1">
-                {String(errors.city.message)}
-              </p>
-            )}
           </div>
 
           <div className="sm:ml-16">
-            <label className="block font-medium text-gray-700">المنطقة
-            <span className="text-red-500 text-xl mr-1">*</span>
+            <label className="block font-medium text-gray-700">
+              المنطقة
+              <span className="text-red-500 text-xl mr-1">*</span>
             </label>
             <input
-            required
+              required
               {...register("hood")}
               className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
               placeholder="المنطقة"
@@ -219,15 +243,13 @@ export default function ElectronicsForm({
               </p>
             )}
           </div>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:ml-16">
           <div className="flex flex-col gap-2 md:col-span-2">
             <label className="block font-medium text-gray-700">
               وصف المنتج
               <span className="text-red-500 text-xl mr-1">*</span>
             </label>
             <textarea
-            required
+              required
               {...register("description")}
               className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
               placeholder="ادخل وصف المنتج هنا"

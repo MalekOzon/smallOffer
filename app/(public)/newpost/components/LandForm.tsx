@@ -5,33 +5,33 @@ import { syrianGovernorates } from "@/app/signup/step2/syrianGovernorates";
 import { useCreateLandPost } from "@/app/lib/postServices/postMutations";
 import { useState } from "react";
 import { Search } from "lucide-react";
+import Button from "@/app/components/ui/Button";
 
 interface PostFormProps {
   Gcategory: string;
   Gsubcategory: string;
 }
 
+export const TYPE_CHOICES = [
+  ["residential_plot", "قطعة أرض للبناء"],
+  ["garden", "حديقة"],
+  ["agriculture_forest", "زراعة / غابات"],
+  ["other_property", "عقارات وحدائق أخرى"],
+];
+export const OFFER_TYPE_CHOICES = [
+  ["sale", "شراء"],
+  ["rent", "ايجار"],
+];
+
 export default function LandForm({ Gcategory, Gsubcategory }: PostFormProps) {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm<LandPostPayload>({});
 
-  console.log({
-    category: Gcategory,
-    subcategory: Gsubcategory,
-  });
-  const TYPE_CHOICES = [
-    ["residential_plot", "قطعة أرض للبناء"],
-    ["garden", "حديقة"],
-    ["agriculture_forest", "زراعة / غابات"],
-    ["other_property", "عقارات وحدائق أخرى"],
-  ];
-  const OFFER_TYPE_CHOICES = [
-    ["sale", "شراء"],
-    ["rent", "ايجار"],
-  ];
+
 
   const [notification, setNotification] = useState<{
     message: string;
@@ -40,10 +40,14 @@ export default function LandForm({ Gcategory, Gsubcategory }: PostFormProps) {
   const createLandPost = useCreateLandPost(setNotification);
   const { isPending: isLoading } = createLandPost;
 
+
+  const [isSearch, setIsSearch] = useState<boolean | undefined>(false);
+  
   const onSubmit = (data: LandPostPayload) => {
     console.log("daTA: ", data);
     const formData = new FormData();
-
+    
+    formData.append("offer_type", data.offer_type ?? "sell");
     formData.append("title", data.title ?? "");
     formData.append("description", data.description ?? "");
     formData.append("price", data.price ?? "");
@@ -70,7 +74,7 @@ export default function LandForm({ Gcategory, Gsubcategory }: PostFormProps) {
     formData.append("subcategory", Gsubcategory);
 
     const outdoorspace_details = {
-      available_from: data.outdoorspace.available_from,
+      available_from: data.outdoorspace.available_from || null,
       area: data.outdoorspace.area,
       land_type: data.outdoorspace.land_type,
       offer_type: data.outdoorspace.offer_type,
@@ -111,143 +115,161 @@ export default function LandForm({ Gcategory, Gsubcategory }: PostFormProps) {
 
   return (
     <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="w-full mx-auto space-y-10"
-    >
-      {/* ------------- Noti -------------- */}
-      {notification && (
-        <Notification
-          message={notification.message}
-          type={notification.type}
-          onClose={() => setNotification(null)}
-        />
-      )}
+    onSubmit={handleSubmit(onSubmit)}
+    className="w-full mx-auto space-y-10"
+  >
+    {/* ------------- Noti -------------- */}
+    {notification && (
+      <Notification
+        message={notification.message}
+        type={notification.type}
+        onClose={() => setNotification(null)}
+      />
+    )}
 
-      {/* معلومات أساسية */}
-      <section className="bg-white rounded-2xl shadow-lg border border-gray-200 p-8 mb-6 ">
-        <h2 className="font-bold text-xl text-gray-800 mb-2 text-right">
-          معلومات أساسية
-        </h2>
-        <p className="text-gray-600 mb-6 text-right">
-          أدخل معلومات الإعلان الأساسية لتظهر بوضوح للمشترين، مثل العنوان والوصف
-          العام والموقع.
-        </p>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-          <div className="sm:ml-16">
-            <label className="block font-medium text-gray-700">
-              اسم المنتج
-              <span className="text-red-500 text-xl mr-1">*</span>
-            </label>
-            <input
-              required
-              {...register("title")}
-              type="text"
-              placeholder="اسم المنتج"
-              className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
-            />
+    {/* معلومات أساسية */}
+    <section className="bg-white rounded-2xl shadow-lg border border-gray-200 p-8 mb-6 ">
+      <h2 className="font-bold text-xl text-gray-800 mb-2 text-right">
+        معلومات أساسية
+      </h2>
+      <p className="text-gray-600 mb-6 text-right">
+        أدخل معلومات الإعلان الأساسية لتظهر بوضوح للمشترين، مثل العنوان والوصف
+        العام والموقع.
+      </p>
+      <div className=" mb-6 sm:ml-16 border-b border-clightgray">
+        {/* SEARCH || SELL */}
+        <h3 className="font-medium mb-3 mt-6 text-lg text-gray-700">
+          نوع المنشور
+          <span className="text-red-500 text-xl mr-1">*</span>
+        </h3>
+        <div className="w-full mt-2 max-w-sm  border-2 border-clightgray p-1.5 rounded-xl mb-6 flex">
+          <Button
+            type="button"
+            className="w-1/2 text-6 font-semibold"
+            variant={isSearch === false ? "primary" : "none"}
+            onClick={() => {
+              setIsSearch(false);
+              setValue("offer_type", "sell");
+            }}
+          >
+            أنا أعرض
+          </Button>
+          <Button
+            type="button"
+            className="w-1/2 text-6 font-semibold"
+            variant={isSearch === true ? "primary" : "none"}
+            onClick={() => {
+              setIsSearch(true);
+              setValue("offer_type", "search");
+            }}
+          >
+            أنا أبحث
+          </Button>
+        </div>
+      </div>
 
-            {errors.title && (
-              <p className="text-red-600 text-sm mt-1">
-                {String(errors.title.message)}
-              </p>
-            )}
-          </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div className="sm:ml-16">
+          <label className="block font-medium text-gray-700">
+            اسم المنتج
+            <span className="text-red-500 text-xl mr-1">*</span>
+          </label>
+          <input
+            required
+            {...register("title")}
+            type="text"
+            placeholder="اسم المنتج"
+            className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
+          />
+        </div>
 
-          <div className="sm:ml-16">
-            <label className="block font-medium text-gray-700">
-              صور المنتج
-            </label>
-            <input
-              type="file"
-              multiple
-              {...register("gallery")}
-              className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
-            />
-          </div>
+        <div className="sm:ml-16">
+          <label className="block font-medium text-gray-700">
+            صور المنتج
+          </label>
+          <input
+            type="file"
+            multiple
+            {...register("gallery")}
+            className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
+          />
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-          <div className="sm:ml-16">
-            <label className="block font-medium text-gray-700">
-              المحافظة
-              <span className="text-red-500 text-xl mr-1">*</span>
-            </label>
-            <select
-              required
-              {...register("city")}
-              className="mt-1  w-full p-3 border-2 rounded-lg bg-cwhite text-gray-700 focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200"
-              style={{
-                borderColor: "#277F60", // لون الحدود
-              }}
-            >
-              <option value="">اختر الإدخال</option>
-              {syrianGovernorates.map((gov) => (
-                <option key={gov.value} value={gov.value}>
-                  {gov.name}
-                </option>
-              ))}
-            </select>
-            {errors.city && (
-              <p className="text-red-600 text-sm mt-1">
-                {String(errors.city.message)}
-              </p>
-            )}
-          </div>
 
-          <div className="sm:ml-16">
-            <label className="block font-medium text-gray-700">
-              المنطقة
-              <span className="text-red-500 text-xl mr-1">*</span>
-            </label>
-            <input
-              required
-              {...register("hood")}
-              className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
-              placeholder="المنطقة"
-            />
-            {errors.hood && (
-              <p className="text-red-600 text-sm mt-1">
-                {String(errors.hood.message)}
-              </p>
-            )}
-          </div>
+        <div className="sm:ml-16">
+          <label className="block font-medium text-gray-700">
+            المحافظة
+            <span className="text-red-500 text-xl mr-1">*</span>
+          </label>
+          <select
+            required
+            {...register("city")}
+            className="mt-1  w-full p-3 border-2 rounded-lg bg-cwhite text-gray-700 focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200"
+            style={{
+              borderColor: "#277F60", // لون الحدود
+            }}
+          >
+            <option value="">اختر الإدخال</option>
+            {syrianGovernorates.map((gov) => (
+              <option key={gov.value} value={gov.value}>
+                {gov.name}
+              </option>
+            ))}
+          </select>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6 sm:ml-16">
-          <div className="flex flex-col gap-2 md:col-span-2">
-            <label className="block font-medium text-gray-700">
-              تفاصيل العنوان
-            </label>
-            <input
-              {...register("detailed_location")}
-              className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
-              placeholder="تفاصيل العنوان"
-            />
-            {errors.detailed_location && (
-              <p className="text-red-600 text-sm mt-1">
-                {String(errors.detailed_location.message)}
-              </p>
-            )}
-          </div>
+
+        <div className="sm:ml-16">
+          <label className="block font-medium text-gray-700">
+            المنطقة
+            <span className="text-red-500 text-xl mr-1">*</span>
+          </label>
+          <input
+            required
+            {...register("hood")}
+            className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
+            placeholder="المنطقة"
+          />
+          {errors.hood && (
+            <p className="text-red-600 text-sm mt-1">
+              {String(errors.hood.message)}
+            </p>
+          )}
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:ml-16">
-          <div className="flex flex-col gap-2 md:col-span-2">
-            <label className="block font-medium text-gray-700">
-              وصف المنتج
-              <span className="text-red-500 text-xl mr-1">*</span>
-            </label>
-            <textarea
-              required
-              {...register("description")}
-              className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
-              placeholder="ادخل وصف المنتج هنا"
-            />
-            {errors.description && (
-              <p className="text-red-600 text-sm mt-1">
-                {String(errors.description.message)}
-              </p>
-            )}
-          </div>
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6 sm:ml-16">
+        <div className="flex flex-col gap-2 md:col-span-2">
+          <label className="block font-medium text-gray-700">
+            تفاصيل العنوان
+          </label>
+          <input
+            {...register("detailed_location")}
+            className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
+            placeholder="تفاصيل العنوان"
+          />
+          {errors.detailed_location && (
+            <p className="text-red-600 text-sm mt-1">
+              {String(errors.detailed_location.message)}
+            </p>
+          )}
         </div>
-      </section>
+        <div className="flex flex-col gap-2 md:col-span-2">
+          <label className="block font-medium text-gray-700">
+            وصف المنتج
+            <span className="text-red-500 text-xl mr-1">*</span>
+          </label>
+          <textarea
+            required
+            {...register("description")}
+            className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
+            placeholder="ادخل وصف المنتج هنا"
+          />
+          {errors.description && (
+            <p className="text-red-600 text-sm mt-1">
+              {String(errors.description.message)}
+            </p>
+          )}
+        </div>
+      </div>
+    </section>
 
       {/* سعر المنتج */}
       <section className="bg-white rounded-2xl shadow-lg border border-gray-200 p-8">

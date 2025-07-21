@@ -13,6 +13,7 @@ __turbopack_context__.s({
     "createLandPost": (()=>createLandPost),
     "createMobilePost": (()=>createMobilePost),
     "createPost": (()=>createPost),
+    "editGenericForm": (()=>editGenericForm),
     "getApartmentPostId": (()=>getApartmentPostId),
     "getCarPostId": (()=>getCarPostId),
     "getElectronicPostId": (()=>getElectronicPostId),
@@ -106,6 +107,14 @@ const getOutdoorSpacePostId = async (id)=>{
 const getApartmentPostId = async (id)=>{
     const res = await __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$lib$2f$loginservices$2f$api$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].get(`accounts/posts/apartment/` + id);
     return res.data;
+};
+const editGenericForm = async (formData, id)=>{
+    const response = await __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$lib$2f$loginservices$2f$api$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].patch("accounts/posts/generic/" + id + "/", formData, {
+        headers: {
+            "Content-Type": "multipart/form-data"
+        }
+    });
+    return response.data;
 };
 if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
     __turbopack_context__.k.registerExports(module, globalThis.$RefreshHelpers$);

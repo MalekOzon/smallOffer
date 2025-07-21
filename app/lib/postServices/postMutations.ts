@@ -3,7 +3,7 @@ import axios from "axios";
 import { createCarPost, createPost, createLandPost, createHousePost, createApartmentPost, createElectronicsPost, createMobilePost } from "./postApi";
 import { extractMessages } from "../loginservices/mutations";
 
-type NotificationSetter = (v: { message: string; type: "success" | "error" }) => void;
+export type NotificationSetter = (v: { message: string; type: "success" | "error" }) => void;
 
 // فورم عام
 export function useCreatePost(setNotification: NotificationSetter) {

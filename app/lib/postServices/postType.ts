@@ -1,6 +1,7 @@
 
 export type GenericPostPayload  = {
   title: string;
+  offer_type: 'sell' | 'search';
   description: string;
   price: string;
   price_type: "fixed" | "negotiable";
@@ -99,4 +100,33 @@ export type ElectronicsPostPayload = GenericPostPayload & ElectronicsDetailsPayl
 export type MobilePostPayload = GenericPostPayload & MobileDetailsPayload;
 
 // ---------------------------------------------------------------------------------
+
+export type PublicProfileInfoType = {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  results: {
+    user: {
+      first_name: string;
+      last_name: string;
+      city: string;
+      profile_image: string | null;
+      total_posts: number;
+      total_views: number;
+      average_rating: number;
+      rating_count: number;
+    };
+    posts: Array<{
+      id: number;
+      offer_type: string;
+      title: string;
+      description: string;
+      price: string;
+      city: string;
+      cover_image: string | null;
+      subcategory: string;
+      created_at: string;
+    }>;
+  };
+};
 

@@ -15,7 +15,6 @@ const HomePage = () => {
   const { data, isLoading, isFetching } = useGetUserPosts(page, pageSize);
   const [hasMore, setHasMore] = useState(true);
 
-  console.log("d===== ",data)
   useEffect(() => {
     if (data && page === 1) {
       setAds(data.results);
@@ -49,6 +48,7 @@ const HomePage = () => {
               imageUrl={ad.cover_image ?? placeholderPost }
               id={ad.id}
               subcat={ad.subcategory}
+              offer_type={ad.offer_type}
             />
           ))}
         </div>

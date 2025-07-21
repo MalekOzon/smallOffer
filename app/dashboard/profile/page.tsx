@@ -297,6 +297,7 @@ const EditProfilePage = () => {
   // get The information from API
   const getUserInfo = useGetUserInfo();
   const { data } = getUserInfo;
+  
   const setUserInfo = useSetUserInfo(setNotification);
   const { isPending: isLoading } = setUserInfo 
   const [codeFromApi, setCodeFromApi] = useState<string>("+963");

@@ -1028,11 +1028,11 @@ const getUserInfo = async ()=>{
     return response.data;
 };
 const getUserPosts = async (page, page_size)=>{
-    const res = await __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$lib$2f$loginservices$2f$api$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].get(`accounts/dashboard/posts/cards/?page=${page}&page_size=${page_size}?ordering=-created_at`);
+    const res = await __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$lib$2f$loginservices$2f$api$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].get(`accounts/dashboard/posts/cards/?page=${page}&page_size=${page_size}&ordering=-created_at`);
     return res.data;
 };
 const getUserFav = async (page, page_size)=>{
-    const res = await __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$lib$2f$loginservices$2f$api$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].get(`accounts/dashboard/favorites/cards/?page=${page}&page_size=${page_size}?ordering=-created_at`);
+    const res = await __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$lib$2f$loginservices$2f$api$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].get(`accounts/dashboard/favorites/cards/?page=${page}&page_size=${page_size}&ordering=-created_at`);
     return res.data;
 };
 var _c;

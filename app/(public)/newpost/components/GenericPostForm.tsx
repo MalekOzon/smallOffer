@@ -7,6 +7,7 @@ import { useCreatePost } from "@/app/lib/postServices/postMutations";
 import { useState } from "react";
 import Notification from "@/app/components/ui/Notification";
 import { Search } from "lucide-react";
+import Button from "@/app/components/ui/Button";
 
 interface GenericPostFormProps {
   Gcategory: string;
@@ -21,16 +22,17 @@ export default function GenericPostForm({
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm<GenericPostPayload>();
-
+  
   const [notification, setNotification] = useState<{
     message: string;
     type: "success" | "error";
   } | null>(null);
   const createPost = useCreatePost(setNotification);
   const { isPending: isLoading } = createPost;
-
+  
   function isBlob(obj: unknown): obj is Blob {
     return (
       typeof window !== "undefined" &&
@@ -40,11 +42,14 @@ export default function GenericPostForm({
       obj instanceof window.Blob
     );
   }
+  
+  const [isSearch, setIsSearch] = useState<boolean | undefined>(false);
 
   const onSubmit = (data: GenericPostPayload) => {
     console.log("daTA: ", data);
     const formData = new FormData();
 
+    formData.append("offer_type", data.offer_type ?? "sell");
     formData.append("title", data.title ?? "");
     formData.append("description", data.description ?? "");
     formData.append("price", data.price ?? "");
@@ -69,7 +74,6 @@ export default function GenericPostForm({
 
     formData.append("category", Gcategory);
     formData.append("subcategory", Gsubcategory);
-
 
     if (data.gallery && data.gallery.length > 0) {
       if (
@@ -112,6 +116,38 @@ export default function GenericPostForm({
           أدخل معلومات الإعلان الأساسية لتظهر بوضوح للمشترين، مثل العنوان والوصف
           العام والموقع.
         </p>
+        <div className=" mb-6 sm:ml-16 border-b border-clightgray">
+          {/* SEARCH || SELL */}
+          <h3 className="font-medium mb-3 mt-6 text-lg text-gray-700">
+            نوع المنشور
+            <span className="text-red-500 text-xl mr-1">*</span>
+          </h3>
+          <div className="w-full mt-2 max-w-sm  border-2 border-clightgray p-1.5 rounded-xl mb-6 flex">
+            <Button
+              type="button"
+              className="w-1/2 text-6 font-semibold"
+              variant={isSearch === false ? "primary" : "none"}
+              onClick={() => {
+                setIsSearch(false);
+                setValue("offer_type", "sell");
+              }}
+            >
+              أنا أعرض
+            </Button>
+            <Button
+              type="button"
+              className="w-1/2 text-6 font-semibold"
+              variant={isSearch === true ? "primary" : "none"}
+              onClick={() => {
+                setIsSearch(true);
+                setValue("offer_type", "search");
+              }}
+            >
+              أنا أبحث
+            </Button>
+          </div>
+        </div>
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
           <div className="sm:ml-16">
             <label className="block font-medium text-gray-700">
@@ -125,12 +161,6 @@ export default function GenericPostForm({
               placeholder="اسم المنتج"
               className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
             />
-
-            {errors.title && (
-              <p className="text-red-600 text-sm mt-1">
-                {String(errors.title.message)}
-              </p>
-            )}
           </div>
 
           <div className="sm:ml-16">
@@ -144,8 +174,7 @@ export default function GenericPostForm({
               className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
             />
           </div>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+
           <div className="sm:ml-16">
             <label className="block font-medium text-gray-700">
               المحافظة
@@ -202,8 +231,6 @@ export default function GenericPostForm({
               </p>
             )}
           </div>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:ml-16">
           <div className="flex flex-col gap-2 md:col-span-2">
             <label className="block font-medium text-gray-700">
               وصف المنتج
@@ -240,7 +267,7 @@ export default function GenericPostForm({
               <span className="text-red-500 text-xl mr-1">*</span>
             </label>
             <input
-            type="number"
+              type="number"
               required
               {...register("price")}
               className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"

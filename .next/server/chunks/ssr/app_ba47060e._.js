@@ -14,7 +14,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist
 ;
 const Title = ({ title, isPostPage })=>{
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-        className: "flex justify-between max-sm:mt-4 max-sm:mx-6",
+        className: "flex justify-between max-sm:mt-4 max-sm:mx-6 mt-4",
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h1", {
                 className: "text-2xl font-bold text-gray-800 pb-4",
@@ -1833,7 +1833,7 @@ const EditProfilePage = ()=>{
     if (getUserInfo.isLoading || getUserInfo.isFetching) {
         return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$app$2f$components$2f$ui$2f$SkeletonNotificationSettings$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {}, void 0, false, {
             fileName: "[project]/app/dashboard/profile/page.tsx",
-            lineNumber: 354,
+            lineNumber: 355,
             columnNumber: 12
         }, this);
     }
@@ -1845,7 +1845,7 @@ const EditProfilePage = ()=>{
                 isPostPage: false
             }, void 0, false, {
                 fileName: "[project]/app/dashboard/profile/page.tsx",
-                lineNumber: 359,
+                lineNumber: 360,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
@@ -1858,7 +1858,7 @@ const EditProfilePage = ()=>{
                         onClose: ()=>setNotification(null)
                     }, void 0, false, {
                         fileName: "[project]/app/dashboard/profile/page.tsx",
-                        lineNumber: 367,
+                        lineNumber: 368,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1873,12 +1873,12 @@ const EditProfilePage = ()=>{
                                     className: "object-cover bg-gray-100"
                                 }, void 0, false, {
                                     fileName: "[project]/app/dashboard/profile/page.tsx",
-                                    lineNumber: 377,
+                                    lineNumber: 378,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/app/dashboard/profile/page.tsx",
-                                lineNumber: 376,
+                                lineNumber: 377,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1892,7 +1892,7 @@ const EditProfilePage = ()=>{
                                                 children: "اسم المستخدم"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/dashboard/profile/page.tsx",
-                                                lineNumber: 389,
+                                                lineNumber: 390,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -1904,7 +1904,7 @@ const EditProfilePage = ()=>{
                                                 className: `mt-1 block w-full p-2.5 text-6 font-medium border rounded-md focus:outline-none ${errors.username ? "border-red-500" : "border-gray-300"} placeholder:text-gray-400`
                                             }, void 0, false, {
                                                 fileName: "[project]/app/dashboard/profile/page.tsx",
-                                                lineNumber: 395,
+                                                lineNumber: 396,
                                                 columnNumber: 15
                                             }, this),
                                             errors.username && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1912,13 +1912,13 @@ const EditProfilePage = ()=>{
                                                 children: errors.username.message
                                             }, void 0, false, {
                                                 fileName: "[project]/app/dashboard/profile/page.tsx",
-                                                lineNumber: 406,
+                                                lineNumber: 407,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/dashboard/profile/page.tsx",
-                                        lineNumber: 388,
+                                        lineNumber: 389,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1928,7 +1928,7 @@ const EditProfilePage = ()=>{
                                                 children: "البريد الإلكتروني"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/dashboard/profile/page.tsx",
-                                                lineNumber: 414,
+                                                lineNumber: 415,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -1938,7 +1938,7 @@ const EditProfilePage = ()=>{
                                                 className: `mt-1 block w-full p-2.5 text-6 font-medium border rounded-md focus:outline-none ${errors.email ? "border-red-500" : "border-gray-300"} placeholder:text-gray-400`
                                             }, void 0, false, {
                                                 fileName: "[project]/app/dashboard/profile/page.tsx",
-                                                lineNumber: 417,
+                                                lineNumber: 418,
                                                 columnNumber: 15
                                             }, this),
                                             errors.email && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1946,25 +1946,25 @@ const EditProfilePage = ()=>{
                                                 children: errors.email.message
                                             }, void 0, false, {
                                                 fileName: "[project]/app/dashboard/profile/page.tsx",
-                                                lineNumber: 426,
+                                                lineNumber: 427,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/dashboard/profile/page.tsx",
-                                        lineNumber: 413,
+                                        lineNumber: 414,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/dashboard/profile/page.tsx",
-                                lineNumber: 386,
+                                lineNumber: 387,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/dashboard/profile/page.tsx",
-                        lineNumber: 374,
+                        lineNumber: 375,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1979,7 +1979,7 @@ const EditProfilePage = ()=>{
                                         children: "الاسم الأول"
                                     }, void 0, false, {
                                         fileName: "[project]/app/dashboard/profile/page.tsx",
-                                        lineNumber: 437,
+                                        lineNumber: 438,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -1991,7 +1991,7 @@ const EditProfilePage = ()=>{
                                         className: `mt-1 block w-full p-2.5 text-6 font-medium border rounded-md focus:outline-none ${errors.firstName ? "border-red-500" : "border-gray-300"} placeholder:text-gray-400`
                                     }, void 0, false, {
                                         fileName: "[project]/app/dashboard/profile/page.tsx",
-                                        lineNumber: 443,
+                                        lineNumber: 444,
                                         columnNumber: 13
                                     }, this),
                                     errors.firstName && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1999,13 +1999,13 @@ const EditProfilePage = ()=>{
                                         children: errors.firstName.message
                                     }, void 0, false, {
                                         fileName: "[project]/app/dashboard/profile/page.tsx",
-                                        lineNumber: 454,
+                                        lineNumber: 455,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/dashboard/profile/page.tsx",
-                                lineNumber: 436,
+                                lineNumber: 437,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2017,7 +2017,7 @@ const EditProfilePage = ()=>{
                                         children: "الاسم الأخير"
                                     }, void 0, false, {
                                         fileName: "[project]/app/dashboard/profile/page.tsx",
-                                        lineNumber: 461,
+                                        lineNumber: 462,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -2029,7 +2029,7 @@ const EditProfilePage = ()=>{
                                         className: `mt-1 block w-full p-2.5 text-6 font-medium  border rounded-md focus:outline-none ${errors.lastName ? "border-red-500" : "border-gray-300"} placeholder:text-gray-400`
                                     }, void 0, false, {
                                         fileName: "[project]/app/dashboard/profile/page.tsx",
-                                        lineNumber: 467,
+                                        lineNumber: 468,
                                         columnNumber: 13
                                     }, this),
                                     errors.lastName && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2037,19 +2037,19 @@ const EditProfilePage = ()=>{
                                         children: errors.lastName.message
                                     }, void 0, false, {
                                         fileName: "[project]/app/dashboard/profile/page.tsx",
-                                        lineNumber: 478,
+                                        lineNumber: 479,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/dashboard/profile/page.tsx",
-                                lineNumber: 460,
+                                lineNumber: 461,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/dashboard/profile/page.tsx",
-                        lineNumber: 435,
+                        lineNumber: 436,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2064,7 +2064,7 @@ const EditProfilePage = ()=>{
                                         children: "رقم الهاتف"
                                     }, void 0, false, {
                                         fileName: "[project]/app/dashboard/profile/page.tsx",
-                                        lineNumber: 488,
+                                        lineNumber: 489,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -2076,7 +2076,7 @@ const EditProfilePage = ()=>{
                                         className: `mt-1 p-2 w-full border rounded-md  font-medium  border-clightgray focus:outline-none focus:border-blue-500 ${errors.phoneNumber ? "border-red-500" : ""}`
                                     }, void 0, false, {
                                         fileName: "[project]/app/dashboard/profile/page.tsx",
-                                        lineNumber: 494,
+                                        lineNumber: 495,
                                         columnNumber: 13
                                     }, this),
                                     errors.phoneNumber && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2084,13 +2084,13 @@ const EditProfilePage = ()=>{
                                         children: errors.phoneNumber.message
                                     }, void 0, false, {
                                         fileName: "[project]/app/dashboard/profile/page.tsx",
-                                        lineNumber: 505,
+                                        lineNumber: 506,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/dashboard/profile/page.tsx",
-                                lineNumber: 487,
+                                lineNumber: 488,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2102,7 +2102,7 @@ const EditProfilePage = ()=>{
                                         children: "رمز الدولة"
                                     }, void 0, false, {
                                         fileName: "[project]/app/dashboard/profile/page.tsx",
-                                        lineNumber: 513,
+                                        lineNumber: 514,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$hook$2d$form$2f$dist$2f$index$2e$esm$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Controller"], {
@@ -2123,12 +2123,12 @@ const EditProfilePage = ()=>{
                                                             className: "font-medium text-6 text-black"
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/dashboard/profile/page.tsx",
-                                                            lineNumber: 531,
+                                                            lineNumber: 532,
                                                             columnNumber: 21
                                                         }, void 0)
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/dashboard/profile/page.tsx",
-                                                        lineNumber: 530,
+                                                        lineNumber: 531,
                                                         columnNumber: 19
                                                     }, void 0),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$app$2f$components$2f$ui$2f$select$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["SelectContent"], {
@@ -2143,29 +2143,29 @@ const EditProfilePage = ()=>{
                                                                         children: country.code
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/app/dashboard/profile/page.tsx",
-                                                                        lineNumber: 540,
+                                                                        lineNumber: 541,
                                                                         columnNumber: 40
                                                                     }, void 0)
                                                                 ]
                                                             }, country.code, true, {
                                                                 fileName: "[project]/app/dashboard/profile/page.tsx",
-                                                                lineNumber: 535,
+                                                                lineNumber: 536,
                                                                 columnNumber: 23
                                                             }, void 0))
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/dashboard/profile/page.tsx",
-                                                        lineNumber: 533,
+                                                        lineNumber: 534,
                                                         columnNumber: 19
                                                     }, void 0)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/app/dashboard/profile/page.tsx",
-                                                lineNumber: 524,
+                                                lineNumber: 525,
                                                 columnNumber: 17
                                             }, void 0)
                                     }, void 0, false, {
                                         fileName: "[project]/app/dashboard/profile/page.tsx",
-                                        lineNumber: 519,
+                                        lineNumber: 520,
                                         columnNumber: 13
                                     }, this),
                                     errors.phoneCode && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2173,19 +2173,19 @@ const EditProfilePage = ()=>{
                                         children: errors.phoneCode.message
                                     }, void 0, false, {
                                         fileName: "[project]/app/dashboard/profile/page.tsx",
-                                        lineNumber: 548,
+                                        lineNumber: 549,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/dashboard/profile/page.tsx",
-                                lineNumber: 512,
+                                lineNumber: 513,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/dashboard/profile/page.tsx",
-                        lineNumber: 486,
+                        lineNumber: 487,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2200,7 +2200,7 @@ const EditProfilePage = ()=>{
                                         children: "المحافظة"
                                     }, void 0, false, {
                                         fileName: "[project]/app/dashboard/profile/page.tsx",
-                                        lineNumber: 559,
+                                        lineNumber: 560,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$hook$2d$form$2f$dist$2f$index$2e$esm$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Controller"], {
@@ -2218,12 +2218,12 @@ const EditProfilePage = ()=>{
                                                             className: "text-6 text-black font-medium"
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/dashboard/profile/page.tsx",
-                                                            lineNumber: 574,
+                                                            lineNumber: 575,
                                                             columnNumber: 21
                                                         }, void 0)
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/dashboard/profile/page.tsx",
-                                                        lineNumber: 570,
+                                                        lineNumber: 571,
                                                         columnNumber: 19
                                                     }, void 0),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$app$2f$components$2f$ui$2f$select$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["SelectContent"], {
@@ -2234,23 +2234,23 @@ const EditProfilePage = ()=>{
                                                                 children: gov.name
                                                             }, gov.value, false, {
                                                                 fileName: "[project]/app/dashboard/profile/page.tsx",
-                                                                lineNumber: 579,
+                                                                lineNumber: 580,
                                                                 columnNumber: 23
                                                             }, void 0))
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/dashboard/profile/page.tsx",
-                                                        lineNumber: 577,
+                                                        lineNumber: 578,
                                                         columnNumber: 19
                                                     }, void 0)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/app/dashboard/profile/page.tsx",
-                                                lineNumber: 569,
+                                                lineNumber: 570,
                                                 columnNumber: 17
                                             }, void 0)
                                     }, void 0, false, {
                                         fileName: "[project]/app/dashboard/profile/page.tsx",
-                                        lineNumber: 565,
+                                        lineNumber: 566,
                                         columnNumber: 13
                                     }, this),
                                     errors.city && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2258,13 +2258,13 @@ const EditProfilePage = ()=>{
                                         children: errors.city.message
                                     }, void 0, false, {
                                         fileName: "[project]/app/dashboard/profile/page.tsx",
-                                        lineNumber: 593,
+                                        lineNumber: 594,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/dashboard/profile/page.tsx",
-                                lineNumber: 558,
+                                lineNumber: 559,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2276,7 +2276,7 @@ const EditProfilePage = ()=>{
                                         children: "المنطقة"
                                     }, void 0, false, {
                                         fileName: "[project]/app/dashboard/profile/page.tsx",
-                                        lineNumber: 599,
+                                        lineNumber: 600,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -2287,7 +2287,7 @@ const EditProfilePage = ()=>{
                                         className: `mt-1 p-2 w-full border text-6 font-medium border-clightgray rounded-md focus:outline-none focus:border-blue-500 ${errors.hood ? "border-red-500" : ""}`
                                     }, void 0, false, {
                                         fileName: "[project]/app/dashboard/profile/page.tsx",
-                                        lineNumber: 605,
+                                        lineNumber: 606,
                                         columnNumber: 13
                                     }, this),
                                     errors.hood && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2295,19 +2295,19 @@ const EditProfilePage = ()=>{
                                         children: errors.hood.message
                                     }, void 0, false, {
                                         fileName: "[project]/app/dashboard/profile/page.tsx",
-                                        lineNumber: 615,
+                                        lineNumber: 616,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/dashboard/profile/page.tsx",
-                                lineNumber: 598,
+                                lineNumber: 599,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/dashboard/profile/page.tsx",
-                        lineNumber: 556,
+                        lineNumber: 557,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2318,7 +2318,7 @@ const EditProfilePage = ()=>{
                                 children: "تفاصيل العنوان"
                             }, void 0, false, {
                                 fileName: "[project]/app/dashboard/profile/page.tsx",
-                                lineNumber: 622,
+                                lineNumber: 623,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("textarea", {
@@ -2329,7 +2329,7 @@ const EditProfilePage = ()=>{
                                 className: `focus:border-blue-500 mt-1 block w-full p-2 text-6 font-medium border rounded-md focus:outline-none ${errors.detailed_location ? "border-red-500" : "border-gray-300"} placeholder:text-gray-400`
                             }, void 0, false, {
                                 fileName: "[project]/app/dashboard/profile/page.tsx",
-                                lineNumber: 628,
+                                lineNumber: 629,
                                 columnNumber: 11
                             }, this),
                             errors.detailed_location && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2337,13 +2337,13 @@ const EditProfilePage = ()=>{
                                 children: errors.detailed_location.message
                             }, void 0, false, {
                                 fileName: "[project]/app/dashboard/profile/page.tsx",
-                                lineNumber: 638,
+                                lineNumber: 639,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/dashboard/profile/page.tsx",
-                        lineNumber: 621,
+                        lineNumber: 622,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2354,24 +2354,24 @@ const EditProfilePage = ()=>{
                             children: isLoading ? "جاري الحفظ..." : "حفظ التعديلات"
                         }, void 0, false, {
                             fileName: "[project]/app/dashboard/profile/page.tsx",
-                            lineNumber: 646,
+                            lineNumber: 647,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/app/dashboard/profile/page.tsx",
-                        lineNumber: 645,
+                        lineNumber: 646,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/app/dashboard/profile/page.tsx",
-                lineNumber: 361,
+                lineNumber: 362,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/app/dashboard/profile/page.tsx",
-        lineNumber: 358,
+        lineNumber: 359,
         columnNumber: 5
     }, this);
 };

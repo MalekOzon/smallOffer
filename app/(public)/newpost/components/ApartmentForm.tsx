@@ -1,3 +1,4 @@
+import Button from "@/app/components/ui/Button";
 import Notification from "@/app/components/ui/Notification";
 import { useCreateApartmentPost } from "@/app/lib/postServices/postMutations";
 import { ApartmentPostPayload } from "@/app/lib/postServices/postType";
@@ -10,6 +11,31 @@ interface PostFormProps {
   Gcategory: string;
   Gsubcategory: string;
 }
+export const FURNITURE_CHOICES = [
+  ["furnished-semi/furnished", "مفروش/مفروش جزئيا"],
+  ["balcony", "شرفة"],
+  ["equipped_kitchen", "مطبخ مجهز"],
+  ["bathtub", "حوض الاستحمام"],
+  ["guest_bathroom", "حمام الضيوف"],
+  ["ground_floor", "الصول بدون درج"],
+  ["underfloor_heating", "التدفئة تحت الارضية"],
+];
+export const GENERAL_CHARACTERISTICS = [
+  ["old_building", "مبنى قديم"],
+  ["new_building", "مبنى جديد"],
+  ["elevator", "مصعد"],
+  ["basement", "قبو"],
+  ["attic", "علية"],
+  ["garage/parking", "مراَب/مكان وقوف السيارات"],
+  ["shared_garden", "حديقة/استخدام مشترك"],
+  ["pets_allowed", "مسموح بالحيوانات الاليفة"],
+  ["landmark", "نصب تذكاري"],
+  ["currently_rented", "مؤجر حاليا"],
+];
+export const OFFER_TYPE_CHOICES = [
+  ["sale", "شراء"],
+  ["rent", "ايجار"],
+];
 
 export default function ApartmentForm({
   Gcategory,
@@ -18,39 +44,11 @@ export default function ApartmentForm({
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm<ApartmentPostPayload>({});
 
-  const FURNITURE_CHOICES = [
-    ["furnished-semi/furnished", "مفروش/مفروش جزئيا"],
-    ["balcony", "شرفة"],
-    ["equipped_kitchen", "مطبخ مجهز"],
-    ["bathtub", "حوض الاستحمام"],
-    ["guest_bathroom", "حمام الضيوف"],
-    ["ground_floor", "الصول بدون درج"],
-    ["underfloor_heating", "التدفئة تحت الارضية"],
-  ];
-  const GENERAL_CHARACTERISTICS = [
-    ["old_building", "مبنى قديم"],
-    ["new_building", "مبنى جديد"],
-    ["elevator", "مصعد"],
-    ["basement", "قبو"],
-    ["attic", "علية"],
-    ["garage/parking", "مراَب/مكان وقوف السيارات"],
-    ["shared_garden", "حديقة/استخدام مشترك"],
-    ["pets_allowed", "مسموح بالحيوانات الاليفة"],
-    ["landmark", "نصب تذكاري"],
-    ["currently_rented", "مؤجر حاليا"],
-  ];
-  const OFFER_TYPE_CHOICES = [
-    ["sale", "شراء"],
-    ["rent", "ايجار"],
-  ];
 
-  console.log({
-    category: Gcategory,
-    subcategory: Gsubcategory,
-  });
 
   const [notification, setNotification] = useState<{
     message: string;
@@ -59,10 +57,15 @@ export default function ApartmentForm({
   const createApartmentPost = useCreateApartmentPost(setNotification);
   const { isPending: isLoading } = createApartmentPost;
 
+
+  const [isSearch, setIsSearch] = useState<boolean | undefined>(false);
+  
+  
   const onSubmit = (data: ApartmentPostPayload) => {
     console.log("daTA: ", data);
     const formData = new FormData();
-
+    
+    formData.append("offer_type", data.offer_type ?? "sell");
     formData.append("title", data.title ?? "");
     formData.append("description", data.description ?? "");
     formData.append("price", data.price ?? "");
@@ -90,10 +93,10 @@ export default function ApartmentForm({
 
     const apartmentDetails = {
       real_estate_space: data.apartment.real_estate_space,
-      available_from: data.apartment.available_from,
-      general_characteristics: data.apartment.general_characteristics,
+      available_from: data.apartment.available_from || null,
+      general_characteristics: data.apartment.general_characteristics || null,
       floor: data.apartment.floor,
-      furniture: data.apartment.furniture,
+      furniture: data.apartment.furniture || null,
       bath: data.apartment.bath,
       bed_room: data.apartment.bed_room,
       room: data.apartment.room,
@@ -118,7 +121,6 @@ export default function ApartmentForm({
       }
     }
 
-    console.log("DDD ", formData);
     createApartmentPost.mutate(formData);
   };
 
@@ -134,144 +136,161 @@ export default function ApartmentForm({
 
   return (
     <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="w-full mx-auto space-y-10"
-    >
-      {/* ------------- Noti -------------- */}
-      {notification && (
-        <Notification
-          message={notification.message}
-          type={notification.type}
-          onClose={() => setNotification(null)}
-        />
-      )}
+    onSubmit={handleSubmit(onSubmit)}
+    className="w-full mx-auto space-y-10"
+  >
+    {/* ------------- Noti -------------- */}
+    {notification && (
+      <Notification
+        message={notification.message}
+        type={notification.type}
+        onClose={() => setNotification(null)}
+      />
+    )}
 
-      {/* معلومات أساسية */}
-      <section className="bg-white rounded-2xl shadow-lg border border-gray-200 p-8 mb-6 ">
-        <h2 className="font-bold text-xl text-gray-800 mb-2 text-right">
-          معلومات أساسية
-        </h2>
-        <p className="text-gray-600 mb-6 text-right">
-          أدخل معلومات الإعلان الأساسية لتظهر بوضوح للمشترين، مثل العنوان والوصف
-          العام والموقع.
-        </p>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-          <div className="sm:ml-16">
-            <label className="block font-medium text-gray-700">
-              اسم المنتج
-              <span className="text-red-500 text-xl mr-1">*</span>
-            </label>
-            <input
-              required
-              {...register("title")}
-              type="text"
-              placeholder="اسم المنتج"
-              className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
-            />
-
-            {errors.title && (
-              <p className="text-red-600 text-sm mt-1">
-                {String(errors.title.message)}
-              </p>
-            )}
-          </div>
-
-          <div className="sm:ml-16">
-            <label className="block font-medium text-gray-700">
-              صور المنتج
-            </label>
-            <input
-              type="file"
-              multiple
-              {...register("gallery")}
-              className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
-            />
-          </div>
+    {/* معلومات أساسية */}
+    <section className="bg-white rounded-2xl shadow-lg border border-gray-200 p-8 mb-6 ">
+      <h2 className="font-bold text-xl text-gray-800 mb-2 text-right">
+        معلومات أساسية
+      </h2>
+      <p className="text-gray-600 mb-6 text-right">
+        أدخل معلومات الإعلان الأساسية لتظهر بوضوح للمشترين، مثل العنوان والوصف
+        العام والموقع.
+      </p>
+      <div className=" mb-6 sm:ml-16 border-b border-clightgray">
+        {/* SEARCH || SELL */}
+        <h3 className="font-medium mb-3 mt-6 text-lg text-gray-700">
+          نوع المنشور
+          <span className="text-red-500 text-xl mr-1">*</span>
+        </h3>
+        <div className="w-full mt-2 max-w-sm  border-2 border-clightgray p-1.5 rounded-xl mb-6 flex">
+          <Button
+            type="button"
+            className="w-1/2 text-6 font-semibold"
+            variant={isSearch === false ? "primary" : "none"}
+            onClick={() => {
+              setIsSearch(false);
+              setValue("offer_type", "sell");
+            }}
+          >
+            أنا أعرض
+          </Button>
+          <Button
+            type="button"
+            className="w-1/2 text-6 font-semibold"
+            variant={isSearch === true ? "primary" : "none"}
+            onClick={() => {
+              setIsSearch(true);
+              setValue("offer_type", "search");
+            }}
+          >
+            أنا أبحث
+          </Button>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-          <div className="sm:ml-16">
-            <label className="block font-medium text-gray-700">
-              المحافظة
-              <span className="text-red-500 text-xl mr-1">*</span>
-            </label>
-            <select
-              required
-              {...register("city")}
-              className="mt-1  w-full p-3 border-2 rounded-lg bg-cwhite text-gray-700 focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200"
-              style={{
-                borderColor: "#277F60", // لون الحدود
-              }}
-            >
-              <option value="">اختر الإدخال</option>
-              {syrianGovernorates.map((gov) => (
-                <option key={gov.value} value={gov.value}>
-                  {gov.name}
-                </option>
-              ))}
-            </select>
-            {errors.city && (
-              <p className="text-red-600 text-sm mt-1">
-                {String(errors.city.message)}
-              </p>
-            )}
-          </div>
+      </div>
 
-          <div className="sm:ml-16">
-            <label className="block font-medium text-gray-700">
-              المنطقة
-              <span className="text-red-500 text-xl mr-1">*</span>
-            </label>
-            <input
-              required
-              {...register("hood")}
-              className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
-              placeholder="المنطقة"
-            />
-            {errors.hood && (
-              <p className="text-red-600 text-sm mt-1">
-                {String(errors.hood.message)}
-              </p>
-            )}
-          </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div className="sm:ml-16">
+          <label className="block font-medium text-gray-700">
+            اسم المنتج
+            <span className="text-red-500 text-xl mr-1">*</span>
+          </label>
+          <input
+            required
+            {...register("title")}
+            type="text"
+            placeholder="اسم المنتج"
+            className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
+          />
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6 sm:ml-16">
-          <div className="flex flex-col gap-2 md:col-span-2">
-            <label className="block font-medium text-gray-700">
-              تفاصيل العنوان
-            </label>
-            <input
-              {...register("detailed_location")}
-              className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
-              placeholder="تفاصيل العنوان"
-            />
-            {errors.detailed_location && (
-              <p className="text-red-600 text-sm mt-1">
-                {String(errors.detailed_location.message)}
-              </p>
-            )}
-          </div>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:ml-16">
-          <div className="flex flex-col gap-2 md:col-span-2">
-            <label className="block font-medium text-gray-700">
-              وصف المنتج
-              <span className="text-red-500 text-xl mr-1">*</span>
-            </label>
-            <textarea
-              required
-              {...register("description")}
-              className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
-              placeholder="ادخل وصف المنتج هنا"
-            />
-            {errors.description && (
-              <p className="text-red-600 text-sm mt-1">
-                {String(errors.description.message)}
-              </p>
-            )}
-          </div>
-        </div>
-      </section>
 
+        <div className="sm:ml-16">
+          <label className="block font-medium text-gray-700">
+            صور المنتج
+          </label>
+          <input
+            type="file"
+            multiple
+            {...register("gallery")}
+            className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
+          />
+        </div>
+
+        <div className="sm:ml-16">
+          <label className="block font-medium text-gray-700">
+            المحافظة
+            <span className="text-red-500 text-xl mr-1">*</span>
+          </label>
+          <select
+            required
+            {...register("city")}
+            className="mt-1  w-full p-3 border-2 rounded-lg bg-cwhite text-gray-700 focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200"
+            style={{
+              borderColor: "#277F60", // لون الحدود
+            }}
+          >
+            <option value="">اختر الإدخال</option>
+            {syrianGovernorates.map((gov) => (
+              <option key={gov.value} value={gov.value}>
+                {gov.name}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div className="sm:ml-16">
+          <label className="block font-medium text-gray-700">
+            المنطقة
+            <span className="text-red-500 text-xl mr-1">*</span>
+          </label>
+          <input
+            required
+            {...register("hood")}
+            className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
+            placeholder="المنطقة"
+          />
+          {errors.hood && (
+            <p className="text-red-600 text-sm mt-1">
+              {String(errors.hood.message)}
+            </p>
+          )}
+        </div>
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6 sm:ml-16">
+        <div className="flex flex-col gap-2 md:col-span-2">
+          <label className="block font-medium text-gray-700">
+            تفاصيل العنوان
+          </label>
+          <input
+            {...register("detailed_location")}
+            className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
+            placeholder="تفاصيل العنوان"
+          />
+          {errors.detailed_location && (
+            <p className="text-red-600 text-sm mt-1">
+              {String(errors.detailed_location.message)}
+            </p>
+          )}
+        </div>
+        <div className="flex flex-col gap-2 md:col-span-2">
+          <label className="block font-medium text-gray-700">
+            وصف المنتج
+            <span className="text-red-500 text-xl mr-1">*</span>
+          </label>
+          <textarea
+            required
+            {...register("description")}
+            className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
+            placeholder="ادخل وصف المنتج هنا"
+          />
+          {errors.description && (
+            <p className="text-red-600 text-sm mt-1">
+              {String(errors.description.message)}
+            </p>
+          )}
+        </div>
+      </div>
+    </section>
       {/* سعر المنتج */}
       <section className="bg-white rounded-2xl shadow-lg border border-gray-200 p-8">
         <h2 className="font-bold text-xl text-gray-800 mb-2 text-right">

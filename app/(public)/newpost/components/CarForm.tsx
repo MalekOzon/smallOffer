@@ -5,11 +5,131 @@ import { useCreateCarPost } from "@/app/lib/postServices/postMutations";
 import Notification from "@/app/components/ui/Notification";
 import { syrianGovernorates } from "@/app/signup/step2/syrianGovernorates";
 import { Search } from "lucide-react";
+import Button from "@/app/components/ui/Button";
 
 interface GenericPostFormProps {
   Gcategory: string;
   Gsubcategory: string;
 }
+export const EXTERNAL_FEATURES_CHOICES = [
+  ["alloy_wheels", "عجلات معدنية"],
+  ["xenon_headlights", "مصابيح أمامية زينون"],
+  ["parking_assist", "مساعدة ركن سيارة"],
+  ["trailer_hitch", "وصلة مقطورة"],
+];
+export const INTERNAL_FEATURES_CHOICES = [
+  ["ac", "تكييف"],
+  ["navigation", "نظام ملاحة"],
+  ["radio_tuner", "راديو/موالف"],
+  ["bluetooth", "بلوتوث"],
+  ["seat_heating", "تدفئة المقعد"],
+  ["cruise_control", "مثبت السرعة"],
+  ["handsfree", "نظام حر اليدين"],
+  ["sunroof", "فتحة سقف/سقف بانورامي"],
+  ["non_smoking", "مركبة خالية من التدخين"],
+];
+export const PROTECTION_CHOICES = [
+  ["service_book", "تم صيانة دفتر الخدمة"],
+  ["abs", "نظام المكابح المانعة للانزلاق ABS"],
+];
+export const STATUS_CHOICES = [
+  ["damaged", "متضررة"],
+  ["undamaged", "غير متضررة"],
+];
+export const FUEL_CHOICES = [
+  ["gasoline", "بنزين"],
+  ["diesel", "ديزل"],
+  ["electric", "كهربائي"],
+  ["hybrid", "هجين"],
+  ["lpg", "غاز البترول المسال"],
+  ["cng", "الغاز الطبيعي"],
+];
+export const GEARBOX_CHOICES = [
+  ["manual", "غيار يدوي"],
+  ["automatic", "غيار أوتوماتيك"],
+];
+export const TYPE_CHOICES = [
+  ["small_car", "سيارة صغيرة"],
+  ["limousine", "ليموزين"],
+  ["station", "ستيشن"],
+  ["sports", "سيارة رياضية"],
+  ["van_bus", "فان/حافلة"],
+  ["coupe", "كوبيه"],
+  ["other", "أنواع أخرى"],
+];
+export const DOORS_CHOICES = [
+  ["two_three", "2/3"],
+  ["four_five", "4/5"],
+  ["six_seven", "6/7"],
+  ["other_doors", "عدد مختلف من الأبواب"],
+];
+export const COLOR_CHOICES = [
+  ["beige", "بيج"],
+  ["blue", "أزرق"],
+  ["brown", "بني"],
+  ["yellow", "أصفر"],
+  ["gold", "ذهبي"],
+  ["gray", "رمادي"],
+  ["green", "أخضر"],
+  ["orange", "برتقالي"],
+  ["red", "أحمر"],
+  ["black", "أسود"],
+  ["silver", "فضي"],
+  ["purple", "بنفسجي"],
+  ["white", "أبيض"],
+  ["other", "ألوان أخرى"],
+];
+export const INTERNAL_MATERIALS_CHOICES = [
+  ["full_leather", "جلد كامل"],
+  ["partial_leather", "جلد جزئي"],
+  ["fabric", "قماش"],
+  ["velvet", "مخمل"],
+  ["other_materials", "مواد أخرى"],
+];
+export const BRAND_CHOICES = [
+  ["alfa_romeo", "ألفا روميو"],
+  ["audi", "أودي"],
+  ["bmw", "بي ام دبليو"],
+  ["chevrolet", "شيفروليه"],
+  ["chrysler", "كرايسلر"],
+  ["citroen", "سيتروين"],
+  ["dacia", "داسيا"],
+  ["daewoo", "دايو"],
+  ["daihatsu", "دايهاتسو"],
+  ["fiat", "فيات"],
+  ["ford", "فورد"],
+  ["honda", "هوندا"],
+  ["hyundai", "هيونداي"],
+  ["jaguar", "جاكوار"],
+  ["jeep", "جيب"],
+  ["kia", "كيا"],
+  ["lada", "لادا"],
+  ["lancia", "لانشيا"],
+  ["land_rover", "لاند روفر"],
+  ["lexus", "لكزس"],
+  ["mazda", "مازدا"],
+  ["mercedes_benz", "مرسيدس بنز"],
+  ["mini", "ميني"],
+  ["mitsubishi", "ميتسوبيشي"],
+  ["nissan", "نيسان"],
+  ["opel", "أوبل"],
+  ["peugeot", "بيجو"],
+  ["porsche", "بورشه"],
+  ["renault", "رينو"],
+  ["spaceship", "مركبة فضائية"],
+  ["saab", "ساب"],
+  ["seat", "سيات"],
+  ["skoda", "سكودا"],
+  ["smart", "ذكي"],
+  ["subaru", "سوبارو"],
+  ["suzuki", "سوزوكي"],
+  ["tesla", "تسلا"],
+  ["toyota", "تويوتا"],
+  ["trabant", "ترابانت"],
+  ["volkswagen", "فولكس فاجن"],
+  ["volvo", "فولفو"],
+  ["other", "ماركات السيارات الأخرى"],
+];
 
 export default function CarForm({
   Gcategory,
@@ -17,135 +137,11 @@ export default function CarForm({
 }: GenericPostFormProps) {
   const {
     register,
+    setValue,
     handleSubmit,
     formState: { errors },
   } = useForm<CarPostPayload>({});
 
-  // --- القوائم المرجعية ---
-  const EXTERNAL_FEATURES_CHOICES = [
-    ["alloy_wheels", "عجلات معدنية"],
-    ["xenon_headlights", "مصابيح أمامية زينون"],
-    ["parking_assist", "مساعدة ركن سيارة"],
-    ["trailer_hitch", "وصلة مقطورة"],
-  ];
-  const INTERNAL_FEATURES_CHOICES = [
-    ["ac", "تكييف"],
-    ["navigation", "نظام ملاحة"],
-    ["radio_tuner", "راديو/موالف"],
-    ["bluetooth", "بلوتوث"],
-    ["seat_heating", "تدفئة المقعد"],
-    ["cruise_control", "مثبت السرعة"],
-    ["handsfree", "نظام حر اليدين"],
-    ["sunroof", "فتحة سقف/سقف بانورامي"],
-    ["non_smoking", "مركبة خالية من التدخين"],
-  ];
-  const PROTECTION_CHOICES = [
-    ["service_book", "تم صيانة دفتر الخدمة"],
-    ["abs", "نظام المكابح المانعة للانزلاق ABS"],
-  ];
-  const STATUS_CHOICES = [
-    ["damaged", "متضررة"],
-    ["undamaged", "غير متضررة"],
-  ];
-  const FUEL_CHOICES = [
-    ["gasoline", "بنزين"],
-    ["diesel", "ديزل"],
-    ["electric", "كهربائي"],
-    ["hybrid", "هجين"],
-    ["lpg", "غاز البترول المسال"],
-    ["cng", "الغاز الطبيعي"],
-  ];
-  const GEARBOX_CHOICES = [
-    ["manual", "غيار يدوي"],
-    ["automatic", "غيار أوتوماتيك"],
-  ];
-  const TYPE_CHOICES = [
-    ["small_car", "سيارة صغيرة"],
-    ["limousine", "ليموزين"],
-    ["station", "ستيشن"],
-    ["sports", "سيارة رياضية"],
-    ["van_bus", "فان/حافلة"],
-    ["coupe", "كوبيه"],
-    ["other", "أنواع أخرى"],
-  ];
-  const DOORS_CHOICES = [
-    ["two_three", "2/3"],
-    ["four_five", "4/5"],
-    ["six_seven", "6/7"],
-    ["other_doors", "عدد مختلف من الأبواب"],
-  ];
-  const COLOR_CHOICES = [
-    ["beige", "بيج"],
-    ["blue", "أزرق"],
-    ["brown", "بني"],
-    ["yellow", "أصفر"],
-    ["gold", "ذهبي"],
-    ["gray", "رمادي"],
-    ["green", "أخضر"],
-    ["orange", "برتقالي"],
-    ["red", "أحمر"],
-    ["black", "أسود"],
-    ["silver", "فضي"],
-    ["purple", "بنفسجي"],
-    ["white", "أبيض"],
-    ["other", "ألوان أخرى"],
-  ];
-  const INTERNAL_MATERIALS_CHOICES = [
-    ["full_leather", "جلد كامل"],
-    ["partial_leather", "جلد جزئي"],
-    ["fabric", "قماش"],
-    ["velvet", "مخمل"],
-    ["other_materials", "مواد أخرى"],
-  ];
-  const BRAND_CHOICES = [
-    ["alfa_romeo", "ألفا روميو"],
-    ["audi", "أودي"],
-    ["bmw", "بي ام دبليو"],
-    ["chevrolet", "شيفروليه"],
-    ["chrysler", "كرايسلر"],
-    ["citroen", "سيتروين"],
-    ["dacia", "داسيا"],
-    ["daewoo", "دايو"],
-    ["daihatsu", "دايهاتسو"],
-    ["fiat", "فيات"],
-    ["ford", "فورد"],
-    ["honda", "هوندا"],
-    ["hyundai", "هيونداي"],
-    ["jaguar", "جاكوار"],
-    ["jeep", "جيب"],
-    ["kia", "كيا"],
-    ["lada", "لادا"],
-    ["lancia", "لانشيا"],
-    ["land_rover", "لاند روفر"],
-    ["lexus", "لكزس"],
-    ["mazda", "مازدا"],
-    ["mercedes_benz", "مرسيدس بنز"],
-    ["mini", "ميني"],
-    ["mitsubishi", "ميتسوبيشي"],
-    ["nissan", "نيسان"],
-    ["opel", "أوبل"],
-    ["peugeot", "بيجو"],
-    ["porsche", "بورشه"],
-    ["renault", "رينو"],
-    ["spaceship", "مركبة فضائية"],
-    ["saab", "ساب"],
-    ["seat", "سيات"],
-    ["skoda", "سكودا"],
-    ["smart", "ذكي"],
-    ["subaru", "سوبارو"],
-    ["suzuki", "سوزوكي"],
-    ["tesla", "تسلا"],
-    ["toyota", "تويوتا"],
-    ["trabant", "ترابانت"],
-    ["volkswagen", "فولكس فاجن"],
-    ["volvo", "فولفو"],
-    ["other", "ماركات السيارات الأخرى"],
-  ];
-
-  console.log({
-    category: Gcategory,
-    subcategory: Gsubcategory,
-  });
 
   const [notification, setNotification] = useState<{
     message: string;
@@ -154,10 +150,12 @@ export default function CarForm({
   const createCarPost = useCreateCarPost(setNotification);
   const { isPending: isLoading } = createCarPost;
 
+  const [isSearch, setIsSearch] = useState<boolean | undefined>(false);
   const onSubmit = (data: CarPostPayload) => {
     console.log("daTA: ", data);
     const formData = new FormData();
-
+    
+    formData.append("offer_type", data.offer_type ?? "sell");
     formData.append("title", data.title ?? "");
     formData.append("description", data.description ?? "");
     formData.append("price", data.price ?? "");
@@ -254,142 +252,161 @@ export default function CarForm({
 
   return (
     <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="w-full mx-auto space-y-10"
-    >
-      {/* ------------- Noti -------------- */}
-      {notification && (
-        <Notification
-          message={notification.message}
-          type={notification.type}
-          onClose={() => setNotification(null)}
-        />
-      )}
+    onSubmit={handleSubmit(onSubmit)}
+    className="w-full mx-auto space-y-10"
+  >
+    {/* ------------- Noti -------------- */}
+    {notification && (
+      <Notification
+        message={notification.message}
+        type={notification.type}
+        onClose={() => setNotification(null)}
+      />
+    )}
 
-      {/* معلومات أساسية */}
-      <section className="bg-white rounded-2xl shadow-lg border border-gray-200 p-8 mb-6 ">
-        <h2 className="font-bold text-xl text-gray-800 mb-2 text-right">
-          معلومات أساسية
-        </h2>
-        <p className="text-gray-600 mb-6 text-right">
-          أدخل معلومات الإعلان الأساسية لتظهر بوضوح للمشترين، مثل العنوان والوصف
-          العام والموقع.
-        </p>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-          <div className="sm:ml-16">
-            <label className="block font-medium text-gray-700">
-              اسم المنتج
-              <span className="text-red-500 text-xl mr-1">*</span>
-            </label>
-            <input
-            required
-              {...register("title")}
-              type="text"
-              placeholder="اسم المنتج"
-              className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
-            />
-
-            {errors.title && (
-              <p className="text-red-600 text-sm mt-1">
-                {String(errors.title.message)}
-              </p>
-            )}
-          </div>
-
-          <div className="sm:ml-16">
-            <label className="block font-medium text-gray-700">
-              صور المنتج
-            </label>
-            <input
-              type="file"
-              multiple
-              {...register("gallery")}
-              className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
-            />
-          </div>
+    {/* معلومات أساسية */}
+    <section className="bg-white rounded-2xl shadow-lg border border-gray-200 p-8 mb-6 ">
+      <h2 className="font-bold text-xl text-gray-800 mb-2 text-right">
+        معلومات أساسية
+      </h2>
+      <p className="text-gray-600 mb-6 text-right">
+        أدخل معلومات الإعلان الأساسية لتظهر بوضوح للمشترين، مثل العنوان والوصف
+        العام والموقع.
+      </p>
+      <div className=" mb-6 sm:ml-16 border-b border-clightgray">
+        {/* SEARCH || SELL */}
+        <h3 className="font-medium mb-3 mt-6 text-lg text-gray-700">
+          نوع المنشور
+          <span className="text-red-500 text-xl mr-1">*</span>
+        </h3>
+        <div className="w-full mt-2 max-w-sm  border-2 border-clightgray p-1.5 rounded-xl mb-6 flex">
+          <Button
+            type="button"
+            className="w-1/2 text-6 font-semibold"
+            variant={isSearch === false ? "primary" : "none"}
+            onClick={() => {
+              setIsSearch(false);
+              setValue("offer_type", "sell");
+            }}
+          >
+            أنا أعرض
+          </Button>
+          <Button
+            type="button"
+            className="w-1/2 text-6 font-semibold"
+            variant={isSearch === true ? "primary" : "none"}
+            onClick={() => {
+              setIsSearch(true);
+              setValue("offer_type", "search");
+            }}
+          >
+            أنا أبحث
+          </Button>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-          <div className="sm:ml-16">
-            <label className="block font-medium text-gray-700">المحافظة
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div className="sm:ml-16">
+          <label className="block font-medium text-gray-700">
+            اسم المنتج
             <span className="text-red-500 text-xl mr-1">*</span>
-            </label>
-            <select
+          </label>
+          <input
             required
-              {...register("city")}
-              className="mt-1  w-full p-3 border-2 rounded-lg bg-cwhite text-gray-700 focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200"
-              style={{
-                borderColor: "#277F60", // لون الحدود
-              }}
-            >
-              <option value="">اختر الإدخال</option>
-              {syrianGovernorates.map((gov) => (
-                <option key={gov.value} value={gov.value}>
-                  {gov.name}
-                </option>
-              ))}
-            </select>
-            {errors.city && (
-              <p className="text-red-600 text-sm mt-1">
-                {String(errors.city.message)}
-              </p>
-            )}
-          </div>
+            {...register("title")}
+            type="text"
+            placeholder="اسم المنتج"
+            className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
+          />
+        </div>
 
-          <div className="sm:ml-16">
-            <label className="block font-medium text-gray-700">المنطقة
+        <div className="sm:ml-16">
+          <label className="block font-medium text-gray-700">
+            صور المنتج
+          </label>
+          <input
+            type="file"
+            multiple
+            {...register("gallery")}
+            className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
+          />
+        </div>
+
+        <div className="sm:ml-16">
+          <label className="block font-medium text-gray-700">
+            المحافظة
             <span className="text-red-500 text-xl mr-1">*</span>
-            </label>
-            <input
+          </label>
+          <select
             required
-              {...register("hood")}
-              className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
-              placeholder="المنطقة"
-            />
-            {errors.hood && (
-              <p className="text-red-600 text-sm mt-1">
-                {String(errors.hood.message)}
-              </p>
-            )}
-          </div>
+            {...register("city")}
+            className="mt-1  w-full p-3 border-2 rounded-lg bg-cwhite text-gray-700 focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200"
+            style={{
+              borderColor: "#277F60", // لون الحدود
+            }}
+          >
+            <option value="">اختر الإدخال</option>
+            {syrianGovernorates.map((gov) => (
+              <option key={gov.value} value={gov.value}>
+                {gov.name}
+              </option>
+            ))}
+          </select>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6 sm:ml-16">
-          <div className="flex flex-col gap-2 md:col-span-2">
-            <label className="block font-medium text-gray-700">
-              تفاصيل العنوان
-            </label>
-            <input
-              {...register("detailed_location")}
-              className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
-              placeholder="تفاصيل العنوان"
-            />
-            {errors.detailed_location && (
-              <p className="text-red-600 text-sm mt-1">
-                {String(errors.detailed_location.message)}
-              </p>
-            )}
-          </div>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:ml-16">
-          <div className="flex flex-col gap-2 md:col-span-2">
-            <label className="block font-medium text-gray-700">
-              وصف المنتج
-              <span className="text-red-500 text-xl mr-1">*</span>
-            </label>
-            <textarea
-            required
-              {...register("description")}
-              className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
-              placeholder="ادخل وصف المنتج هنا"
-            />
-            {errors.description && (
-              <p className="text-red-600 text-sm mt-1">
-                {String(errors.description.message)}
-              </p>
-            )}
-          </div>
-        </div>
-      </section>
 
+        <div className="sm:ml-16">
+          <label className="block font-medium text-gray-700">
+            المنطقة
+            <span className="text-red-500 text-xl mr-1">*</span>
+          </label>
+          <input
+            required
+            {...register("hood")}
+            className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
+            placeholder="المنطقة"
+          />
+          {errors.hood && (
+            <p className="text-red-600 text-sm mt-1">
+              {String(errors.hood.message)}
+            </p>
+          )}
+        </div>
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6 sm:ml-16">
+        <div className="flex flex-col gap-2 md:col-span-2">
+          <label className="block font-medium text-gray-700">
+            تفاصيل العنوان
+          </label>
+          <input
+            {...register("detailed_location")}
+            className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
+            placeholder="تفاصيل العنوان"
+          />
+          {errors.detailed_location && (
+            <p className="text-red-600 text-sm mt-1">
+              {String(errors.detailed_location.message)}
+            </p>
+          )}
+        </div>
+        <div className="flex flex-col gap-2 md:col-span-2">
+          <label className="block font-medium text-gray-700">
+            وصف المنتج
+            <span className="text-red-500 text-xl mr-1">*</span>
+          </label>
+          <textarea
+            required
+            {...register("description")}
+            className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
+            placeholder="ادخل وصف المنتج هنا"
+          />
+          {errors.description && (
+            <p className="text-red-600 text-sm mt-1">
+              {String(errors.description.message)}
+            </p>
+          )}
+        </div>
+      </div>
+    </section>
       {/* سعر المنتج */}
       <section className="bg-white rounded-2xl shadow-lg border border-gray-200 p-8">
         <h2 className="font-bold text-xl text-gray-800 mb-2 text-right">

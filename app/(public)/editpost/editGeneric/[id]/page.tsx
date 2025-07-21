@@ -1,20 +1,33 @@
 "use client";
+import Button from "@/app/components/ui/Button";
 import Notification from "@/app/components/ui/Notification";
 import { useGetGenericPostId } from "@/app/lib/postServices/postQueries";
 import { GenericPostPayload } from "@/app/lib/postServices/postType";
 import { syrianGovernorates } from "@/app/signup/step2/syrianGovernorates";
 import { useParams } from "next/navigation";
 import React, { useState, useEffect } from "react";
+import { categories } from "@/app/sections/categories";
+import { useEditGenericForm } from "@/app/lib/postServices/editPostMutation";
+import SkeletonNotificationSettings from "@/app/components/ui/SkeletonNotificationSettings";
 
 const EditGeneric = () => {
   const params = useParams();
-  console.log("Params: ", params);
   const id = params.id as string | undefined;
+  
   const getPostDetail = useGetGenericPostId(id);
-  const { data, isLoading: isFetchingData } = getPostDetail;
+  const { data, isLoading } = getPostDetail;
+  
 
-  console.log("da   ", data);
-  // State لتحديث البيانات القادمة من API والتعديل عليها
+  const [notification, setNotification] = useState<{
+    message: string;
+    type: "success" | "error";
+  } | null>(null);
+
+  const editGenericForm = useEditGenericForm(setNotification);
+  const isPending = editGenericForm.isPending;
+
+
+
   const [formData, setFormData] = useState<Partial<GenericPostPayload>>({
     category: "",
     subcategory: "",
@@ -44,7 +57,9 @@ const EditGeneric = () => {
         detailed_location: data.detailed_location || "",
         cover_image: data.cover_image || "",
         gallery: data.gallery || [],
+        offer_type: data.offer_type || "sell",
       });
+      setIsSearch(data.offer_type === "search");
     }
   }, [data]);
 
@@ -54,47 +69,117 @@ const EditGeneric = () => {
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
     >
   ) => {
-    const { name, value } = e.target;
+    const { name, value, type } = e.target;
+    const files = (e.target as HTMLInputElement).files;
+    if (type === "file") {
+      setFormData((prev) => ({
+        ...prev,
+        [name]: files ? Array.from(files) : [],
+      }));
+    } else {
+      setFormData((prev) => ({
+        ...prev,
+        [name]: value,
+      }));
+    }
+  };
+
+  function isBlob(obj: unknown): obj is Blob {
+    return (
+      typeof window !== "undefined" &&
+      typeof obj === "object" &&
+      obj !== null &&
+      typeof window.Blob !== "undefined" &&
+      obj instanceof window.Blob
+    );
+  }
+
+
+  const [isSearch, setIsSearch] = useState<boolean | undefined>(false);
+
+  // تحديث offer_type عند الضغط على الأزرار
+  const handleOfferType = (type: "sell" | "search") => {
+    setIsSearch(type === "search");
     setFormData((prev) => ({
       ...prev,
-      [name]: value,
+      offer_type: type,
     }));
   };
 
-  // دالة لإرسال البيانات بعد التعديل
-  const onSubmit = (e: React.FormEvent) => {
+  // دالة الإرسال الصحيحة
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const formDataToSend = new FormData();
-
-    // إضافة البيانات إلى FormData
-    Object.entries(formData).forEach(([key, value]) => {
-      if (value !== null && value !== undefined) {
-        if (key === "gallery" && Array.isArray(value)) {
-          value.forEach((file) => formDataToSend.append("gallery", file));
-        } else if (key === "cover_image" && typeof window !== "undefined") {
-          if (value instanceof File || value instanceof Blob) {
-            formDataToSend.append("cover_image", value);
-          }
-        } else {
-          formDataToSend.append(key, value.toString());
-        }
+    const data = formData;
+    const form = new FormData();
+    form.append("offer_type", data.offer_type ?? "sell");
+    form.append("title", data.title ?? "");
+    form.append("description", data.description ?? "");
+    form.append("price", data.price ?? "");
+    form.append("price_type", data.price_type ?? "fixed");
+    form.append("city", data.city ?? "");
+    form.append("hood", data.hood ?? "");
+    form.append("detailed_location", data.detailed_location ?? "");
+    if (data.cover_image && typeof window !== "undefined") {
+      if (
+        typeof data.cover_image === "object" &&
+        "length" in data.cover_image &&
+        typeof (data.cover_image as FileList).item === "function"
+      ) {
+        form.append("cover_image", (data.cover_image as FileList)[0]);
+      } else if (isBlob(data.cover_image)) {
+        form.append("cover_image", data.cover_image);
+      } else if (typeof data.cover_image === "string") {
+        form.append("cover_image", data.cover_image);
       }
-    });
-
-    // هنا يمكنك إرسال البيانات باستخدام mutate أو أي دالة أخرى
-    console.log(
-      "Form Data to Submit:",
-      Object.fromEntries(formDataToSend.entries())
-    );
+    }
+    if (data.gallery && data.gallery.length > 0) {
+      if (
+        typeof globalThis.FileList !== "undefined" &&
+        data.gallery instanceof globalThis.FileList
+      ) {
+        Array.from(data.gallery).forEach((img: File) => {
+          form.append("gallery", img);
+        });
+      } else if (Array.isArray(data.gallery)) {
+        (data.gallery as (File | string)[]).forEach((img) => {
+          if (img instanceof File) {
+            form.append("gallery", img);
+          } else if (typeof img === "string") {
+            form.append("gallery", img);
+          }
+        });
+      }
+    }
+    if (!id) {
+      setNotification({ message: "معرف الإعلان غير صالح.", type: "error" });
+      return;
+    }
+    editGenericForm.mutate({ formData: form, id });
   };
 
-  const [notification, setNotification] = useState<{
-    message: string;
-    type: "success" | "error";
-  } | null>(null);
+    function getArabicName(input: string): string | null {
+      for (const category of categories) {
+        if (category.slug === input) {
+          return category.name;
+        }
+    
+        for (const item of category.items) {
+          if (item.slug === input) {
+            return item.label; 
+          }
+        }
+      }
+      return null;
+    }
+
+    if( isLoading ) return(
+      <SkeletonNotificationSettings />
+    )
 
   return (
-    <form onSubmit={onSubmit} className="w-full mx-auto space-y-10">
+    <div className="min-h-screen py-4 bg-gray-100  flex flex-col items-center">
+
+    <form onSubmit={onSubmit} className="w-[90%]">
       {/* ------------- Noti -------------- */}
       {notification && (
         <Notification
@@ -121,10 +206,6 @@ const EditGeneric = () => {
       {/* تصنيف المنتج */}
       <div className="bg-white rounded-xl shadow-md border border-gray-200 p-6 mb-8">
         <h2 className="font-bold text-xl mb-2 text-gray-800">تصنيف المنتج</h2>
-        <p className="text-gray-500 mb-4">
-          اختر تصنيف المنتج الخاص بك مع العلم أن التفاصيل المدخلة تختلف بحسب
-          التصنيف
-        </p>
         <hr className="mb-6 text-clightgray" />
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="sm:ml-16">
@@ -136,7 +217,7 @@ const EditGeneric = () => {
               required
               readOnly
               name="category"
-              value={formData.category || ""}
+              value={getArabicName(formData.category ?? "") || ""}
               type="text"
               className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
             />
@@ -151,7 +232,7 @@ const EditGeneric = () => {
               required
               readOnly
               name="subcategory"
-              value={formData.subcategory || ""}
+              value={getArabicName(formData.subcategory ?? "") || ""}
               type="text"
               className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
             />
@@ -168,6 +249,32 @@ const EditGeneric = () => {
           أدخل معلومات الإعلان الأساسية لتظهر بوضوح للمشترين، مثل العنوان والوصف
           العام والموقع.
         </p>
+        <div className=" mb-6 sm:ml-16 border-b border-clightgray">
+          {/* SEARCH || SELL */}
+          <h3 className="font-medium mb-3 mt-6 text-lg text-gray-700">
+            نوع المنشور
+            <span className="text-red-500 text-xl mr-1">*</span>
+          </h3>
+          <div className="w-full mt-2 max-w-sm  border-2 border-clightgray p-1.5 rounded-xl mb-6 flex">
+            <Button
+              type="button"
+              className="w-1/2 text-6 font-semibold"
+              variant={isSearch === false ? "primary" : "none"}
+              onClick={() => handleOfferType("sell")}
+            >
+              أنا أعرض
+            </Button>
+            <Button
+              type="button"
+              className="w-1/2 text-6 font-semibold"
+              variant={isSearch === true ? "primary" : "none"}
+              onClick={() => handleOfferType("search")}
+            >
+              أنا أبحث
+            </Button>
+          </div>
+        </div>
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
           <div className="sm:ml-16">
             <label className="block font-medium text-gray-700">
@@ -191,15 +298,7 @@ const EditGeneric = () => {
               type="file"
               multiple
               name="gallery"
-              onChange={(e) => {
-                const files = Array.from(e.target.files || []);
-                // إذا كان يجب رفع الملفات فعلياً، هنا ترفع وترجع روابطها
-                // حالياً سنضع أسماء الملفات كنصوص فقط لتوافق النوع
-                setFormData((prev) => ({
-                  ...prev,
-                  gallery: files.map((f) => f.name),
-                }));
-              }}
+              onChange={handleInputChange}
               className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
             />
           </div>
@@ -347,13 +446,14 @@ const EditGeneric = () => {
             type="submit"
             className="mt-8 ml-6 max-sm:ml-0 text-white rounded"
           >
-            <span className="bg-cgreen hover:bg-chgreen py-3 px-32 max-sm:px-20 rounded text-xl transition-all duration-300">
-              {isFetchingData ? "جارٍ التحميل ..." : "إعادة نشر"}
+            <span className="bg-cgreen hover:bg-chgreen py-3 px-32 max-md:px-20 rounded text-xl transition-all duration-300">
+              {isPending ? "جارٍ النشر ..." : "إعادة نشر"}
             </span>
           </button>
         </div>
       </section>
     </form>
+    </div>
   );
 };
 
