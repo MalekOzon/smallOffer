@@ -145,7 +145,7 @@ export default function GenericPostForm({
         formData.append("cover_image", data.cover_image);
       }
     }
-
+  
     formData.append("category", Gcategory);
     formData.append("subcategory", Gsubcategory);
 
