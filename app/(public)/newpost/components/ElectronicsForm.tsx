@@ -1,11 +1,12 @@
 import { useForm } from "react-hook-form";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Notification from "@/app/components/ui/Notification";
 import { ElectronicsPostPayload } from "@/app/lib/postServices/postType";
 import { useCreateElectronicsPost } from "@/app/lib/postServices/postMutations";
 import { syrianGovernorates } from "@/app/signup/step2/syrianGovernorates";
 import { Search } from "lucide-react";
 import Button from "@/app/components/ui/Button";
+import Image from "next/image";
 
 interface PostFormProps {
   Gcategory: string;
@@ -24,6 +25,7 @@ export default function ElectronicsForm({
 }: PostFormProps) {
   const {
     register,
+    watch,
     handleSubmit,
     setValue,
     formState: { errors },
@@ -38,6 +40,39 @@ export default function ElectronicsForm({
   } | null>(null);
   const CreateElectronicsPost = useCreateElectronicsPost(setNotification);
   const { isPending: isLoading } = CreateElectronicsPost;
+
+
+  
+////////////////////////////////  // //////////////////////////////////////
+
+const coverImage = watch("cover_image");
+const [preview, setPreview] = useState<string | null>(null);
+const inputRef = useRef<HTMLInputElement>(null);
+useEffect(() => {
+  if (coverImage instanceof File) {
+    const objectUrl = URL.createObjectURL(coverImage);
+    setPreview(objectUrl);
+    return () => URL.revokeObjectURL(objectUrl);
+  } else {
+    setPreview(null);
+  }
+}, [coverImage]);
+
+const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const file = e.target.files?.[0];
+  if (file) {
+    setValue("cover_image", file, {
+      shouldValidate: true,
+      shouldDirty: true,
+    });
+  }
+};
+
+const handleClick = () => {
+  inputRef.current?.click();
+};
+
+////////////////////////////////  // //////////////////////////////////////
 
   const [isSearch, setIsSearch] = useState<boolean | undefined>(false);
   
@@ -54,19 +89,13 @@ export default function ElectronicsForm({
     formData.append("hood", data.hood ?? "");
     formData.append("detailed_location", data.detailed_location ?? "");
 
-    if (data.cover_image && typeof window !== "undefined") {
-      if (
-        typeof data.cover_image === "object" &&
-        "length" in data.cover_image &&
-        typeof (data.cover_image as FileList).item === "function"
-      ) {
-        // Likely a FileList
-        formData.append("cover_image", (data.cover_image as FileList)[0]);
-      } else if (isBlob(data.cover_image)) {
-        // File inherits from Blob
-        formData.append("cover_image", data.cover_image);
-      }
-    }
+if (data.cover_image) {
+  if (data.cover_image instanceof File) {
+    formData.append("cover_image", data.cover_image);
+  } else if (typeof data.cover_image === "string") {
+    formData.append("cover_image", data.cover_image);
+  }
+}
 
     formData.append("category", Gcategory);
     formData.append("subcategory", Gsubcategory);
@@ -95,15 +124,7 @@ export default function ElectronicsForm({
     CreateElectronicsPost.mutate(formData);
   };
 
-  function isBlob(obj: unknown): obj is Blob {
-    return (
-      typeof window !== "undefined" &&
-      typeof obj === "object" &&
-      obj !== null &&
-      typeof window.Blob !== "undefined" &&
-      obj instanceof window.Blob
-    );
-  }
+
 
   return (
 <form
@@ -175,6 +196,37 @@ export default function ElectronicsForm({
             />
           </div>
 
+
+<div className="sm:ml-16">
+<label className="block font-medium text-gray-700 mb-2">
+  صورة غلاف المنتج
+</label>
+
+<input
+  type="file"
+  accept="image/*"
+  ref={inputRef}
+  onChange={handleImageChange}
+  className="hidden"
+/>
+
+<div
+  onClick={handleClick}
+  className="w-64 h-40 border-2 border-dashed border-cgreen rounded-lg flex items-center justify-center cursor-pointer bg-cwhite overflow-hidden"
+>
+  {preview ? (
+    <Image
+      src={preview}
+      alt="preview"
+      width={256}
+      height={160}
+      className="object-cover w-full h-full"
+    />
+  ) : (
+    <span className="text-cgreen text-4xl">+</span>
+  )}
+</div>
+</div>
           <div className="sm:ml-16">
             <label className="block font-medium text-gray-700">
               صور المنتج

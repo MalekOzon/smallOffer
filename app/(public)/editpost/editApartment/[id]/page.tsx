@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useParams } from "next/navigation";
 import { useGetApartmentPostId } from "@/app/lib/postServices/postQueries";
 import { useEditApartmentForm } from "@/app/lib/postServices/editPostMutation";
@@ -14,6 +14,7 @@ import {
   GENERAL_CHARACTERISTICS,
   OFFER_TYPE_CHOICES,
 } from "@/app/(public)/newpost/components/ApartmentForm";
+import Image from "next/image";
 
 const EditApartment = () => {
   const params = useParams();
@@ -72,25 +73,7 @@ const EditApartment = () => {
     }
   }, [data]);
 
-  const handleInputChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >
-  ) => {
-    const { name, value, type } = e.target;
-    const files = (e.target as HTMLInputElement).files;
-    if (type === "file") {
-      setFormData((prev) => ({
-        ...prev,
-        [name]: files ? Array.from(files) : [],
-      }));
-    } else {
-      setFormData((prev) => ({
-        ...prev,
-        [name]: value,
-      }));
-    }
-  };
+
 
   const handleApartmentInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -139,15 +122,6 @@ const EditApartment = () => {
     });
   };
 
-  function isBlob(obj: unknown): obj is Blob {
-    return (
-      typeof window !== "undefined" &&
-      typeof obj === "object" &&
-      obj !== null &&
-      typeof window.Blob !== "undefined" &&
-      obj instanceof window.Blob
-    );
-  }
 
   // تحديث offer_type عند الضغط على الأزرار
   const handleOfferType = (type: "sell" | "search") => {
@@ -158,14 +132,7 @@ const EditApartment = () => {
     }));
   };
 
-  function isFileList(value: unknown): value is FileList {
-    return (
-      typeof value === "object" &&
-      value !== null &&
-      typeof (value as FileList).item === "function" &&
-      typeof (value as FileList)[Symbol.iterator] === "function"
-    );
-  }
+
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -186,11 +153,9 @@ const EditApartment = () => {
     form.append("subcategory", data.subcategory ?? "");
     form.append("detailed_location", data.detailed_location ?? "");
 
-    if (isFileList(data.cover_image)) {
-      form.append("cover_image", data.cover_image[0]);
-    } else if (isBlob(data.cover_image)) {
+    if (data.cover_image instanceof File) {
       form.append("cover_image", data.cover_image);
-    }
+  }
 
     if (data.gallery && data.gallery.length > 0) {
       if (
@@ -240,6 +205,97 @@ const EditApartment = () => {
     }
     return null;
   }
+
+
+    // /////////////////////////////////////////////////////////////////////////////////////
+
+    const inputRef = useRef<HTMLInputElement | null>(null);
+    const [preview, setPreview] = useState<string | null>(null);
+    // لما تضغط على صندوق رفع الصورة يفتح اختيار الملفات
+    const handleClick = () => {
+      inputRef.current?.click();
+    };
+      // لما تختار صورة جديدة يتم تحديث preview و formData.cover_image
+      const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const files = e.target.files;
+        if (files && files.length > 0) {
+          const file = files[0];
+          setFormData((prev) => ({
+            ...prev,
+            cover_image: file,
+          }));
+          setPreview(URL.createObjectURL(file));
+        }
+      };
+       // تحديث preview لو جت بيانات موجودة كسلسلة نصية (رابط صورة من السيرفر مثلا)
+    useEffect(() => {
+      if (formData.cover_image && typeof formData.cover_image === "string") {
+        setPreview(formData.cover_image);
+      }
+    }, [formData.cover_image]);
+  
+    const handleInputChange = (
+      e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+      >
+    ) => {
+      const { name, value, type } = e.target;
+      const files = (e.target as HTMLInputElement).files;
+      
+      if (type === "file") {
+        if (name === "gallery") {
+          setFormData((prev) => ({
+            ...prev,
+            [name]: files ? Array.from(files) : [],
+          }));
+        } else if (name === "cover_image") {
+          setFormData((prev) => ({
+            ...prev,
+            [name]: files && files.length > 0 ? files[0] : null,
+          }));
+        }
+      } else {
+        setFormData((prev) => ({
+          ...prev,
+          [name]: value,
+        }));
+      }
+    };
+  
+  
+  //   <div className="sm:ml-16">
+  //   <label className="block font-medium text-gray-700 mb-2">
+  //     صورة غلاف المنتج
+  //   </label>
+  
+  //   <input
+  //     type="file"
+  //     accept="image/*"
+  //     ref={inputRef}
+  //     onChange={handleImageChange}
+  //     className="hidden"
+  //   />
+  
+  //   <div
+  //     onClick={handleClick}
+  //     className="w-64 h-40 border-2 border-dashed border-cgreen rounded-lg flex items-center justify-center cursor-pointer bg-cwhite overflow-hidden"
+  //   >
+  //     {preview ? (
+  //       <Image
+  //         src={preview}
+  //         alt="preview"
+  //         width={256}
+  //         height={160}
+  //         className="object-cover w-full h-full"
+  //       />
+  //     ) : (
+  //       <span className="text-cgreen text-4xl">+</span>
+  //     )}
+  //   </div>
+  // </div>
+  
+  
+    // ////////////////////////////////////////////////////////////////////
 
   if (isLoading) return <SkeletonNotificationSettings />;
 
@@ -353,6 +409,37 @@ const EditApartment = () => {
                 className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
               />
             </div>
+
+              <div className="sm:ml-16">
+    <label className="block font-medium text-gray-700 mb-2">
+      صورة غلاف المنتج
+    </label>
+  
+    <input
+      type="file"
+      accept="image/*"
+      ref={inputRef}
+      onChange={handleImageChange}
+      className="hidden"
+    />
+  
+    <div
+      onClick={handleClick}
+      className="w-64 h-40 border-2 border-dashed border-cgreen rounded-lg flex items-center justify-center cursor-pointer bg-cwhite overflow-hidden"
+    >
+      {preview ? (
+        <Image
+          src={preview}
+          alt="preview"
+          width={256}
+          height={160}
+          className="object-cover w-full h-full"
+        />
+      ) : (
+        <span className="text-cgreen text-4xl">+</span>
+      )}
+    </div>
+  </div>
             <div className="sm:ml-16">
               <label className="block font-medium text-gray-700">
                 صور المنتج

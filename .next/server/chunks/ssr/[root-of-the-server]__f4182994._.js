@@ -2346,7 +2346,74 @@ const categories = [
         name: "وظائف",
         icon: __TURBOPACK__imported__module__$5b$project$5d2f$public$2f$resourses$2f$bag$2e$svg$2e$mjs__$7b$__IMAGE__$3d3e$__$225b$project$5d2f$public$2f$resourses$2f$bag$2e$svg__$28$static__in__ecmascript$2922$__$7d$__$5b$app$2d$ssr$5d$__$28$structured__image__object$2c$__ecmascript$29$__["default"],
         slug: "jobs",
-        items: []
+        items: [
+            {
+                label: "برمجة وتقنية",
+                icon: __TURBOPACK__imported__module__$5b$project$5d2f$public$2f$resourses$2f$cook$2e$svg$2e$mjs__$7b$__IMAGE__$3d3e$__$225b$project$5d2f$public$2f$resourses$2f$cook$2e$svg__$28$static__in__ecmascript$2922$__$7d$__$5b$app$2d$ssr$5d$__$28$structured__image__object$2c$__ecmascript$29$__["default"],
+                slug: "it",
+                href: "/categories/learning/cooking"
+            },
+            {
+                label: "صناعي وحرفي",
+                icon: __TURBOPACK__imported__module__$5b$project$5d2f$public$2f$resourses$2f$cook$2e$svg$2e$mjs__$7b$__IMAGE__$3d3e$__$225b$project$5d2f$public$2f$resourses$2f$cook$2e$svg__$28$static__in__ecmascript$2922$__$7d$__$5b$app$2d$ssr$5d$__$28$structured__image__object$2c$__ecmascript$29$__["default"],
+                slug: "craftsman",
+                href: "/categories/learning/cooking"
+            },
+            {
+                label: "مطاعم وكافيهات",
+                icon: __TURBOPACK__imported__module__$5b$project$5d2f$public$2f$resourses$2f$cook$2e$svg$2e$mjs__$7b$__IMAGE__$3d3e$__$225b$project$5d2f$public$2f$resourses$2f$cook$2e$svg__$28$static__in__ecmascript$2922$__$7d$__$5b$app$2d$ssr$5d$__$28$structured__image__object$2c$__ecmascript$29$__["default"],
+                slug: "resturants",
+                href: "/categories/learning/cooking"
+            },
+            {
+                label: "نقل وتوصيل",
+                icon: __TURBOPACK__imported__module__$5b$project$5d2f$public$2f$resourses$2f$cook$2e$svg$2e$mjs__$7b$__IMAGE__$3d3e$__$225b$project$5d2f$public$2f$resourses$2f$cook$2e$svg__$28$static__in__ecmascript$2922$__$7d$__$5b$app$2d$ssr$5d$__$28$structured__image__object$2c$__ecmascript$29$__["default"],
+                slug: "delivery",
+                href: "/categories/learning/cooking"
+            },
+            {
+                label: "تعليم وتدريس",
+                icon: __TURBOPACK__imported__module__$5b$project$5d2f$public$2f$resourses$2f$cook$2e$svg$2e$mjs__$7b$__IMAGE__$3d3e$__$225b$project$5d2f$public$2f$resourses$2f$cook$2e$svg__$28$static__in__ecmascript$2922$__$7d$__$5b$app$2d$ssr$5d$__$28$structured__image__object$2c$__ecmascript$29$__["default"],
+                slug: "teaching",
+                href: "/categories/learning/cooking"
+            },
+            {
+                label: "أعمال حرة",
+                icon: __TURBOPACK__imported__module__$5b$project$5d2f$public$2f$resourses$2f$cook$2e$svg$2e$mjs__$7b$__IMAGE__$3d3e$__$225b$project$5d2f$public$2f$resourses$2f$cook$2e$svg__$28$static__in__ecmascript$2922$__$7d$__$5b$app$2d$ssr$5d$__$28$structured__image__object$2c$__ecmascript$29$__["default"],
+                slug: "free",
+                href: "/categories/learning/cooking"
+            },
+            {
+                label: "بناء وإعمار",
+                icon: __TURBOPACK__imported__module__$5b$project$5d2f$public$2f$resourses$2f$cook$2e$svg$2e$mjs__$7b$__IMAGE__$3d3e$__$225b$project$5d2f$public$2f$resourses$2f$cook$2e$svg__$28$static__in__ecmascript$2922$__$7d$__$5b$app$2d$ssr$5d$__$28$structured__image__object$2c$__ecmascript$29$__["default"],
+                slug: "construction",
+                href: "/categories/learning/cooking"
+            },
+            {
+                label: "الطب والصحة",
+                icon: __TURBOPACK__imported__module__$5b$project$5d2f$public$2f$resourses$2f$cook$2e$svg$2e$mjs__$7b$__IMAGE__$3d3e$__$225b$project$5d2f$public$2f$resourses$2f$cook$2e$svg__$28$static__in__ecmascript$2922$__$7d$__$5b$app$2d$ssr$5d$__$28$structured__image__object$2c$__ecmascript$29$__["default"],
+                slug: "medical",
+                href: "/categories/learning/cooking"
+            },
+            {
+                label: "مكاتب",
+                icon: __TURBOPACK__imported__module__$5b$project$5d2f$public$2f$resourses$2f$cook$2e$svg$2e$mjs__$7b$__IMAGE__$3d3e$__$225b$project$5d2f$public$2f$resourses$2f$cook$2e$svg__$28$static__in__ecmascript$2922$__$7d$__$5b$app$2d$ssr$5d$__$28$structured__image__object$2c$__ecmascript$29$__["default"],
+                slug: "offices",
+                href: "/categories/learning/cooking"
+            },
+            {
+                label: "تصميم وإعلام",
+                icon: __TURBOPACK__imported__module__$5b$project$5d2f$public$2f$resourses$2f$cook$2e$svg$2e$mjs__$7b$__IMAGE__$3d3e$__$225b$project$5d2f$public$2f$resourses$2f$cook$2e$svg__$28$static__in__ecmascript$2922$__$7d$__$5b$app$2d$ssr$5d$__$28$structured__image__object$2c$__ecmascript$29$__["default"],
+                slug: "design-media",
+                href: "/categories/learning/cooking"
+            },
+            {
+                label: "أعمال أخرى",
+                icon: __TURBOPACK__imported__module__$5b$project$5d2f$public$2f$resourses$2f$cook$2e$svg$2e$mjs__$7b$__IMAGE__$3d3e$__$225b$project$5d2f$public$2f$resourses$2f$cook$2e$svg__$28$static__in__ecmascript$2922$__$7d$__$5b$app$2d$ssr$5d$__$28$structured__image__object$2c$__ecmascript$29$__["default"],
+                slug: "other",
+                href: "/categories/learning/cooking"
+            }
+        ]
     }
 ];
 }}),

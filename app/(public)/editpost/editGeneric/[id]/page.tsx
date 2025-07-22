@@ -60,6 +60,9 @@ const EditGeneric = () => {
     }
   };
   
+
+
+  
   // تحديث صورة في المعرض
   const handleGalleryChange = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -411,6 +414,9 @@ const EditGeneric = () => {
                 )}
               </div>
             </div>
+
+
+            
             <input type="hidden" {...register("gallery")} />
             <div className="sm:ml-16">
               <label className="block font-medium text-gray-700 mb-2">

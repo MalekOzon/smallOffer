@@ -36,13 +36,8 @@ export default function GenericPostForm({
   const { isPending: isLoading } = createPost;
 
   // COVER IMAGE -------------------------------------------------
-  // Watch cover_image for preview
   const coverImage = watch("cover_image");
-
-  // State for preview URL
   const [preview, setPreview] = useState<string | null>(null);
-
-  // Ref to hidden file input
   const inputRef = useRef<HTMLInputElement>(null);
 
   // Create preview URL when coverImage changes
@@ -55,6 +50,7 @@ export default function GenericPostForm({
       setPreview(null);
     }
   }, [coverImage]);
+
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
@@ -264,6 +260,8 @@ export default function GenericPostForm({
               )}
             </div>
           </div>
+
+          
           <input type="hidden" {...register("gallery")} />
           {/* قسم معرض الصور */}
           <div className="sm:ml-16">

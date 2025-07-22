@@ -9,8 +9,9 @@ import { CarPostPayload } from "@/app/lib/postServices/postType";
 import { categories } from "@/app/sections/categories";
 import { syrianGovernorates } from "@/app/signup/step2/syrianGovernorates";
 import { Search } from "lucide-react";
+import Image from "next/image";
 import { useParams } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 const EditCar = () => {
   const params = useParams();
@@ -27,6 +28,11 @@ const EditCar = () => {
   const editCarForm = useEditCarForm(setNotification);
   const isPending = editCarForm.isPending;
 
+
+
+
+
+
   // عدل تعريف formData ليكون car: CarPostPayload['car'] | undefined
   const [formData, setFormData] = useState<Partial<CarPostPayload>>({
     category: "",
@@ -38,7 +44,7 @@ const EditCar = () => {
     city: "",
     hood: "",
     detailed_location: "",
-    cover_image: "",
+    cover_image: null,
     gallery: [],
     car: undefined,
   });
@@ -65,26 +71,6 @@ const EditCar = () => {
     }
   }, [data]);
 
-  // دالة لتحديث القيم في الحقول عند التعديل
-  const handleInputChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >
-  ) => {
-    const { name, value, type } = e.target;
-    const files = (e.target as HTMLInputElement).files;
-    if (type === "file") {
-      setFormData((prev) => ({
-        ...prev,
-        [name]: files ? Array.from(files) : [],
-      }));
-    } else {
-      setFormData((prev) => ({
-        ...prev,
-        [name]: value,
-      }));
-    }
-  };
 
   // --- أضف دالة تغيير لحقول تفاصيل السيارة مع إصلاحات linter النهائية ---
   const handleCarInputChange = (
@@ -138,16 +124,6 @@ const EditCar = () => {
     });
   };
 
-  function isBlob(obj: unknown): obj is Blob {
-    return (
-      typeof window !== "undefined" &&
-      typeof obj === "object" &&
-      obj !== null &&
-      typeof window.Blob !== "undefined" &&
-      obj instanceof window.Blob
-    );
-  }
-
   const [isSearch, setIsSearch] = useState<boolean | undefined>(false);
 
   // تحديث offer_type عند الضغط على الأزرار
@@ -164,6 +140,11 @@ const EditCar = () => {
     e.preventDefault();
     const data = formData;
     const form = new FormData();
+    if (!id) {
+      setNotification({ message: "معرف الإعلان غير صالح.", type: "error" });
+      return;
+    }
+
     form.append("offer_type", data.offer_type ?? "sell");
     form.append("title", data.title ?? "");
     form.append("description", data.description ?? "");
@@ -176,19 +157,10 @@ const EditCar = () => {
     form.append("detailed_location", data.detailed_location ?? "");
 
 
-    if (data.cover_image && typeof window !== "undefined") {
-      if (
-        typeof data.cover_image === "object" &&
-        "length" in data.cover_image &&
-        typeof (data.cover_image as FileList).item === "function"
-      ) {
-        form.append("cover_image", (data.cover_image as FileList)[0]);
-      } else if (isBlob(data.cover_image)) {
-        form.append("cover_image", data.cover_image);
-      } else if (typeof data.cover_image === "string") {
-        form.append("cover_image", data.cover_image);
-      }
-    }
+    if (data.cover_image instanceof File) {
+      form.append("cover_image", data.cover_image);
+  }
+
     const carDetails = {
       fuel_type: data.car?.fuel_type,
       color: data.car?.color,
@@ -227,31 +199,16 @@ const EditCar = () => {
         }
       }
     });
-
     form.append("car_details", JSON.stringify(cleanCarDetails));
     
-    if (data.gallery && data.gallery.length > 0) {
-      if (
-        typeof globalThis.FileList !== "undefined" &&
-        data.gallery instanceof globalThis.FileList
-      ) {
-        Array.from(data.gallery).forEach((img: File) => {
+    if (formData.gallery && formData.gallery.length > 0) {
+      formData.gallery.forEach((img) => {
+        if (img instanceof File) {
           form.append("gallery", img);
-        });
-      } else if (Array.isArray(data.gallery)) {
-        (data.gallery as (File | string)[]).forEach((img) => {
-          if (img instanceof File) {
-            form.append("gallery", img);
-          } else if (typeof img === "string") {
-            form.append("gallery", img);
-          }
-        });
-      }
+        }
+      });
     }
-    if (!id) {
-      setNotification({ message: "معرف الإعلان غير صالح.", type: "error" });
-      return;
-    }
+
     editCarForm.mutate({ formData: form, id });
   };
 
@@ -269,6 +226,109 @@ const EditCar = () => {
     }
     return null;
   }
+
+
+
+  // /////////////////////////////////////////////////////////////////////////////////////
+
+  const inputRef = useRef<HTMLInputElement | null>(null);
+  const [preview, setPreview] = useState<string | null>(null);
+  // لما تضغط على صندوق رفع الصورة يفتح اختيار الملفات
+  const handleClick = () => {
+    inputRef.current?.click();
+  };
+    // لما تختار صورة جديدة يتم تحديث preview و formData.cover_image
+    const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      const files = e.target.files;
+      if (files && files.length > 0) {
+        const file = files[0];
+        setFormData((prev) => ({
+          ...prev,
+          cover_image: file,
+        }));
+        setPreview(URL.createObjectURL(file));
+      }
+    };
+     // تحديث preview لو جت بيانات موجودة كسلسلة نصية (رابط صورة من السيرفر مثلا)
+  useEffect(() => {
+    if (formData.cover_image && typeof formData.cover_image === "string") {
+      setPreview(formData.cover_image);
+    }
+  }, [formData.cover_image]);
+
+  const handleInputChange = (
+    e: React.ChangeEvent<
+    HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ) => {
+    const { name, value, type } = e.target;
+    const files = (e.target as HTMLInputElement).files;
+    
+    if (type === "file") {
+      if (name === "gallery") {
+        setFormData((prev) => ({
+          ...prev,
+          [name]: files ? Array.from(files) : [],
+        }));
+      } else if (name === "cover_image") {
+        setFormData((prev) => ({
+          ...prev,
+          [name]: files && files.length > 0 ? files[0] : null,
+        }));
+      }
+    } else {
+      setFormData((prev) => ({
+        ...prev,
+        [name]: value,
+      }));
+    }
+  };
+
+
+//   <div className="sm:ml-16">
+//   <label className="block font-medium text-gray-700 mb-2">
+//     صورة غلاف المنتج
+//   </label>
+
+//   {/* Hidden File Input */}
+//   <input
+//     type="file"
+//     accept="image/*"
+//     ref={inputRef}
+//     onChange={handleImageChange}
+//     className="hidden"
+//   />
+
+//   {/* Upload Box */}
+//   <div
+//     onClick={handleClick}
+//     className="w-64 h-40 border-2 border-dashed border-cgreen rounded-lg flex items-center justify-center cursor-pointer bg-cwhite overflow-hidden"
+//   >
+//     {preview ? (
+//       <Image
+//         src={preview}
+//         alt="preview"
+//         width={256}
+//         height={160}
+//         className="object-cover w-full h-full"
+//       />
+//     ) : (
+//       <span className="text-cgreen text-4xl">+</span>
+//     )}
+//   </div>
+// </div>
+
+
+  // if (formData.gallery && formData.gallery.length > 0) {
+  //   formData.gallery.forEach((img) => {
+  //     if (img instanceof File) {
+  //       form.append("gallery", img);
+  //     }
+  //   });
+  // }
+
+  // ////////////////////////////////////////////////////////////////////
+
 
   if (isLoading) return <SkeletonNotificationSettings />;
 
@@ -388,6 +448,40 @@ const EditCar = () => {
                 className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
               />
             </div>
+            <div className="sm:ml-16">
+              <label className="block font-medium text-gray-700 mb-2">
+                صورة غلاف المنتج
+              </label>
+
+              {/* Hidden File Input */}
+              <input
+                type="file"
+                accept="image/*"
+                ref={inputRef}
+                onChange={handleImageChange}
+                className="hidden"
+              />
+
+              {/* Upload Box */}
+              <div
+                onClick={handleClick}
+                className="w-64 h-40 border-2 border-dashed border-cgreen rounded-lg flex items-center justify-center cursor-pointer bg-cwhite overflow-hidden"
+              >
+                {preview ? (
+                  <Image
+                    src={preview}
+                    alt="preview"
+                    width={256}
+                    height={160}
+                    className="object-cover w-full h-full"
+                  />
+                ) : (
+                  <span className="text-cgreen text-4xl">+</span>
+                )}
+              </div>
+            </div>
+
+
             <div className="sm:ml-16">
               <label className="block font-medium text-gray-700">
                 صور المنتج

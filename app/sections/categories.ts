@@ -139,6 +139,21 @@ export const categories = [
     name: "وظائف",
     icon: bag,
     slug: "jobs",
-    items: [],
+    items: [
+      { label: "برمجة وتقنية", icon: cook, slug: "it", href: "/categories/learning/cooking" },
+      { label: "صناعي وحرفي", icon: cook, slug: "craftsman", href: "/categories/learning/cooking" },
+      { label: "مطاعم وكافيهات", icon: cook, slug: "resturants", href: "/categories/learning/cooking" },
+      { label: "نقل وتوصيل", icon: cook, slug: "delivery", href: "/categories/learning/cooking" },
+      { label: "تعليم وتدريس", icon: cook, slug: "teaching", href: "/categories/learning/cooking" },
+      { label: "أعمال حرة", icon: cook, slug: "free", href: "/categories/learning/cooking" },
+      { label: "بناء وإعمار", icon: cook, slug: "construction", href: "/categories/learning/cooking" },
+      { label: "الطب والصحة", icon: cook, slug: "medical", href: "/categories/learning/cooking" },
+      { label: "مكاتب", icon: cook, slug: "offices", href: "/categories/learning/cooking" },
+      { label: "تصميم وإعلام", icon: cook, slug: "design-media", href: "/categories/learning/cooking" },
+      { label: "أعمال أخرى", icon: cook, slug: "other", href: "/categories/learning/cooking" },
+
+    ],
   },
 ];
+
+

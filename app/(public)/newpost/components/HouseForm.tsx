@@ -1,12 +1,13 @@
 import { useForm } from "react-hook-form";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { HousePostPayload } from "@/app/lib/postServices/postType";
 import Notification from "@/app/components/ui/Notification";
 import { useCreateHousePost } from "@/app/lib/postServices/postMutations";
 import { syrianGovernorates } from "@/app/signup/step2/syrianGovernorates";
 import { Search } from "lucide-react";
 import Button from "@/app/components/ui/Button";
+import Image from "next/image";
 
 interface PostFormProps {
   Gcategory: string;
@@ -48,13 +49,12 @@ export const OFFER_TYPE_CHOICES = [
 
 export default function HouseForm({ Gcategory, Gsubcategory }: PostFormProps) {
   const {
+    watch,
     register,
     handleSubmit,
     setValue,
     formState: { errors },
   } = useForm<HousePostPayload>({});
-
-
 
   const [notification, setNotification] = useState<{
     message: string;
@@ -63,13 +63,84 @@ export default function HouseForm({ Gcategory, Gsubcategory }: PostFormProps) {
   const createHousePost = useCreateHousePost(setNotification);
   const { isPending: isLoading } = createHousePost;
 
+  ////////////////////////////////  // //////////////////////////////////////
+
+  const coverImage = watch("cover_image");
+  const [preview, setPreview] = useState<string | null>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+  useEffect(() => {
+    if (coverImage instanceof File) {
+      const objectUrl = URL.createObjectURL(coverImage);
+      setPreview(objectUrl);
+      return () => URL.revokeObjectURL(objectUrl);
+    } else {
+      setPreview(null);
+    }
+  }, [coverImage]);
+
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setValue("cover_image", file, {
+        shouldValidate: true,
+        shouldDirty: true,
+      });
+    }
+  };
+
+  const handleClick = () => {
+    inputRef.current?.click();
+  };
+
+  // if (data.cover_image) {
+  //   if (data.cover_image instanceof File) {
+  //     formData.append("cover_image", data.cover_image);
+  //   } else if (typeof data.cover_image === "string") {
+  //     formData.append("cover_image", data.cover_image);
+  //   }
+  // }
+
+  {
+    /* <div className="sm:ml-16">
+<label className="block font-medium text-gray-700 mb-2">
+  صورة غلاف المنتج
+</label>
+
+<input
+  type="file"
+  accept="image/*"
+  ref={inputRef}
+  onChange={handleImageChange}
+  className="hidden"
+/>
+
+<div
+  onClick={handleClick}
+  className="w-64 h-40 border-2 border-dashed border-cgreen rounded-lg flex items-center justify-center cursor-pointer bg-cwhite overflow-hidden"
+>
+  {preview ? (
+    <Image
+      src={preview}
+      alt="preview"
+      width={256}
+      height={160}
+      className="object-cover w-full h-full"
+    />
+  ) : (
+    <span className="text-cgreen text-4xl">+</span>
+  )}
+</div>
+</div> */
+  }
+
+  ////////////////////////////////  // //////////////////////////////////////
 
   const [isSearch, setIsSearch] = useState<boolean | undefined>(false);
-  
+
   const onSubmit = (data: HousePostPayload) => {
     console.log("daTA: ", data);
     const formData = new FormData();
-    
+
     formData.append("offer_type", data.offer_type ?? "sell");
     formData.append("title", data.title ?? "");
     formData.append("description", data.description ?? "");
@@ -79,16 +150,10 @@ export default function HouseForm({ Gcategory, Gsubcategory }: PostFormProps) {
     formData.append("hood", data.hood ?? "");
     formData.append("detailed_location", data.detailed_location ?? "");
 
-    if (data.cover_image && typeof window !== "undefined") {
-      if (
-        typeof data.cover_image === "object" &&
-        "length" in data.cover_image &&
-        typeof (data.cover_image as FileList).item === "function"
-      ) {
-        // Likely a FileList
-        formData.append("cover_image", (data.cover_image as FileList)[0]);
-      } else if (isBlob(data.cover_image)) {
-        // File inherits from Blob
+    if (data.cover_image) {
+      if (data.cover_image instanceof File) {
+        formData.append("cover_image", data.cover_image);
+      } else if (typeof data.cover_image === "string") {
         formData.append("cover_image", data.cover_image);
       }
     }
@@ -99,7 +164,7 @@ export default function HouseForm({ Gcategory, Gsubcategory }: PostFormProps) {
     const houseDetails = {
       available_from: data.house.available_from || null,
       general_characteristics: data.house.general_characteristics || null,
-      furniture: data.house.furniture || null ,
+      furniture: data.house.furniture || null,
       bath: data.house.bath,
       real_estate_space: data.house.real_estate_space,
       house_type: data.house.house_type,
@@ -126,177 +191,196 @@ export default function HouseForm({ Gcategory, Gsubcategory }: PostFormProps) {
       }
     }
 
-    console.log("DDD ", formData);
     createHousePost.mutate(formData);
   };
 
-  function isBlob(obj: unknown): obj is Blob {
-    return (
-      typeof window !== "undefined" &&
-      typeof obj === "object" &&
-      obj !== null &&
-      typeof window.Blob !== "undefined" &&
-      obj instanceof window.Blob
-    );
-  }
-
   return (
     <form
-    onSubmit={handleSubmit(onSubmit)}
-    className="w-full mx-auto space-y-10"
-  >
-    {/* ------------- Noti -------------- */}
-    {notification && (
-      <Notification
-        message={notification.message}
-        type={notification.type}
-        onClose={() => setNotification(null)}
-      />
-    )}
+      onSubmit={handleSubmit(onSubmit)}
+      className="w-full mx-auto space-y-10"
+    >
+      {/* ------------- Noti -------------- */}
+      {notification && (
+        <Notification
+          message={notification.message}
+          type={notification.type}
+          onClose={() => setNotification(null)}
+        />
+      )}
 
-    {/* معلومات أساسية */}
-    <section className="bg-white rounded-2xl shadow-lg border border-gray-200 p-8 mb-6 ">
-      <h2 className="font-bold text-xl text-gray-800 mb-2 text-right">
-        معلومات أساسية
-      </h2>
-      <p className="text-gray-600 mb-6 text-right">
-        أدخل معلومات الإعلان الأساسية لتظهر بوضوح للمشترين، مثل العنوان والوصف
-        العام والموقع.
-      </p>
-      <div className=" mb-6 sm:ml-16 border-b border-clightgray">
-        {/* SEARCH || SELL */}
-        <h3 className="font-medium mb-3 mt-6 text-lg text-gray-700">
-          نوع المنشور
-          <span className="text-red-500 text-xl mr-1">*</span>
-        </h3>
-        <div className="w-full mt-2 max-w-sm  border-2 border-clightgray p-1.5 rounded-xl mb-6 flex">
-          <Button
-            type="button"
-            className="w-1/2 text-6 font-semibold"
-            variant={isSearch === false ? "primary" : "none"}
-            onClick={() => {
-              setIsSearch(false);
-              setValue("offer_type", "sell");
-            }}
-          >
-            أنا أعرض
-          </Button>
-          <Button
-            type="button"
-            className="w-1/2 text-6 font-semibold"
-            variant={isSearch === true ? "primary" : "none"}
-            onClick={() => {
-              setIsSearch(true);
-              setValue("offer_type", "search");
-            }}
-          >
-            أنا أبحث
-          </Button>
-        </div>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-        <div className="sm:ml-16">
-          <label className="block font-medium text-gray-700">
-            اسم المنتج
+      {/* معلومات أساسية */}
+      <section className="bg-white rounded-2xl shadow-lg border border-gray-200 p-8 mb-6 ">
+        <h2 className="font-bold text-xl text-gray-800 mb-2 text-right">
+          معلومات أساسية
+        </h2>
+        <p className="text-gray-600 mb-6 text-right">
+          أدخل معلومات الإعلان الأساسية لتظهر بوضوح للمشترين، مثل العنوان والوصف
+          العام والموقع.
+        </p>
+        <div className=" mb-6 sm:ml-16 border-b border-clightgray">
+          {/* SEARCH || SELL */}
+          <h3 className="font-medium mb-3 mt-6 text-lg text-gray-700">
+            نوع المنشور
             <span className="text-red-500 text-xl mr-1">*</span>
-          </label>
-          <input
-            required
-            {...register("title")}
-            type="text"
-            placeholder="اسم المنتج"
-            className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
-          />
+          </h3>
+          <div className="w-full mt-2 max-w-sm  border-2 border-clightgray p-1.5 rounded-xl mb-6 flex">
+            <Button
+              type="button"
+              className="w-1/2 text-6 font-semibold"
+              variant={isSearch === false ? "primary" : "none"}
+              onClick={() => {
+                setIsSearch(false);
+                setValue("offer_type", "sell");
+              }}
+            >
+              أنا أعرض
+            </Button>
+            <Button
+              type="button"
+              className="w-1/2 text-6 font-semibold"
+              variant={isSearch === true ? "primary" : "none"}
+              onClick={() => {
+                setIsSearch(true);
+                setValue("offer_type", "search");
+              }}
+            >
+              أنا أبحث
+            </Button>
+          </div>
         </div>
 
-        <div className="sm:ml-16">
-          <label className="block font-medium text-gray-700">
-            صور المنتج
-          </label>
-          <input
-            type="file"
-            multiple
-            {...register("gallery")}
-            className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
-          />
-        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+          <div className="sm:ml-16">
+            <label className="block font-medium text-gray-700">
+              اسم المنتج
+              <span className="text-red-500 text-xl mr-1">*</span>
+            </label>
+            <input
+              required
+              {...register("title")}
+              type="text"
+              placeholder="اسم المنتج"
+              className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
+            />
+          </div>
 
-        <div className="sm:ml-16">
-          <label className="block font-medium text-gray-700">
-            المحافظة
-            <span className="text-red-500 text-xl mr-1">*</span>
-          </label>
-          <select
-            required
-            {...register("city")}
-            className="mt-1  w-full p-3 border-2 rounded-lg bg-cwhite text-gray-700 focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200"
-            style={{
-              borderColor: "#277F60", // لون الحدود
-            }}
-          >
-            <option value="">اختر الإدخال</option>
-            {syrianGovernorates.map((gov) => (
-              <option key={gov.value} value={gov.value}>
-                {gov.name}
-              </option>
-            ))}
-          </select>
-        </div>
+          <div className="sm:ml-16">
+            <label className="block font-medium text-gray-700 mb-2">
+              صورة غلاف المنتج
+            </label>
 
-        <div className="sm:ml-16">
-          <label className="block font-medium text-gray-700">
-            المنطقة
-            <span className="text-red-500 text-xl mr-1">*</span>
-          </label>
-          <input
-            required
-            {...register("hood")}
-            className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
-            placeholder="المنطقة"
-          />
-          {errors.hood && (
-            <p className="text-red-600 text-sm mt-1">
-              {String(errors.hood.message)}
-            </p>
-          )}
+            <input
+              type="file"
+              accept="image/*"
+              ref={inputRef}
+              onChange={handleImageChange}
+              className="hidden"
+            />
+
+            <div
+              onClick={handleClick}
+              className="w-64 h-40 border-2 border-dashed border-cgreen rounded-lg flex items-center justify-center cursor-pointer bg-cwhite overflow-hidden"
+            >
+              {preview ? (
+                <Image
+                  src={preview}
+                  alt="preview"
+                  width={256}
+                  height={160}
+                  className="object-cover w-full h-full"
+                />
+              ) : (
+                <span className="text-cgreen text-4xl">+</span>
+              )}
+            </div>
+          </div>
+          <div className="sm:ml-16">
+            <label className="block font-medium text-gray-700">
+              صور المنتج
+            </label>
+            <input
+              type="file"
+              multiple
+              {...register("gallery")}
+              className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
+            />
+          </div>
+
+          <div className="sm:ml-16">
+            <label className="block font-medium text-gray-700">
+              المحافظة
+              <span className="text-red-500 text-xl mr-1">*</span>
+            </label>
+            <select
+              required
+              {...register("city")}
+              className="mt-1  w-full p-3 border-2 rounded-lg bg-cwhite text-gray-700 focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200"
+              style={{
+                borderColor: "#277F60", // لون الحدود
+              }}
+            >
+              <option value="">اختر الإدخال</option>
+              {syrianGovernorates.map((gov) => (
+                <option key={gov.value} value={gov.value}>
+                  {gov.name}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className="sm:ml-16">
+            <label className="block font-medium text-gray-700">
+              المنطقة
+              <span className="text-red-500 text-xl mr-1">*</span>
+            </label>
+            <input
+              required
+              {...register("hood")}
+              className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
+              placeholder="المنطقة"
+            />
+            {errors.hood && (
+              <p className="text-red-600 text-sm mt-1">
+                {String(errors.hood.message)}
+              </p>
+            )}
+          </div>
         </div>
-      </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6 sm:ml-16">
-        <div className="flex flex-col gap-2 md:col-span-2">
-          <label className="block font-medium text-gray-700">
-            تفاصيل العنوان
-          </label>
-          <input
-            {...register("detailed_location")}
-            className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
-            placeholder="تفاصيل العنوان"
-          />
-          {errors.detailed_location && (
-            <p className="text-red-600 text-sm mt-1">
-              {String(errors.detailed_location.message)}
-            </p>
-          )}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6 sm:ml-16">
+          <div className="flex flex-col gap-2 md:col-span-2">
+            <label className="block font-medium text-gray-700">
+              تفاصيل العنوان
+            </label>
+            <input
+              {...register("detailed_location")}
+              className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
+              placeholder="تفاصيل العنوان"
+            />
+            {errors.detailed_location && (
+              <p className="text-red-600 text-sm mt-1">
+                {String(errors.detailed_location.message)}
+              </p>
+            )}
+          </div>
+          <div className="flex flex-col gap-2 md:col-span-2">
+            <label className="block font-medium text-gray-700">
+              وصف المنتج
+              <span className="text-red-500 text-xl mr-1">*</span>
+            </label>
+            <textarea
+              required
+              {...register("description")}
+              className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
+              placeholder="ادخل وصف المنتج هنا"
+            />
+            {errors.description && (
+              <p className="text-red-600 text-sm mt-1">
+                {String(errors.description.message)}
+              </p>
+            )}
+          </div>
         </div>
-        <div className="flex flex-col gap-2 md:col-span-2">
-          <label className="block font-medium text-gray-700">
-            وصف المنتج
-            <span className="text-red-500 text-xl mr-1">*</span>
-          </label>
-          <textarea
-            required
-            {...register("description")}
-            className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
-            placeholder="ادخل وصف المنتج هنا"
-          />
-          {errors.description && (
-            <p className="text-red-600 text-sm mt-1">
-              {String(errors.description.message)}
-            </p>
-          )}
-        </div>
-      </div>
-    </section>
+      </section>
 
       {/* سعر المنتج */}
       <section className="bg-white rounded-2xl shadow-lg border border-gray-200 p-8">
