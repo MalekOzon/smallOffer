@@ -26,7 +26,8 @@ __turbopack_context__.s({
     "getGenericPostId": (()=>getGenericPostId),
     "getHousePostId": (()=>getHousePostId),
     "getMobilePostId": (()=>getMobilePostId),
-    "getOutdoorSpacePostId": (()=>getOutdoorSpacePostId)
+    "getOutdoorSpacePostId": (()=>getOutdoorSpacePostId),
+    "getPublicProfileInfo": (()=>getPublicProfileInfo)
 });
 var __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$lib$2f$loginservices$2f$api$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/app/lib/loginservices/api.ts [app-ssr] (ecmascript)");
 ;
@@ -170,6 +171,10 @@ const editOutdoor_spaceForm = async (formData, id)=>{
     });
     return response.data;
 };
+const getPublicProfileInfo = async (username, page, page_size)=>{
+    const res = await __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$lib$2f$loginservices$2f$api$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].get(`accounts/users/${username}/posts/cards/?page=${page}&page_size=${page_size}&ordering=-created_at`);
+    return res.data;
+};
 }}),
 "[project]/app/lib/postServices/postQueries.ts [app-ssr] (ecmascript)": ((__turbopack_context__) => {
 "use strict";
@@ -183,7 +188,8 @@ __turbopack_context__.s({
     "useGetGenericPostId": (()=>useGetGenericPostId),
     "useGetHousePostId": (()=>useGetHousePostId),
     "useGetMobilePostId": (()=>useGetMobilePostId),
-    "useGetOutdoorSpacePostId": (()=>useGetOutdoorSpacePostId)
+    "useGetOutdoorSpacePostId": (()=>useGetOutdoorSpacePostId),
+    "useGetPublicProfileInfo": (()=>useGetPublicProfileInfo)
 });
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$tanstack$2f$react$2d$query$2f$build$2f$modern$2f$useQuery$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/@tanstack/react-query/build/modern/useQuery.js [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$lib$2f$postServices$2f$postApi$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/app/lib/postServices/postApi.ts [app-ssr] (ecmascript)");
@@ -271,6 +277,18 @@ function useGetOutdoorSpacePostId(id) {
         enabled: !!id,
         staleTime: 1000 * 60 * 5,
         retry: 1
+    });
+}
+function useGetPublicProfileInfo(username, page, page_size) {
+    return (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$tanstack$2f$react$2d$query$2f$build$2f$modern$2f$useQuery$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useQuery"])({
+        queryKey: [
+            "accounts/posts/",
+            username,
+            page
+        ],
+        queryFn: ()=>(0, __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$lib$2f$postServices$2f$postApi$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["getPublicProfileInfo"])(username, page ?? 1, page_size ?? 10),
+        enabled: !!username,
+        staleTime: 1000 * 60 * 5
     });
 }
 }}),

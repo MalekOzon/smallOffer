@@ -149,19 +149,15 @@ export default function GenericPostForm({
     formData.append("category", Gcategory);
     formData.append("subcategory", Gsubcategory);
 
-    if (data.gallery && data.gallery.length > 0) {
-      (data.gallery as (File | string)[]).forEach((img) => {
+    if (galleryFiles && galleryFiles.length > 0) {
+      (galleryFiles as (File | string)[]).forEach((img) => {
         if (img instanceof File) {
           formData.append("gallery", img);
         } 
       });
     }
 
-    // بعد إضافة كل البيانات إلى formData
-// for (let [key, value] of formData.entries()) {
-//   if(key === "gallery") console.log("asdddddddd")
-//   console.log(key, value);
-// }
+// for (let [key, value] of formData.entries()) {console.log(key, value);}
 
     createPost.mutate(formData);
   };

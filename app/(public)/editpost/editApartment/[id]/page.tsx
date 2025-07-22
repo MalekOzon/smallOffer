@@ -9,7 +9,11 @@ import Button from "@/app/components/ui/Button";
 import { syrianGovernorates } from "@/app/signup/step2/syrianGovernorates";
 import { categories } from "@/app/sections/categories";
 import SkeletonNotificationSettings from "@/app/components/ui/SkeletonNotificationSettings";
-import { FURNITURE_CHOICES, GENERAL_CHARACTERISTICS, OFFER_TYPE_CHOICES } from "@/app/(public)/newpost/components/ApartmentForm";
+import {
+  FURNITURE_CHOICES,
+  GENERAL_CHARACTERISTICS,
+  OFFER_TYPE_CHOICES,
+} from "@/app/(public)/newpost/components/ApartmentForm";
 
 const EditApartment = () => {
   const params = useParams();
@@ -59,7 +63,8 @@ const EditApartment = () => {
         ...data,
         apartment: {
           ...data.apartment,
-          general_characteristics: data.apartment?.general_characteristics || [],
+          general_characteristics:
+            data.apartment?.general_characteristics || [],
           furniture: data.apartment?.furniture || [],
         },
       });
@@ -91,24 +96,32 @@ const EditApartment = () => {
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     const { name, value, type } = e.target;
-    const key = name.replace("apartment.", "") as keyof ApartmentPostPayload["apartment"];
+    const key = name.replace(
+      "apartment.",
+      ""
+    ) as keyof ApartmentPostPayload["apartment"];
     setFormData((prev) => {
-      const baseApartment: ApartmentPostPayload["apartment"] = prev.apartment ?? {
-        real_estate_space: 0,
-        available_from: "",
-        general_characteristics: [],
-        floor: 0,
-        furniture: [],
-        bath: undefined,
-        bed_room: undefined,
-        room: 0,
-        year: undefined,
-        offer_type: "sale",
+      const baseApartment: ApartmentPostPayload["apartment"] =
+        prev.apartment ?? {
+          real_estate_space: 0,
+          available_from: "",
+          general_characteristics: [],
+          floor: 0,
+          furniture: [],
+          bath: undefined,
+          bed_room: undefined,
+          room: 0,
+          year: undefined,
+          offer_type: "sale",
+        };
+      const newApartment: ApartmentPostPayload["apartment"] = {
+        ...baseApartment,
       };
-      const newApartment: ApartmentPostPayload["apartment"] = { ...baseApartment };
       if (type === "checkbox") {
         const checked = (e.target as HTMLInputElement).checked;
-        const arr = Array.isArray(newApartment[key]) ? [...(newApartment[key] as string[])] : [];
+        const arr = Array.isArray(newApartment[key])
+          ? [...(newApartment[key] as string[])]
+          : [];
         if (checked) {
           if (!arr.includes(value)) arr.push(value);
         } else {
@@ -117,7 +130,8 @@ const EditApartment = () => {
         }
         (newApartment[key] as unknown) = arr;
       } else if (type === "number") {
-        (newApartment[key] as unknown) = value === "" ? undefined : Number(value);
+        (newApartment[key] as unknown) =
+          value === "" ? undefined : Number(value);
       } else {
         (newApartment[key] as unknown) = value;
       }
@@ -144,6 +158,15 @@ const EditApartment = () => {
     }));
   };
 
+  function isFileList(value: unknown): value is FileList {
+    return (
+      typeof value === "object" &&
+      value !== null &&
+      typeof (value as FileList).item === "function" &&
+      typeof (value as FileList)[Symbol.iterator] === "function"
+    );
+  }
+
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!id) {
@@ -162,19 +185,13 @@ const EditApartment = () => {
     form.append("category", data.category ?? "");
     form.append("subcategory", data.subcategory ?? "");
     form.append("detailed_location", data.detailed_location ?? "");
-    if (data.cover_image && typeof window !== "undefined") {
-      if (
-        typeof data.cover_image === "object" &&
-        "length" in data.cover_image &&
-        typeof (data.cover_image as FileList).item === "function"
-      ) {
-        form.append("cover_image", (data.cover_image as FileList)[0]);
-      } else if (isBlob(data.cover_image)) {
-        form.append("cover_image", data.cover_image);
-      } else if (typeof data.cover_image === "string") {
-        form.append("cover_image", data.cover_image);
-      }
+
+    if (isFileList(data.cover_image)) {
+      form.append("cover_image", data.cover_image[0]);
+    } else if (isBlob(data.cover_image)) {
+      form.append("cover_image", data.cover_image);
     }
+
     if (data.gallery && data.gallery.length > 0) {
       if (
         typeof globalThis.FileList !== "undefined" &&
@@ -242,8 +259,11 @@ const EditApartment = () => {
             تعديل إعلان الشقة
           </h1>
           <p className="text-gray-600 flex justify-start max-sm:block">
-            بنشرك تعديلاتك فإنك توافق على {" "}
-            <a href="#" className="text-cgreen underline hover:text-chgreen mx-1">
+            بنشرك تعديلاتك فإنك توافق على{" "}
+            <a
+              href="#"
+              className="text-cgreen underline hover:text-chgreen mx-1"
+            >
               سياسة النشر
             </a>{" "}
             الخاصة بـ small-offer
@@ -286,9 +306,12 @@ const EditApartment = () => {
         </div>
         {/* معلومات أساسية */}
         <section className="bg-white rounded-2xl shadow-lg border border-gray-200 p-8 mb-6">
-          <h2 className="font-bold text-xl text-gray-800 mb-2 text-right">معلومات أساسية</h2>
+          <h2 className="font-bold text-xl text-gray-800 mb-2 text-right">
+            معلومات أساسية
+          </h2>
           <p className="text-gray-600 mb-6 text-right">
-            أدخل معلومات الإعلان الأساسية لتظهر بوضوح للمشترين، مثل العنوان والوصف العام والموقع.
+            أدخل معلومات الإعلان الأساسية لتظهر بوضوح للمشترين، مثل العنوان
+            والوصف العام والموقع.
           </p>
           <div className=" mb-6 sm:ml-16 border-b border-clightgray">
             {/* SEARCH || SELL */}
@@ -331,7 +354,9 @@ const EditApartment = () => {
               />
             </div>
             <div className="sm:ml-16">
-              <label className="block font-medium text-gray-700">صور المنتج</label>
+              <label className="block font-medium text-gray-700">
+                صور المنتج
+              </label>
               <input
                 type="file"
                 multiple
@@ -379,7 +404,9 @@ const EditApartment = () => {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6 sm:ml-16">
             <div className="flex flex-col gap-2 md:col-span-2">
-              <label className="block font-medium text-gray-700">تفاصيل العنوان</label>
+              <label className="block font-medium text-gray-700">
+                تفاصيل العنوان
+              </label>
               <input
                 name="detailed_location"
                 value={formData.detailed_location || ""}
@@ -407,9 +434,12 @@ const EditApartment = () => {
         </section>
         {/* سعر المنتج */}
         <section className="bg-white rounded-2xl shadow-lg border border-gray-200 p-8">
-          <h2 className="font-bold text-xl text-gray-800 mb-2 text-right">سعر المنتج</h2>
+          <h2 className="font-bold text-xl text-gray-800 mb-2 text-right">
+            سعر المنتج
+          </h2>
           <p className="text-gray-600 mb-6 text-right">
-            حدد سعر الإعلان أو اختر إذا كان قابل للتفاوض، وسيساعد المستخدمين على معرفة القيمة بسهولة.
+            حدد سعر الإعلان أو اختر إذا كان قابل للتفاوض، وسيساعد المستخدمين على
+            معرفة القيمة بسهولة.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
             <div className="sm:ml-16">
@@ -464,7 +494,9 @@ const EditApartment = () => {
           <h2 className="font-bold text-lg mb-2">تفاصيل الشقة</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="sm:ml-16">
-              <label className="block font-medium text-gray-700">نوع العرض <span className="text-red-500 text-xl mr-1">*</span></label>
+              <label className="block font-medium text-gray-700">
+                نوع العرض <span className="text-red-500 text-xl mr-1">*</span>
+              </label>
               <select
                 required
                 name="apartment.offer_type"
@@ -483,7 +515,10 @@ const EditApartment = () => {
               </select>
             </div>
             <div className="sm:ml-16">
-              <label className="block font-medium text-gray-700">المساحة العقارية (م²) <span className="text-red-500 text-xl mr-1">*</span></label>
+              <label className="block font-medium text-gray-700">
+                المساحة العقارية (م²){" "}
+                <span className="text-red-500 text-xl mr-1">*</span>
+              </label>
               <input
                 required
                 type="number"
@@ -495,7 +530,9 @@ const EditApartment = () => {
               />
             </div>
             <div className="sm:ml-16">
-              <label className="block font-medium text-gray-700">عدد الغرف <span className="text-red-500 text-xl mr-1">*</span></label>
+              <label className="block font-medium text-gray-700">
+                عدد الغرف <span className="text-red-500 text-xl mr-1">*</span>
+              </label>
               <input
                 required
                 type="number"
@@ -507,7 +544,9 @@ const EditApartment = () => {
               />
             </div>
             <div className="sm:ml-16">
-              <label className="block font-medium text-gray-700">عدد غرف النوم</label>
+              <label className="block font-medium text-gray-700">
+                عدد غرف النوم
+              </label>
               <input
                 type="number"
                 name="apartment.bed_room"
@@ -518,7 +557,9 @@ const EditApartment = () => {
               />
             </div>
             <div className="sm:ml-16">
-              <label className="block font-medium text-gray-700">عدد الحمامات</label>
+              <label className="block font-medium text-gray-700">
+                عدد الحمامات
+              </label>
               <input
                 type="number"
                 name="apartment.bath"
@@ -529,7 +570,9 @@ const EditApartment = () => {
               />
             </div>
             <div className="sm:ml-16">
-              <label className="block font-medium text-gray-700">متاح من تاريخ</label>
+              <label className="block font-medium text-gray-700">
+                متاح من تاريخ
+              </label>
               <input
                 type="date"
                 name="apartment.available_from"
@@ -539,7 +582,9 @@ const EditApartment = () => {
               />
             </div>
             <div className="sm:ml-16">
-              <label className="block font-medium text-gray-700">الطابق <span className="text-red-500 text-xl mr-1">*</span></label>
+              <label className="block font-medium text-gray-700">
+                الطابق <span className="text-red-500 text-xl mr-1">*</span>
+              </label>
               <input
                 required
                 type="text"
@@ -550,7 +595,9 @@ const EditApartment = () => {
               />
             </div>
             <div className="sm:ml-16">
-              <label className="block font-medium text-gray-700">سنة البناء</label>
+              <label className="block font-medium text-gray-700">
+                سنة البناء
+              </label>
               <input
                 type="number"
                 name="apartment.year"
@@ -568,13 +615,19 @@ const EditApartment = () => {
               <label className="block font-medium text-gray-700">الأثاث</label>
               <div className="flex flex-wrap gap-2 mt-2 ">
                 {FURNITURE_CHOICES.map(([value, label]) => (
-                  <label key={value} className="flex items-center gap-1 ml-2 text-gray-700 cursor-pointer">
+                  <label
+                    key={value}
+                    className="flex items-center gap-1 ml-2 text-gray-700 cursor-pointer"
+                  >
                     <input
                       className="custom-checkbox"
                       type="checkbox"
                       value={value}
                       name="apartment.furniture"
-                      checked={Array.isArray(formData.apartment?.furniture) && formData.apartment.furniture.includes(value)}
+                      checked={
+                        Array.isArray(formData.apartment?.furniture) &&
+                        formData.apartment.furniture.includes(value)
+                      }
                       onChange={handleApartmentInputChange}
                     />
                     {label}
@@ -583,16 +636,28 @@ const EditApartment = () => {
               </div>
             </div>
             <div className="bg-cwhite rounded-md p-2 shadow-md">
-              <label className="block font-medium text-gray-700">حالة المبنى</label>
+              <label className="block font-medium text-gray-700">
+                حالة المبنى
+              </label>
               <div className="flex flex-wrap gap-2 mt-2 ">
                 {GENERAL_CHARACTERISTICS.map(([value, label]) => (
-                  <label key={value} className="flex items-center gap-1 ml-2 text-gray-700 cursor-pointer">
+                  <label
+                    key={value}
+                    className="flex items-center gap-1 ml-2 text-gray-700 cursor-pointer"
+                  >
                     <input
                       className="custom-checkbox"
                       type="checkbox"
                       value={value}
                       name="apartment.general_characteristics"
-                      checked={Array.isArray(formData.apartment?.general_characteristics) && formData.apartment.general_characteristics.includes(value)}
+                      checked={
+                        Array.isArray(
+                          formData.apartment?.general_characteristics
+                        ) &&
+                        formData.apartment.general_characteristics.includes(
+                          value
+                        )
+                      }
                       onChange={handleApartmentInputChange}
                     />
                     {label}

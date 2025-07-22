@@ -15,12 +15,11 @@ import { useForm } from "react-hook-form";
 const EditGeneric = () => {
 
   const {
-    setValue,
     register,
     formState: {  },
   } = useForm<GenericPostPayload>({
     defaultValues: {
-      gallery: [], // تهيئة gallery كمصفوفة فارغة
+      gallery_images: [], // تهيئة gallery كمصفوفة فارغة
     },
   });
 
@@ -29,22 +28,21 @@ const EditGeneric = () => {
 
   const getPostDetail = useGetGenericPostId(id);
   const { data, isLoading } = getPostDetail;
-  console.log("hooooooooon ",data?.gallery)
-
+  
   const [notification, setNotification] = useState<{
     message: string;
     type: "success" | "error";
   } | null>(null);
-
+  
   const editGenericForm = useEditGenericForm(setNotification);
   const isPending = editGenericForm.isPending;
-
+  
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
-
+  
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
   const [galleryFiles, setGalleryFiles] = useState<(File | string)[]>([]);
-
+  
   // لما تضغط على صندوق رفع الصورة يفتح اختيار الملفات
   const handleClick = () => {
     inputRef.current?.click();
@@ -61,7 +59,7 @@ const EditGeneric = () => {
       setPreview(URL.createObjectURL(file));
     }
   };
-
+  
   // تحديث صورة في المعرض
   const handleGalleryChange = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -70,42 +68,55 @@ const EditGeneric = () => {
     const file = e.target.files?.[0];
     if (file) {
       setGalleryFiles((prev) => {
-        const newGallery = [...prev];
-        newGallery[index] = file;
-        return newGallery;
-      });
-      setValue("gallery", [...galleryFiles, file], {
-        shouldValidate: true,
-        shouldDirty: true,
+        const updated = [...prev];
+        updated[index] = file;
+        
+        setFormData((prevForm) => ({
+          ...prevForm,
+          gallery: updated,
+        }));
+        
+        return updated;
       });
     }
   };
   
+  
   // Handler to remove image at index
   const handleRemoveImage = (index: number) => {
-    setGalleryFiles((prev) => prev.filter((_, i) => i !== index));
-    setValue("gallery", galleryFiles.filter((_, i) => i !== index), {
-      shouldValidate: true,
-      shouldDirty: true,
+    setGalleryFiles((prev) => {
+      const updated = prev.filter((_, i) => i !== index);
+      
+      setFormData((prevForm) => ({
+        ...prevForm,
+        gallery: updated,
+      }));
+      
+      return updated;
     });
   };
   
   // Handler to add new empty slot (up to max 5)
   const handleAddNewGallerySlot = () => {
-    if (galleryFiles.length < 5) {
-      setGalleryFiles((prev) => [...prev, ""]);
-      setValue("gallery", [...galleryFiles, ""], {
-        shouldValidate: true,
-        shouldDirty: true,
-      });
-    }
+    setGalleryFiles((prev) => {
+      if (prev.length >= 5) return prev;
+      
+      const updated = [...prev, ""];
+      
+      setFormData((prevForm) => ({
+        ...prevForm,
+        gallery: updated,
+      }));
+      
+      return updated;
+    });
   };
-
+  
   // فتح نافذة اختيار الملفات لصورة معينة
   const triggerFileInput = (index: number) => {
     inputRefs.current[index]?.click();
   };
-
+  
   const [formData, setFormData] = useState<Partial<GenericPostPayload>>({
     category: "",
     subcategory: "",
@@ -119,10 +130,12 @@ const EditGeneric = () => {
     cover_image: null,
     gallery: [],
   });
-
+  
   // تحديث الحقول بمجرد استلام البيانات
   useEffect(() => {
     if (data) {
+      const galleryImages = data.gallery_images?.map((img) => img.image) || [];
+      
       setFormData({
         category: data.category || "",
         subcategory: data.subcategory || "",
@@ -134,22 +147,22 @@ const EditGeneric = () => {
         hood: data.hood || "",
         detailed_location: data.detailed_location || "",
         cover_image: data.cover_image || "",
-        gallery: data.gallery || [],
+        gallery: galleryImages,
         offer_type: data.offer_type || "sell",
       });
-      setGalleryFiles(data.gallery || []);
+      setGalleryFiles(galleryImages);
       setIsSearch(data.offer_type === "search");
     }
   }, [data]);
-
+  
   const handleInputChange = (
     e: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
     >
   ) => {
     const { name, value, type } = e.target;
     const files = (e.target as HTMLInputElement).files;
-
+    
     if (type === "file") {
       if (name === "gallery") {
         setFormData((prev) => ({
@@ -169,9 +182,9 @@ const EditGeneric = () => {
       }));
     }
   };
-
+  
   const [isSearch, setIsSearch] = useState<boolean | undefined>(false);
-
+  
   // تحديث offer_type عند الضغط على الأزرار
   const handleOfferType = (type: "sell" | "search") => {
     setIsSearch(type === "search");
@@ -180,12 +193,18 @@ const EditGeneric = () => {
       offer_type: type,
     }));
   };
-
+  const afasfaf = data?.gallery_images;
   // دالة الإرسال الصحيحة
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    console.log("hooooooooon ",afasfaf)
     e.preventDefault();
     const data = formData;
+    
     const form = new FormData();
+    if (!id) {
+      setNotification({ message: "معرف الإعلان غير صالح.", type: "error" });
+      return;
+    }
     form.append("offer_type", data.offer_type ?? "sell");
     form.append("title", data.title ?? "");
     form.append("description", data.description ?? "");
@@ -195,26 +214,27 @@ const EditGeneric = () => {
     form.append("hood", data.hood ?? "");
     form.append("detailed_location", data.detailed_location ?? "");
 
-    if (data.cover_image) {
-      if (data.cover_image instanceof File) {
+    if (data.cover_image instanceof File) {
         form.append("cover_image", data.cover_image);
-      }
     }
 
-    if (data.gallery && data.gallery.length > 0) {
-      (data.gallery as (File | string)[]).forEach((img) => {
+    if (formData.gallery && formData.gallery.length > 0) {
+      formData.gallery.forEach((img) => {
         if (img instanceof File) {
-          form.append("gallery", img);
-        } else if (typeof img === "string") {
           form.append("gallery", img);
         }
       });
     }
 
-    if (!id) {
-      setNotification({ message: "معرف الإعلان غير صالح.", type: "error" });
-      return;
-    }
+    console.log("📋 Gallery content:");
+    const galleryItems = form.getAll("gallery");
+    galleryItems.forEach((item, index) => {
+      if (item instanceof File) {
+        console.log(`[${index}]  ${item.name}`);
+      } 
+    });
+
+
     editGenericForm.mutate({ formData: form, id });
   };
 

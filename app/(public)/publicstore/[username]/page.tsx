@@ -45,7 +45,6 @@ type PublicUser = {
   rating_count: number;
 };
 
-
 const PublicStore = () => {
   const params = useParams();
   const username = params.username as string;
@@ -171,10 +170,10 @@ const PublicStore = () => {
           الاعلانات المنشورة
         </div>
         <div className="flex ">
-          <div className="w-[85%] max-md:w-full ml-1">
+          <div className="w-[85%] max-lg:w-[80%] max-md:w-full ml-1">
             {mappedAds.length > 0 ? (
               <div className="h-full rounded-md mb-10">
-                <div className="grid gap-4 grid-cols-2 md:grid-cols-4">
+                <div className="grid gap-4 grid-cols-2  lg:grid-cols-3 xl:grid-cols-4">
                   {mappedAds.map((ad) => (
                     <AdCard
                       key={ad.id}
@@ -213,7 +212,12 @@ const PublicStore = () => {
               </div>
             )}
           </div>
-          <div className="w-[15%] bg-cblue h-[500px] max-md:hidden">asd</div>
+
+          <div className="max-md:hidden w-[15%] max-lg:w-[20%] flex items-center justify-center bg-cgreen relative min-h-[330px]">
+            <p className="text-white text-xl font-bold whitespace-nowrap rotate-[-90deg] transform-origin-left">
+              تواصل معنا لعرض إعلانك هنا
+            </p>
+          </div>
         </div>
       </div>
     </div>

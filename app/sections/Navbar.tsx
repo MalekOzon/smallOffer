@@ -106,9 +106,11 @@ const Navbar = () => {
     const handleResize = () => {
       const width = window.innerWidth;
       if (width < 923) {
-        setRowConfig({ first: 5, second: 2 });
-      } else if (width < 1123) {
-        setRowConfig({ first: 6, second: 1 });
+        setRowConfig({ first: 5, second: 3 });
+      } else if (width < 1080) {
+        setRowConfig({ first: 6, second: 2 });
+      } else if (width < 1176) {
+        setRowConfig({ first: 7, second: 1 });
       } else {
         setRowConfig({ first: categories.length, second: 0 });
       }
@@ -124,6 +126,8 @@ const Navbar = () => {
     rowConfig.first + rowConfig.second
   );
 
+console.log("first " , firstRow);
+console.log("second " , secondRow);
 
   return (
     <>
@@ -455,7 +459,7 @@ const Navbar = () => {
             {firstRow.map((cat, idx) => (
               <div
                 key={idx}
-                className="relative group w-full sm:w-auto text-center sm:text-left"
+                className="relative group w-full sm:w-auto text-center sm:text-left "
               >
                 <Link
                   href={cat.slug || "#"}
@@ -544,7 +548,7 @@ const Navbar = () => {
             ))}
           </div>
           {secondRow.length > 0 && (
-            <div className="flex flex-wrap items-center px-1 mt-2">
+            <div className="flex flex-wrap items-center px-1 mt-2 ">
               {secondRow.map((cat, idx) => (
                 <div
                   key={idx}

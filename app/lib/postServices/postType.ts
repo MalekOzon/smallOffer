@@ -1,5 +1,10 @@
+export type GalleryImage = {
+  id: number;
+  image: string;
+};
 
 export type GenericPostPayload  = {
+  gallery_images?: GalleryImage[];
   title: string;
   offer_type: 'sell' | 'search';
   description: string;

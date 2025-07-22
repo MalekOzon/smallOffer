@@ -1059,7 +1059,7 @@ var { g: global, __dirname, k: __turbopack_refresh__, m: module, e: exports } = 
 {
 const e = new Error(`Could not parse module '[project]/app/(public)/editpost/editGeneric/[id]/page.tsx'
 
-Expected ',', got 'data'`);
+Expected ',', got '.'`);
 e.code = 'MODULE_UNPARSEABLE';
 throw e;}}),
 "[project]/node_modules/react-hook-form/dist/index.esm.mjs [app-client] (ecmascript)": ((__turbopack_context__) => {

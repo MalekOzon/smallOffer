@@ -55,7 +55,6 @@ const AdCard: FC<AdCardProps> = ({
         };
 
   function goToEdit() {
-    console.log("sub= ", subcat);
     if (subcat === "cars") {
       return(`/editpost/editCar/${id}`);
     } else if (subcat === "outdoor-space") {
