@@ -4,10 +4,11 @@ import { GenericPostPayload } from "@/app/lib/postServices/postType";
 import { useForm } from "react-hook-form";
 import { syrianGovernorates } from "@/app/signup/step2/syrianGovernorates";
 import { useCreatePost } from "@/app/lib/postServices/postMutations";
-import { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Notification from "@/app/components/ui/Notification";
 import { Search } from "lucide-react";
 import Button from "@/app/components/ui/Button";
+import Image from "next/image";
 
 interface GenericPostFormProps {
   Gcategory: string;
@@ -23,26 +24,105 @@ export default function GenericPostForm({
     register,
     handleSubmit,
     setValue,
+    watch,
     formState: { errors },
   } = useForm<GenericPostPayload>();
-  
+
   const [notification, setNotification] = useState<{
     message: string;
     type: "success" | "error";
   } | null>(null);
   const createPost = useCreatePost(setNotification);
   const { isPending: isLoading } = createPost;
+
+  // COVER IMAGE -------------------------------------------------
+  // Watch cover_image for preview
+  const coverImage = watch("cover_image");
+
+  // State for preview URL
+  const [preview, setPreview] = useState<string | null>(null);
+
+  // Ref to hidden file input
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  // Create preview URL when coverImage changes
+  useEffect(() => {
+    if (coverImage instanceof File) {
+      const objectUrl = URL.createObjectURL(coverImage);
+      setPreview(objectUrl);
+      return () => URL.revokeObjectURL(objectUrl);
+    } else {
+      setPreview(null);
+    }
+  }, [coverImage]);
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setValue("cover_image", file, {
+        shouldValidate: true,
+        shouldDirty: true,
+      });
+    }
+  };
+
+  const handleClick = () => {
+    inputRef.current?.click();
+  };
+  // ------------------------------------------------------------------
+
+  // GALLERY -------------------------------------------------
+
+  // State for gallery files (images)
+  const [galleryFiles, setGalleryFiles] = useState<(File | string)[]>([]);
+
+  // Handler to add or replace image at index
+  const handleGalleryChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    index: number
+  ) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setGalleryFiles((prev) => {
+        const newGallery = [...prev];
+        newGallery[index] = file;
+        return newGallery;
+      });
+      setValue("gallery", [...galleryFiles, file], {
+        shouldValidate: true,
+        shouldDirty: true,
+      });
+    }
+  };
   
-  function isBlob(obj: unknown): obj is Blob {
-    return (
-      typeof window !== "undefined" &&
-      typeof obj === "object" &&
-      obj !== null &&
-      typeof window.Blob !== "undefined" &&
-      obj instanceof window.Blob
-    );
-  }
+  // Handler to remove image at index
+  const handleRemoveImage = (index: number) => {
+    setGalleryFiles((prev) => prev.filter((_, i) => i !== index));
+    setValue("gallery", galleryFiles.filter((_, i) => i !== index), {
+      shouldValidate: true,
+      shouldDirty: true,
+    });
+  };
   
+  // Handler to add new empty slot (up to max 5)
+  const handleAddNewGallerySlot = () => {
+    if (galleryFiles.length < 5) {
+      setGalleryFiles((prev) => [...prev, ""]);
+      setValue("gallery", [...galleryFiles, ""], {
+        shouldValidate: true,
+        shouldDirty: true,
+      });
+    }
+  };
+
+  // To trigger hidden file input per each gallery box
+  const inputRefs = React.useRef<(HTMLInputElement | null)[]>([]);
+
+  const triggerFileInput = (index: number) => {
+    inputRefs.current[index]?.click();
+  };
+
+  // ---------------------------------------------------------
+
   const [isSearch, setIsSearch] = useState<boolean | undefined>(false);
 
   const onSubmit = (data: GenericPostPayload) => {
@@ -58,16 +138,10 @@ export default function GenericPostForm({
     formData.append("hood", data.hood ?? "");
     formData.append("detailed_location", data.detailed_location ?? "");
 
-    if (data.cover_image && typeof window !== "undefined") {
-      if (
-        typeof data.cover_image === "object" &&
-        "length" in data.cover_image &&
-        typeof (data.cover_image as FileList).item === "function"
-      ) {
-        // Likely a FileList
-        formData.append("cover_image", (data.cover_image as FileList)[0]);
-      } else if (isBlob(data.cover_image)) {
-        // File inherits from Blob
+    if (data.cover_image) {
+      if (data.cover_image instanceof File) {
+        formData.append("cover_image", data.cover_image);
+      } else if (typeof data.cover_image === "string") {
         formData.append("cover_image", data.cover_image);
       }
     }
@@ -76,19 +150,18 @@ export default function GenericPostForm({
     formData.append("subcategory", Gsubcategory);
 
     if (data.gallery && data.gallery.length > 0) {
-      if (
-        typeof globalThis.FileList !== "undefined" &&
-        data.gallery instanceof globalThis.FileList
-      ) {
-        Array.from(data.gallery).forEach((img: File) => {
+      (data.gallery as (File | string)[]).forEach((img) => {
+        if (img instanceof File) {
           formData.append("gallery", img);
-        });
-      } else if (Array.isArray(data.gallery)) {
-        (data.gallery as string[]).forEach((img) => {
-          formData.append("gallery", img);
-        });
-      }
+        } 
+      });
     }
+
+    // بعد إضافة كل البيانات إلى formData
+// for (let [key, value] of formData.entries()) {
+//   if(key === "gallery") console.log("asdddddddd")
+//   console.log(key, value);
+// }
 
     createPost.mutate(formData);
   };
@@ -164,15 +237,100 @@ export default function GenericPostForm({
           </div>
 
           <div className="sm:ml-16">
-            <label className="block font-medium text-gray-700">
-              صور المنتج
+            <label className="block font-medium text-gray-700 mb-2">
+              صورة غلاف المنتج
             </label>
+
+            {/* Hidden File Input */}
             <input
               type="file"
-              multiple
-              {...register("gallery")}
-              className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
+              accept="image/*"
+              ref={inputRef}
+              onChange={handleImageChange}
+              className="hidden"
             />
+
+            {/* Upload Box */}
+            <div
+              onClick={handleClick}
+              className="w-64 h-40 border-2 border-dashed border-cgreen rounded-lg flex items-center justify-center cursor-pointer bg-cwhite overflow-hidden"
+            >
+              {preview ? (
+                <Image
+                  src={preview}
+                  alt="preview"
+                  width={256}
+                  height={160}
+                  className="object-cover w-full h-full"
+                />
+              ) : (
+                <span className="text-cgreen text-4xl">+</span>
+              )}
+            </div>
+          </div>
+          <input type="hidden" {...register("gallery")} />
+          {/* قسم معرض الصور */}
+          <div className="sm:ml-16">
+            <label className="block font-medium text-gray-700 mb-2">
+              صور المنتج
+            </label>
+            <div className="flex flex-wrap gap-4">
+              {galleryFiles.map((img, index) => {
+                const previewUrl =
+                  img instanceof File ? URL.createObjectURL(img) : img;
+
+                return (
+                  <div
+                    key={index}
+                    className="relative w-24 h-24 border-2 border-cgreen rounded-lg overflow-hidden cursor-pointer"
+                  >
+                    <input
+                      type="file"
+                      accept="image/*"
+                      className="hidden"
+                      onChange={(e) => handleGalleryChange(e, index)}
+                      ref={(el) => {
+                        inputRefs.current[index] = el;
+                      }}
+                    />
+                    {previewUrl ? (
+                      <Image
+                        src={previewUrl}
+                        alt={`Gallery image ${index + 1}`}
+                        fill
+                        style={{ objectFit: "cover" }}
+                        onClick={() => triggerFileInput(index)}
+                        onLoad={() => URL.revokeObjectURL(previewUrl)} // تنظيف الذاكرة
+                      />
+                    ) : (
+                      <div
+                        onClick={() => triggerFileInput(index)}
+                        className="flex justify-center items-center w-full h-full text-cgreen text-4xl"
+                      >
+                        +
+                      </div>
+                    )}
+                    <button
+                      type="button"
+                      onClick={() => handleRemoveImage(index)}
+                      className="absolute top-0 right-0 bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center"
+                    >
+                      &times;
+                    </button>
+                  </div>
+                );
+              })}
+
+              {/* مربع إضافة صورة جديد إذا أقل من 5 صور */}
+              {galleryFiles.length < 5 && (
+                <div
+                  onClick={handleAddNewGallerySlot}
+                  className="w-24 h-24 border-2 border-dashed border-cgreen rounded-lg flex items-center justify-center cursor-pointer text-cgreen text-4xl"
+                >
+                  +
+                </div>
+              )}
+            </div>
           </div>
 
           <div className="sm:ml-16">

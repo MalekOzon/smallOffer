@@ -8,8 +8,8 @@ export type GenericPostPayload  = {
   city: string;
   hood: string;
   detailed_location?: string; // جعلها اختيارية
-  cover_image?: string;
-  gallery?: string[]; // جعلها اختيارية
+  cover_image?: File | string | null;
+  gallery?: (File | string)[];
   category: string;
   subcategory: string;
 };
