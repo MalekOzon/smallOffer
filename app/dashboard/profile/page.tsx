@@ -1,10 +1,13 @@
 "use client";
 
-import { useForm, Controller, SubmitHandler } from "react-hook-form";
+import {
+  useForm,
+  Controller,
+  SubmitHandler,
+} from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import userAvatar from "../../../public/resourses/userAvatar.svg";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Title from "@/app/components/dashborad/Title";
 import {
@@ -254,7 +257,10 @@ const schema = z.object({
   city: z.string(),
   hood: z.string().min(2, "المنطقة يجب أن تكون صحيحة"),
   detailed_location: z.string().min(5, "تفاصيل العنوان يجب أن تكون صحيحة"),
+  profile_image: z.union([z.instanceof(File), z.string()]),
 });
+
+
 type FormData = {
   email: string;
   firstName: string;
@@ -265,11 +271,14 @@ type FormData = {
   city: string;
   hood: string;
   detailed_location: string;
+  profile_image: File | string;
 };
 
 const EditProfilePage = () => {
   const {
     register,
+    setValue,
+    watch,
     handleSubmit,
     control,
     formState: { errors },
@@ -286,6 +295,7 @@ const EditProfilePage = () => {
       hood: "",
       detailed_location: "",
       email: "",
+      // profile_image: ""
     },
   });
 
@@ -297,29 +307,24 @@ const EditProfilePage = () => {
   // get The information from API
   const getUserInfo = useGetUserInfo();
   const { data } = getUserInfo;
-  
+
   const setUserInfo = useSetUserInfo(setNotification);
-  const { isPending: isLoading } = setUserInfo 
+  const { isPending: isLoading } = setUserInfo;
   const [codeFromApi, setCodeFromApi] = useState<string>("+963");
   const [cityFromApi, setCityFromApi] = useState<string>("");
-  
+
   useEffect(() => {
-    console.log("get data: ", data);
 
     if (data) {
       const code = extractCountryCode(data.phone_number) || "+963";
       const localNumber: string = data.phone_number
-  ? codeFromApi
-    ? data.phone_number.slice(codeFromApi.length)
-    : data.phone_number
-  : "";
+        ? codeFromApi
+          ? data.phone_number.slice(codeFromApi.length)
+          : data.phone_number
+        : "";
 
-        setCodeFromApi(code);
-        setCityFromApi(data.city);
-
-      console.log("Extracted phoneCode:", codeFromApi);
-      console.log("City:", cityFromApi);
-      console.log("data.city: ", data.city);
+      setCodeFromApi(code);
+      setCityFromApi(data.city);
 
       reset({
         firstName: data.first_name || "",
@@ -331,6 +336,7 @@ const EditProfilePage = () => {
         city: data.city || cityFromApi,
         hood: data.hood || "",
         detailed_location: data.detailed_location || "",
+        profile_image: data.profile_image || "",
       });
       console.log("Reset values:", {
         phoneCode: codeFromApi,
@@ -339,16 +345,51 @@ const EditProfilePage = () => {
     }
   }, [data, reset]);
 
-  const onSubmit: SubmitHandler<FormData> = (data) => {
-    const jsonData = JSON.stringify({
-      city: data.city ,
-      hood: data.hood,
-      detailed_location: data.detailed_location,
-      profile_image: null, // لو أردت تعديله لاحقًا
-    });
-    console.log("json:", jsonData);
+  const onSubmit: SubmitHandler<FormData> = (formData) => {
+    const form = new FormData();
+  
+    form.append("city", formData.city);
+    form.append("hood", formData.hood);
+    form.append("detailed_location", formData.detailed_location);
+  
+    if (formData.profile_image instanceof File) {
+      form.append("profile_image", formData.profile_image);
+    } else {
+      // في حال كانت صورة قديمة على شكل رابط فقط، يمكنك تجاهلها أو إرسالها كنص إن كانت API تدعمه
+      form.append("profile_image", formData.profile_image);
+    }
+  
+    setUserInfo.mutate(form);
+  };
 
-    setUserInfo.mutate(JSON.parse(jsonData));
+  const coverImage = watch("profile_image");
+  const [preview, setPreview] = useState<string | null>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  // Create preview URL when coverImage changes
+  useEffect(() => {
+    if (coverImage instanceof File) {
+      const objectUrl = URL.createObjectURL(coverImage);
+      setPreview(objectUrl);
+      return () => URL.revokeObjectURL(objectUrl);
+    } else {
+      setPreview(null);
+    }
+  }, [coverImage]);
+
+
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setValue("profile_image", file, {
+        shouldValidate: true,
+        shouldDirty: true,
+      });
+    }
+  };
+
+  const handleClick = () => {
+    inputRef.current?.click();
   };
 
   if (getUserInfo.isLoading || getUserInfo.isFetching) {
@@ -374,13 +415,44 @@ const EditProfilePage = () => {
         {/* Header */}
         <div className="flex justify-between items-start max-lg:flex-col max-lg:items-center gap-6">
           {/* صورة المستخدم */}
-          <div className="w-36 h-36 rounded-full border-4 border-white overflow-hidden relative shadow-md">
-            <Image
-              src={userAvatar}
-              alt="Profile"
-              fill
-              className="object-cover bg-gray-100"
+
+          <div className="sm:ml-16">
+            {/* Hidden File Input */}
+            <input
+              {...register("profile_image")}
+              type="file"
+              accept="image/*"
+              ref={inputRef}
+              onChange={handleImageChange}
+              className="hidden"
             />
+
+            {/* Upload Box */}
+            <div
+              onClick={handleClick}
+              className="w-40  h-40 hover:opacity-50 group border-2 rounded-full border-cgreen  flex items-center justify-center cursor-pointer bg-cwhite overflow-hidden"
+            >
+              
+              {preview ? (
+                <Image
+                  src={preview}
+                  alt="preview"
+                  width={256}
+                  height={160}
+                  className="object-cover w-full h-full "
+                />
+              ) : typeof coverImage === "string" && coverImage !== "" ? (
+                <Image
+                  src={coverImage}
+                  alt="current"
+                  width={256}
+                  height={160}
+                  className="object-cover w-full h-full"
+                />
+              ) : (
+                <span className="text-cgreen text-4xl">+</span>
+              )}
+            </div>
           </div>
 
           {/* NAME AND EMAIL */}
@@ -528,8 +600,14 @@ const EditProfilePage = () => {
                     field.onChange(value); // تحديث القيمة في react-hook-form
                   }}
                 >
-                  <SelectTrigger disabled className="w-full py-5  font-medium text-6 text-black mt-1 border border-clightgray">
-                    <SelectValue  placeholder={codeFromApi} className="font-medium text-6 text-black" />
+                  <SelectTrigger
+                    disabled
+                    className="w-full py-5  font-medium text-6 text-black mt-1 border border-clightgray"
+                  >
+                    <SelectValue
+                      placeholder={codeFromApi}
+                      className="font-medium text-6 text-black"
+                    />
                   </SelectTrigger>
                   <SelectContent className="bg-cwhite w-full max-w-full font-medium text-6 text-black">
                     {countryCodes.map((country) => (
@@ -572,7 +650,10 @@ const EditProfilePage = () => {
                     className="border border-clightgray w-full py-5 mt-1 text-6 text-black font-medium "
                     dir="rtl"
                   >
-                    <SelectValue placeholder={data?.city} className="text-6 text-black font-medium" />
+                    <SelectValue
+                      placeholder={data?.city}
+                      className="text-6 text-black font-medium"
+                    />
                   </SelectTrigger>
 
                   <SelectContent className="bg-cwhite w-full max-w-full">

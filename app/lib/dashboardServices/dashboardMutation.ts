@@ -2,7 +2,7 @@ import axios from "axios";
 import { extractMessages } from "../loginservices/mutations";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { changePasswordDash, deleteAccount, EmailNotificationsDash, feedbackEmail, setUserInfo } from "./dashboardApi";
-import { changePasswordDashType, deleteAccountType, EmailNotificationsDashType, feedbackEmailType, setUserInfoType } from "@/app/types/authTypes";
+import { changePasswordDashType, deleteAccountType, EmailNotificationsDashType, feedbackEmailType } from "@/app/types/authTypes";
 
 
 // Change Password Dash
@@ -190,7 +190,8 @@ export function useSetUserInfo(
 ) {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: (data: setUserInfoType) => setUserInfo(data),
+    mutationFn: (formData: FormData) => setUserInfo(formData),
+
     onMutate: () => {
       console.log("جاري تعديل البيانات  ...");
     },

@@ -25,7 +25,7 @@ const Navbar = () => {
   const logout = useLogout(setNotification);
   const { isPending: isLoading } = logout;
   const getUserInfo = useGetUserInfo();
-  
+
   const isLoggedIn = getUserInfo.data?.username;
 
   const confirmLogout = () => {
@@ -126,8 +126,8 @@ const Navbar = () => {
     rowConfig.first + rowConfig.second
   );
 
-console.log("first " , firstRow);
-console.log("second " , secondRow);
+  console.log("first ", firstRow);
+  console.log("second ", secondRow);
 
   return (
     <>
@@ -139,7 +139,7 @@ console.log("second " , secondRow);
           <div
             className="flex items-center gap-2 relative md:hidden"
             ref={userMenuRef}
-            >
+          >
             {isLoggedIn ? (
               <>
                 <div
@@ -212,7 +212,10 @@ console.log("second " , secondRow);
             )}
           </div>
           {/* زر القلب */}
-          <Link href="/dashboard/favorites" className="text-cdarkgray max-sm:ml-16">
+          <Link
+            href="/dashboard/favorites"
+            className="text-cdarkgray max-sm:ml-16"
+          >
             <Heart />
           </Link>
           {/* اللوغو */}
@@ -245,7 +248,6 @@ console.log("second " , secondRow);
           </button>
         </div>
 
-
         {/* ديسكتوب: الهيدر القديم */}
         <div className="hidden md:flex items-center justify-between py-2 px-3">
           <Link href="/" className="text-2xl font-bold text-cgreen">
@@ -273,11 +275,26 @@ console.log("second " , secondRow);
                   onMouseLeave={() => setShowMenu(false)}
                 >
                   <div className="flex items-center cursor-pointer select-none">
-                    <Image
-                      src={userAvatar}
-                      alt="User Avatar"
-                      className="w-14 h-14 rounded-full mr-2 object-cover border-2 border-cgreen"
-                    />
+                    <div className="w-14 h-14 rounded-full overflow-hidden border-1 border-cgreen">
+                      {typeof getUserInfo.data?.profile_image === "string" &&
+                      getUserInfo.data?.profile_image !== "" ? (
+                        <Image
+                          src={getUserInfo.data?.profile_image}
+                          alt="User Avatar"
+                          width={120}
+                          height={120}
+                          className="object-cover  w-full h-full"
+                        />
+                      ) : (
+                        <Image
+                          src={userAvatar} // صورة افتراضية تحفظها داخل public/
+                          alt="Default Avatar"
+                          width={96}
+                          height={96}
+                          className="object-cover "
+                        />
+                      )}
+                    </div>
                     <span className="text-6 font-medium mr-3">
                       {getUserInfo.data?.username}
                     </span>
@@ -569,7 +586,8 @@ console.log("second " , secondRow);
                         style={{
                           filter:
                             "brightness(0) saturate(100%) invert(56%) sepia(16%) saturate(1162%) hue-rotate(110deg) brightness(93%) contrast(92%)",
-                        }}                      />
+                        }}
+                      />
                       <span className="mr-2 transition-all duration-200 group-hover:text-white">
                         {cat.name}
                       </span>

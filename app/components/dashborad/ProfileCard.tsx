@@ -1,9 +1,9 @@
 import React from "react";
 import Image from "next/image";
-import userAvatar from "../../../public/resourses/userAvatar.svg";
 import { Mail, Phone } from "lucide-react";
 import { useGetUserInfo } from "@/app/lib/dashboardServices/dashboardQueries";
 import LoadingSpinner from "../ui/LoadingSpinner";
+import userAvatar from "../../../public/resourses/userAvatar.svg"
 
 const ProfileCard = () => {
   const getUserInfo = useGetUserInfo();
@@ -13,14 +13,25 @@ const ProfileCard = () => {
   return (
     <div className="w-full lg:h-[29vh] flex p-6 bg-white rounded-lg shadow-md text-right ">
       <div className="flex w-full justify-center items-center flex-col">
-        <div className="w-24 h-24 rounded-full overflow-hidden  border-1 border-cgreen">
-          <Image
-            src={userAvatar} // استبدل بمسار صورة المستخدم الفعلي
-            alt="User Avatar"
-            width={96}
-            height={96}
-            className="object-cover p-1"
-          />
+        <div className="w-24 h-24 rounded-full overflow-hidden border-1 border-cgreen">
+          {typeof data?.profile_image === "string" &&
+          data.profile_image !== "" ? (
+            <Image
+              src={data.profile_image}
+              alt="User Avatar"
+              width={120}
+              height={120}
+              className="object-cover  w-full h-full"
+            />
+          ) : (
+            <Image
+              src={userAvatar} // صورة افتراضية تحفظها داخل public/
+              alt="Default Avatar"
+              width={96}
+              height={96}
+              className="object-cover p-1"
+            />
+          )}
         </div>
         <h2 className=" text-xl mt-2 font-semibold  ">
           {data?.first_name} {data?.last_name}

@@ -941,8 +941,12 @@ const feedbackEmail = async (data)=>{
     const response = await __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$lib$2f$loginservices$2f$api$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].post("accounts/dashboard/settings/feedback/", data);
     return response.data;
 };
-const setUserInfo = async (data)=>{
-    const response = await __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$lib$2f$loginservices$2f$api$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].patch("accounts/dashboard/", data);
+const setUserInfo = async (formData)=>{
+    const response = await __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$lib$2f$loginservices$2f$api$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].patch("accounts/dashboard/", formData, {
+        headers: {
+            "Content-Type": "multipart/form-data"
+        }
+    });
     return response.data;
 };
 const getUserInfo = async ()=>{
@@ -1186,10 +1190,29 @@ const Header = ({ onMenuClick })=>{
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: "flex px-4 justify-end items-center ml-1 max-sm:ml-0 space-x-reverse relative ",
                 children: [
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
-                        src: __TURBOPACK__imported__module__$5b$project$5d2f$public$2f$resourses$2f$userAvatar$2e$svg$2e$mjs__$7b$__IMAGE__$3d3e$__$225b$project$5d2f$public$2f$resourses$2f$userAvatar$2e$svg__$28$static__in__ecmascript$2922$__$7d$__$5b$app$2d$ssr$5d$__$28$structured__image__object$2c$__ecmascript$29$__["default"],
-                        alt: "User Avatar",
-                        className: "w-14 h-14 rounded-full object-cover border-2 border-cgreen mr-2"
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        className: "w-14 h-14 rounded-full overflow-hidden border-1 border-cgreen",
+                        children: typeof getUserInfo.data?.profile_image === "string" && getUserInfo.data?.profile_image !== "" ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
+                            src: getUserInfo.data?.profile_image,
+                            alt: "User Avatar",
+                            width: 120,
+                            height: 120,
+                            className: "object-cover  w-full h-full"
+                        }, void 0, false, {
+                            fileName: "[project]/app/components/dashborad/Header.tsx",
+                            lineNumber: 116,
+                            columnNumber: 13
+                        }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
+                            src: __TURBOPACK__imported__module__$5b$project$5d2f$public$2f$resourses$2f$userAvatar$2e$svg$2e$mjs__$7b$__IMAGE__$3d3e$__$225b$project$5d2f$public$2f$resourses$2f$userAvatar$2e$svg__$28$static__in__ecmascript$2922$__$7d$__$5b$app$2d$ssr$5d$__$28$structured__image__object$2c$__ecmascript$29$__["default"],
+                            alt: "Default Avatar",
+                            width: 96,
+                            height: 96,
+                            className: "object-cover p-1"
+                        }, void 0, false, {
+                            fileName: "[project]/app/components/dashborad/Header.tsx",
+                            lineNumber: 124,
+                            columnNumber: 13
+                        }, this)
                     }, void 0, false, {
                         fileName: "[project]/app/components/dashborad/Header.tsx",
                         lineNumber: 113,
@@ -1207,25 +1230,25 @@ const Header = ({ onMenuClick })=>{
                                         children: getUserInfo.data?.username
                                     }, void 0, false, {
                                         fileName: "[project]/app/components/dashborad/Header.tsx",
-                                        lineNumber: 124,
+                                        lineNumber: 139,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                         className: "text-gray-400 mr-3",
                                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$chevron$2d$down$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__ChevronDown$3e$__["ChevronDown"], {}, void 0, false, {
                                             fileName: "[project]/app/components/dashborad/Header.tsx",
-                                            lineNumber: 128,
+                                            lineNumber: 143,
                                             columnNumber: 15
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/app/components/dashborad/Header.tsx",
-                                        lineNumber: 127,
+                                        lineNumber: 142,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/components/dashborad/Header.tsx",
-                                lineNumber: 120,
+                                lineNumber: 135,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1245,17 +1268,17 @@ const Header = ({ onMenuClick })=>{
                                                 size: 18
                                             }, void 0, false, {
                                                 fileName: "[project]/app/components/dashborad/Header.tsx",
-                                                lineNumber: 152,
+                                                lineNumber: 167,
                                                 columnNumber: 19
                                             }, this)
                                         }, void 0, false, {
                                             fileName: "[project]/app/components/dashborad/Header.tsx",
-                                            lineNumber: 148,
+                                            lineNumber: 163,
                                             columnNumber: 17
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/app/components/dashborad/Header.tsx",
-                                        lineNumber: 147,
+                                        lineNumber: 162,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("ul", {
@@ -1272,19 +1295,19 @@ const Header = ({ onMenuClick })=>{
                                                             className: "ml-2"
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/components/dashborad/Header.tsx",
-                                                            lineNumber: 164,
+                                                            lineNumber: 179,
                                                             columnNumber: 19
                                                         }, this),
                                                         "تعديل المعلومات الشخصية"
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/app/components/dashborad/Header.tsx",
-                                                    lineNumber: 159,
+                                                    lineNumber: 174,
                                                     columnNumber: 17
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/app/components/dashborad/Header.tsx",
-                                                lineNumber: 158,
+                                                lineNumber: 173,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
@@ -1298,19 +1321,19 @@ const Header = ({ onMenuClick })=>{
                                                             className: "ml-2"
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/components/dashborad/Header.tsx",
-                                                            lineNumber: 174,
+                                                            lineNumber: 189,
                                                             columnNumber: 19
                                                         }, this),
                                                         "تغيير كلمة المرور"
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/app/components/dashborad/Header.tsx",
-                                                    lineNumber: 169,
+                                                    lineNumber: 184,
                                                     columnNumber: 17
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/app/components/dashborad/Header.tsx",
-                                                lineNumber: 168,
+                                                lineNumber: 183,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
@@ -1323,37 +1346,37 @@ const Header = ({ onMenuClick })=>{
                                                             className: "ml-2"
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/components/dashborad/Header.tsx",
-                                                            lineNumber: 183,
+                                                            lineNumber: 198,
                                                             columnNumber: 19
                                                         }, this),
                                                         "تسجيل الخروج"
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/app/components/dashborad/Header.tsx",
-                                                    lineNumber: 179,
+                                                    lineNumber: 194,
                                                     columnNumber: 17
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/app/components/dashborad/Header.tsx",
-                                                lineNumber: 178,
+                                                lineNumber: 193,
                                                 columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/components/dashborad/Header.tsx",
-                                        lineNumber: 157,
+                                        lineNumber: 172,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/components/dashborad/Header.tsx",
-                                lineNumber: 132,
+                                lineNumber: 147,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/components/dashborad/Header.tsx",
-                        lineNumber: 119,
+                        lineNumber: 134,
                         columnNumber: 9
                     }, this)
                 ]
@@ -1370,12 +1393,12 @@ const Header = ({ onMenuClick })=>{
                     onClose: ()=>setNotification(null)
                 }, void 0, false, {
                     fileName: "[project]/app/components/dashborad/Header.tsx",
-                    lineNumber: 195,
+                    lineNumber: 210,
                     columnNumber: 11
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/app/components/dashborad/Header.tsx",
-                lineNumber: 194,
+                lineNumber: 209,
                 columnNumber: 9
             }, this),
             showLogoutConfirm && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1393,17 +1416,17 @@ const Header = ({ onMenuClick })=>{
                                     className: "w-10 sm:w-12"
                                 }, void 0, false, {
                                     fileName: "[project]/app/components/dashborad/Header.tsx",
-                                    lineNumber: 209,
+                                    lineNumber: 224,
                                     columnNumber: 17
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/app/components/dashborad/Header.tsx",
-                                lineNumber: 208,
+                                lineNumber: 223,
                                 columnNumber: 15
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/app/components/dashborad/Header.tsx",
-                            lineNumber: 207,
+                            lineNumber: 222,
                             columnNumber: 13
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
@@ -1411,7 +1434,7 @@ const Header = ({ onMenuClick })=>{
                             children: "تسجيل الخروج"
                         }, void 0, false, {
                             fileName: "[project]/app/components/dashborad/Header.tsx",
-                            lineNumber: 216,
+                            lineNumber: 231,
                             columnNumber: 13
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1419,7 +1442,7 @@ const Header = ({ onMenuClick })=>{
                             children: "هل أنت متأكد من تسجيل الخروج؟"
                         }, void 0, false, {
                             fileName: "[project]/app/components/dashborad/Header.tsx",
-                            lineNumber: 219,
+                            lineNumber: 234,
                             columnNumber: 13
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1434,12 +1457,12 @@ const Header = ({ onMenuClick })=>{
                                         children: "جاري المعالجة..."
                                     }, void 0, false, {
                                         fileName: "[project]/app/components/dashborad/Header.tsx",
-                                        lineNumber: 229,
+                                        lineNumber: 244,
                                         columnNumber: 19
                                     }, this) : "تسجيل الخروج"
                                 }, void 0, false, {
                                     fileName: "[project]/app/components/dashborad/Header.tsx",
-                                    lineNumber: 223,
+                                    lineNumber: 238,
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -1448,24 +1471,24 @@ const Header = ({ onMenuClick })=>{
                                     children: "إلغاء الأمر"
                                 }, void 0, false, {
                                     fileName: "[project]/app/components/dashborad/Header.tsx",
-                                    lineNumber: 236,
+                                    lineNumber: 251,
                                     columnNumber: 15
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/components/dashborad/Header.tsx",
-                            lineNumber: 222,
+                            lineNumber: 237,
                             columnNumber: 13
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/components/dashborad/Header.tsx",
-                    lineNumber: 206,
+                    lineNumber: 221,
                     columnNumber: 11
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/app/components/dashborad/Header.tsx",
-                lineNumber: 205,
+                lineNumber: 220,
                 columnNumber: 9
             }, this)
         ]

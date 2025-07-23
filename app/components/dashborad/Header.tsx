@@ -110,11 +110,26 @@ const Header = ({ onMenuClick }: { onMenuClick?: () => void }) => {
 
       {/* المستخدم والقائمة المنسدلة */}
       <div className="flex px-4 justify-end items-center ml-1 max-sm:ml-0 space-x-reverse relative ">
-        <Image
-          src={userAvatar}
-          alt="User Avatar"
-          className="w-14 h-14 rounded-full object-cover border-2 border-cgreen mr-2"
-        />
+        <div className="w-14 h-14 rounded-full overflow-hidden border-1 border-cgreen">
+          {typeof getUserInfo.data?.profile_image === "string" &&
+          getUserInfo.data?.profile_image !== "" ? (
+            <Image
+              src={getUserInfo.data?.profile_image}
+              alt="User Avatar"
+              width={120}
+              height={120}
+              className="object-cover  w-full h-full"
+            />
+          ) : (
+            <Image
+              src={userAvatar} // صورة افتراضية تحفظها داخل public/
+              alt="Default Avatar"
+              width={96}
+              height={96}
+              className="object-cover p-1"
+            />
+          )}
+        </div>
 
         <div className={`relative mr-1 ${!isMobile ? "group" : ""}`}>
           <div

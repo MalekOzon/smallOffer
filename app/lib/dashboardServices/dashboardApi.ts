@@ -3,7 +3,6 @@ import {
   deleteAccountType,
   EmailNotificationsDashType,
   feedbackEmailType,
-  setUserInfoType,
   UserAdsResponse,
 } from "@/app/types/authTypes";
 import axiosInstance from "../loginservices/api";
@@ -50,8 +49,21 @@ export const feedbackEmail = async (data: feedbackEmailType) => {
 };
 
 // Send Account Info
-export const setUserInfo = async (data: setUserInfoType) => {
-  const response = await axiosInstance.patch("accounts/dashboard/", data);
+// export const setUserInfo = async (data: setUserInfoType) => {
+//   const response = await axiosInstance.patch("accounts/dashboard/", data);
+//   return response.data;
+// };
+
+export const setUserInfo = async (formData : FormData) => {
+  const response = await axiosInstance.patch(
+    "accounts/dashboard/",
+    formData,
+    {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    }
+  );
   return response.data;
 };
 
