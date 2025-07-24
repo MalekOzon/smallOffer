@@ -126,7 +126,6 @@ const Navbar = () => {
     rowConfig.first + rowConfig.second
   );
 
-
   return (
     <>
       {/* Header */}
@@ -148,11 +147,27 @@ const Navbar = () => {
                   <span className="font-bold text-cdarkgray text-6 mr-1">
                     {getUserInfo.data?.username}
                   </span>
-                  <Image
-                    src={userAvatar}
-                    alt="User Avatar"
-                    className="w-14 h-14 rounded-full object-cover border-2 border-cgreen mr-2"
-                  />
+                  <div className="w-14 h-14 rounded-full overflow-hidden border-1 border-cgreen mr-2">
+                      {
+                      typeof getUserInfo.data?.profile_image === "string" &&
+                      getUserInfo.data?.profile_image !== "" ? (
+                        <Image
+                          src={getUserInfo.data?.profile_image}
+                          alt="User Avatar"
+                          width={120}
+                          height={120}
+                          className="object-cover  w-full h-full"
+                        />
+                      ) : (
+                        <Image
+                          src={userAvatar} // صورة افتراضية تحفظها داخل public/
+                          alt="Default Avatar"
+                          width={96}
+                          height={96}
+                          className="object-cover "
+                        />
+                      )}
+                    </div>
                 </div>
                 {/* القائمة المنسدلة للموبايل */}
                 {showMenu && (
@@ -274,7 +289,8 @@ const Navbar = () => {
                 >
                   <div className="flex items-center cursor-pointer select-none">
                     <div className="w-14 h-14 rounded-full overflow-hidden border-1 border-cgreen">
-                      {typeof getUserInfo.data?.profile_image === "string" &&
+                      {
+                      typeof getUserInfo.data?.profile_image === "string" &&
                       getUserInfo.data?.profile_image !== "" ? (
                         <Image
                           src={getUserInfo.data?.profile_image}
