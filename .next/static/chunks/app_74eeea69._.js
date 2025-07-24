@@ -1103,13 +1103,9 @@ const EditGeneric = ()=>{
     const isPending = editGenericForm.isPending;
     const inputRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(null);
     const [preview, setPreview] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
-    const inputRefs = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])([]);
-    const [galleryFiles, setGalleryFiles] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])([]);
-    // لما تضغط على صندوق رفع الصورة يفتح اختيار الملفات
     const handleClick = ()=>{
         inputRef.current?.click();
     };
-    // لما تختار صورة جديدة يتم تحديث preview و formData.cover_image
     const handleImageChange = (e)=>{
         const files = e.target.files;
         if (files && files.length > 0) {
@@ -1121,7 +1117,9 @@ const EditGeneric = ()=>{
             setPreview(URL.createObjectURL(file));
         }
     };
-    // تحديث صورة في المعرض
+    const MAX_GALLERY_IMAGES = 7;
+    const inputRefs = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])([]);
+    const [galleryFiles, setGalleryFiles] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])([]);
     const handleGalleryChange = (e, index)=>{
         const file = e.target.files?.[0];
         if (file) {
@@ -1138,7 +1136,6 @@ const EditGeneric = ()=>{
             });
         }
     };
-    // Handler to remove image at index
     const handleRemoveImage = (index)=>{
         setGalleryFiles((prev)=>{
             const updated = prev.filter((_, i)=>i !== index);
@@ -1149,10 +1146,9 @@ const EditGeneric = ()=>{
             return updated;
         });
     };
-    // Handler to add new empty slot (up to max 5)
     const handleAddNewGallerySlot = ()=>{
         setGalleryFiles((prev)=>{
-            if (prev.length >= 5) return prev;
+            if (prev.length >= MAX_GALLERY_IMAGES) return prev;
             const updated = [
                 ...prev,
                 ""
@@ -1164,7 +1160,6 @@ const EditGeneric = ()=>{
             return updated;
         });
     };
-    // فتح نافذة اختيار الملفات لصورة معينة
     const triggerFileInput = (index)=>{
         inputRefs.current[index]?.click();
     };
@@ -1240,10 +1235,21 @@ const EditGeneric = ()=>{
                 offer_type: type
             }));
     };
-    const afasfaf = data?.gallery_images;
+    const convertURLtoFile = async (url)=>{
+        const response = await fetch(url);
+        const blob = await response.blob();
+        let name = url.split("/").pop() || "";
+        if (!/\.(jpg|jpeg|png|webp|gif)$/i.test(name)) {
+            name = `image-${Date.now()}.jpg`; // اسم افتراضي بامتداد مسموح
+        }
+        return new File([
+            blob
+        ], name, {
+            type: blob.type
+        });
+    };
     // دالة الإرسال الصحيحة
-    const onSubmit = (e)=>{
-        console.log("hooooooooon ", afasfaf);
+    const onSubmit = async (e)=>{
         e.preventDefault();
         const data = formData;
         const form = new FormData();
@@ -1265,14 +1271,15 @@ const EditGeneric = ()=>{
         if (data.cover_image instanceof File) {
             form.append("cover_image", data.cover_image);
         }
-        if (formData.gallery && formData.gallery.length > 0) {
-            formData.gallery.forEach((img)=>{
-                if (img instanceof File) {
-                    form.append("gallery", img);
-                }
-            });
+        for (const img of formData.gallery || []){
+            if (img instanceof File) {
+                form.append("gallery", img);
+            } else if (typeof img === "string") {
+                const file = await convertURLtoFile(img);
+                form.append("gallery", file);
+            }
         }
-        console.log("📋 Gallery content:");
+        console.log("📋 Gallery content ");
         const galleryItems = form.getAll("gallery");
         galleryItems.forEach((item, index)=>{
             if (item instanceof File) {
@@ -1554,49 +1561,17 @@ const EditGeneric = ()=>{
                             lineNumber: 343,
                             columnNumber: 11
                         }, this),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                            className: "text-lg max-sm:text-sm border p-2 bg-cgreen text-cwhite rounded-md ",
+                            children: "ملاحظة:   يوجد زر معاينة المنشور  في الأسفل"
+                        }, void 0, false, {
+                            fileName: "[project]/app/(public)/editpost/editGeneric/[id]/page.tsx",
+                            lineNumber: 368,
+                            columnNumber: 11
+                        }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            className: "grid grid-cols-1 md:grid-cols-2 gap-6 mb-6",
+                            className: "grid grid-cols-1 md:grid-cols-2 gap-6 my-6",
                             children: [
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "sm:ml-16",
-                                    children: [
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                            className: "block font-medium text-gray-700",
-                                            children: [
-                                                "اسم المنتج ",
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                    className: "text-red-500 text-xl mr-1",
-                                                    children: "*"
-                                                }, void 0, false, {
-                                                    fileName: "[project]/app/(public)/editpost/editGeneric/[id]/page.tsx",
-                                                    lineNumber: 372,
-                                                    columnNumber: 28
-                                                }, this)
-                                            ]
-                                        }, void 0, true, {
-                                            fileName: "[project]/app/(public)/editpost/editGeneric/[id]/page.tsx",
-                                            lineNumber: 371,
-                                            columnNumber: 15
-                                        }, this),
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
-                                            required: true,
-                                            name: "title",
-                                            value: formData.title || "",
-                                            onChange: handleInputChange,
-                                            type: "text",
-                                            placeholder: "اسم المنتج",
-                                            className: "w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
-                                        }, void 0, false, {
-                                            fileName: "[project]/app/(public)/editpost/editGeneric/[id]/page.tsx",
-                                            lineNumber: 374,
-                                            columnNumber: 15
-                                        }, this)
-                                    ]
-                                }, void 0, true, {
-                                    fileName: "[project]/app/(public)/editpost/editGeneric/[id]/page.tsx",
-                                    lineNumber: 370,
-                                    columnNumber: 13
-                                }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                     className: "sm:ml-16",
                                     children: [
@@ -1605,7 +1580,7 @@ const EditGeneric = ()=>{
                                             children: "صورة غلاف المنتج"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editGeneric/[id]/page.tsx",
-                                            lineNumber: 386,
+                                            lineNumber: 374,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -1616,12 +1591,12 @@ const EditGeneric = ()=>{
                                             className: "hidden"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editGeneric/[id]/page.tsx",
-                                            lineNumber: 391,
+                                            lineNumber: 379,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                             onClick: handleClick,
-                                            className: "w-64 h-40 border-2 border-dashed border-cgreen rounded-lg flex items-center justify-center cursor-pointer bg-cwhite overflow-hidden",
+                                            className: "w-[70%] max-sm:w-full h-52  border-2 border-dashed border-cgreen rounded-lg flex items-center justify-center cursor-pointer bg-cwhite overflow-hidden",
                                             children: preview ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
                                                 src: preview,
                                                 alt: "preview",
@@ -1630,25 +1605,25 @@ const EditGeneric = ()=>{
                                                 className: "object-cover w-full h-full"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/editpost/editGeneric/[id]/page.tsx",
-                                                lineNumber: 405,
+                                                lineNumber: 393,
                                                 columnNumber: 19
                                             }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                 className: "text-cgreen text-4xl",
                                                 children: "+"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/editpost/editGeneric/[id]/page.tsx",
-                                                lineNumber: 413,
+                                                lineNumber: 401,
                                                 columnNumber: 19
                                             }, this)
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editGeneric/[id]/page.tsx",
-                                            lineNumber: 400,
+                                            lineNumber: 388,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editGeneric/[id]/page.tsx",
-                                    lineNumber: 385,
+                                    lineNumber: 373,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -1656,27 +1631,27 @@ const EditGeneric = ()=>{
                                     ...register("gallery")
                                 }, void 0, false, {
                                     fileName: "[project]/app/(public)/editpost/editGeneric/[id]/page.tsx",
-                                    lineNumber: 420,
+                                    lineNumber: 406,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "sm:ml-16",
+                                    className: "sm:ml-16  ",
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                             className: "block font-medium text-gray-700 mb-2",
                                             children: "صور المنتج"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editGeneric/[id]/page.tsx",
-                                            lineNumber: 422,
+                                            lineNumber: 408,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                            className: "flex flex-wrap gap-4",
+                                            className: "flex flex-wrap gap-2",
                                             children: [
                                                 galleryFiles.map((img, index)=>{
                                                     const previewUrl = img instanceof File ? URL.createObjectURL(img) : img;
                                                     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                        className: "relative w-24 h-24 border-2 border-cgreen rounded-lg overflow-hidden cursor-pointer",
+                                                        className: "relative max-sm:w-32 w-24  h-24 border-2 border-cgreen rounded-lg overflow-hidden cursor-pointer",
                                                         children: [
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
                                                                 type: "file",
@@ -1688,7 +1663,7 @@ const EditGeneric = ()=>{
                                                                 }
                                                             }, void 0, false, {
                                                                 fileName: "[project]/app/(public)/editpost/editGeneric/[id]/page.tsx",
-                                                                lineNumber: 435,
+                                                                lineNumber: 421,
                                                                 columnNumber: 23
                                                             }, this),
                                                             previewUrl && previewUrl !== "" ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
@@ -1702,7 +1677,7 @@ const EditGeneric = ()=>{
                                                                 onLoad: ()=>img instanceof File && URL.revokeObjectURL(previewUrl)
                                                             }, void 0, false, {
                                                                 fileName: "[project]/app/(public)/editpost/editGeneric/[id]/page.tsx",
-                                                                lineNumber: 445,
+                                                                lineNumber: 431,
                                                                 columnNumber: 25
                                                             }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                                 onClick: ()=>triggerFileInput(index),
@@ -1710,7 +1685,7 @@ const EditGeneric = ()=>{
                                                                 children: "+"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/app/(public)/editpost/editGeneric/[id]/page.tsx",
-                                                                lineNumber: 457,
+                                                                lineNumber: 443,
                                                                 columnNumber: 25
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -1720,41 +1695,81 @@ const EditGeneric = ()=>{
                                                                 children: "×"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/app/(public)/editpost/editGeneric/[id]/page.tsx",
-                                                                lineNumber: 464,
+                                                                lineNumber: 450,
                                                                 columnNumber: 23
                                                             }, this)
                                                         ]
                                                     }, index, true, {
                                                         fileName: "[project]/app/(public)/editpost/editGeneric/[id]/page.tsx",
-                                                        lineNumber: 431,
+                                                        lineNumber: 417,
                                                         columnNumber: 21
                                                     }, this);
                                                 }),
-                                                galleryFiles.length < 5 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                galleryFiles.length < MAX_GALLERY_IMAGES && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                     onClick: handleAddNewGallerySlot,
                                                     className: "w-24 h-24 border-2 border-dashed border-cgreen rounded-lg flex items-center justify-center cursor-pointer text-cgreen text-4xl",
                                                     children: "+"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editGeneric/[id]/page.tsx",
-                                                    lineNumber: 475,
+                                                    lineNumber: 461,
                                                     columnNumber: 19
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/(public)/editpost/editGeneric/[id]/page.tsx",
-                                            lineNumber: 425,
+                                            lineNumber: 411,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editGeneric/[id]/page.tsx",
-                                    lineNumber: 421,
+                                    lineNumber: 407,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/(public)/editpost/editGeneric/[id]/page.tsx",
-                            lineNumber: 369,
+                            lineNumber: 370,
+                            columnNumber: 11
+                        }, this),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                            className: "sm:ml-16",
+                            children: [
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
+                                    className: "block font-medium text-gray-700",
+                                    children: [
+                                        "اسم المنتج ",
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                            className: "text-red-500 text-xl mr-1",
+                                            children: "*"
+                                        }, void 0, false, {
+                                            fileName: "[project]/app/(public)/editpost/editGeneric/[id]/page.tsx",
+                                            lineNumber: 474,
+                                            columnNumber: 28
+                                        }, this)
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "[project]/app/(public)/editpost/editGeneric/[id]/page.tsx",
+                                    lineNumber: 473,
+                                    columnNumber: 15
+                                }, this),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                    required: true,
+                                    name: "title",
+                                    value: formData.title || "",
+                                    onChange: handleInputChange,
+                                    type: "text",
+                                    placeholder: "اسم المنتج",
+                                    className: "w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
+                                }, void 0, false, {
+                                    fileName: "[project]/app/(public)/editpost/editGeneric/[id]/page.tsx",
+                                    lineNumber: 476,
+                                    columnNumber: 15
+                                }, this)
+                            ]
+                        }, void 0, true, {
+                            fileName: "[project]/app/(public)/editpost/editGeneric/[id]/page.tsx",
+                            lineNumber: 472,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1772,13 +1787,13 @@ const EditGeneric = ()=>{
                                                     children: "*"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editGeneric/[id]/page.tsx",
-                                                    lineNumber: 494,
+                                                    lineNumber: 490,
                                                     columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/(public)/editpost/editGeneric/[id]/page.tsx",
-                                            lineNumber: 492,
+                                            lineNumber: 488,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
@@ -1796,7 +1811,7 @@ const EditGeneric = ()=>{
                                                     children: "اختر الإدخال"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editGeneric/[id]/page.tsx",
-                                                    lineNumber: 506,
+                                                    lineNumber: 502,
                                                     columnNumber: 17
                                                 }, this),
                                                 __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$signup$2f$step2$2f$syrianGovernorates$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["syrianGovernorates"].map((gov)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -1804,19 +1819,19 @@ const EditGeneric = ()=>{
                                                         children: gov.name
                                                     }, gov.value, false, {
                                                         fileName: "[project]/app/(public)/editpost/editGeneric/[id]/page.tsx",
-                                                        lineNumber: 508,
+                                                        lineNumber: 504,
                                                         columnNumber: 19
                                                     }, this))
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/(public)/editpost/editGeneric/[id]/page.tsx",
-                                            lineNumber: 496,
+                                            lineNumber: 492,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editGeneric/[id]/page.tsx",
-                                    lineNumber: 491,
+                                    lineNumber: 487,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1831,13 +1846,13 @@ const EditGeneric = ()=>{
                                                     children: "*"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editGeneric/[id]/page.tsx",
-                                                    lineNumber: 517,
+                                                    lineNumber: 513,
                                                     columnNumber: 25
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/(public)/editpost/editGeneric/[id]/page.tsx",
-                                            lineNumber: 516,
+                                            lineNumber: 512,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -1849,19 +1864,19 @@ const EditGeneric = ()=>{
                                             placeholder: "المنطقة"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editGeneric/[id]/page.tsx",
-                                            lineNumber: 519,
+                                            lineNumber: 515,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editGeneric/[id]/page.tsx",
-                                    lineNumber: 515,
+                                    lineNumber: 511,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/(public)/editpost/editGeneric/[id]/page.tsx",
-                            lineNumber: 490,
+                            lineNumber: 486,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1874,7 +1889,7 @@ const EditGeneric = ()=>{
                                         children: "تفاصيل العنوان"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/editpost/editGeneric/[id]/page.tsx",
-                                        lineNumber: 531,
+                                        lineNumber: 527,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -1885,18 +1900,18 @@ const EditGeneric = ()=>{
                                         placeholder: "تفاصيل العنوان"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/editpost/editGeneric/[id]/page.tsx",
-                                        lineNumber: 534,
+                                        lineNumber: 530,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/editpost/editGeneric/[id]/page.tsx",
-                                lineNumber: 530,
+                                lineNumber: 526,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/app/(public)/editpost/editGeneric/[id]/page.tsx",
-                            lineNumber: 529,
+                            lineNumber: 525,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1913,13 +1928,13 @@ const EditGeneric = ()=>{
                                                 children: "*"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/editpost/editGeneric/[id]/page.tsx",
-                                                lineNumber: 546,
+                                                lineNumber: 542,
                                                 columnNumber: 28
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/(public)/editpost/editGeneric/[id]/page.tsx",
-                                        lineNumber: 545,
+                                        lineNumber: 541,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("textarea", {
@@ -1931,18 +1946,18 @@ const EditGeneric = ()=>{
                                         placeholder: "ادخل وصف المنتج هنا"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/editpost/editGeneric/[id]/page.tsx",
-                                        lineNumber: 548,
+                                        lineNumber: 544,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/editpost/editGeneric/[id]/page.tsx",
-                                lineNumber: 544,
+                                lineNumber: 540,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/app/(public)/editpost/editGeneric/[id]/page.tsx",
-                            lineNumber: 543,
+                            lineNumber: 539,
                             columnNumber: 11
                         }, this)
                     ]
@@ -1959,7 +1974,7 @@ const EditGeneric = ()=>{
                             children: "سعر المنتج"
                         }, void 0, false, {
                             fileName: "[project]/app/(public)/editpost/editGeneric/[id]/page.tsx",
-                            lineNumber: 562,
+                            lineNumber: 558,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1967,7 +1982,7 @@ const EditGeneric = ()=>{
                             children: "حدد سعر الإعلان أو اختر إذا كان قابل للتفاوض، وسيساعد المستخدمين على معرفة القيمة بسهولة."
                         }, void 0, false, {
                             fileName: "[project]/app/(public)/editpost/editGeneric/[id]/page.tsx",
-                            lineNumber: 565,
+                            lineNumber: 561,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1984,13 +1999,13 @@ const EditGeneric = ()=>{
                                                 children: "*"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/editpost/editGeneric/[id]/page.tsx",
-                                                lineNumber: 573,
+                                                lineNumber: 569,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/(public)/editpost/editGeneric/[id]/page.tsx",
-                                        lineNumber: 571,
+                                        lineNumber: 567,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -2003,18 +2018,18 @@ const EditGeneric = ()=>{
                                         placeholder: "ادخل سعر المنتج"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/editpost/editGeneric/[id]/page.tsx",
-                                        lineNumber: 575,
+                                        lineNumber: 571,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/editpost/editGeneric/[id]/page.tsx",
-                                lineNumber: 570,
+                                lineNumber: 566,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/app/(public)/editpost/editGeneric/[id]/page.tsx",
-                            lineNumber: 569,
+                            lineNumber: 565,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2029,13 +2044,13 @@ const EditGeneric = ()=>{
                                             children: "*"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editGeneric/[id]/page.tsx",
-                                            lineNumber: 588,
+                                            lineNumber: 584,
                                             columnNumber: 25
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editGeneric/[id]/page.tsx",
-                                    lineNumber: 587,
+                                    lineNumber: 583,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2054,20 +2069,20 @@ const EditGeneric = ()=>{
                                                     className: "accent-cgreen"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editGeneric/[id]/page.tsx",
-                                                    lineNumber: 592,
+                                                    lineNumber: 588,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                     children: "سعر قابل للتفاوض"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editGeneric/[id]/page.tsx",
-                                                    lineNumber: 601,
+                                                    lineNumber: 597,
                                                     columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/(public)/editpost/editGeneric/[id]/page.tsx",
-                                            lineNumber: 591,
+                                            lineNumber: 587,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
@@ -2082,39 +2097,39 @@ const EditGeneric = ()=>{
                                                     className: "accent-cgreen"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editGeneric/[id]/page.tsx",
-                                                    lineNumber: 604,
+                                                    lineNumber: 600,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                     children: "سعر ثابت"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editGeneric/[id]/page.tsx",
-                                                    lineNumber: 612,
+                                                    lineNumber: 608,
                                                     columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/(public)/editpost/editGeneric/[id]/page.tsx",
-                                            lineNumber: 603,
+                                            lineNumber: 599,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editGeneric/[id]/page.tsx",
-                                    lineNumber: 590,
+                                    lineNumber: 586,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/(public)/editpost/editGeneric/[id]/page.tsx",
-                            lineNumber: 586,
+                            lineNumber: 582,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("hr", {
                             className: "mt-6 mb-3 text-clightgray"
                         }, void 0, false, {
                             fileName: "[project]/app/(public)/editpost/editGeneric/[id]/page.tsx",
-                            lineNumber: 616,
+                            lineNumber: 612,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2129,12 +2144,12 @@ const EditGeneric = ()=>{
                                         children: "معاينة"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/editpost/editGeneric/[id]/page.tsx",
-                                        lineNumber: 624,
+                                        lineNumber: 620,
                                         columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/app/(public)/editpost/editGeneric/[id]/page.tsx",
-                                    lineNumber: 619,
+                                    lineNumber: 615,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -2145,24 +2160,24 @@ const EditGeneric = ()=>{
                                         children: isPending ? "جارٍ النشر ..." : "إعادة نشر"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/editpost/editGeneric/[id]/page.tsx",
-                                        lineNumber: 633,
+                                        lineNumber: 629,
                                         columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/app/(public)/editpost/editGeneric/[id]/page.tsx",
-                                    lineNumber: 629,
+                                    lineNumber: 625,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/(public)/editpost/editGeneric/[id]/page.tsx",
-                            lineNumber: 617,
+                            lineNumber: 613,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/(public)/editpost/editGeneric/[id]/page.tsx",
-                    lineNumber: 561,
+                    lineNumber: 557,
                     columnNumber: 9
                 }, this)
             ]
@@ -2177,7 +2192,7 @@ const EditGeneric = ()=>{
         columnNumber: 5
     }, this);
 };
-_s(EditGeneric, "ioWWEGHrps8tPc7bOTP3CO8F11I=", false, function() {
+_s(EditGeneric, "fPZxnVVaurAHOkvNlNuG+mtdpNM=", false, function() {
     return [
         __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$hook$2d$form$2f$dist$2f$index$2e$esm$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useForm"],
         __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useParams"],

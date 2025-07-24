@@ -3284,6 +3284,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$re
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/image.js [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/navigation.js [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/server/route-modules/app-page/vendored/ssr/react.js [app-ssr] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$hook$2d$form$2f$dist$2f$index$2e$esm$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/react-hook-form/dist/index.esm.mjs [app-ssr] (ecmascript)");
 "use client";
 ;
 ;
@@ -3298,7 +3299,13 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist
 ;
 ;
 ;
+;
 const EditCar = ()=>{
+    const { register, formState: {} } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$hook$2d$form$2f$dist$2f$index$2e$esm$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useForm"])({
+        defaultValues: {
+            gallery_images: []
+        }
+    });
     const params = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useParams"])();
     const id = params.id;
     const getPostDetail = (0, __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$lib$2f$postServices$2f$postQueries$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useGetCarPostId"])(id);
@@ -3306,7 +3313,51 @@ const EditCar = ()=>{
     const [notification, setNotification] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(null);
     const editCarForm = (0, __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$lib$2f$postServices$2f$editPostMutation$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEditCarForm"])(setNotification);
     const isPending = editCarForm.isPending;
-    // عدل تعريف formData ليكون car: CarPostPayload['car'] | undefined
+    const inputRefs = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useRef"])([]);
+    const [galleryFiles, setGalleryFiles] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])([]);
+    const handleGalleryChange = (e, index)=>{
+        const file = e.target.files?.[0];
+        if (file) {
+            setGalleryFiles((prev)=>{
+                const updated = [
+                    ...prev
+                ];
+                updated[index] = file;
+                setFormData((prevForm)=>({
+                        ...prevForm,
+                        gallery: updated
+                    }));
+                return updated;
+            });
+        }
+    };
+    const handleRemoveImage = (index)=>{
+        setGalleryFiles((prev)=>{
+            const updated = prev.filter((_, i)=>i !== index);
+            setFormData((prevForm)=>({
+                    ...prevForm,
+                    gallery: updated
+                }));
+            return updated;
+        });
+    };
+    const handleAddNewGallerySlot = ()=>{
+        setGalleryFiles((prev)=>{
+            if (prev.length >= 10) return prev;
+            const updated = [
+                ...prev,
+                ""
+            ];
+            setFormData((prevForm)=>({
+                    ...prevForm,
+                    gallery: updated
+                }));
+            return updated;
+        });
+    };
+    const triggerFileInput = (index)=>{
+        inputRefs.current[index]?.click();
+    };
     const [formData, setFormData] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])({
         category: "",
         subcategory: "",
@@ -3321,9 +3372,9 @@ const EditCar = ()=>{
         gallery: [],
         car: undefined
     });
-    // تحديث الحقول بمجرد استلام البيانات
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
         if (data) {
+            const galleryImages = data.gallery_images?.map((img)=>img.image) || [];
             setFormData({
                 category: data.category || "",
                 subcategory: data.subcategory || "",
@@ -3335,16 +3386,16 @@ const EditCar = ()=>{
                 hood: data.hood || "",
                 detailed_location: data.detailed_location || "",
                 cover_image: data.cover_image || "",
-                gallery: data.gallery || [],
+                gallery: galleryImages,
                 offer_type: data.offer_type || "sell",
                 car: data.car || {}
             });
+            setGalleryFiles(galleryImages);
             setIsSearch(data.offer_type === "search");
         }
     }, [
         data
     ]);
-    // --- أضف دالة تغيير لحقول تفاصيل السيارة مع إصلاحات linter النهائية ---
     const handleCarInputChange = (e)=>{
         const { name, value, type } = e.target;
         const key = name.replace("car.", "");
@@ -3401,7 +3452,6 @@ const EditCar = ()=>{
         });
     };
     const [isSearch, setIsSearch] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false);
-    // تحديث offer_type عند الضغط على الأزرار
     const handleOfferType = (type)=>{
         setIsSearch(type === "search");
         setFormData((prev)=>({
@@ -3410,7 +3460,7 @@ const EditCar = ()=>{
             }));
     };
     // دالة الإرسال الصحيحة
-    const onSubmit = (e)=>{
+    const onSubmit = async (e)=>{
         e.preventDefault();
         const data = formData;
         const form = new FormData();
@@ -3434,6 +3484,21 @@ const EditCar = ()=>{
         if (data.cover_image instanceof File) {
             form.append("cover_image", data.cover_image);
         }
+        for (const img of formData.gallery || []){
+            if (img instanceof File) {
+                form.append("gallery", img);
+            } else if (typeof img === "string") {
+                const file = await convertURLtoFile(img);
+                form.append("gallery", file);
+            }
+        }
+        console.log("📋 Gallery send from me");
+        const galleryItems = form.getAll("gallery");
+        galleryItems.forEach((item, index)=>{
+            if (item instanceof File) {
+                console.log(`[${index}]  ${item.name}`);
+            }
+        });
         const carDetails = {
             fuel_type: data.car?.fuel_type,
             color: data.car?.color,
@@ -3542,47 +3607,23 @@ const EditCar = ()=>{
                 }));
         }
     };
-    //   <div className="sm:ml-16">
-    //   <label className="block font-medium text-gray-700 mb-2">
-    //     صورة غلاف المنتج
-    //   </label>
-    //   {/* Hidden File Input */}
-    //   <input
-    //     type="file"
-    //     accept="image/*"
-    //     ref={inputRef}
-    //     onChange={handleImageChange}
-    //     className="hidden"
-    //   />
-    //   {/* Upload Box */}
-    //   <div
-    //     onClick={handleClick}
-    //     className="w-64 h-40 border-2 border-dashed border-cgreen rounded-lg flex items-center justify-center cursor-pointer bg-cwhite overflow-hidden"
-    //   >
-    //     {preview ? (
-    //       <Image
-    //         src={preview}
-    //         alt="preview"
-    //         width={256}
-    //         height={160}
-    //         className="object-cover w-full h-full"
-    //       />
-    //     ) : (
-    //       <span className="text-cgreen text-4xl">+</span>
-    //     )}
-    //   </div>
-    // </div>
-    // if (formData.gallery && formData.gallery.length > 0) {
-    //   formData.gallery.forEach((img) => {
-    //     if (img instanceof File) {
-    //       form.append("gallery", img);
-    //     }
-    //   });
-    // }
+    const convertURLtoFile = async (url)=>{
+        const response = await fetch(url);
+        const blob = await response.blob();
+        let name = url.split("/").pop() || "";
+        if (!/\.(jpg|jpeg|png|webp|gif)$/i.test(name)) {
+            name = `image-${Date.now()}.jpg`; // اسم افتراضي بامتداد مسموح
+        }
+        return new File([
+            blob
+        ], name, {
+            type: blob.type
+        });
+    };
     // ////////////////////////////////////////////////////////////////////
     if (isLoading) return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$app$2f$components$2f$ui$2f$SkeletonNotificationSettings$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {}, void 0, false, {
         fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-        lineNumber: 333,
+        lineNumber: 379,
         columnNumber: 25
     }, this);
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3597,7 +3638,7 @@ const EditCar = ()=>{
                     onClose: ()=>setNotification(null)
                 }, void 0, false, {
                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                    lineNumber: 340,
+                    lineNumber: 386,
                     columnNumber: 11
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3608,7 +3649,7 @@ const EditCar = ()=>{
                             children: "تعديل الإعلان"
                         }, void 0, false, {
                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                            lineNumber: 349,
+                            lineNumber: 395,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -3622,7 +3663,7 @@ const EditCar = ()=>{
                                     children: "سياسة النشر"
                                 }, void 0, false, {
                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                    lineNumber: 354,
+                                    lineNumber: 400,
                                     columnNumber: 13
                                 }, this),
                                 " ",
@@ -3630,13 +3671,13 @@ const EditCar = ()=>{
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                            lineNumber: 352,
+                            lineNumber: 398,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                    lineNumber: 348,
+                    lineNumber: 394,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3647,14 +3688,14 @@ const EditCar = ()=>{
                             children: "تصنيف المنتج"
                         }, void 0, false, {
                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                            lineNumber: 366,
+                            lineNumber: 412,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("hr", {
                             className: "mb-6 text-clightgray"
                         }, void 0, false, {
                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                            lineNumber: 367,
+                            lineNumber: 413,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3672,13 +3713,13 @@ const EditCar = ()=>{
                                                     children: "*"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                    lineNumber: 372,
+                                                    lineNumber: 418,
                                                     columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 370,
+                                            lineNumber: 416,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -3690,13 +3731,13 @@ const EditCar = ()=>{
                                             className: "w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 374,
+                                            lineNumber: 420,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                    lineNumber: 369,
+                                    lineNumber: 415,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3711,13 +3752,13 @@ const EditCar = ()=>{
                                                     children: "*"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                    lineNumber: 387,
+                                                    lineNumber: 433,
                                                     columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 385,
+                                            lineNumber: 431,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -3729,25 +3770,25 @@ const EditCar = ()=>{
                                             className: "w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 389,
+                                            lineNumber: 435,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                    lineNumber: 384,
+                                    lineNumber: 430,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                            lineNumber: 368,
+                            lineNumber: 414,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                    lineNumber: 365,
+                    lineNumber: 411,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
@@ -3758,7 +3799,7 @@ const EditCar = ()=>{
                             children: "معلومات أساسية"
                         }, void 0, false, {
                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                            lineNumber: 403,
+                            lineNumber: 449,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -3766,7 +3807,7 @@ const EditCar = ()=>{
                             children: "أدخل معلومات الإعلان الأساسية لتظهر بوضوح للمشترين، مثل العنوان والوصف العام والموقع."
                         }, void 0, false, {
                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                            lineNumber: 406,
+                            lineNumber: 452,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3781,13 +3822,13 @@ const EditCar = ()=>{
                                             children: "*"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 414,
+                                            lineNumber: 460,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                    lineNumber: 412,
+                                    lineNumber: 458,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3801,7 +3842,7 @@ const EditCar = ()=>{
                                             children: "أنا أعرض"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 417,
+                                            lineNumber: 463,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$app$2f$components$2f$ui$2f$Button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -3812,19 +3853,19 @@ const EditCar = ()=>{
                                             children: "أنا أبحث"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 425,
+                                            lineNumber: 471,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                    lineNumber: 416,
+                                    lineNumber: 462,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                            lineNumber: 410,
+                            lineNumber: 456,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3842,13 +3883,13 @@ const EditCar = ()=>{
                                                     children: "*"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                    lineNumber: 439,
+                                                    lineNumber: 485,
                                                     columnNumber: 28
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 438,
+                                            lineNumber: 484,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -3861,13 +3902,13 @@ const EditCar = ()=>{
                                             className: "w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 441,
+                                            lineNumber: 487,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                    lineNumber: 437,
+                                    lineNumber: 483,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3878,7 +3919,7 @@ const EditCar = ()=>{
                                             children: "صورة غلاف المنتج"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 452,
+                                            lineNumber: 498,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -3889,7 +3930,7 @@ const EditCar = ()=>{
                                             className: "hidden"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 457,
+                                            lineNumber: 503,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3903,59 +3944,131 @@ const EditCar = ()=>{
                                                 className: "object-cover w-full h-full"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                lineNumber: 471,
+                                                lineNumber: 517,
                                                 columnNumber: 19
                                             }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                 className: "text-cgreen text-4xl",
                                                 children: "+"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                lineNumber: 479,
+                                                lineNumber: 525,
                                                 columnNumber: 19
                                             }, this)
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 466,
+                                            lineNumber: 512,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                    lineNumber: 451,
+                                    lineNumber: 497,
+                                    columnNumber: 13
+                                }, this),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                    type: "hidden",
+                                    ...register("gallery")
+                                }, void 0, false, {
+                                    fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
+                                    lineNumber: 531,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                     className: "sm:ml-16",
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                            className: "block font-medium text-gray-700",
+                                            className: "block font-medium text-gray-700 mb-2",
                                             children: "صور المنتج"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 486,
+                                            lineNumber: 533,
                                             columnNumber: 15
                                         }, this),
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
-                                            type: "file",
-                                            multiple: true,
-                                            name: "gallery",
-                                            onChange: handleInputChange,
-                                            className: "w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
-                                        }, void 0, false, {
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                            className: "flex flex-wrap gap-4",
+                                            children: [
+                                                galleryFiles.map((img, index)=>{
+                                                    const previewUrl = img instanceof File ? URL.createObjectURL(img) : img;
+                                                    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                        className: "relative w-24 h-24 border-2 border-cgreen rounded-lg overflow-hidden cursor-pointer",
+                                                        children: [
+                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                                                type: "file",
+                                                                accept: "image/*",
+                                                                className: "hidden",
+                                                                onChange: (e)=>handleGalleryChange(e, index),
+                                                                ref: (el)=>{
+                                                                    inputRefs.current[index] = el;
+                                                                }
+                                                            }, void 0, false, {
+                                                                fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
+                                                                lineNumber: 546,
+                                                                columnNumber: 23
+                                                            }, this),
+                                                            previewUrl && previewUrl !== "" ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
+                                                                src: previewUrl,
+                                                                alt: `Gallery image ${index + 1}`,
+                                                                fill: true,
+                                                                style: {
+                                                                    objectFit: "cover"
+                                                                },
+                                                                onClick: ()=>triggerFileInput(index),
+                                                                onLoad: ()=>img instanceof File && URL.revokeObjectURL(previewUrl)
+                                                            }, void 0, false, {
+                                                                fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
+                                                                lineNumber: 556,
+                                                                columnNumber: 25
+                                                            }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                                onClick: ()=>triggerFileInput(index),
+                                                                className: "flex justify-center items-center w-full h-full text-cgreen text-4xl",
+                                                                children: "+"
+                                                            }, void 0, false, {
+                                                                fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
+                                                                lineNumber: 568,
+                                                                columnNumber: 25
+                                                            }, this),
+                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                                                type: "button",
+                                                                onClick: ()=>handleRemoveImage(index),
+                                                                className: "absolute top-0 right-0 bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center",
+                                                                children: "×"
+                                                            }, void 0, false, {
+                                                                fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
+                                                                lineNumber: 575,
+                                                                columnNumber: 23
+                                                            }, this)
+                                                        ]
+                                                    }, index, true, {
+                                                        fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
+                                                        lineNumber: 542,
+                                                        columnNumber: 21
+                                                    }, this);
+                                                }),
+                                                galleryFiles.length < 5 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                    onClick: handleAddNewGallerySlot,
+                                                    className: "w-24 h-24 border-2 border-dashed border-cgreen rounded-lg flex items-center justify-center cursor-pointer text-cgreen text-4xl",
+                                                    children: "+"
+                                                }, void 0, false, {
+                                                    fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
+                                                    lineNumber: 586,
+                                                    columnNumber: 19
+                                                }, this)
+                                            ]
+                                        }, void 0, true, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 489,
+                                            lineNumber: 536,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                    lineNumber: 485,
+                                    lineNumber: 532,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                            lineNumber: 436,
+                            lineNumber: 482,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3973,13 +4086,13 @@ const EditCar = ()=>{
                                                     children: "*"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                    lineNumber: 502,
+                                                    lineNumber: 603,
                                                     columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 500,
+                                            lineNumber: 601,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
@@ -3997,7 +4110,7 @@ const EditCar = ()=>{
                                                     children: "اختر الإدخال"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                    lineNumber: 514,
+                                                    lineNumber: 615,
                                                     columnNumber: 17
                                                 }, this),
                                                 __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$signup$2f$step2$2f$syrianGovernorates$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["syrianGovernorates"].map((gov)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -4005,19 +4118,19 @@ const EditCar = ()=>{
                                                         children: gov.name
                                                     }, gov.value, false, {
                                                         fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                        lineNumber: 516,
+                                                        lineNumber: 617,
                                                         columnNumber: 19
                                                     }, this))
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 504,
+                                            lineNumber: 605,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                    lineNumber: 499,
+                                    lineNumber: 600,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4032,13 +4145,13 @@ const EditCar = ()=>{
                                                     children: "*"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                    lineNumber: 525,
+                                                    lineNumber: 626,
                                                     columnNumber: 25
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 524,
+                                            lineNumber: 625,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -4050,19 +4163,19 @@ const EditCar = ()=>{
                                             placeholder: "المنطقة"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 527,
+                                            lineNumber: 628,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                    lineNumber: 523,
+                                    lineNumber: 624,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                            lineNumber: 498,
+                            lineNumber: 599,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4075,7 +4188,7 @@ const EditCar = ()=>{
                                         children: "تفاصيل العنوان"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                        lineNumber: 539,
+                                        lineNumber: 640,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -4086,18 +4199,18 @@ const EditCar = ()=>{
                                         placeholder: "تفاصيل العنوان"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                        lineNumber: 542,
+                                        lineNumber: 643,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                lineNumber: 538,
+                                lineNumber: 639,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                            lineNumber: 537,
+                            lineNumber: 638,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4114,13 +4227,13 @@ const EditCar = ()=>{
                                                 children: "*"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                lineNumber: 554,
+                                                lineNumber: 655,
                                                 columnNumber: 28
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                        lineNumber: 553,
+                                        lineNumber: 654,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("textarea", {
@@ -4132,24 +4245,24 @@ const EditCar = ()=>{
                                         placeholder: "ادخل وصف المنتج هنا"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                        lineNumber: 556,
+                                        lineNumber: 657,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                lineNumber: 552,
+                                lineNumber: 653,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                            lineNumber: 551,
+                            lineNumber: 652,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                    lineNumber: 402,
+                    lineNumber: 448,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
@@ -4160,7 +4273,7 @@ const EditCar = ()=>{
                             children: "سعر المنتج"
                         }, void 0, false, {
                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                            lineNumber: 570,
+                            lineNumber: 671,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -4168,7 +4281,7 @@ const EditCar = ()=>{
                             children: "حدد سعر الإعلان أو اختر إذا كان قابل للتفاوض، وسيساعد المستخدمين على معرفة القيمة بسهولة."
                         }, void 0, false, {
                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                            lineNumber: 573,
+                            lineNumber: 674,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4185,13 +4298,13 @@ const EditCar = ()=>{
                                                 children: "*"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                lineNumber: 581,
+                                                lineNumber: 682,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                        lineNumber: 579,
+                                        lineNumber: 680,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -4204,18 +4317,18 @@ const EditCar = ()=>{
                                         placeholder: "ادخل سعر المنتج"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                        lineNumber: 583,
+                                        lineNumber: 684,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                lineNumber: 578,
+                                lineNumber: 679,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                            lineNumber: 577,
+                            lineNumber: 678,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4230,13 +4343,13 @@ const EditCar = ()=>{
                                             children: "*"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 596,
+                                            lineNumber: 697,
                                             columnNumber: 25
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                    lineNumber: 595,
+                                    lineNumber: 696,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4255,20 +4368,20 @@ const EditCar = ()=>{
                                                     className: "accent-cgreen"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                    lineNumber: 600,
+                                                    lineNumber: 701,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                     children: "سعر قابل للتفاوض"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                    lineNumber: 609,
+                                                    lineNumber: 710,
                                                     columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 599,
+                                            lineNumber: 700,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
@@ -4283,38 +4396,38 @@ const EditCar = ()=>{
                                                     className: "accent-cgreen"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                    lineNumber: 612,
+                                                    lineNumber: 713,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                     children: "سعر ثابت"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                    lineNumber: 620,
+                                                    lineNumber: 721,
                                                     columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 611,
+                                            lineNumber: 712,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                    lineNumber: 598,
+                                    lineNumber: 699,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                            lineNumber: 594,
+                            lineNumber: 695,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                    lineNumber: 569,
+                    lineNumber: 670,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
@@ -4325,7 +4438,7 @@ const EditCar = ()=>{
                             children: "تفاصيل السيارة"
                         }, void 0, false, {
                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                            lineNumber: 626,
+                            lineNumber: 727,
                             columnNumber: 9
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4343,13 +4456,13 @@ const EditCar = ()=>{
                                                     children: "*"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                    lineNumber: 631,
+                                                    lineNumber: 732,
                                                     columnNumber: 13
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 630,
+                                            lineNumber: 731,
                                             columnNumber: 13
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
@@ -4368,7 +4481,7 @@ const EditCar = ()=>{
                                                     children: "اختر الماركة"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                    lineNumber: 642,
+                                                    lineNumber: 743,
                                                     columnNumber: 15
                                                 }, this),
                                                 __TURBOPACK__imported__module__$5b$project$5d2f$app$2f28$public$292f$newpost$2f$components$2f$CarForm$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["BRAND_CHOICES"].map(([value, label])=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -4376,19 +4489,19 @@ const EditCar = ()=>{
                                                         children: label
                                                     }, value, false, {
                                                         fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                        lineNumber: 644,
+                                                        lineNumber: 745,
                                                         columnNumber: 17
                                                     }, this))
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 633,
+                                            lineNumber: 734,
                                             columnNumber: 13
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                    lineNumber: 629,
+                                    lineNumber: 730,
                                     columnNumber: 11
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4399,7 +4512,7 @@ const EditCar = ()=>{
                                             children: "الموديل"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 651,
+                                            lineNumber: 752,
                                             columnNumber: 13
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -4410,13 +4523,13 @@ const EditCar = ()=>{
                                             dir: "rtl"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 652,
+                                            lineNumber: 753,
                                             columnNumber: 13
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                    lineNumber: 650,
+                                    lineNumber: 751,
                                     columnNumber: 11
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4431,13 +4544,13 @@ const EditCar = ()=>{
                                                     children: "*"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                    lineNumber: 664,
+                                                    lineNumber: 765,
                                                     columnNumber: 15
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 662,
+                                            lineNumber: 763,
                                             columnNumber: 13
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -4450,13 +4563,13 @@ const EditCar = ()=>{
                                             dir: "rtl"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 666,
+                                            lineNumber: 767,
                                             columnNumber: 13
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                    lineNumber: 661,
+                                    lineNumber: 762,
                                     columnNumber: 11
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4467,7 +4580,7 @@ const EditCar = ()=>{
                                             children: "الأداء"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 678,
+                                            lineNumber: 779,
                                             columnNumber: 13
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -4480,13 +4593,13 @@ const EditCar = ()=>{
                                             placeholder: "مثال: 150 حصان"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 679,
+                                            lineNumber: 780,
                                             columnNumber: 13
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                    lineNumber: 677,
+                                    lineNumber: 778,
                                     columnNumber: 11
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4497,7 +4610,7 @@ const EditCar = ()=>{
                                             children: "اللون"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 691,
+                                            lineNumber: 792,
                                             columnNumber: 13
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
@@ -4515,7 +4628,7 @@ const EditCar = ()=>{
                                                     children: "اختر اللون"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                    lineNumber: 700,
+                                                    lineNumber: 801,
                                                     columnNumber: 15
                                                 }, this),
                                                 __TURBOPACK__imported__module__$5b$project$5d2f$app$2f28$public$292f$newpost$2f$components$2f$CarForm$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["COLOR_CHOICES"].map(([value, label])=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -4523,19 +4636,19 @@ const EditCar = ()=>{
                                                         children: label
                                                     }, value, false, {
                                                         fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                        lineNumber: 702,
+                                                        lineNumber: 803,
                                                         columnNumber: 17
                                                     }, this))
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 692,
+                                            lineNumber: 793,
                                             columnNumber: 13
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                    lineNumber: 690,
+                                    lineNumber: 791,
                                     columnNumber: 11
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4550,13 +4663,13 @@ const EditCar = ()=>{
                                                     children: "*"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                    lineNumber: 712,
+                                                    lineNumber: 813,
                                                     columnNumber: 15
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 710,
+                                            lineNumber: 811,
                                             columnNumber: 13
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -4572,13 +4685,13 @@ const EditCar = ()=>{
                                             dir: "rtl"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 714,
+                                            lineNumber: 815,
                                             columnNumber: 13
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                    lineNumber: 709,
+                                    lineNumber: 810,
                                     columnNumber: 11
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4589,7 +4702,7 @@ const EditCar = ()=>{
                                             children: "تاريخ الفحص الفني"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 727,
+                                            lineNumber: 828,
                                             columnNumber: 13
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -4604,13 +4717,13 @@ const EditCar = ()=>{
                                             dir: "rtl"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 730,
+                                            lineNumber: 831,
                                             columnNumber: 13
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                    lineNumber: 726,
+                                    lineNumber: 827,
                                     columnNumber: 11
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4625,13 +4738,13 @@ const EditCar = ()=>{
                                                     children: "*"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                    lineNumber: 745,
+                                                    lineNumber: 846,
                                                     columnNumber: 15
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 743,
+                                            lineNumber: 844,
                                             columnNumber: 13
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -4643,13 +4756,13 @@ const EditCar = ()=>{
                                             dir: "rtl"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 747,
+                                            lineNumber: 848,
                                             columnNumber: 13
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                    lineNumber: 742,
+                                    lineNumber: 843,
                                     columnNumber: 11
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4664,13 +4777,13 @@ const EditCar = ()=>{
                                                     children: "*"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                    lineNumber: 760,
+                                                    lineNumber: 861,
                                                     columnNumber: 15
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 758,
+                                            lineNumber: 859,
                                             columnNumber: 13
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -4682,19 +4795,19 @@ const EditCar = ()=>{
                                             dir: "rtl"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 762,
+                                            lineNumber: 863,
                                             columnNumber: 13
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                    lineNumber: 757,
+                                    lineNumber: 858,
                                     columnNumber: 11
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                            lineNumber: 628,
+                            lineNumber: 729,
                             columnNumber: 9
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4712,13 +4825,13 @@ const EditCar = ()=>{
                                                     children: "*"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                    lineNumber: 778,
+                                                    lineNumber: 879,
                                                     columnNumber: 15
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 776,
+                                            lineNumber: 877,
                                             columnNumber: 13
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4736,31 +4849,31 @@ const EditCar = ()=>{
                                                             className: "accent-cgreen"
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                            lineNumber: 787,
+                                                            lineNumber: 888,
                                                             columnNumber: 19
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                             children: label
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                            lineNumber: 796,
+                                                            lineNumber: 897,
                                                             columnNumber: 19
                                                         }, this)
                                                     ]
                                                 }, value, true, {
                                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                    lineNumber: 783,
+                                                    lineNumber: 884,
                                                     columnNumber: 17
                                                 }, this))
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 781,
+                                            lineNumber: 882,
                                             columnNumber: 13
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                    lineNumber: 775,
+                                    lineNumber: 876,
                                     columnNumber: 11
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4775,13 +4888,13 @@ const EditCar = ()=>{
                                                     children: "*"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                    lineNumber: 804,
+                                                    lineNumber: 905,
                                                     columnNumber: 15
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 802,
+                                            lineNumber: 903,
                                             columnNumber: 13
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4799,31 +4912,31 @@ const EditCar = ()=>{
                                                             className: "accent-cgreen"
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                            lineNumber: 813,
+                                                            lineNumber: 914,
                                                             columnNumber: 19
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                             children: label
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                            lineNumber: 822,
+                                                            lineNumber: 923,
                                                             columnNumber: 19
                                                         }, this)
                                                     ]
                                                 }, value, true, {
                                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                    lineNumber: 809,
+                                                    lineNumber: 910,
                                                     columnNumber: 17
                                                 }, this))
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 807,
+                                            lineNumber: 908,
                                             columnNumber: 13
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                    lineNumber: 801,
+                                    lineNumber: 902,
                                     columnNumber: 11
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4834,7 +4947,7 @@ const EditCar = ()=>{
                                             children: "عدد الأبواب"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 830,
+                                            lineNumber: 931,
                                             columnNumber: 13
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4851,31 +4964,31 @@ const EditCar = ()=>{
                                                             className: "accent-cgreen"
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                            lineNumber: 840,
+                                                            lineNumber: 941,
                                                             columnNumber: 19
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                             children: label
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                            lineNumber: 848,
+                                                            lineNumber: 949,
                                                             columnNumber: 19
                                                         }, this)
                                                     ]
                                                 }, value, true, {
                                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                    lineNumber: 836,
+                                                    lineNumber: 937,
                                                     columnNumber: 17
                                                 }, this))
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 834,
+                                            lineNumber: 935,
                                             columnNumber: 13
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                    lineNumber: 828,
+                                    lineNumber: 929,
                                     columnNumber: 11
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4886,7 +4999,7 @@ const EditCar = ()=>{
                                             children: "المواد الداخلية"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 856,
+                                            lineNumber: 957,
                                             columnNumber: 13
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4903,31 +5016,31 @@ const EditCar = ()=>{
                                                             className: "accent-cgreen"
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                            lineNumber: 866,
+                                                            lineNumber: 967,
                                                             columnNumber: 19
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                             children: label
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                            lineNumber: 874,
+                                                            lineNumber: 975,
                                                             columnNumber: 19
                                                         }, this)
                                                     ]
                                                 }, value, true, {
                                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                    lineNumber: 862,
+                                                    lineNumber: 963,
                                                     columnNumber: 17
                                                 }, this))
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 860,
+                                            lineNumber: 961,
                                             columnNumber: 13
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                    lineNumber: 854,
+                                    lineNumber: 955,
                                     columnNumber: 11
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4942,13 +5055,13 @@ const EditCar = ()=>{
                                                     children: "*"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                    lineNumber: 884,
+                                                    lineNumber: 985,
                                                     columnNumber: 15
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 882,
+                                            lineNumber: 983,
                                             columnNumber: 13
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4967,31 +5080,31 @@ const EditCar = ()=>{
                                                             className: "accent-cgreen"
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                            lineNumber: 893,
+                                                            lineNumber: 994,
                                                             columnNumber: 19
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                             children: label
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                            lineNumber: 902,
+                                                            lineNumber: 1003,
                                                             columnNumber: 19
                                                         }, this)
                                                     ]
                                                 }, value, true, {
                                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                    lineNumber: 888,
+                                                    lineNumber: 989,
                                                     columnNumber: 17
                                                 }, this))
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 886,
+                                            lineNumber: 987,
                                             columnNumber: 13
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                    lineNumber: 880,
+                                    lineNumber: 981,
                                     columnNumber: 11
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5002,7 +5115,7 @@ const EditCar = ()=>{
                                             children: "نوع السيارة"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 909,
+                                            lineNumber: 1010,
                                             columnNumber: 13
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5019,31 +5132,31 @@ const EditCar = ()=>{
                                                             className: "accent-cgreen"
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                            lineNumber: 919,
+                                                            lineNumber: 1020,
                                                             columnNumber: 19
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                             children: label
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                            lineNumber: 927,
+                                                            lineNumber: 1028,
                                                             columnNumber: 19
                                                         }, this)
                                                     ]
                                                 }, value, true, {
                                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                    lineNumber: 915,
+                                                    lineNumber: 1016,
                                                     columnNumber: 17
                                                 }, this))
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 913,
+                                            lineNumber: 1014,
                                             columnNumber: 13
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                    lineNumber: 907,
+                                    lineNumber: 1008,
                                     columnNumber: 11
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5054,7 +5167,7 @@ const EditCar = ()=>{
                                             children: "أنظمة الحماية"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 934,
+                                            lineNumber: 1035,
                                             columnNumber: 13
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5071,25 +5184,25 @@ const EditCar = ()=>{
                                                             onChange: handleCarInputChange
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                            lineNumber: 943,
+                                                            lineNumber: 1044,
                                                             columnNumber: 19
                                                         }, this),
                                                         label
                                                     ]
                                                 }, value, true, {
                                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                    lineNumber: 939,
+                                                    lineNumber: 1040,
                                                     columnNumber: 17
                                                 }, this))
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 937,
+                                            lineNumber: 1038,
                                             columnNumber: 13
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                    lineNumber: 933,
+                                    lineNumber: 1034,
                                     columnNumber: 11
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5100,7 +5213,7 @@ const EditCar = ()=>{
                                             children: "المميزات الخارجية"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 958,
+                                            lineNumber: 1059,
                                             columnNumber: 13
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5117,25 +5230,25 @@ const EditCar = ()=>{
                                                             onChange: handleCarInputChange
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                            lineNumber: 967,
+                                                            lineNumber: 1068,
                                                             columnNumber: 19
                                                         }, this),
                                                         label
                                                     ]
                                                 }, value, true, {
                                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                    lineNumber: 963,
+                                                    lineNumber: 1064,
                                                     columnNumber: 17
                                                 }, this))
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 961,
+                                            lineNumber: 1062,
                                             columnNumber: 13
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                    lineNumber: 957,
+                                    lineNumber: 1058,
                                     columnNumber: 11
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5146,7 +5259,7 @@ const EditCar = ()=>{
                                             children: "المميزات الداخلية"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 982,
+                                            lineNumber: 1083,
                                             columnNumber: 13
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5163,38 +5276,38 @@ const EditCar = ()=>{
                                                             onChange: handleCarInputChange
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                            lineNumber: 991,
+                                                            lineNumber: 1092,
                                                             columnNumber: 19
                                                         }, this),
                                                         label
                                                     ]
                                                 }, value, true, {
                                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                    lineNumber: 987,
+                                                    lineNumber: 1088,
                                                     columnNumber: 17
                                                 }, this))
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 985,
+                                            lineNumber: 1086,
                                             columnNumber: 13
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                    lineNumber: 981,
+                                    lineNumber: 1082,
                                     columnNumber: 11
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                            lineNumber: 774,
+                            lineNumber: 875,
                             columnNumber: 9
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("hr", {
                             className: "mt-6 mb-3 text-clightgray"
                         }, void 0, false, {
                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                            lineNumber: 1006,
+                            lineNumber: 1107,
                             columnNumber: 9
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5210,18 +5323,18 @@ const EditCar = ()=>{
                                             "معاينة",
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$search$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Search$3e$__["Search"], {}, void 0, false, {
                                                 fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                lineNumber: 1016,
+                                                lineNumber: 1117,
                                                 columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                        lineNumber: 1014,
+                                        lineNumber: 1115,
                                         columnNumber: 13
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                    lineNumber: 1009,
+                                    lineNumber: 1110,
                                     columnNumber: 11
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -5232,35 +5345,35 @@ const EditCar = ()=>{
                                         children: isPending ? "جارٍ النشر ..." : "إعادة نشر"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                        lineNumber: 1024,
+                                        lineNumber: 1125,
                                         columnNumber: 13
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                    lineNumber: 1020,
+                                    lineNumber: 1121,
                                     columnNumber: 11
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                            lineNumber: 1007,
+                            lineNumber: 1108,
                             columnNumber: 9
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                    lineNumber: 625,
+                    lineNumber: 726,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-            lineNumber: 337,
+            lineNumber: 383,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-        lineNumber: 336,
+        lineNumber: 382,
         columnNumber: 5
     }, this);
 };

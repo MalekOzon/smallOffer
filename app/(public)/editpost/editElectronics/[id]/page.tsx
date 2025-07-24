@@ -11,8 +11,17 @@ import { categories } from "@/app/sections/categories";
 import SkeletonNotificationSettings from "@/app/components/ui/SkeletonNotificationSettings";
 import { STATUS_CHOICES } from "@/app/(public)/newpost/components/ElectronicsForm";
 import Image from "next/image";
+import { useForm } from "react-hook-form";
 
 const EditElectronics = () => {
+  const {
+    register,
+    formState: {},
+  } = useForm<ElectronicsPostPayload>({
+    defaultValues: {
+      gallery_images: [], // تهيئة gallery كمصفوفة فارغة
+    },
+  });
   const params = useParams();
   const id = params.id as string | undefined;
   const { data, isLoading } = useGetElectronicsPostId(id);
@@ -24,6 +33,70 @@ const EditElectronics = () => {
 
   const editElectronicsForm = useEditElectronicForm(setNotification);
   const isPending = editElectronicsForm.isPending;
+//////////////////////////////////////////////////
+const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
+const [galleryFiles, setGalleryFiles] = useState<(File | string)[]>([]);
+const handleGalleryChange = (
+e: React.ChangeEvent<HTMLInputElement>,
+index: number
+) => {
+const file = e.target.files?.[0];
+if (file) {
+  setGalleryFiles((prev) => {
+    const updated = [...prev];
+    updated[index] = file;
+
+    setFormData((prevForm) => ({
+      ...prevForm,
+      gallery: updated,
+    }));
+
+    return updated;
+  });
+}
+};
+const handleRemoveImage = (index: number) => {
+setGalleryFiles((prev) => {
+  const updated = prev.filter((_, i) => i !== index);
+  setFormData((prevForm) => ({
+    ...prevForm,
+    gallery: updated,
+  }));
+  return updated;
+});
+};
+const handleAddNewGallerySlot = () => {
+setGalleryFiles((prev) => {
+  if (prev.length >= 10) return prev;
+  const updated = [...prev, ""];
+  setFormData((prevForm) => ({
+    ...prevForm,
+    gallery: updated,
+  }));
+
+  return updated;
+});
+};
+const triggerFileInput = (index: number) => {
+inputRefs.current[index]?.click();
+};  
+const convertURLtoFile = async (url: string): Promise<File> => {
+  const response = await fetch(url);
+  const blob = await response.blob();
+
+  let name = url.split("/").pop() || "";
+  if (!/\.(jpg|jpeg|png|webp|gif)$/i.test(name)) {
+    name = `image-${Date.now()}.jpg`; // اسم افتراضي بامتداد مسموح
+  }
+
+  return new File([blob], name, { type: blob.type });
+};
+
+
+//////////////////////////////////////////////////
+
+
+
 
   const [formData, setFormData] = useState<Partial<ElectronicsPostPayload>>({
     category: "",
@@ -45,18 +118,31 @@ const EditElectronics = () => {
 
   const [isSearch, setIsSearch] = useState<boolean | undefined>(false);
 
+
   useEffect(() => {
     if (data) {
+      const galleryImages = data.gallery_images?.map((img) => img.image) || [];
       setFormData({
-        ...data,
+        category: data.category || "",
+        subcategory: data.subcategory || "",
+        title: data.title || "",
+        description: data.description || "",
+        price: data.price || "",
+        price_type: data.price_type || "fixed",
+        city: data.city || "",
+        hood: data.hood || "",
+        detailed_location: data.detailed_location || "",
+        cover_image: data.cover_image || "",
+        gallery: galleryImages,
+        offer_type: data.offer_type || "sell",
         electronics: {
-          ...data.electronics,
-        },
+                  ...data.electronics,
+                },
       });
+      setGalleryFiles(galleryImages);
       setIsSearch(data.offer_type === "search");
     }
   }, [data]);
-
 
 
   const handleElectronicsInputChange = (
@@ -85,7 +171,7 @@ const EditElectronics = () => {
     }));
   };
 
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!id) {
       setNotification({ message: "معرف الإعلان غير صالح.", type: "error" });
@@ -110,24 +196,24 @@ const EditElectronics = () => {
   }
 
 
-    if (data.gallery && data.gallery.length > 0) {
-      if (
-        typeof globalThis.FileList !== "undefined" &&
-        data.gallery instanceof globalThis.FileList
-      ) {
-        Array.from(data.gallery).forEach((img: File) => {
-          form.append("gallery", img);
-        });
-      } else if (Array.isArray(data.gallery)) {
-        (data.gallery as (File | string)[]).forEach((img) => {
-          if (img instanceof File) {
-            form.append("gallery", img);
-          } else if (typeof img === "string") {
-            form.append("gallery", img);
-          }
-        });
-      }
+  for (const img of formData.gallery || []) {
+    if (img instanceof File) {
+      form.append("gallery", img);
+    } else if (typeof img === "string") {
+      const file = await convertURLtoFile(img);
+      form.append("gallery", file);
     }
+  }
+  
+
+  console.log("📋 Gallery content ");
+  const galleryItems = form.getAll("gallery");
+  galleryItems.forEach((item, index) => {
+    if (item instanceof File) {
+      console.log(`[${index}]  ${item.name}`);
+    }
+  });
+
     // Electronics details
     const electronicsDetails = {
       status: data.electronics?.status,
@@ -151,17 +237,11 @@ const EditElectronics = () => {
   }
 
   ////////////////////////////////////////////////////////////////////////////////////////
-
-//   if (data.cover_image instanceof File) {
-//     form.append("cover_image", data.cover_image);
-// }
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
-  // لما تضغط على صندوق رفع الصورة يفتح اختيار الملفات
   const handleClick = () => {
     inputRef.current?.click();
   };
-    // لما تختار صورة جديدة يتم تحديث preview و formData.cover_image
     const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       const files = e.target.files;
       if (files && files.length > 0) {
@@ -173,13 +253,11 @@ const EditElectronics = () => {
         setPreview(URL.createObjectURL(file));
       }
     };
-     // تحديث preview لو جت بيانات موجودة كسلسلة نصية (رابط صورة من السيرفر مثلا)
   useEffect(() => {
     if (formData.cover_image && typeof formData.cover_image === "string") {
       setPreview(formData.cover_image);
     }
   }, [formData.cover_image]);
-
   const handleInputChange = (
     e: React.ChangeEvent<
     HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
@@ -207,40 +285,6 @@ const EditElectronics = () => {
       }));
     }
   };
-
-
-//   <div className="sm:ml-16">
-//   <label className="block font-medium text-gray-700 mb-2">
-//     صورة غلاف المنتج
-//   </label>
-
-//   <input
-//     type="file"
-//     accept="image/*"
-//     ref={inputRef}
-//     onChange={handleImageChange}
-//     className="hidden"
-//   />
-
-//   <div
-//     onClick={handleClick}
-//     className="w-64 h-40 border-2 border-dashed border-cgreen rounded-lg flex items-center justify-center cursor-pointer bg-cwhite overflow-hidden"
-//   >
-//     {preview ? (
-//       <Image
-//         src={preview}
-//         alt="preview"
-//         width={256}
-//         height={160}
-//         className="object-cover w-full h-full"
-//       />
-//     ) : (
-//       <span className="text-cgreen text-4xl">+</span>
-//     )}
-//   </div>
-// </div>
-
-
   // ////////////////////////////////////////////////////////////////////
 
   if (isLoading) return <SkeletonNotificationSettings />;
@@ -381,16 +425,73 @@ const EditElectronics = () => {
   </div>
 </div>
 
+
+            <input type="hidden" {...register("gallery")} />
             <div className="sm:ml-16">
-              <label className="block font-medium text-gray-700">صور المنتج</label>
-              <input
-                type="file"
-                multiple
-                name="gallery"
-                onChange={handleInputChange}
-                className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
-              />
+              <label className="block font-medium text-gray-700 mb-2">
+                صور المنتج
+              </label>
+              <div className="flex flex-wrap gap-4">
+                {galleryFiles.map((img, index) => {
+                  const previewUrl =
+                    img instanceof File ? URL.createObjectURL(img) : img;
+
+                  return (
+                    <div
+                      key={index}
+                      className="relative max-sm:w-32 w-24  h-24 border-2 border-cgreen rounded-lg overflow-hidden cursor-pointer"
+                    >
+                      <input
+                        type="file"
+                        accept="image/*"
+                        className="hidden"
+                        onChange={(e) => handleGalleryChange(e, index)}
+                        ref={(el) => {
+                          inputRefs.current[index] = el;
+                        }}
+                      />
+                      {previewUrl && previewUrl !== "" ? (
+                        <Image
+                          src={previewUrl}
+                          alt={`Gallery image ${index + 1}`}
+                          fill
+                          style={{ objectFit: "cover" }}
+                          onClick={() => triggerFileInput(index)}
+                          onLoad={() =>
+                            img instanceof File &&
+                            URL.revokeObjectURL(previewUrl)
+                          }
+                        />
+                      ) : (
+                        <div
+                          onClick={() => triggerFileInput(index)}
+                          className="flex justify-center items-center w-full h-full text-cgreen text-4xl"
+                        >
+                          +
+                        </div>
+                      )}
+                      <button
+                        type="button"
+                        onClick={() => handleRemoveImage(index)}
+                        className="absolute top-0 right-0 bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center"
+                      >
+                        ×
+                      </button>
+                    </div>
+                  );
+                })}
+                {galleryFiles.length < 5 && (
+                  <div
+                    onClick={handleAddNewGallerySlot}
+                    className="w-24 h-24 border-2 border-dashed border-cgreen rounded-lg flex items-center justify-center cursor-pointer text-cgreen text-4xl"
+                  >
+                    +
+                  </div>
+                )}
+              </div>
             </div>
+
+
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
             <div className="sm:ml-16">

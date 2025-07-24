@@ -4,16 +4,12 @@
   "/(public)/editpost/editElectronics/[id]/page": "app/(public)/editpost/editElectronics/[id]/page.js",
   "/(public)/editpost/editGeneric/[id]/page": "app/(public)/editpost/editGeneric/[id]/page.js",
   "/(public)/editpost/editHouse/[id]/page": "app/(public)/editpost/editHouse/[id]/page.js",
-  "/(public)/editpost/editMobile/[id]/page": "app/(public)/editpost/editMobile/[id]/page.js",
-  "/(public)/editpost/editOutdoorspace/[id]/page": "app/(public)/editpost/editOutdoorspace/[id]/page.js",
   "/(public)/newpost/page": "app/(public)/newpost/page.js",
   "/(public)/page": "app/(public)/page.js",
-  "/(public)/publicstore/[username]/page": "app/(public)/publicstore/[username]/page.js",
   "/_not-found/page": "app/_not-found/page.js",
   "/dashboard/ads/page": "app/dashboard/ads/page.js",
   "/dashboard/page": "app/dashboard/page.js",
   "/dashboard/profile/page": "app/dashboard/profile/page.js",
-  "/dashboard/settings/page": "app/dashboard/settings/page.js",
   "/favicon.ico/route": "app/favicon.ico/route.js",
-  "/previewpost/[id]/page": "app/previewpost/[id]/page.js"
+  "/login/page": "app/login/page.js"
 }

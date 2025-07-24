@@ -126,8 +126,6 @@ const Navbar = () => {
     rowConfig.first + rowConfig.second
   );
 
-  console.log("first ", firstRow);
-  console.log("second ", secondRow);
 
   return (
     <>

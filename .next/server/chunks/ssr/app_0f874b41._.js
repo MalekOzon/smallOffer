@@ -1224,8 +1224,10 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$components$2f$ui$2f$N
 var __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$lib$2f$postServices$2f$postMutations$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/app/lib/postServices/postMutations.ts [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$signup$2f$step2$2f$syrianGovernorates$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/app/signup/step2/syrianGovernorates.ts [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$search$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Search$3e$__ = __turbopack_context__.i("[project]/node_modules/lucide-react/dist/esm/icons/search.js [app-ssr] (ecmascript) <export default as Search>");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/image.js [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/server/route-modules/app-page/vendored/ssr/react.js [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$hook$2d$form$2f$dist$2f$index$2e$esm$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/react-hook-form/dist/index.esm.mjs [app-ssr] (ecmascript)");
+;
 ;
 ;
 ;
@@ -1317,10 +1319,38 @@ const OFFER_TYPE_CHOICES = [
     ]
 ];
 function ApartmentForm({ Gcategory, Gsubcategory }) {
-    const { register, handleSubmit, setValue, formState: { errors } } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$hook$2d$form$2f$dist$2f$index$2e$esm$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useForm"])({});
+    const { register, watch, handleSubmit, setValue, formState: { errors } } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$hook$2d$form$2f$dist$2f$index$2e$esm$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useForm"])({});
     const [notification, setNotification] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(null);
     const createApartmentPost = (0, __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$lib$2f$postServices$2f$postMutations$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useCreateApartmentPost"])(setNotification);
     const { isPending: isLoading } = createApartmentPost;
+    ////////////////////////////////  // //////////////////////////////////////
+    const coverImage = watch("cover_image");
+    const [preview, setPreview] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(null);
+    const inputRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useRef"])(null);
+    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
+        if (coverImage instanceof File) {
+            const objectUrl = URL.createObjectURL(coverImage);
+            setPreview(objectUrl);
+            return ()=>URL.revokeObjectURL(objectUrl);
+        } else {
+            setPreview(null);
+        }
+    }, [
+        coverImage
+    ]);
+    const handleImageChange = (e)=>{
+        const file = e.target.files?.[0];
+        if (file) {
+            setValue("cover_image", file, {
+                shouldValidate: true,
+                shouldDirty: true
+            });
+        }
+    };
+    const handleClick = ()=>{
+        inputRef.current?.click();
+    };
+    ////////////////////////////////  // //////////////////////////////////////
     const [isSearch, setIsSearch] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false);
     const onSubmit = (data)=>{
         console.log("daTA: ", data);
@@ -1333,8 +1363,12 @@ function ApartmentForm({ Gcategory, Gsubcategory }) {
         formData.append("city", data.city ?? "");
         formData.append("hood", data.hood ?? "");
         formData.append("detailed_location", data.detailed_location ?? "");
-        if ("TURBOPACK compile-time falsy", 0) {
-            "TURBOPACK unreachable";
+        if (data.cover_image) {
+            if (data.cover_image instanceof File) {
+                formData.append("cover_image", data.cover_image);
+            } else if (typeof data.cover_image === "string") {
+                formData.append("cover_image", data.cover_image);
+            }
         }
         formData.append("category", Gcategory);
         formData.append("subcategory", Gsubcategory);
@@ -1364,9 +1398,6 @@ function ApartmentForm({ Gcategory, Gsubcategory }) {
         }
         createApartmentPost.mutate(formData);
     };
-    function isBlob(obj) {
-        return "undefined" !== "undefined" && typeof obj === "object" && obj !== null && typeof window.Blob !== "undefined" && obj instanceof window.Blob;
-    }
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
         onSubmit: handleSubmit(onSubmit),
         className: "w-full mx-auto space-y-10",
@@ -1377,7 +1408,7 @@ function ApartmentForm({ Gcategory, Gsubcategory }) {
                 onClose: ()=>setNotification(null)
             }, void 0, false, {
                 fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                lineNumber: 144,
+                lineNumber: 162,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
@@ -1388,7 +1419,7 @@ function ApartmentForm({ Gcategory, Gsubcategory }) {
                         children: "معلومات أساسية"
                     }, void 0, false, {
                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                        lineNumber: 153,
+                        lineNumber: 171,
                         columnNumber: 7
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1396,7 +1427,7 @@ function ApartmentForm({ Gcategory, Gsubcategory }) {
                         children: "أدخل معلومات الإعلان الأساسية لتظهر بوضوح للمشترين، مثل العنوان والوصف العام والموقع."
                     }, void 0, false, {
                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                        lineNumber: 156,
+                        lineNumber: 174,
                         columnNumber: 7
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1411,13 +1442,13 @@ function ApartmentForm({ Gcategory, Gsubcategory }) {
                                         children: "*"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                        lineNumber: 164,
+                                        lineNumber: 182,
                                         columnNumber: 11
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                lineNumber: 162,
+                                lineNumber: 180,
                                 columnNumber: 9
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1434,7 +1465,7 @@ function ApartmentForm({ Gcategory, Gsubcategory }) {
                                         children: "أنا أعرض"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                        lineNumber: 167,
+                                        lineNumber: 185,
                                         columnNumber: 11
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$app$2f$components$2f$ui$2f$Button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -1448,19 +1479,19 @@ function ApartmentForm({ Gcategory, Gsubcategory }) {
                                         children: "أنا أبحث"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                        lineNumber: 178,
+                                        lineNumber: 196,
                                         columnNumber: 11
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                lineNumber: 166,
+                                lineNumber: 184,
                                 columnNumber: 9
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                        lineNumber: 160,
+                        lineNumber: 178,
                         columnNumber: 7
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1478,13 +1509,13 @@ function ApartmentForm({ Gcategory, Gsubcategory }) {
                                                 children: "*"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                                lineNumber: 196,
+                                                lineNumber: 214,
                                                 columnNumber: 13
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                        lineNumber: 194,
+                                        lineNumber: 212,
                                         columnNumber: 11
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -1495,13 +1526,67 @@ function ApartmentForm({ Gcategory, Gsubcategory }) {
                                         className: "w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                        lineNumber: 198,
+                                        lineNumber: 216,
                                         columnNumber: 11
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                lineNumber: 193,
+                                lineNumber: 211,
+                                columnNumber: 9
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "sm:ml-16",
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
+                                        className: "block font-medium text-gray-700 mb-2",
+                                        children: "صورة غلاف المنتج"
+                                    }, void 0, false, {
+                                        fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
+                                        lineNumber: 226,
+                                        columnNumber: 1
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                        type: "file",
+                                        accept: "image/*",
+                                        ref: inputRef,
+                                        onChange: handleImageChange,
+                                        className: "hidden"
+                                    }, void 0, false, {
+                                        fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
+                                        lineNumber: 230,
+                                        columnNumber: 1
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                        onClick: handleClick,
+                                        className: "w-64 h-40 border-2 border-dashed border-cgreen rounded-lg flex items-center justify-center cursor-pointer bg-cwhite overflow-hidden",
+                                        children: preview ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
+                                            src: preview,
+                                            alt: "preview",
+                                            width: 256,
+                                            height: 160,
+                                            className: "object-cover w-full h-full"
+                                        }, void 0, false, {
+                                            fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
+                                            lineNumber: 243,
+                                            columnNumber: 5
+                                        }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                            className: "text-cgreen text-4xl",
+                                            children: "+"
+                                        }, void 0, false, {
+                                            fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
+                                            lineNumber: 251,
+                                            columnNumber: 5
+                                        }, this)
+                                    }, void 0, false, {
+                                        fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
+                                        lineNumber: 238,
+                                        columnNumber: 1
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
+                                lineNumber: 225,
                                 columnNumber: 9
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1512,7 +1597,7 @@ function ApartmentForm({ Gcategory, Gsubcategory }) {
                                         children: "صور المنتج"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                        lineNumber: 208,
+                                        lineNumber: 257,
                                         columnNumber: 11
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -1522,13 +1607,13 @@ function ApartmentForm({ Gcategory, Gsubcategory }) {
                                         className: "w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                        lineNumber: 211,
+                                        lineNumber: 260,
                                         columnNumber: 11
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                lineNumber: 207,
+                                lineNumber: 256,
                                 columnNumber: 9
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1543,13 +1628,13 @@ function ApartmentForm({ Gcategory, Gsubcategory }) {
                                                 children: "*"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                                lineNumber: 222,
+                                                lineNumber: 271,
                                                 columnNumber: 13
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                        lineNumber: 220,
+                                        lineNumber: 269,
                                         columnNumber: 11
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
@@ -1565,7 +1650,7 @@ function ApartmentForm({ Gcategory, Gsubcategory }) {
                                                 children: "اختر الإدخال"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                                lineNumber: 232,
+                                                lineNumber: 281,
                                                 columnNumber: 13
                                             }, this),
                                             __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$signup$2f$step2$2f$syrianGovernorates$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["syrianGovernorates"].map((gov)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -1573,19 +1658,19 @@ function ApartmentForm({ Gcategory, Gsubcategory }) {
                                                     children: gov.name
                                                 }, gov.value, false, {
                                                     fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                                    lineNumber: 234,
+                                                    lineNumber: 283,
                                                     columnNumber: 15
                                                 }, this))
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                        lineNumber: 224,
+                                        lineNumber: 273,
                                         columnNumber: 11
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                lineNumber: 219,
+                                lineNumber: 268,
                                 columnNumber: 9
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1600,13 +1685,13 @@ function ApartmentForm({ Gcategory, Gsubcategory }) {
                                                 children: "*"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                                lineNumber: 244,
+                                                lineNumber: 293,
                                                 columnNumber: 13
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                        lineNumber: 242,
+                                        lineNumber: 291,
                                         columnNumber: 11
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -1616,7 +1701,7 @@ function ApartmentForm({ Gcategory, Gsubcategory }) {
                                         placeholder: "المنطقة"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                        lineNumber: 246,
+                                        lineNumber: 295,
                                         columnNumber: 11
                                     }, this),
                                     errors.hood && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1624,19 +1709,19 @@ function ApartmentForm({ Gcategory, Gsubcategory }) {
                                         children: String(errors.hood.message)
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                        lineNumber: 253,
+                                        lineNumber: 302,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                lineNumber: 241,
+                                lineNumber: 290,
                                 columnNumber: 9
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                        lineNumber: 192,
+                        lineNumber: 210,
                         columnNumber: 7
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1650,7 +1735,7 @@ function ApartmentForm({ Gcategory, Gsubcategory }) {
                                         children: "تفاصيل العنوان"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                        lineNumber: 261,
+                                        lineNumber: 310,
                                         columnNumber: 11
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -1659,7 +1744,7 @@ function ApartmentForm({ Gcategory, Gsubcategory }) {
                                         placeholder: "تفاصيل العنوان"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                        lineNumber: 264,
+                                        lineNumber: 313,
                                         columnNumber: 11
                                     }, this),
                                     errors.detailed_location && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1667,13 +1752,13 @@ function ApartmentForm({ Gcategory, Gsubcategory }) {
                                         children: String(errors.detailed_location.message)
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                        lineNumber: 270,
+                                        lineNumber: 319,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                lineNumber: 260,
+                                lineNumber: 309,
                                 columnNumber: 9
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1688,13 +1773,13 @@ function ApartmentForm({ Gcategory, Gsubcategory }) {
                                                 children: "*"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                                lineNumber: 278,
+                                                lineNumber: 327,
                                                 columnNumber: 13
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                        lineNumber: 276,
+                                        lineNumber: 325,
                                         columnNumber: 11
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("textarea", {
@@ -1704,7 +1789,7 @@ function ApartmentForm({ Gcategory, Gsubcategory }) {
                                         placeholder: "ادخل وصف المنتج هنا"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                        lineNumber: 280,
+                                        lineNumber: 329,
                                         columnNumber: 11
                                     }, this),
                                     errors.description && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1712,25 +1797,25 @@ function ApartmentForm({ Gcategory, Gsubcategory }) {
                                         children: String(errors.description.message)
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                        lineNumber: 287,
+                                        lineNumber: 336,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                lineNumber: 275,
+                                lineNumber: 324,
                                 columnNumber: 9
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                        lineNumber: 259,
+                        lineNumber: 308,
                         columnNumber: 7
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                lineNumber: 152,
+                lineNumber: 170,
                 columnNumber: 5
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
@@ -1741,7 +1826,7 @@ function ApartmentForm({ Gcategory, Gsubcategory }) {
                         children: "سعر المنتج"
                     }, void 0, false, {
                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                        lineNumber: 296,
+                        lineNumber: 345,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1749,7 +1834,7 @@ function ApartmentForm({ Gcategory, Gsubcategory }) {
                         children: "حدد سعر الإعلان أو اختر إذا كان قابل للتفاوض، وسيساعد المستخدمين على معرفة القيمة بسهولة."
                     }, void 0, false, {
                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                        lineNumber: 299,
+                        lineNumber: 348,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1766,13 +1851,13 @@ function ApartmentForm({ Gcategory, Gsubcategory }) {
                                             children: "*"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                            lineNumber: 307,
+                                            lineNumber: 356,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                    lineNumber: 305,
+                                    lineNumber: 354,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -1783,18 +1868,18 @@ function ApartmentForm({ Gcategory, Gsubcategory }) {
                                     placeholder: "ادخل سعر المنتج"
                                 }, void 0, false, {
                                     fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                    lineNumber: 309,
+                                    lineNumber: 358,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                            lineNumber: 304,
+                            lineNumber: 353,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                        lineNumber: 303,
+                        lineNumber: 352,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1809,13 +1894,13 @@ function ApartmentForm({ Gcategory, Gsubcategory }) {
                                         children: "*"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                        lineNumber: 323,
+                                        lineNumber: 372,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                lineNumber: 321,
+                                lineNumber: 370,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1832,20 +1917,20 @@ function ApartmentForm({ Gcategory, Gsubcategory }) {
                                                 className: "accent-cgreen"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                                lineNumber: 327,
+                                                lineNumber: 376,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                 children: "سعر قابل للتفاوض"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                                lineNumber: 334,
+                                                lineNumber: 383,
                                                 columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                        lineNumber: 326,
+                                        lineNumber: 375,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
@@ -1858,38 +1943,38 @@ function ApartmentForm({ Gcategory, Gsubcategory }) {
                                                 className: "accent-cgreen"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                                lineNumber: 337,
+                                                lineNumber: 386,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                 children: "سعر ثابت"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                                lineNumber: 343,
+                                                lineNumber: 392,
                                                 columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                        lineNumber: 336,
+                                        lineNumber: 385,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                lineNumber: 325,
+                                lineNumber: 374,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                        lineNumber: 320,
+                        lineNumber: 369,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                lineNumber: 295,
+                lineNumber: 344,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
@@ -1900,7 +1985,7 @@ function ApartmentForm({ Gcategory, Gsubcategory }) {
                         children: "تفاصيل الشقة"
                     }, void 0, false, {
                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                        lineNumber: 351,
+                        lineNumber: 400,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1918,13 +2003,13 @@ function ApartmentForm({ Gcategory, Gsubcategory }) {
                                                 children: "*"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                                lineNumber: 355,
+                                                lineNumber: 404,
                                                 columnNumber: 13
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                        lineNumber: 354,
+                                        lineNumber: 403,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
@@ -1941,7 +2026,7 @@ function ApartmentForm({ Gcategory, Gsubcategory }) {
                                                 children: "اختر نوع العرض"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                                lineNumber: 366,
+                                                lineNumber: 415,
                                                 columnNumber: 15
                                             }, this),
                                             OFFER_TYPE_CHOICES.map(([value, label])=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -1949,19 +2034,19 @@ function ApartmentForm({ Gcategory, Gsubcategory }) {
                                                     children: label
                                                 }, value, false, {
                                                     fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                                    lineNumber: 368,
+                                                    lineNumber: 417,
                                                     columnNumber: 17
                                                 }, this))
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                        lineNumber: 357,
+                                        lineNumber: 406,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                lineNumber: 353,
+                                lineNumber: 402,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1976,13 +2061,13 @@ function ApartmentForm({ Gcategory, Gsubcategory }) {
                                                 children: "*"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                                lineNumber: 378,
+                                                lineNumber: 427,
                                                 columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                        lineNumber: 376,
+                                        lineNumber: 425,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -1995,13 +2080,13 @@ function ApartmentForm({ Gcategory, Gsubcategory }) {
                                         min: 0
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                        lineNumber: 380,
+                                        lineNumber: 429,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                lineNumber: 375,
+                                lineNumber: 424,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2016,13 +2101,13 @@ function ApartmentForm({ Gcategory, Gsubcategory }) {
                                                 children: "*"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                                lineNumber: 393,
+                                                lineNumber: 442,
                                                 columnNumber: 13
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                        lineNumber: 392,
+                                        lineNumber: 441,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -2035,13 +2120,13 @@ function ApartmentForm({ Gcategory, Gsubcategory }) {
                                         min: 0
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                        lineNumber: 395,
+                                        lineNumber: 444,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                lineNumber: 391,
+                                lineNumber: 440,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2052,7 +2137,7 @@ function ApartmentForm({ Gcategory, Gsubcategory }) {
                                         children: "عدد غرف النوم"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                        lineNumber: 405,
+                                        lineNumber: 454,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -2064,13 +2149,13 @@ function ApartmentForm({ Gcategory, Gsubcategory }) {
                                         min: 0
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                        lineNumber: 408,
+                                        lineNumber: 457,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                lineNumber: 404,
+                                lineNumber: 453,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2081,7 +2166,7 @@ function ApartmentForm({ Gcategory, Gsubcategory }) {
                                         children: "عدد الحمامات"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                        lineNumber: 417,
+                                        lineNumber: 466,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -2093,13 +2178,13 @@ function ApartmentForm({ Gcategory, Gsubcategory }) {
                                         min: 0
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                        lineNumber: 420,
+                                        lineNumber: 469,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                lineNumber: 416,
+                                lineNumber: 465,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2110,7 +2195,7 @@ function ApartmentForm({ Gcategory, Gsubcategory }) {
                                         children: "متاح من تاريخ"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                        lineNumber: 429,
+                                        lineNumber: 478,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -2119,13 +2204,13 @@ function ApartmentForm({ Gcategory, Gsubcategory }) {
                                         className: "w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                        lineNumber: 432,
+                                        lineNumber: 481,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                lineNumber: 428,
+                                lineNumber: 477,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2140,13 +2225,13 @@ function ApartmentForm({ Gcategory, Gsubcategory }) {
                                                 children: "*"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                                lineNumber: 441,
+                                                lineNumber: 490,
                                                 columnNumber: 13
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                        lineNumber: 440,
+                                        lineNumber: 489,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -2158,13 +2243,13 @@ function ApartmentForm({ Gcategory, Gsubcategory }) {
                                         className: "w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                        lineNumber: 443,
+                                        lineNumber: 492,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                lineNumber: 439,
+                                lineNumber: 488,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2175,7 +2260,7 @@ function ApartmentForm({ Gcategory, Gsubcategory }) {
                                         children: "سنة البناء"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                        lineNumber: 452,
+                                        lineNumber: 501,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -2188,19 +2273,19 @@ function ApartmentForm({ Gcategory, Gsubcategory }) {
                                         max: 2100
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                        lineNumber: 455,
+                                        lineNumber: 504,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                lineNumber: 451,
+                                lineNumber: 500,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                        lineNumber: 352,
+                        lineNumber: 401,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2214,7 +2299,7 @@ function ApartmentForm({ Gcategory, Gsubcategory }) {
                                         children: "الأثاث"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                        lineNumber: 469,
+                                        lineNumber: 518,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2229,25 +2314,25 @@ function ApartmentForm({ Gcategory, Gsubcategory }) {
                                                         ...register("apartment.furniture")
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                                        lineNumber: 476,
+                                                        lineNumber: 525,
                                                         columnNumber: 19
                                                     }, this),
                                                     label
                                                 ]
                                             }, value, true, {
                                                 fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                                lineNumber: 472,
+                                                lineNumber: 521,
                                                 columnNumber: 17
                                             }, this))
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                        lineNumber: 470,
+                                        lineNumber: 519,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                lineNumber: 468,
+                                lineNumber: 517,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2258,7 +2343,7 @@ function ApartmentForm({ Gcategory, Gsubcategory }) {
                                         children: "حالة المبنى"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                        lineNumber: 489,
+                                        lineNumber: 538,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2273,38 +2358,38 @@ function ApartmentForm({ Gcategory, Gsubcategory }) {
                                                         ...register("apartment.general_characteristics")
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                                        lineNumber: 498,
+                                                        lineNumber: 547,
                                                         columnNumber: 19
                                                     }, this),
                                                     label
                                                 ]
                                             }, value, true, {
                                                 fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                                lineNumber: 494,
+                                                lineNumber: 543,
                                                 columnNumber: 17
                                             }, this))
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                        lineNumber: 492,
+                                        lineNumber: 541,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                lineNumber: 488,
+                                lineNumber: 537,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                        lineNumber: 467,
+                        lineNumber: 516,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("hr", {
                         className: "mt-6 mb-3 text-clightgray"
                     }, void 0, false, {
                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                        lineNumber: 511,
+                        lineNumber: 560,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2321,7 +2406,7 @@ function ApartmentForm({ Gcategory, Gsubcategory }) {
                                             className: "ml-1 text-cgreen group-hover:text-cwhite"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                            lineNumber: 520,
+                                            lineNumber: 569,
                                             columnNumber: 15
                                         }, this),
                                         " ",
@@ -2329,12 +2414,12 @@ function ApartmentForm({ Gcategory, Gsubcategory }) {
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                    lineNumber: 519,
+                                    lineNumber: 568,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                lineNumber: 514,
+                                lineNumber: 563,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -2345,30 +2430,30 @@ function ApartmentForm({ Gcategory, Gsubcategory }) {
                                     children: isLoading ? "جار النشر ..." : "نشر"
                                 }, void 0, false, {
                                     fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                    lineNumber: 530,
+                                    lineNumber: 579,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                                lineNumber: 526,
+                                lineNumber: 575,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                        lineNumber: 512,
+                        lineNumber: 561,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-                lineNumber: 350,
+                lineNumber: 399,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/app/(public)/newpost/components/ApartmentForm.tsx",
-        lineNumber: 138,
+        lineNumber: 156,
         columnNumber: 5
     }, this);
 }
@@ -2392,6 +2477,8 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$signup$2f$step2$2f$sy
 var __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$sections$2f$categories$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/app/sections/categories.ts [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$components$2f$ui$2f$SkeletonNotificationSettings$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/app/components/ui/SkeletonNotificationSettings.tsx [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$app$2f28$public$292f$newpost$2f$components$2f$ApartmentForm$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/app/(public)/newpost/components/ApartmentForm.tsx [app-ssr] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/image.js [app-ssr] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$hook$2d$form$2f$dist$2f$index$2e$esm$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/react-hook-form/dist/index.esm.mjs [app-ssr] (ecmascript)");
 "use client";
 ;
 ;
@@ -2404,13 +2491,78 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$app$2f28$public$292f$newpost
 ;
 ;
 ;
+;
+;
 const EditApartment = ()=>{
+    const { register, formState: {} } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$hook$2d$form$2f$dist$2f$index$2e$esm$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useForm"])({
+        defaultValues: {
+            gallery_images: []
+        }
+    });
     const params = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useParams"])();
     const id = params.id;
     const { data, isLoading } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$lib$2f$postServices$2f$postQueries$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useGetApartmentPostId"])(id);
     const [notification, setNotification] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(null);
     const editApartmentForm = (0, __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$lib$2f$postServices$2f$editPostMutation$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEditApartmentForm"])(setNotification);
     const isPending = editApartmentForm.isPending;
+    const inputRefs = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useRef"])([]);
+    const [galleryFiles, setGalleryFiles] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])([]);
+    const handleGalleryChange = (e, index)=>{
+        const file = e.target.files?.[0];
+        if (file) {
+            setGalleryFiles((prev)=>{
+                const updated = [
+                    ...prev
+                ];
+                updated[index] = file;
+                setFormData((prevForm)=>({
+                        ...prevForm,
+                        gallery: updated
+                    }));
+                return updated;
+            });
+        }
+    };
+    const handleRemoveImage = (index)=>{
+        setGalleryFiles((prev)=>{
+            const updated = prev.filter((_, i)=>i !== index);
+            setFormData((prevForm)=>({
+                    ...prevForm,
+                    gallery: updated
+                }));
+            return updated;
+        });
+    };
+    const handleAddNewGallerySlot = ()=>{
+        setGalleryFiles((prev)=>{
+            if (prev.length >= 10) return prev;
+            const updated = [
+                ...prev,
+                ""
+            ];
+            setFormData((prevForm)=>({
+                    ...prevForm,
+                    gallery: updated
+                }));
+            return updated;
+        });
+    };
+    const triggerFileInput = (index)=>{
+        inputRefs.current[index]?.click();
+    };
+    const convertURLtoFile = async (url)=>{
+        const response = await fetch(url);
+        const blob = await response.blob();
+        let name = url.split("/").pop() || "";
+        if (!/\.(jpg|jpeg|png|webp|gif)$/i.test(name)) {
+            name = `image-${Date.now()}.jpg`; // اسم افتراضي بامتداد مسموح
+        }
+        return new File([
+            blob
+        ], name, {
+            type: blob.type
+        });
+    };
     const [formData, setFormData] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])({
         category: "",
         subcategory: "",
@@ -2440,34 +2592,32 @@ const EditApartment = ()=>{
     const [isSearch, setIsSearch] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false);
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
         if (data) {
+            const galleryImages = data.gallery_images?.map((img)=>img.image) || [];
             setFormData({
-                ...data,
+                category: data.category || "",
+                subcategory: data.subcategory || "",
+                title: data.title || "",
+                description: data.description || "",
+                price: data.price || "",
+                price_type: data.price_type || "fixed",
+                city: data.city || "",
+                hood: data.hood || "",
+                detailed_location: data.detailed_location || "",
+                cover_image: data.cover_image || "",
+                gallery: galleryImages,
+                offer_type: data.offer_type || "sell",
                 apartment: {
                     ...data.apartment,
                     general_characteristics: data.apartment?.general_characteristics || [],
                     furniture: data.apartment?.furniture || []
                 }
             });
+            setGalleryFiles(galleryImages);
             setIsSearch(data.offer_type === "search");
         }
     }, [
         data
     ]);
-    const handleInputChange = (e)=>{
-        const { name, value, type } = e.target;
-        const files = e.target.files;
-        if (type === "file") {
-            setFormData((prev)=>({
-                    ...prev,
-                    [name]: files ? Array.from(files) : []
-                }));
-        } else {
-            setFormData((prev)=>({
-                    ...prev,
-                    [name]: value
-                }));
-        }
-    };
     const handleApartmentInputChange = (e)=>{
         const { name, value, type } = e.target;
         const key = name.replace("apartment.", "");
@@ -2510,9 +2660,6 @@ const EditApartment = ()=>{
             };
         });
     };
-    function isBlob(obj) {
-        return "undefined" !== "undefined" && typeof obj === "object" && obj !== null && typeof window.Blob !== "undefined" && obj instanceof window.Blob;
-    }
     // تحديث offer_type عند الضغط على الأزرار
     const handleOfferType = (type)=>{
         setIsSearch(type === "search");
@@ -2521,10 +2668,7 @@ const EditApartment = ()=>{
                 offer_type: type
             }));
     };
-    function isFileList(value) {
-        return typeof value === "object" && value !== null && typeof value.item === "function" && typeof value[Symbol.iterator] === "function";
-    }
-    const onSubmit = (e)=>{
+    const onSubmit = async (e)=>{
         e.preventDefault();
         if (!id) {
             setNotification({
@@ -2545,26 +2689,24 @@ const EditApartment = ()=>{
         form.append("category", data.category ?? "");
         form.append("subcategory", data.subcategory ?? "");
         form.append("detailed_location", data.detailed_location ?? "");
-        if (isFileList(data.cover_image)) {
-            form.append("cover_image", data.cover_image[0]);
-        } else if (isBlob(data.cover_image)) {
-            "TURBOPACK unreachable";
+        if (data.cover_image instanceof File) {
+            form.append("cover_image", data.cover_image);
         }
-        if (data.gallery && data.gallery.length > 0) {
-            if (typeof globalThis.FileList !== "undefined" && data.gallery instanceof globalThis.FileList) {
-                Array.from(data.gallery).forEach((img)=>{
-                    form.append("gallery", img);
-                });
-            } else if (Array.isArray(data.gallery)) {
-                data.gallery.forEach((img)=>{
-                    if (img instanceof File) {
-                        form.append("gallery", img);
-                    } else if (typeof img === "string") {
-                        form.append("gallery", img);
-                    }
-                });
+        for (const img of formData.gallery || []){
+            if (img instanceof File) {
+                form.append("gallery", img);
+            } else if (typeof img === "string") {
+                const file = await convertURLtoFile(img);
+                form.append("gallery", file);
             }
         }
+        console.log("📋 Gallery content ");
+        const galleryItems = form.getAll("gallery");
+        galleryItems.forEach((item, index)=>{
+            if (item instanceof File) {
+                console.log(`[${index}]  ${item.name}`);
+            }
+        });
         // Apartment details
         const apartmentDetails = {
             real_estate_space: data.apartment?.real_estate_space,
@@ -2597,9 +2739,59 @@ const EditApartment = ()=>{
         }
         return null;
     }
+    // /////////////////////////////////////////////////////////////////////////////////////
+    const inputRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useRef"])(null);
+    const [preview, setPreview] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(null);
+    // لما تضغط على صندوق رفع الصورة يفتح اختيار الملفات
+    const handleClick = ()=>{
+        inputRef.current?.click();
+    };
+    // لما تختار صورة جديدة يتم تحديث preview و formData.cover_image
+    const handleImageChange = (e)=>{
+        const files = e.target.files;
+        if (files && files.length > 0) {
+            const file = files[0];
+            setFormData((prev)=>({
+                    ...prev,
+                    cover_image: file
+                }));
+            setPreview(URL.createObjectURL(file));
+        }
+    };
+    // تحديث preview لو جت بيانات موجودة كسلسلة نصية (رابط صورة من السيرفر مثلا)
+    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
+        if (formData.cover_image && typeof formData.cover_image === "string") {
+            setPreview(formData.cover_image);
+        }
+    }, [
+        formData.cover_image
+    ]);
+    const handleInputChange = (e)=>{
+        const { name, value, type } = e.target;
+        const files = e.target.files;
+        if (type === "file") {
+            if (name === "gallery") {
+                setFormData((prev)=>({
+                        ...prev,
+                        [name]: files ? Array.from(files) : []
+                    }));
+            } else if (name === "cover_image") {
+                setFormData((prev)=>({
+                        ...prev,
+                        [name]: files && files.length > 0 ? files[0] : null
+                    }));
+            }
+        } else {
+            setFormData((prev)=>({
+                    ...prev,
+                    [name]: value
+                }));
+        }
+    };
+    // ////////////////////////////////////////////////////////////////////
     if (isLoading) return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$app$2f$components$2f$ui$2f$SkeletonNotificationSettings$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {}, void 0, false, {
         fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-        lineNumber: 244,
+        lineNumber: 339,
         columnNumber: 25
     }, this);
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2614,7 +2806,7 @@ const EditApartment = ()=>{
                     onClose: ()=>setNotification(null)
                 }, void 0, false, {
                     fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                    lineNumber: 250,
+                    lineNumber: 345,
                     columnNumber: 11
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2625,7 +2817,7 @@ const EditApartment = ()=>{
                             children: "تعديل إعلان الشقة"
                         }, void 0, false, {
                             fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                            lineNumber: 258,
+                            lineNumber: 353,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2639,7 +2831,7 @@ const EditApartment = ()=>{
                                     children: "سياسة النشر"
                                 }, void 0, false, {
                                     fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                                    lineNumber: 263,
+                                    lineNumber: 358,
                                     columnNumber: 13
                                 }, this),
                                 " ",
@@ -2647,13 +2839,13 @@ const EditApartment = ()=>{
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                            lineNumber: 261,
+                            lineNumber: 356,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                    lineNumber: 257,
+                    lineNumber: 352,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2664,14 +2856,14 @@ const EditApartment = ()=>{
                             children: "تصنيف المنتج"
                         }, void 0, false, {
                             fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                            lineNumber: 274,
+                            lineNumber: 369,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("hr", {
                             className: "mb-6 text-clightgray"
                         }, void 0, false, {
                             fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                            lineNumber: 275,
+                            lineNumber: 370,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2689,13 +2881,13 @@ const EditApartment = ()=>{
                                                     children: "*"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                                                    lineNumber: 280,
+                                                    lineNumber: 375,
                                                     columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                                            lineNumber: 278,
+                                            lineNumber: 373,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -2707,13 +2899,13 @@ const EditApartment = ()=>{
                                             className: "w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                                            lineNumber: 282,
+                                            lineNumber: 377,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                                    lineNumber: 277,
+                                    lineNumber: 372,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2728,13 +2920,13 @@ const EditApartment = ()=>{
                                                     children: "*"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                                                    lineNumber: 294,
+                                                    lineNumber: 389,
                                                     columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                                            lineNumber: 292,
+                                            lineNumber: 387,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -2746,25 +2938,25 @@ const EditApartment = ()=>{
                                             className: "w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                                            lineNumber: 296,
+                                            lineNumber: 391,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                                    lineNumber: 291,
+                                    lineNumber: 386,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                            lineNumber: 276,
+                            lineNumber: 371,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                    lineNumber: 273,
+                    lineNumber: 368,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
@@ -2775,7 +2967,7 @@ const EditApartment = ()=>{
                             children: "معلومات أساسية"
                         }, void 0, false, {
                             fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                            lineNumber: 309,
+                            lineNumber: 404,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2783,7 +2975,7 @@ const EditApartment = ()=>{
                             children: "أدخل معلومات الإعلان الأساسية لتظهر بوضوح للمشترين، مثل العنوان والوصف العام والموقع."
                         }, void 0, false, {
                             fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                            lineNumber: 312,
+                            lineNumber: 407,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2798,13 +2990,13 @@ const EditApartment = ()=>{
                                             children: "*"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                                            lineNumber: 320,
+                                            lineNumber: 415,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                                    lineNumber: 318,
+                                    lineNumber: 413,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2818,7 +3010,7 @@ const EditApartment = ()=>{
                                             children: "أنا أعرض"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                                            lineNumber: 323,
+                                            lineNumber: 418,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$app$2f$components$2f$ui$2f$Button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -2829,19 +3021,182 @@ const EditApartment = ()=>{
                                             children: "أنا أبحث"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                                            lineNumber: 331,
+                                            lineNumber: 426,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                                    lineNumber: 322,
+                                    lineNumber: 417,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                            lineNumber: 316,
+                            lineNumber: 411,
+                            columnNumber: 11
+                        }, this),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                            className: "grid grid-cols-1 md:grid-cols-2 gap-6 mb-6",
+                            children: [
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                    className: "sm:ml-16",
+                                    children: [
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
+                                            className: "block font-medium text-gray-700 mb-2",
+                                            children: "صورة غلاف المنتج"
+                                        }, void 0, false, {
+                                            fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
+                                            lineNumber: 440,
+                                            columnNumber: 15
+                                        }, this),
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                            type: "file",
+                                            accept: "image/*",
+                                            ref: inputRef,
+                                            onChange: handleImageChange,
+                                            className: "hidden"
+                                        }, void 0, false, {
+                                            fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
+                                            lineNumber: 444,
+                                            columnNumber: 15
+                                        }, this),
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                            onClick: handleClick,
+                                            className: "w-64 h-40 border-2 border-dashed border-cgreen rounded-lg flex items-center justify-center cursor-pointer bg-cwhite overflow-hidden",
+                                            children: preview ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
+                                                src: preview,
+                                                alt: "preview",
+                                                width: 256,
+                                                height: 160,
+                                                className: "object-cover w-full h-full"
+                                            }, void 0, false, {
+                                                fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
+                                                lineNumber: 457,
+                                                columnNumber: 19
+                                            }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                className: "text-cgreen text-4xl",
+                                                children: "+"
+                                            }, void 0, false, {
+                                                fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
+                                                lineNumber: 465,
+                                                columnNumber: 19
+                                            }, this)
+                                        }, void 0, false, {
+                                            fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
+                                            lineNumber: 452,
+                                            columnNumber: 15
+                                        }, this)
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
+                                    lineNumber: 439,
+                                    columnNumber: 13
+                                }, this),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                    type: "hidden",
+                                    ...register("gallery")
+                                }, void 0, false, {
+                                    fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
+                                    lineNumber: 469,
+                                    columnNumber: 13
+                                }, this),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                    className: "sm:ml-16",
+                                    children: [
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
+                                            className: "block font-medium text-gray-700 mb-2",
+                                            children: "صور المنتج"
+                                        }, void 0, false, {
+                                            fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
+                                            lineNumber: 471,
+                                            columnNumber: 15
+                                        }, this),
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                            className: "flex flex-wrap gap-4",
+                                            children: [
+                                                galleryFiles.map((img, index)=>{
+                                                    const previewUrl = img instanceof File ? URL.createObjectURL(img) : img;
+                                                    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                        className: "relative max-sm:w-32 w-24  h-24 border-2 border-cgreen rounded-lg overflow-hidden cursor-pointer",
+                                                        children: [
+                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                                                type: "file",
+                                                                accept: "image/*",
+                                                                className: "hidden",
+                                                                onChange: (e)=>handleGalleryChange(e, index),
+                                                                ref: (el)=>{
+                                                                    inputRefs.current[index] = el;
+                                                                }
+                                                            }, void 0, false, {
+                                                                fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
+                                                                lineNumber: 484,
+                                                                columnNumber: 23
+                                                            }, this),
+                                                            previewUrl && previewUrl !== "" ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
+                                                                src: previewUrl,
+                                                                alt: `Gallery image ${index + 1}`,
+                                                                fill: true,
+                                                                style: {
+                                                                    objectFit: "cover"
+                                                                },
+                                                                onClick: ()=>triggerFileInput(index),
+                                                                onLoad: ()=>img instanceof File && URL.revokeObjectURL(previewUrl)
+                                                            }, void 0, false, {
+                                                                fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
+                                                                lineNumber: 494,
+                                                                columnNumber: 25
+                                                            }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                                onClick: ()=>triggerFileInput(index),
+                                                                className: "flex justify-center items-center w-full h-full text-cgreen text-4xl",
+                                                                children: "+"
+                                                            }, void 0, false, {
+                                                                fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
+                                                                lineNumber: 506,
+                                                                columnNumber: 25
+                                                            }, this),
+                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                                                type: "button",
+                                                                onClick: ()=>handleRemoveImage(index),
+                                                                className: "absolute top-0 right-0 bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center",
+                                                                children: "×"
+                                                            }, void 0, false, {
+                                                                fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
+                                                                lineNumber: 513,
+                                                                columnNumber: 23
+                                                            }, this)
+                                                        ]
+                                                    }, index, true, {
+                                                        fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
+                                                        lineNumber: 480,
+                                                        columnNumber: 21
+                                                    }, this);
+                                                }),
+                                                galleryFiles.length < 5 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                    onClick: handleAddNewGallerySlot,
+                                                    className: "w-24 h-24 border-2 border-dashed border-cgreen rounded-lg flex items-center justify-center cursor-pointer text-cgreen text-4xl",
+                                                    children: "+"
+                                                }, void 0, false, {
+                                                    fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
+                                                    lineNumber: 524,
+                                                    columnNumber: 19
+                                                }, this)
+                                            ]
+                                        }, void 0, true, {
+                                            fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
+                                            lineNumber: 474,
+                                            columnNumber: 15
+                                        }, this)
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
+                                    lineNumber: 470,
+                                    columnNumber: 13
+                                }, this)
+                            ]
+                        }, void 0, true, {
+                            fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
+                            lineNumber: 436,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2859,13 +3214,13 @@ const EditApartment = ()=>{
                                                     children: "*"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                                                    lineNumber: 344,
+                                                    lineNumber: 538,
                                                     columnNumber: 28
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                                            lineNumber: 343,
+                                            lineNumber: 537,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -2878,52 +3233,15 @@ const EditApartment = ()=>{
                                             className: "w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                                            lineNumber: 346,
+                                            lineNumber: 540,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                                    lineNumber: 342,
-                                    columnNumber: 13
+                                    lineNumber: 536,
+                                    columnNumber: 11
                                 }, this),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "sm:ml-16",
-                                    children: [
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                            className: "block font-medium text-gray-700",
-                                            children: "صور المنتج"
-                                        }, void 0, false, {
-                                            fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                                            lineNumber: 357,
-                                            columnNumber: 15
-                                        }, this),
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
-                                            type: "file",
-                                            multiple: true,
-                                            name: "gallery",
-                                            onChange: handleInputChange,
-                                            className: "w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
-                                        }, void 0, false, {
-                                            fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                                            lineNumber: 360,
-                                            columnNumber: 15
-                                        }, this)
-                                    ]
-                                }, void 0, true, {
-                                    fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                                    lineNumber: 356,
-                                    columnNumber: 13
-                                }, this)
-                            ]
-                        }, void 0, true, {
-                            fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                            lineNumber: 341,
-                            columnNumber: 11
-                        }, this),
-                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            className: "grid grid-cols-1 md:grid-cols-2 gap-6 mb-6",
-                            children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                     className: "sm:ml-16",
                                     children: [
@@ -2936,13 +3254,13 @@ const EditApartment = ()=>{
                                                     children: "*"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                                                    lineNumber: 373,
+                                                    lineNumber: 553,
                                                     columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                                            lineNumber: 371,
+                                            lineNumber: 551,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
@@ -2960,7 +3278,7 @@ const EditApartment = ()=>{
                                                     children: "اختر الإدخال"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                                                    lineNumber: 383,
+                                                    lineNumber: 563,
                                                     columnNumber: 17
                                                 }, this),
                                                 __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$signup$2f$step2$2f$syrianGovernorates$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["syrianGovernorates"].map((gov)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -2968,19 +3286,19 @@ const EditApartment = ()=>{
                                                         children: gov.name
                                                     }, gov.value, false, {
                                                         fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                                                        lineNumber: 385,
+                                                        lineNumber: 565,
                                                         columnNumber: 19
                                                     }, this))
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                                            lineNumber: 375,
+                                            lineNumber: 555,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                                    lineNumber: 370,
+                                    lineNumber: 550,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2995,13 +3313,13 @@ const EditApartment = ()=>{
                                                     children: "*"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                                                    lineNumber: 393,
+                                                    lineNumber: 573,
                                                     columnNumber: 25
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                                            lineNumber: 392,
+                                            lineNumber: 572,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -3013,19 +3331,19 @@ const EditApartment = ()=>{
                                             placeholder: "المنطقة"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                                            lineNumber: 395,
+                                            lineNumber: 575,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                                    lineNumber: 391,
+                                    lineNumber: 571,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                            lineNumber: 369,
+                            lineNumber: 535,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3038,7 +3356,7 @@ const EditApartment = ()=>{
                                         children: "تفاصيل العنوان"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                                        lineNumber: 407,
+                                        lineNumber: 587,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -3049,18 +3367,18 @@ const EditApartment = ()=>{
                                         placeholder: "تفاصيل العنوان"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                                        lineNumber: 410,
+                                        lineNumber: 590,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                                lineNumber: 406,
+                                lineNumber: 586,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                            lineNumber: 405,
+                            lineNumber: 585,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3077,13 +3395,13 @@ const EditApartment = ()=>{
                                                 children: "*"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                                                lineNumber: 422,
+                                                lineNumber: 602,
                                                 columnNumber: 28
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                                        lineNumber: 421,
+                                        lineNumber: 601,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("textarea", {
@@ -3095,24 +3413,24 @@ const EditApartment = ()=>{
                                         placeholder: "ادخل وصف المنتج هنا"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                                        lineNumber: 424,
+                                        lineNumber: 604,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                                lineNumber: 420,
+                                lineNumber: 600,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                            lineNumber: 419,
+                            lineNumber: 599,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                    lineNumber: 308,
+                    lineNumber: 403,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
@@ -3123,7 +3441,7 @@ const EditApartment = ()=>{
                             children: "سعر المنتج"
                         }, void 0, false, {
                             fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                            lineNumber: 437,
+                            lineNumber: 617,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -3131,7 +3449,7 @@ const EditApartment = ()=>{
                             children: "حدد سعر الإعلان أو اختر إذا كان قابل للتفاوض، وسيساعد المستخدمين على معرفة القيمة بسهولة."
                         }, void 0, false, {
                             fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                            lineNumber: 440,
+                            lineNumber: 620,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3148,13 +3466,13 @@ const EditApartment = ()=>{
                                                 children: "*"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                                                lineNumber: 448,
+                                                lineNumber: 628,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                                        lineNumber: 446,
+                                        lineNumber: 626,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -3167,18 +3485,18 @@ const EditApartment = ()=>{
                                         placeholder: "ادخل سعر المنتج"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                                        lineNumber: 450,
+                                        lineNumber: 630,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                                lineNumber: 445,
+                                lineNumber: 625,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                            lineNumber: 444,
+                            lineNumber: 624,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3193,13 +3511,13 @@ const EditApartment = ()=>{
                                             children: "*"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                                            lineNumber: 463,
+                                            lineNumber: 643,
                                             columnNumber: 25
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                                    lineNumber: 462,
+                                    lineNumber: 642,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3218,20 +3536,20 @@ const EditApartment = ()=>{
                                                     className: "accent-cgreen"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                                                    lineNumber: 467,
+                                                    lineNumber: 647,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                     children: "سعر قابل للتفاوض"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                                                    lineNumber: 476,
+                                                    lineNumber: 656,
                                                     columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                                            lineNumber: 466,
+                                            lineNumber: 646,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
@@ -3246,38 +3564,38 @@ const EditApartment = ()=>{
                                                     className: "accent-cgreen"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                                                    lineNumber: 479,
+                                                    lineNumber: 659,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                     children: "سعر ثابت"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                                                    lineNumber: 487,
+                                                    lineNumber: 667,
                                                     columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                                            lineNumber: 478,
+                                            lineNumber: 658,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                                    lineNumber: 465,
+                                    lineNumber: 645,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                            lineNumber: 461,
+                            lineNumber: 641,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                    lineNumber: 436,
+                    lineNumber: 616,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
@@ -3288,7 +3606,7 @@ const EditApartment = ()=>{
                             children: "تفاصيل الشقة"
                         }, void 0, false, {
                             fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                            lineNumber: 494,
+                            lineNumber: 674,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3306,13 +3624,13 @@ const EditApartment = ()=>{
                                                     children: "*"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                                                    lineNumber: 498,
+                                                    lineNumber: 678,
                                                     columnNumber: 27
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                                            lineNumber: 497,
+                                            lineNumber: 677,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
@@ -3331,7 +3649,7 @@ const EditApartment = ()=>{
                                                     children: "اختر نوع العرض"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                                                    lineNumber: 509,
+                                                    lineNumber: 689,
                                                     columnNumber: 17
                                                 }, this),
                                                 __TURBOPACK__imported__module__$5b$project$5d2f$app$2f28$public$292f$newpost$2f$components$2f$ApartmentForm$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["OFFER_TYPE_CHOICES"].map(([value, label])=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -3339,19 +3657,19 @@ const EditApartment = ()=>{
                                                         children: label
                                                     }, value, false, {
                                                         fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                                                        lineNumber: 511,
+                                                        lineNumber: 691,
                                                         columnNumber: 19
                                                     }, this))
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                                            lineNumber: 500,
+                                            lineNumber: 680,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                                    lineNumber: 496,
+                                    lineNumber: 676,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3367,13 +3685,13 @@ const EditApartment = ()=>{
                                                     children: "*"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                                                    lineNumber: 520,
+                                                    lineNumber: 700,
                                                     columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                                            lineNumber: 518,
+                                            lineNumber: 698,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -3386,13 +3704,13 @@ const EditApartment = ()=>{
                                             min: 0
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                                            lineNumber: 522,
+                                            lineNumber: 702,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                                    lineNumber: 517,
+                                    lineNumber: 697,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3407,13 +3725,13 @@ const EditApartment = ()=>{
                                                     children: "*"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                                                    lineNumber: 534,
+                                                    lineNumber: 714,
                                                     columnNumber: 27
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                                            lineNumber: 533,
+                                            lineNumber: 713,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -3426,13 +3744,13 @@ const EditApartment = ()=>{
                                             min: 0
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                                            lineNumber: 536,
+                                            lineNumber: 716,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                                    lineNumber: 532,
+                                    lineNumber: 712,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3443,7 +3761,7 @@ const EditApartment = ()=>{
                                             children: "عدد غرف النوم"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                                            lineNumber: 547,
+                                            lineNumber: 727,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -3455,13 +3773,13 @@ const EditApartment = ()=>{
                                             min: 0
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                                            lineNumber: 550,
+                                            lineNumber: 730,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                                    lineNumber: 546,
+                                    lineNumber: 726,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3472,7 +3790,7 @@ const EditApartment = ()=>{
                                             children: "عدد الحمامات"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                                            lineNumber: 560,
+                                            lineNumber: 740,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -3484,13 +3802,13 @@ const EditApartment = ()=>{
                                             min: 0
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                                            lineNumber: 563,
+                                            lineNumber: 743,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                                    lineNumber: 559,
+                                    lineNumber: 739,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3501,7 +3819,7 @@ const EditApartment = ()=>{
                                             children: "متاح من تاريخ"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                                            lineNumber: 573,
+                                            lineNumber: 753,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -3512,13 +3830,13 @@ const EditApartment = ()=>{
                                             className: "w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                                            lineNumber: 576,
+                                            lineNumber: 756,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                                    lineNumber: 572,
+                                    lineNumber: 752,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3533,13 +3851,13 @@ const EditApartment = ()=>{
                                                     children: "*"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                                                    lineNumber: 586,
+                                                    lineNumber: 766,
                                                     columnNumber: 24
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                                            lineNumber: 585,
+                                            lineNumber: 765,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -3551,13 +3869,13 @@ const EditApartment = ()=>{
                                             className: "w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                                            lineNumber: 588,
+                                            lineNumber: 768,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                                    lineNumber: 584,
+                                    lineNumber: 764,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3568,7 +3886,7 @@ const EditApartment = ()=>{
                                             children: "سنة البناء"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                                            lineNumber: 598,
+                                            lineNumber: 778,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -3581,19 +3899,19 @@ const EditApartment = ()=>{
                                             max: 2100
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                                            lineNumber: 601,
+                                            lineNumber: 781,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                                    lineNumber: 597,
+                                    lineNumber: 777,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                            lineNumber: 495,
+                            lineNumber: 675,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3607,7 +3925,7 @@ const EditApartment = ()=>{
                                             children: "الأثاث"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                                            lineNumber: 615,
+                                            lineNumber: 795,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3624,25 +3942,25 @@ const EditApartment = ()=>{
                                                             onChange: handleApartmentInputChange
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                                                            lineNumber: 622,
+                                                            lineNumber: 802,
                                                             columnNumber: 21
                                                         }, this),
                                                         label
                                                     ]
                                                 }, value, true, {
                                                     fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                                                    lineNumber: 618,
+                                                    lineNumber: 798,
                                                     columnNumber: 19
                                                 }, this))
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                                            lineNumber: 616,
+                                            lineNumber: 796,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                                    lineNumber: 614,
+                                    lineNumber: 794,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3653,7 +3971,7 @@ const EditApartment = ()=>{
                                             children: "حالة المبنى"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                                            lineNumber: 639,
+                                            lineNumber: 819,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3670,38 +3988,38 @@ const EditApartment = ()=>{
                                                             onChange: handleApartmentInputChange
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                                                            lineNumber: 648,
+                                                            lineNumber: 828,
                                                             columnNumber: 21
                                                         }, this),
                                                         label
                                                     ]
                                                 }, value, true, {
                                                     fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                                                    lineNumber: 644,
+                                                    lineNumber: 824,
                                                     columnNumber: 19
                                                 }, this))
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                                            lineNumber: 642,
+                                            lineNumber: 822,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                                    lineNumber: 638,
+                                    lineNumber: 818,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                            lineNumber: 613,
+                            lineNumber: 793,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("hr", {
                             className: "mt-6 mb-3 text-clightgray"
                         }, void 0, false, {
                             fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                            lineNumber: 669,
+                            lineNumber: 849,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3714,34 +4032,34 @@ const EditApartment = ()=>{
                                     children: isPending ? "جارٍ التعديل ..." : "تعديل"
                                 }, void 0, false, {
                                     fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                                    lineNumber: 675,
+                                    lineNumber: 855,
                                     columnNumber: 15
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                                lineNumber: 671,
+                                lineNumber: 851,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                            lineNumber: 670,
+                            lineNumber: 850,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-                    lineNumber: 493,
+                    lineNumber: 673,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-            lineNumber: 248,
+            lineNumber: 343,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/app/(public)/editpost/editApartment/[id]/page.tsx",
-        lineNumber: 247,
+        lineNumber: 342,
         columnNumber: 5
     }, this);
 };

@@ -699,6 +699,7 @@ function GenericPostForm({ Gcategory, Gsubcategory }) {
     };
     // ------------------------------------------------------------------
     // GALLERY -------------------------------------------------
+    const MAX_GALLERY_IMAGES = 7;
     // State for gallery files (images)
     const [galleryFiles, setGalleryFiles] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])([]);
     // Handler to add or replace image at index
@@ -731,7 +732,7 @@ function GenericPostForm({ Gcategory, Gsubcategory }) {
     };
     // Handler to add new empty slot (up to max 5)
     const handleAddNewGallerySlot = ()=>{
-        if (galleryFiles.length < 5) {
+        if (galleryFiles.length < MAX_GALLERY_IMAGES) {
             setGalleryFiles((prev)=>[
                     ...prev,
                     ""
@@ -792,7 +793,7 @@ function GenericPostForm({ Gcategory, Gsubcategory }) {
                 onClose: ()=>setNotification(null)
             }, void 0, false, {
                 fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                lineNumber: 168,
+                lineNumber: 171,
                 columnNumber: 9
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
@@ -803,7 +804,7 @@ function GenericPostForm({ Gcategory, Gsubcategory }) {
                         children: "معلومات أساسية"
                     }, void 0, false, {
                         fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                        lineNumber: 177,
+                        lineNumber: 180,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -811,7 +812,7 @@ function GenericPostForm({ Gcategory, Gsubcategory }) {
                         children: "أدخل معلومات الإعلان الأساسية لتظهر بوضوح للمشترين، مثل العنوان والوصف العام والموقع."
                     }, void 0, false, {
                         fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                        lineNumber: 180,
+                        lineNumber: 183,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -826,13 +827,13 @@ function GenericPostForm({ Gcategory, Gsubcategory }) {
                                         children: "*"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                                        lineNumber: 188,
+                                        lineNumber: 191,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                                lineNumber: 186,
+                                lineNumber: 189,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -849,7 +850,7 @@ function GenericPostForm({ Gcategory, Gsubcategory }) {
                                         children: "أنا أعرض"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                                        lineNumber: 191,
+                                        lineNumber: 194,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$app$2f$components$2f$ui$2f$Button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -863,71 +864,41 @@ function GenericPostForm({ Gcategory, Gsubcategory }) {
                                         children: "أنا أبحث"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                                        lineNumber: 202,
+                                        lineNumber: 205,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                                lineNumber: 190,
+                                lineNumber: 193,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                        lineNumber: 184,
+                        lineNumber: 187,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                        className: "text-lg max-sm:text-sm border p-2 bg-cgreen text-cwhite rounded-md ",
+                        children: "ملاحظة:   يوجد زر معاينة المنشور  في الأسفل"
+                    }, void 0, false, {
+                        fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
+                        lineNumber: 220,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "grid grid-cols-1 md:grid-cols-2 gap-6 mb-6",
+                        className: "grid grid-cols-1 md:grid-cols-2 gap-6 mb-6 mt-6",
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                className: "sm:ml-16",
-                                children: [
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                        className: "block font-medium text-gray-700",
-                                        children: [
-                                            "اسم المنتج",
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                className: "text-red-500 text-xl mr-1",
-                                                children: "*"
-                                            }, void 0, false, {
-                                                fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                                                lineNumber: 220,
-                                                columnNumber: 15
-                                            }, this)
-                                        ]
-                                    }, void 0, true, {
-                                        fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                                        lineNumber: 218,
-                                        columnNumber: 13
-                                    }, this),
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
-                                        required: true,
-                                        ...register("title"),
-                                        type: "text",
-                                        placeholder: "اسم المنتج",
-                                        className: "w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
-                                    }, void 0, false, {
-                                        fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                                        lineNumber: 222,
-                                        columnNumber: 13
-                                    }, this)
-                                ]
-                            }, void 0, true, {
-                                fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                                lineNumber: 217,
-                                columnNumber: 11
-                            }, this),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                className: "sm:ml-16",
+                                className: "sm:ml-16  ",
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                         className: "block font-medium text-gray-700 mb-2",
                                         children: "صورة غلاف المنتج"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                                        lineNumber: 232,
+                                        lineNumber: 225,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -938,12 +909,12 @@ function GenericPostForm({ Gcategory, Gsubcategory }) {
                                         className: "hidden"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                                        lineNumber: 237,
+                                        lineNumber: 230,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                         onClick: handleClick,
-                                        className: "w-64 h-40 border-2 border-dashed border-cgreen rounded-lg flex items-center justify-center cursor-pointer bg-cwhite overflow-hidden",
+                                        className: "w-[70%] max-sm:w-full h-52  border-2 border-dashed border-cgreen rounded-lg flex items-center justify-center cursor-pointer bg-cwhite overflow-hidden",
                                         children: preview ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
                                             src: preview,
                                             alt: "preview",
@@ -952,25 +923,25 @@ function GenericPostForm({ Gcategory, Gsubcategory }) {
                                             className: "object-cover w-full h-full"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                                            lineNumber: 251,
+                                            lineNumber: 244,
                                             columnNumber: 17
                                         }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                             className: "text-cgreen text-4xl",
                                             children: "+"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                                            lineNumber: 259,
+                                            lineNumber: 252,
                                             columnNumber: 17
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                                        lineNumber: 246,
+                                        lineNumber: 239,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                                lineNumber: 231,
+                                lineNumber: 224,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -978,7 +949,7 @@ function GenericPostForm({ Gcategory, Gsubcategory }) {
                                 ...register("gallery")
                             }, void 0, false, {
                                 fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                                lineNumber: 265,
+                                lineNumber: 258,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -989,16 +960,16 @@ function GenericPostForm({ Gcategory, Gsubcategory }) {
                                         children: "صور المنتج"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                                        lineNumber: 268,
+                                        lineNumber: 261,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                        className: "flex flex-wrap gap-4",
+                                        className: "flex flex-wrap gap-4 ",
                                         children: [
                                             galleryFiles.map((img, index)=>{
                                                 const previewUrl = img instanceof File ? URL.createObjectURL(img) : img;
                                                 return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                    className: "relative w-24 h-24 border-2 border-cgreen rounded-lg overflow-hidden cursor-pointer",
+                                                    className: "relative max-sm:w-32 w-24  h-24 border-2 border-cgreen rounded-lg overflow-hidden cursor-pointer",
                                                     children: [
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
                                                             type: "file",
@@ -1010,7 +981,7 @@ function GenericPostForm({ Gcategory, Gsubcategory }) {
                                                             }
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                                                            lineNumber: 281,
+                                                            lineNumber: 274,
                                                             columnNumber: 21
                                                         }, this),
                                                         previewUrl ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -1024,7 +995,7 @@ function GenericPostForm({ Gcategory, Gsubcategory }) {
                                                             onLoad: ()=>URL.revokeObjectURL(previewUrl)
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                                                            lineNumber: 291,
+                                                            lineNumber: 284,
                                                             columnNumber: 23
                                                         }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                             onClick: ()=>triggerFileInput(index),
@@ -1032,7 +1003,7 @@ function GenericPostForm({ Gcategory, Gsubcategory }) {
                                                             children: "+"
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                                                            lineNumber: 300,
+                                                            lineNumber: 293,
                                                             columnNumber: 23
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -1042,35 +1013,73 @@ function GenericPostForm({ Gcategory, Gsubcategory }) {
                                                             children: "×"
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                                                            lineNumber: 307,
+                                                            lineNumber: 300,
                                                             columnNumber: 21
                                                         }, this)
                                                     ]
                                                 }, index, true, {
                                                     fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                                                    lineNumber: 277,
+                                                    lineNumber: 270,
                                                     columnNumber: 19
                                                 }, this);
                                             }),
-                                            galleryFiles.length < 5 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                            galleryFiles.length < MAX_GALLERY_IMAGES && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                 onClick: handleAddNewGallerySlot,
                                                 className: "w-24 h-24 border-2 border-dashed border-cgreen rounded-lg flex items-center justify-center cursor-pointer text-cgreen text-4xl",
                                                 children: "+"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                                                lineNumber: 320,
+                                                lineNumber: 313,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                                        lineNumber: 271,
+                                        lineNumber: 264,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                                lineNumber: 267,
+                                lineNumber: 260,
+                                columnNumber: 11
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "sm:ml-16",
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
+                                        className: "block font-medium text-gray-700",
+                                        children: [
+                                            "اسم المنتج",
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                className: "text-red-500 text-xl mr-1",
+                                                children: "*"
+                                            }, void 0, false, {
+                                                fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
+                                                lineNumber: 325,
+                                                columnNumber: 15
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
+                                        lineNumber: 323,
+                                        columnNumber: 13
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                        required: true,
+                                        ...register("title"),
+                                        type: "text",
+                                        placeholder: "اسم المنتج",
+                                        className: "w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
+                                    }, void 0, false, {
+                                        fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
+                                        lineNumber: 327,
+                                        columnNumber: 13
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
+                                lineNumber: 322,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1085,13 +1094,13 @@ function GenericPostForm({ Gcategory, Gsubcategory }) {
                                                 children: "*"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                                                lineNumber: 333,
+                                                lineNumber: 339,
                                                 columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                                        lineNumber: 331,
+                                        lineNumber: 337,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
@@ -1107,7 +1116,7 @@ function GenericPostForm({ Gcategory, Gsubcategory }) {
                                                 children: "اختر الإدخال"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                                                lineNumber: 343,
+                                                lineNumber: 349,
                                                 columnNumber: 15
                                             }, this),
                                             __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$signup$2f$step2$2f$syrianGovernorates$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["syrianGovernorates"].map((gov)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -1115,19 +1124,19 @@ function GenericPostForm({ Gcategory, Gsubcategory }) {
                                                     children: gov.name
                                                 }, gov.value, false, {
                                                     fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                                                    lineNumber: 345,
+                                                    lineNumber: 351,
                                                     columnNumber: 17
                                                 }, this))
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                                        lineNumber: 335,
+                                        lineNumber: 341,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                                lineNumber: 330,
+                                lineNumber: 336,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1142,13 +1151,13 @@ function GenericPostForm({ Gcategory, Gsubcategory }) {
                                                 children: "*"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                                                lineNumber: 355,
+                                                lineNumber: 361,
                                                 columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                                        lineNumber: 353,
+                                        lineNumber: 359,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -1158,7 +1167,7 @@ function GenericPostForm({ Gcategory, Gsubcategory }) {
                                         placeholder: "المنطقة"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                                        lineNumber: 357,
+                                        lineNumber: 363,
                                         columnNumber: 13
                                     }, this),
                                     errors.hood && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1166,19 +1175,19 @@ function GenericPostForm({ Gcategory, Gsubcategory }) {
                                         children: String(errors.hood.message)
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                                        lineNumber: 364,
+                                        lineNumber: 370,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                                lineNumber: 352,
+                                lineNumber: 358,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                        lineNumber: 216,
+                        lineNumber: 221,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1192,7 +1201,7 @@ function GenericPostForm({ Gcategory, Gsubcategory }) {
                                         children: "تفاصيل العنوان"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                                        lineNumber: 372,
+                                        lineNumber: 378,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -1201,7 +1210,7 @@ function GenericPostForm({ Gcategory, Gsubcategory }) {
                                         placeholder: "تفاصيل العنوان"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                                        lineNumber: 375,
+                                        lineNumber: 381,
                                         columnNumber: 13
                                     }, this),
                                     errors.detailed_location && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1209,13 +1218,13 @@ function GenericPostForm({ Gcategory, Gsubcategory }) {
                                         children: String(errors.detailed_location.message)
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                                        lineNumber: 381,
+                                        lineNumber: 387,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                                lineNumber: 371,
+                                lineNumber: 377,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1230,13 +1239,13 @@ function GenericPostForm({ Gcategory, Gsubcategory }) {
                                                 children: "*"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                                                lineNumber: 389,
+                                                lineNumber: 395,
                                                 columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                                        lineNumber: 387,
+                                        lineNumber: 393,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("textarea", {
@@ -1246,7 +1255,7 @@ function GenericPostForm({ Gcategory, Gsubcategory }) {
                                         placeholder: "ادخل وصف المنتج هنا"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                                        lineNumber: 391,
+                                        lineNumber: 397,
                                         columnNumber: 13
                                     }, this),
                                     errors.description && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1254,25 +1263,25 @@ function GenericPostForm({ Gcategory, Gsubcategory }) {
                                         children: String(errors.description.message)
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                                        lineNumber: 398,
+                                        lineNumber: 404,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                                lineNumber: 386,
+                                lineNumber: 392,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                        lineNumber: 370,
+                        lineNumber: 376,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                lineNumber: 176,
+                lineNumber: 179,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
@@ -1283,7 +1292,7 @@ function GenericPostForm({ Gcategory, Gsubcategory }) {
                         children: "سعر المنتج"
                     }, void 0, false, {
                         fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                        lineNumber: 408,
+                        lineNumber: 414,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1291,7 +1300,7 @@ function GenericPostForm({ Gcategory, Gsubcategory }) {
                         children: "حدد سعر الإعلان أو اختر إذا كان قابل للتفاوض، وسيساعد المستخدمين على معرفة القيمة بسهولة."
                     }, void 0, false, {
                         fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                        lineNumber: 411,
+                        lineNumber: 417,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1308,13 +1317,13 @@ function GenericPostForm({ Gcategory, Gsubcategory }) {
                                             children: "*"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                                            lineNumber: 419,
+                                            lineNumber: 425,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                                    lineNumber: 417,
+                                    lineNumber: 423,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -1325,18 +1334,18 @@ function GenericPostForm({ Gcategory, Gsubcategory }) {
                                     placeholder: "ادخل سعر المنتج"
                                 }, void 0, false, {
                                     fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                                    lineNumber: 421,
+                                    lineNumber: 427,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                            lineNumber: 416,
+                            lineNumber: 422,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                        lineNumber: 415,
+                        lineNumber: 421,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1351,13 +1360,13 @@ function GenericPostForm({ Gcategory, Gsubcategory }) {
                                         children: "*"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                                        lineNumber: 434,
+                                        lineNumber: 440,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                                lineNumber: 432,
+                                lineNumber: 438,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1374,20 +1383,20 @@ function GenericPostForm({ Gcategory, Gsubcategory }) {
                                                 className: "accent-cgreen"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                                                lineNumber: 438,
+                                                lineNumber: 444,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                 children: "سعر قابل للتفاوض"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                                                lineNumber: 445,
+                                                lineNumber: 451,
                                                 columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                                        lineNumber: 437,
+                                        lineNumber: 443,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
@@ -1400,39 +1409,39 @@ function GenericPostForm({ Gcategory, Gsubcategory }) {
                                                 className: "accent-cgreen"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                                                lineNumber: 448,
+                                                lineNumber: 454,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                 children: "سعر ثابت"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                                                lineNumber: 454,
+                                                lineNumber: 460,
                                                 columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                                        lineNumber: 447,
+                                        lineNumber: 453,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                                lineNumber: 436,
+                                lineNumber: 442,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                        lineNumber: 431,
+                        lineNumber: 437,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("hr", {
                         className: "mt-6 mb-3 text-clightgray"
                     }, void 0, false, {
                         fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                        lineNumber: 459,
+                        lineNumber: 465,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1449,7 +1458,7 @@ function GenericPostForm({ Gcategory, Gsubcategory }) {
                                             className: "ml-1 text-cgreen group-hover:text-cwhite"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                                            lineNumber: 468,
+                                            lineNumber: 474,
                                             columnNumber: 15
                                         }, this),
                                         " ",
@@ -1457,12 +1466,12 @@ function GenericPostForm({ Gcategory, Gsubcategory }) {
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                                    lineNumber: 467,
+                                    lineNumber: 473,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                                lineNumber: 462,
+                                lineNumber: 468,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -1473,30 +1482,30 @@ function GenericPostForm({ Gcategory, Gsubcategory }) {
                                     children: isLoading ? "جار النشر ..." : "نشر"
                                 }, void 0, false, {
                                     fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                                    lineNumber: 478,
+                                    lineNumber: 484,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                                lineNumber: 474,
+                                lineNumber: 480,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                        lineNumber: 460,
+                        lineNumber: 466,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-                lineNumber: 407,
+                lineNumber: 413,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/app/(public)/newpost/components/GenericPostForm.tsx",
-        lineNumber: 162,
+        lineNumber: 165,
         columnNumber: 5
     }, this);
 }

@@ -2901,6 +2901,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$sections$2f$categorie
 var __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$components$2f$ui$2f$SkeletonNotificationSettings$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/app/components/ui/SkeletonNotificationSettings.tsx [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$search$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Search$3e$__ = __turbopack_context__.i("[project]/node_modules/lucide-react/dist/esm/icons/search.js [app-client] (ecmascript) <export default as Search>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/image.js [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$hook$2d$form$2f$dist$2f$index$2e$esm$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/react-hook-form/dist/index.esm.mjs [app-client] (ecmascript)");
 ;
 var _s = __turbopack_context__.k.signature();
 "use client";
@@ -2916,14 +2917,78 @@ var _s = __turbopack_context__.k.signature();
 ;
 ;
 ;
+;
 const EditHouse = ()=>{
     _s();
+    const { register, formState: {} } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$hook$2d$form$2f$dist$2f$index$2e$esm$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useForm"])({
+        defaultValues: {
+            gallery_images: []
+        }
+    });
     const params = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useParams"])();
     const id = params.id;
     const { data, isLoading } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$lib$2f$postServices$2f$postQueries$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useGetHousePostId"])(id);
     const [notification, setNotification] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
     const editHouseForm = (0, __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$lib$2f$postServices$2f$editPostMutation$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEditHouseForm"])(setNotification);
     const isPending = editHouseForm.isPending;
+    const inputRefs = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])([]);
+    const [galleryFiles, setGalleryFiles] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])([]);
+    const handleGalleryChange = (e, index)=>{
+        const file = e.target.files?.[0];
+        if (file) {
+            setGalleryFiles((prev)=>{
+                const updated = [
+                    ...prev
+                ];
+                updated[index] = file;
+                setFormData((prevForm)=>({
+                        ...prevForm,
+                        gallery: updated
+                    }));
+                return updated;
+            });
+        }
+    };
+    const handleRemoveImage = (index)=>{
+        setGalleryFiles((prev)=>{
+            const updated = prev.filter((_, i)=>i !== index);
+            setFormData((prevForm)=>({
+                    ...prevForm,
+                    gallery: updated
+                }));
+            return updated;
+        });
+    };
+    const handleAddNewGallerySlot = ()=>{
+        setGalleryFiles((prev)=>{
+            if (prev.length >= 10) return prev;
+            const updated = [
+                ...prev,
+                ""
+            ];
+            setFormData((prevForm)=>({
+                    ...prevForm,
+                    gallery: updated
+                }));
+            return updated;
+        });
+    };
+    const triggerFileInput = (index)=>{
+        inputRefs.current[index]?.click();
+    };
+    const convertURLtoFile = async (url)=>{
+        const response = await fetch(url);
+        const blob = await response.blob();
+        let name = url.split("/").pop() || "";
+        if (!/\.(jpg|jpeg|png|webp|gif)$/i.test(name)) {
+            name = `image-${Date.now()}.jpg`; // اسم افتراضي بامتداد مسموح
+        }
+        return new File([
+            blob
+        ], name, {
+            type: blob.type
+        });
+    };
     const [formData, setFormData] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])({
         category: "",
         subcategory: "",
@@ -2953,14 +3018,29 @@ const EditHouse = ()=>{
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
         "EditHouse.useEffect": ()=>{
             if (data) {
+                const galleryImages = data.gallery_images?.map({
+                    "EditHouse.useEffect": (img)=>img.image
+                }["EditHouse.useEffect"]) || [];
                 setFormData({
-                    ...data,
+                    category: data.category || "",
+                    subcategory: data.subcategory || "",
+                    title: data.title || "",
+                    description: data.description || "",
+                    price: data.price || "",
+                    price_type: data.price_type || "fixed",
+                    city: data.city || "",
+                    hood: data.hood || "",
+                    detailed_location: data.detailed_location || "",
+                    cover_image: data.cover_image || "",
+                    gallery: galleryImages,
+                    offer_type: data.offer_type || "sell",
                     house: {
                         ...data.house,
                         general_characteristics: data.house?.general_characteristics || [],
                         furniture: data.house?.furniture || []
                     }
                 });
+                setGalleryFiles(galleryImages);
                 setIsSearch(data.offer_type === "search");
             }
         }
@@ -3018,7 +3098,7 @@ const EditHouse = ()=>{
                 offer_type: type
             }));
     };
-    const onSubmit = (e)=>{
+    const onSubmit = async (e)=>{
         e.preventDefault();
         if (!id) {
             setNotification({
@@ -3042,21 +3122,21 @@ const EditHouse = ()=>{
         if (data.cover_image instanceof File) {
             form.append("cover_image", data.cover_image);
         }
-        if (data.gallery && data.gallery.length > 0) {
-            if (typeof globalThis.FileList !== "undefined" && data.gallery instanceof globalThis.FileList) {
-                Array.from(data.gallery).forEach((img)=>{
-                    form.append("gallery", img);
-                });
-            } else if (Array.isArray(data.gallery)) {
-                data.gallery.forEach((img)=>{
-                    if (img instanceof File) {
-                        form.append("gallery", img);
-                    } else if (typeof img === "string") {
-                        form.append("gallery", img);
-                    }
-                });
+        for (const img of formData.gallery || []){
+            if (img instanceof File) {
+                form.append("gallery", img);
+            } else if (typeof img === "string") {
+                const file = await convertURLtoFile(img);
+                form.append("gallery", file);
             }
         }
+        console.log("📋 Gallery content ");
+        const galleryItems = form.getAll("gallery");
+        galleryItems.forEach((item, index)=>{
+            if (item instanceof File) {
+                console.log(`[${index}]  ${item.name}`);
+            }
+        });
         // House details
         const houseDetails = {
             available_from: data.house?.available_from,
@@ -3143,7 +3223,7 @@ const EditHouse = ()=>{
     // ////////////////////////////////////////////////////////////////////
     if (isLoading) return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$app$2f$components$2f$ui$2f$SkeletonNotificationSettings$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {}, void 0, false, {
         fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-        lineNumber: 256,
+        lineNumber: 337,
         columnNumber: 25
     }, this);
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3158,7 +3238,7 @@ const EditHouse = ()=>{
                     onClose: ()=>setNotification(null)
                 }, void 0, false, {
                     fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                    lineNumber: 262,
+                    lineNumber: 343,
                     columnNumber: 11
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3169,7 +3249,7 @@ const EditHouse = ()=>{
                             children: "تعديل إعلان المنزل"
                         }, void 0, false, {
                             fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                            lineNumber: 270,
+                            lineNumber: 351,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -3183,7 +3263,7 @@ const EditHouse = ()=>{
                                     children: "سياسة النشر"
                                 }, void 0, false, {
                                     fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                    lineNumber: 275,
+                                    lineNumber: 356,
                                     columnNumber: 13
                                 }, this),
                                 " ",
@@ -3191,13 +3271,13 @@ const EditHouse = ()=>{
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                            lineNumber: 273,
+                            lineNumber: 354,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                    lineNumber: 269,
+                    lineNumber: 350,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3208,14 +3288,14 @@ const EditHouse = ()=>{
                             children: "تصنيف المنتج"
                         }, void 0, false, {
                             fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                            lineNumber: 283,
+                            lineNumber: 364,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("hr", {
                             className: "mb-6 text-clightgray"
                         }, void 0, false, {
                             fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                            lineNumber: 284,
+                            lineNumber: 365,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3233,13 +3313,13 @@ const EditHouse = ()=>{
                                                     children: "*"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                                    lineNumber: 289,
+                                                    lineNumber: 370,
                                                     columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                            lineNumber: 287,
+                                            lineNumber: 368,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -3251,13 +3331,13 @@ const EditHouse = ()=>{
                                             className: "w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                            lineNumber: 291,
+                                            lineNumber: 372,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                    lineNumber: 286,
+                                    lineNumber: 367,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3272,13 +3352,13 @@ const EditHouse = ()=>{
                                                     children: "*"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                                    lineNumber: 303,
+                                                    lineNumber: 384,
                                                     columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                            lineNumber: 301,
+                                            lineNumber: 382,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -3290,25 +3370,25 @@ const EditHouse = ()=>{
                                             className: "w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                            lineNumber: 305,
+                                            lineNumber: 386,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                    lineNumber: 300,
+                                    lineNumber: 381,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                            lineNumber: 285,
+                            lineNumber: 366,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                    lineNumber: 282,
+                    lineNumber: 363,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
@@ -3319,7 +3399,7 @@ const EditHouse = ()=>{
                             children: "معلومات أساسية"
                         }, void 0, false, {
                             fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                            lineNumber: 318,
+                            lineNumber: 399,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -3327,7 +3407,7 @@ const EditHouse = ()=>{
                             children: "أدخل معلومات الإعلان الأساسية لتظهر بوضوح للمشترين، مثل العنوان والوصف العام والموقع."
                         }, void 0, false, {
                             fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                            lineNumber: 319,
+                            lineNumber: 400,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3342,13 +3422,13 @@ const EditHouse = ()=>{
                                             children: "*"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                            lineNumber: 326,
+                                            lineNumber: 407,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                    lineNumber: 324,
+                                    lineNumber: 405,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3362,7 +3442,7 @@ const EditHouse = ()=>{
                                             children: "أنا أعرض"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                            lineNumber: 329,
+                                            lineNumber: 410,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$app$2f$components$2f$ui$2f$Button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
@@ -3373,19 +3453,19 @@ const EditHouse = ()=>{
                                             children: "أنا أبحث"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                            lineNumber: 337,
+                                            lineNumber: 418,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                    lineNumber: 328,
+                                    lineNumber: 409,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                            lineNumber: 322,
+                            lineNumber: 403,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3403,13 +3483,13 @@ const EditHouse = ()=>{
                                                     children: "*"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                                    lineNumber: 350,
+                                                    lineNumber: 431,
                                                     columnNumber: 28
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                            lineNumber: 349,
+                                            lineNumber: 430,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -3422,13 +3502,13 @@ const EditHouse = ()=>{
                                             className: "w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                            lineNumber: 352,
+                                            lineNumber: 433,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                    lineNumber: 348,
+                                    lineNumber: 429,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3439,7 +3519,7 @@ const EditHouse = ()=>{
                                             children: "صورة غلاف المنتج"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                            lineNumber: 363,
+                                            lineNumber: 444,
                                             columnNumber: 3
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -3450,7 +3530,7 @@ const EditHouse = ()=>{
                                             className: "hidden"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                            lineNumber: 367,
+                                            lineNumber: 448,
                                             columnNumber: 3
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3464,59 +3544,131 @@ const EditHouse = ()=>{
                                                 className: "object-cover w-full h-full"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                                lineNumber: 380,
+                                                lineNumber: 461,
                                                 columnNumber: 7
                                             }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                 className: "text-cgreen text-4xl",
                                                 children: "+"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                                lineNumber: 388,
+                                                lineNumber: 469,
                                                 columnNumber: 7
                                             }, this)
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                            lineNumber: 375,
+                                            lineNumber: 456,
                                             columnNumber: 3
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                    lineNumber: 362,
+                                    lineNumber: 443,
                                     columnNumber: 13
+                                }, this),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                    type: "hidden",
+                                    ...register("gallery")
+                                }, void 0, false, {
+                                    fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
+                                    lineNumber: 473,
+                                    columnNumber: 1
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                     className: "sm:ml-16",
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                            className: "block font-medium text-gray-700",
+                                            className: "block font-medium text-gray-700 mb-2",
                                             children: "صور المنتج"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                            lineNumber: 393,
+                                            lineNumber: 475,
                                             columnNumber: 15
                                         }, this),
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
-                                            type: "file",
-                                            multiple: true,
-                                            name: "gallery",
-                                            onChange: handleInputChange,
-                                            className: "w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
-                                        }, void 0, false, {
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                            className: "flex flex-wrap gap-4",
+                                            children: [
+                                                galleryFiles.map((img, index)=>{
+                                                    const previewUrl = img instanceof File ? URL.createObjectURL(img) : img;
+                                                    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                        className: "relative max-sm:w-32 w-24  h-24 border-2 border-cgreen rounded-lg overflow-hidden cursor-pointer",
+                                                        children: [
+                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                                                type: "file",
+                                                                accept: "image/*",
+                                                                className: "hidden",
+                                                                onChange: (e)=>handleGalleryChange(e, index),
+                                                                ref: (el)=>{
+                                                                    inputRefs.current[index] = el;
+                                                                }
+                                                            }, void 0, false, {
+                                                                fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
+                                                                lineNumber: 488,
+                                                                columnNumber: 23
+                                                            }, this),
+                                                            previewUrl && previewUrl !== "" ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
+                                                                src: previewUrl,
+                                                                alt: `Gallery image ${index + 1}`,
+                                                                fill: true,
+                                                                style: {
+                                                                    objectFit: "cover"
+                                                                },
+                                                                onClick: ()=>triggerFileInput(index),
+                                                                onLoad: ()=>img instanceof File && URL.revokeObjectURL(previewUrl)
+                                                            }, void 0, false, {
+                                                                fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
+                                                                lineNumber: 498,
+                                                                columnNumber: 25
+                                                            }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                                onClick: ()=>triggerFileInput(index),
+                                                                className: "flex justify-center items-center w-full h-full text-cgreen text-4xl",
+                                                                children: "+"
+                                                            }, void 0, false, {
+                                                                fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
+                                                                lineNumber: 510,
+                                                                columnNumber: 25
+                                                            }, this),
+                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                                                type: "button",
+                                                                onClick: ()=>handleRemoveImage(index),
+                                                                className: "absolute top-0 right-0 bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center",
+                                                                children: "×"
+                                                            }, void 0, false, {
+                                                                fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
+                                                                lineNumber: 517,
+                                                                columnNumber: 23
+                                                            }, this)
+                                                        ]
+                                                    }, index, true, {
+                                                        fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
+                                                        lineNumber: 484,
+                                                        columnNumber: 21
+                                                    }, this);
+                                                }),
+                                                galleryFiles.length < 5 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                    onClick: handleAddNewGallerySlot,
+                                                    className: "w-24 h-24 border-2 border-dashed border-cgreen rounded-lg flex items-center justify-center cursor-pointer text-cgreen text-4xl",
+                                                    children: "+"
+                                                }, void 0, false, {
+                                                    fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
+                                                    lineNumber: 528,
+                                                    columnNumber: 19
+                                                }, this)
+                                            ]
+                                        }, void 0, true, {
                                             fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                            lineNumber: 394,
+                                            lineNumber: 478,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                    lineNumber: 392,
+                                    lineNumber: 474,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                            lineNumber: 347,
+                            lineNumber: 428,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3534,13 +3686,13 @@ const EditHouse = ()=>{
                                                     children: "*"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                                    lineNumber: 407,
+                                                    lineNumber: 544,
                                                     columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                            lineNumber: 405,
+                                            lineNumber: 542,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
@@ -3558,7 +3710,7 @@ const EditHouse = ()=>{
                                                     children: "اختر الإدخال"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                                    lineNumber: 417,
+                                                    lineNumber: 554,
                                                     columnNumber: 17
                                                 }, this),
                                                 __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$signup$2f$step2$2f$syrianGovernorates$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["syrianGovernorates"].map((gov)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -3566,19 +3718,19 @@ const EditHouse = ()=>{
                                                         children: gov.name
                                                     }, gov.value, false, {
                                                         fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                                        lineNumber: 419,
+                                                        lineNumber: 556,
                                                         columnNumber: 19
                                                     }, this))
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                            lineNumber: 409,
+                                            lineNumber: 546,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                    lineNumber: 404,
+                                    lineNumber: 541,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3593,13 +3745,13 @@ const EditHouse = ()=>{
                                                     children: "*"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                                    lineNumber: 427,
+                                                    lineNumber: 564,
                                                     columnNumber: 25
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                            lineNumber: 426,
+                                            lineNumber: 563,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -3611,19 +3763,19 @@ const EditHouse = ()=>{
                                             placeholder: "المنطقة"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                            lineNumber: 429,
+                                            lineNumber: 566,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                    lineNumber: 425,
+                                    lineNumber: 562,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                            lineNumber: 403,
+                            lineNumber: 540,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3636,7 +3788,7 @@ const EditHouse = ()=>{
                                         children: "تفاصيل العنوان"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                        lineNumber: 441,
+                                        lineNumber: 578,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -3647,18 +3799,18 @@ const EditHouse = ()=>{
                                         placeholder: "تفاصيل العنوان"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                        lineNumber: 442,
+                                        lineNumber: 579,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                lineNumber: 440,
+                                lineNumber: 577,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                            lineNumber: 439,
+                            lineNumber: 576,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3675,13 +3827,13 @@ const EditHouse = ()=>{
                                                 children: "*"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                                lineNumber: 454,
+                                                lineNumber: 591,
                                                 columnNumber: 28
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                        lineNumber: 453,
+                                        lineNumber: 590,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("textarea", {
@@ -3693,24 +3845,24 @@ const EditHouse = ()=>{
                                         placeholder: "ادخل وصف المنتج هنا"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                        lineNumber: 456,
+                                        lineNumber: 593,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                lineNumber: 452,
+                                lineNumber: 589,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                            lineNumber: 451,
+                            lineNumber: 588,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                    lineNumber: 317,
+                    lineNumber: 398,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
@@ -3721,7 +3873,7 @@ const EditHouse = ()=>{
                             children: "سعر المنتج"
                         }, void 0, false, {
                             fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                            lineNumber: 469,
+                            lineNumber: 606,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -3729,7 +3881,7 @@ const EditHouse = ()=>{
                             children: "حدد سعر الإعلان أو اختر إذا كان قابل للتفاوض، وسيساعد المستخدمين على معرفة القيمة بسهولة."
                         }, void 0, false, {
                             fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                            lineNumber: 470,
+                            lineNumber: 607,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3746,13 +3898,13 @@ const EditHouse = ()=>{
                                                 children: "*"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                                lineNumber: 477,
+                                                lineNumber: 614,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                        lineNumber: 475,
+                                        lineNumber: 612,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -3765,18 +3917,18 @@ const EditHouse = ()=>{
                                         placeholder: "ادخل سعر المنتج"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                        lineNumber: 479,
+                                        lineNumber: 616,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                lineNumber: 474,
+                                lineNumber: 611,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                            lineNumber: 473,
+                            lineNumber: 610,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3791,13 +3943,13 @@ const EditHouse = ()=>{
                                             children: "*"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                            lineNumber: 492,
+                                            lineNumber: 629,
                                             columnNumber: 25
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                    lineNumber: 491,
+                                    lineNumber: 628,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3816,20 +3968,20 @@ const EditHouse = ()=>{
                                                     className: "accent-cgreen"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                                    lineNumber: 496,
+                                                    lineNumber: 633,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                     children: "سعر قابل للتفاوض"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                                    lineNumber: 505,
+                                                    lineNumber: 642,
                                                     columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                            lineNumber: 495,
+                                            lineNumber: 632,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
@@ -3844,38 +3996,38 @@ const EditHouse = ()=>{
                                                     className: "accent-cgreen"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                                    lineNumber: 508,
+                                                    lineNumber: 645,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                     children: "سعر ثابت"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                                    lineNumber: 516,
+                                                    lineNumber: 653,
                                                     columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                            lineNumber: 507,
+                                            lineNumber: 644,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                    lineNumber: 494,
+                                    lineNumber: 631,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                            lineNumber: 490,
+                            lineNumber: 627,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                    lineNumber: 468,
+                    lineNumber: 605,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
@@ -3886,7 +4038,7 @@ const EditHouse = ()=>{
                             children: "تفاصيل المنزل"
                         }, void 0, false, {
                             fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                            lineNumber: 523,
+                            lineNumber: 660,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3904,13 +4056,13 @@ const EditHouse = ()=>{
                                                     children: "*"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                                    lineNumber: 527,
+                                                    lineNumber: 664,
                                                     columnNumber: 27
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                            lineNumber: 526,
+                                            lineNumber: 663,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
@@ -3929,7 +4081,7 @@ const EditHouse = ()=>{
                                                     children: "اختر العرض"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                                    lineNumber: 538,
+                                                    lineNumber: 675,
                                                     columnNumber: 17
                                                 }, this),
                                                 __TURBOPACK__imported__module__$5b$project$5d2f$app$2f28$public$292f$newpost$2f$components$2f$HouseForm$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["OFFER_TYPE_CHOICES"].map(([value, label])=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -3937,19 +4089,19 @@ const EditHouse = ()=>{
                                                         children: label
                                                     }, value, false, {
                                                         fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                                        lineNumber: 540,
+                                                        lineNumber: 677,
                                                         columnNumber: 19
                                                     }, this))
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                            lineNumber: 529,
+                                            lineNumber: 666,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                    lineNumber: 525,
+                                    lineNumber: 662,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3964,13 +4116,13 @@ const EditHouse = ()=>{
                                                     children: "*"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                                    lineNumber: 548,
+                                                    lineNumber: 685,
                                                     columnNumber: 27
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                            lineNumber: 547,
+                                            lineNumber: 684,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -3983,13 +4135,13 @@ const EditHouse = ()=>{
                                             min: 0
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                            lineNumber: 550,
+                                            lineNumber: 687,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                    lineNumber: 546,
+                                    lineNumber: 683,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4000,7 +4152,7 @@ const EditHouse = ()=>{
                                             children: "عدد غرف النوم"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                            lineNumber: 561,
+                                            lineNumber: 698,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -4012,13 +4164,13 @@ const EditHouse = ()=>{
                                             min: 0
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                            lineNumber: 562,
+                                            lineNumber: 699,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                    lineNumber: 560,
+                                    lineNumber: 697,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4029,7 +4181,7 @@ const EditHouse = ()=>{
                                             children: "عدد الحمامات"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                            lineNumber: 572,
+                                            lineNumber: 709,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -4041,13 +4193,13 @@ const EditHouse = ()=>{
                                             min: 0
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                            lineNumber: 573,
+                                            lineNumber: 710,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                    lineNumber: 571,
+                                    lineNumber: 708,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4062,13 +4214,13 @@ const EditHouse = ()=>{
                                                     children: "*"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                                    lineNumber: 584,
+                                                    lineNumber: 721,
                                                     columnNumber: 39
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                            lineNumber: 583,
+                                            lineNumber: 720,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -4081,13 +4233,13 @@ const EditHouse = ()=>{
                                             min: 0
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                            lineNumber: 586,
+                                            lineNumber: 723,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                    lineNumber: 582,
+                                    lineNumber: 719,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4098,7 +4250,7 @@ const EditHouse = ()=>{
                                             children: "متاح من تاريخ"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                            lineNumber: 597,
+                                            lineNumber: 734,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -4109,13 +4261,13 @@ const EditHouse = ()=>{
                                             className: "w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                            lineNumber: 598,
+                                            lineNumber: 735,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                    lineNumber: 596,
+                                    lineNumber: 733,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4126,7 +4278,7 @@ const EditHouse = ()=>{
                                             children: "سنة البناء"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                            lineNumber: 607,
+                                            lineNumber: 744,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -4139,19 +4291,19 @@ const EditHouse = ()=>{
                                             max: 2100
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                            lineNumber: 608,
+                                            lineNumber: 745,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                    lineNumber: 606,
+                                    lineNumber: 743,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                            lineNumber: 524,
+                            lineNumber: 661,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4165,7 +4317,7 @@ const EditHouse = ()=>{
                                             children: "نوع المنزل"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                            lineNumber: 622,
+                                            lineNumber: 759,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4182,31 +4334,31 @@ const EditHouse = ()=>{
                                                             className: "accent-cgreen"
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                                            lineNumber: 626,
+                                                            lineNumber: 763,
                                                             columnNumber: 21
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                             children: label
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                                            lineNumber: 634,
+                                                            lineNumber: 771,
                                                             columnNumber: 21
                                                         }, this)
                                                     ]
                                                 }, value, true, {
                                                     fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                                    lineNumber: 625,
+                                                    lineNumber: 762,
                                                     columnNumber: 19
                                                 }, this))
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                            lineNumber: 623,
+                                            lineNumber: 760,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                    lineNumber: 621,
+                                    lineNumber: 758,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4217,7 +4369,7 @@ const EditHouse = ()=>{
                                             children: "الأثاث"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                            lineNumber: 640,
+                                            lineNumber: 777,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4234,25 +4386,25 @@ const EditHouse = ()=>{
                                                             onChange: handleHouseInputChange
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                                            lineNumber: 644,
+                                                            lineNumber: 781,
                                                             columnNumber: 21
                                                         }, this),
                                                         label
                                                     ]
                                                 }, value, true, {
                                                     fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                                    lineNumber: 643,
+                                                    lineNumber: 780,
                                                     columnNumber: 19
                                                 }, this))
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                            lineNumber: 641,
+                                            lineNumber: 778,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                    lineNumber: 639,
+                                    lineNumber: 776,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4263,7 +4415,7 @@ const EditHouse = ()=>{
                                             children: "حالة المبنى"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                            lineNumber: 658,
+                                            lineNumber: 795,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4280,45 +4432,45 @@ const EditHouse = ()=>{
                                                             onChange: handleHouseInputChange
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                                            lineNumber: 662,
+                                                            lineNumber: 799,
                                                             columnNumber: 21
                                                         }, this),
                                                         label
                                                     ]
                                                 }, value, true, {
                                                     fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                                    lineNumber: 661,
+                                                    lineNumber: 798,
                                                     columnNumber: 19
                                                 }, this))
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                            lineNumber: 659,
+                                            lineNumber: 796,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                    lineNumber: 657,
+                                    lineNumber: 794,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                            lineNumber: 620,
+                            lineNumber: 757,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("hr", {
                             className: "mt-6 mb-3 text-clightgray"
                         }, void 0, false, {
                             fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                            lineNumber: 676,
+                            lineNumber: 813,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("hr", {
                             className: "mt-6 mb-3 text-clightgray"
                         }, void 0, false, {
                             fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                            lineNumber: 678,
+                            lineNumber: 815,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4334,18 +4486,18 @@ const EditHouse = ()=>{
                                             "معاينة",
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$search$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Search$3e$__["Search"], {}, void 0, false, {
                                                 fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                                lineNumber: 688,
+                                                lineNumber: 825,
                                                 columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                        lineNumber: 686,
+                                        lineNumber: 823,
                                         columnNumber: 13
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                    lineNumber: 681,
+                                    lineNumber: 818,
                                     columnNumber: 11
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -4356,40 +4508,41 @@ const EditHouse = ()=>{
                                         children: isPending ? "جارٍ النشر ..." : "إعادة نشر"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                        lineNumber: 696,
+                                        lineNumber: 833,
                                         columnNumber: 13
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                                    lineNumber: 692,
+                                    lineNumber: 829,
                                     columnNumber: 11
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                            lineNumber: 679,
+                            lineNumber: 816,
                             columnNumber: 9
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-                    lineNumber: 522,
+                    lineNumber: 659,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-            lineNumber: 260,
+            lineNumber: 341,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/app/(public)/editpost/editHouse/[id]/page.tsx",
-        lineNumber: 259,
+        lineNumber: 340,
         columnNumber: 5
     }, this);
 };
-_s(EditHouse, "dxwySp8RVviNSSRMsbyAYc4sgS4=", false, function() {
+_s(EditHouse, "blCY2zuSb7+iKwNCXvqY0eK8oxM=", false, function() {
     return [
+        __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$hook$2d$form$2f$dist$2f$index$2e$esm$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useForm"],
         __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useParams"],
         __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$lib$2f$postServices$2f$postQueries$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useGetHousePostId"],
         __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$lib$2f$postServices$2f$editPostMutation$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEditHouseForm"]

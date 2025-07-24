@@ -2417,6 +2417,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$sections$2f$categorie
 var __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$components$2f$ui$2f$SkeletonNotificationSettings$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/app/components/ui/SkeletonNotificationSettings.tsx [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$app$2f28$public$292f$newpost$2f$components$2f$ElectronicsForm$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/app/(public)/newpost/components/ElectronicsForm.tsx [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/image.js [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$hook$2d$form$2f$dist$2f$index$2e$esm$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/react-hook-form/dist/index.esm.mjs [app-client] (ecmascript)");
 ;
 var _s = __turbopack_context__.k.signature();
 "use client";
@@ -2431,14 +2432,80 @@ var _s = __turbopack_context__.k.signature();
 ;
 ;
 ;
+;
 const EditElectronics = ()=>{
     _s();
+    const { register, formState: {} } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$hook$2d$form$2f$dist$2f$index$2e$esm$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useForm"])({
+        defaultValues: {
+            gallery_images: []
+        }
+    });
     const params = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useParams"])();
     const id = params.id;
     const { data, isLoading } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$lib$2f$postServices$2f$postQueries$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useGetElectronicsPostId"])(id);
     const [notification, setNotification] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
     const editElectronicsForm = (0, __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$lib$2f$postServices$2f$editPostMutation$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEditElectronicForm"])(setNotification);
     const isPending = editElectronicsForm.isPending;
+    //////////////////////////////////////////////////
+    const inputRefs = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])([]);
+    const [galleryFiles, setGalleryFiles] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])([]);
+    const handleGalleryChange = (e, index)=>{
+        const file = e.target.files?.[0];
+        if (file) {
+            setGalleryFiles((prev)=>{
+                const updated = [
+                    ...prev
+                ];
+                updated[index] = file;
+                setFormData((prevForm)=>({
+                        ...prevForm,
+                        gallery: updated
+                    }));
+                return updated;
+            });
+        }
+    };
+    const handleRemoveImage = (index)=>{
+        setGalleryFiles((prev)=>{
+            const updated = prev.filter((_, i)=>i !== index);
+            setFormData((prevForm)=>({
+                    ...prevForm,
+                    gallery: updated
+                }));
+            return updated;
+        });
+    };
+    const handleAddNewGallerySlot = ()=>{
+        setGalleryFiles((prev)=>{
+            if (prev.length >= 10) return prev;
+            const updated = [
+                ...prev,
+                ""
+            ];
+            setFormData((prevForm)=>({
+                    ...prevForm,
+                    gallery: updated
+                }));
+            return updated;
+        });
+    };
+    const triggerFileInput = (index)=>{
+        inputRefs.current[index]?.click();
+    };
+    const convertURLtoFile = async (url)=>{
+        const response = await fetch(url);
+        const blob = await response.blob();
+        let name = url.split("/").pop() || "";
+        if (!/\.(jpg|jpeg|png|webp|gif)$/i.test(name)) {
+            name = `image-${Date.now()}.jpg`; // اسم افتراضي بامتداد مسموح
+        }
+        return new File([
+            blob
+        ], name, {
+            type: blob.type
+        });
+    };
+    //////////////////////////////////////////////////
     const [formData, setFormData] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])({
         category: "",
         subcategory: "",
@@ -2460,12 +2527,27 @@ const EditElectronics = ()=>{
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
         "EditElectronics.useEffect": ()=>{
             if (data) {
+                const galleryImages = data.gallery_images?.map({
+                    "EditElectronics.useEffect": (img)=>img.image
+                }["EditElectronics.useEffect"]) || [];
                 setFormData({
-                    ...data,
+                    category: data.category || "",
+                    subcategory: data.subcategory || "",
+                    title: data.title || "",
+                    description: data.description || "",
+                    price: data.price || "",
+                    price_type: data.price_type || "fixed",
+                    city: data.city || "",
+                    hood: data.hood || "",
+                    detailed_location: data.detailed_location || "",
+                    cover_image: data.cover_image || "",
+                    gallery: galleryImages,
+                    offer_type: data.offer_type || "sell",
                     electronics: {
                         ...data.electronics
                     }
                 });
+                setGalleryFiles(galleryImages);
                 setIsSearch(data.offer_type === "search");
             }
         }
@@ -2497,7 +2579,7 @@ const EditElectronics = ()=>{
                 offer_type: type
             }));
     };
-    const onSubmit = (e)=>{
+    const onSubmit = async (e)=>{
         e.preventDefault();
         if (!id) {
             setNotification({
@@ -2521,21 +2603,21 @@ const EditElectronics = ()=>{
         if (data.cover_image instanceof File) {
             form.append("cover_image", data.cover_image);
         }
-        if (data.gallery && data.gallery.length > 0) {
-            if (typeof globalThis.FileList !== "undefined" && data.gallery instanceof globalThis.FileList) {
-                Array.from(data.gallery).forEach((img)=>{
-                    form.append("gallery", img);
-                });
-            } else if (Array.isArray(data.gallery)) {
-                data.gallery.forEach((img)=>{
-                    if (img instanceof File) {
-                        form.append("gallery", img);
-                    } else if (typeof img === "string") {
-                        form.append("gallery", img);
-                    }
-                });
+        for (const img of formData.gallery || []){
+            if (img instanceof File) {
+                form.append("gallery", img);
+            } else if (typeof img === "string") {
+                const file = await convertURLtoFile(img);
+                form.append("gallery", file);
             }
         }
+        console.log("📋 Gallery content ");
+        const galleryItems = form.getAll("gallery");
+        galleryItems.forEach((item, index)=>{
+            if (item instanceof File) {
+                console.log(`[${index}]  ${item.name}`);
+            }
+        });
         // Electronics details
         const electronicsDetails = {
             status: data.electronics?.status
@@ -2560,16 +2642,11 @@ const EditElectronics = ()=>{
         return null;
     }
     ////////////////////////////////////////////////////////////////////////////////////////
-    //   if (data.cover_image instanceof File) {
-    //     form.append("cover_image", data.cover_image);
-    // }
     const inputRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(null);
     const [preview, setPreview] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
-    // لما تضغط على صندوق رفع الصورة يفتح اختيار الملفات
     const handleClick = ()=>{
         inputRef.current?.click();
     };
-    // لما تختار صورة جديدة يتم تحديث preview و formData.cover_image
     const handleImageChange = (e)=>{
         const files = e.target.files;
         if (files && files.length > 0) {
@@ -2581,7 +2658,6 @@ const EditElectronics = ()=>{
             setPreview(URL.createObjectURL(file));
         }
     };
-    // تحديث preview لو جت بيانات موجودة كسلسلة نصية (رابط صورة من السيرفر مثلا)
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
         "EditElectronics.useEffect": ()=>{
             if (formData.cover_image && typeof formData.cover_image === "string") {
@@ -2613,38 +2689,10 @@ const EditElectronics = ()=>{
                 }));
         }
     };
-    //   <div className="sm:ml-16">
-    //   <label className="block font-medium text-gray-700 mb-2">
-    //     صورة غلاف المنتج
-    //   </label>
-    //   <input
-    //     type="file"
-    //     accept="image/*"
-    //     ref={inputRef}
-    //     onChange={handleImageChange}
-    //     className="hidden"
-    //   />
-    //   <div
-    //     onClick={handleClick}
-    //     className="w-64 h-40 border-2 border-dashed border-cgreen rounded-lg flex items-center justify-center cursor-pointer bg-cwhite overflow-hidden"
-    //   >
-    //     {preview ? (
-    //       <Image
-    //         src={preview}
-    //         alt="preview"
-    //         width={256}
-    //         height={160}
-    //         className="object-cover w-full h-full"
-    //       />
-    //     ) : (
-    //       <span className="text-cgreen text-4xl">+</span>
-    //     )}
-    //   </div>
-    // </div>
     // ////////////////////////////////////////////////////////////////////
     if (isLoading) return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$app$2f$components$2f$ui$2f$SkeletonNotificationSettings$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {}, void 0, false, {
         fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
-        lineNumber: 246,
+        lineNumber: 290,
         columnNumber: 25
     }, this);
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2659,7 +2707,7 @@ const EditElectronics = ()=>{
                     onClose: ()=>setNotification(null)
                 }, void 0, false, {
                     fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
-                    lineNumber: 252,
+                    lineNumber: 296,
                     columnNumber: 11
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2670,7 +2718,7 @@ const EditElectronics = ()=>{
                             children: "تعديل إعلان الإلكترونيات"
                         }, void 0, false, {
                             fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
-                            lineNumber: 260,
+                            lineNumber: 304,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2684,7 +2732,7 @@ const EditElectronics = ()=>{
                                     children: "سياسة النشر"
                                 }, void 0, false, {
                                     fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
-                                    lineNumber: 265,
+                                    lineNumber: 309,
                                     columnNumber: 13
                                 }, this),
                                 " ",
@@ -2692,13 +2740,13 @@ const EditElectronics = ()=>{
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
-                            lineNumber: 263,
+                            lineNumber: 307,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
-                    lineNumber: 259,
+                    lineNumber: 303,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2709,14 +2757,14 @@ const EditElectronics = ()=>{
                             children: "تصنيف المنتج"
                         }, void 0, false, {
                             fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
-                            lineNumber: 273,
+                            lineNumber: 317,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("hr", {
                             className: "mb-6 text-clightgray"
                         }, void 0, false, {
                             fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
-                            lineNumber: 274,
+                            lineNumber: 318,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2734,13 +2782,13 @@ const EditElectronics = ()=>{
                                                     children: "*"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
-                                                    lineNumber: 279,
+                                                    lineNumber: 323,
                                                     columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
-                                            lineNumber: 277,
+                                            lineNumber: 321,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -2752,13 +2800,13 @@ const EditElectronics = ()=>{
                                             className: "w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
-                                            lineNumber: 281,
+                                            lineNumber: 325,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
-                                    lineNumber: 276,
+                                    lineNumber: 320,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2773,13 +2821,13 @@ const EditElectronics = ()=>{
                                                     children: "*"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
-                                                    lineNumber: 293,
+                                                    lineNumber: 337,
                                                     columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
-                                            lineNumber: 291,
+                                            lineNumber: 335,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -2791,25 +2839,25 @@ const EditElectronics = ()=>{
                                             className: "w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
-                                            lineNumber: 295,
+                                            lineNumber: 339,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
-                                    lineNumber: 290,
+                                    lineNumber: 334,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
-                            lineNumber: 275,
+                            lineNumber: 319,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
-                    lineNumber: 272,
+                    lineNumber: 316,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
@@ -2820,7 +2868,7 @@ const EditElectronics = ()=>{
                             children: "معلومات أساسية"
                         }, void 0, false, {
                             fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
-                            lineNumber: 308,
+                            lineNumber: 352,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2828,7 +2876,7 @@ const EditElectronics = ()=>{
                             children: "أدخل معلومات الإعلان الأساسية لتظهر بوضوح للمشترين، مثل العنوان والوصف العام والموقع."
                         }, void 0, false, {
                             fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
-                            lineNumber: 309,
+                            lineNumber: 353,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2843,13 +2891,13 @@ const EditElectronics = ()=>{
                                             children: "*"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
-                                            lineNumber: 316,
+                                            lineNumber: 360,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
-                                    lineNumber: 314,
+                                    lineNumber: 358,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2863,7 +2911,7 @@ const EditElectronics = ()=>{
                                             children: "أنا أعرض"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
-                                            lineNumber: 319,
+                                            lineNumber: 363,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$app$2f$components$2f$ui$2f$Button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
@@ -2874,19 +2922,19 @@ const EditElectronics = ()=>{
                                             children: "أنا أبحث"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
-                                            lineNumber: 327,
+                                            lineNumber: 371,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
-                                    lineNumber: 318,
+                                    lineNumber: 362,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
-                            lineNumber: 312,
+                            lineNumber: 356,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2904,13 +2952,13 @@ const EditElectronics = ()=>{
                                                     children: "*"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
-                                                    lineNumber: 340,
+                                                    lineNumber: 384,
                                                     columnNumber: 28
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
-                                            lineNumber: 339,
+                                            lineNumber: 383,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -2923,13 +2971,13 @@ const EditElectronics = ()=>{
                                             className: "w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
-                                            lineNumber: 342,
+                                            lineNumber: 386,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
-                                    lineNumber: 338,
+                                    lineNumber: 382,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2940,7 +2988,7 @@ const EditElectronics = ()=>{
                                             children: "صورة غلاف المنتج"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
-                                            lineNumber: 354,
+                                            lineNumber: 398,
                                             columnNumber: 3
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -2951,7 +2999,7 @@ const EditElectronics = ()=>{
                                             className: "hidden"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
-                                            lineNumber: 358,
+                                            lineNumber: 402,
                                             columnNumber: 3
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2965,59 +3013,131 @@ const EditElectronics = ()=>{
                                                 className: "object-cover w-full h-full"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
-                                                lineNumber: 371,
+                                                lineNumber: 415,
                                                 columnNumber: 7
                                             }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                 className: "text-cgreen text-4xl",
                                                 children: "+"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
-                                                lineNumber: 379,
+                                                lineNumber: 423,
                                                 columnNumber: 7
                                             }, this)
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
-                                            lineNumber: 366,
+                                            lineNumber: 410,
                                             columnNumber: 3
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
-                                    lineNumber: 353,
+                                    lineNumber: 397,
+                                    columnNumber: 13
+                                }, this),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                    type: "hidden",
+                                    ...register("gallery")
+                                }, void 0, false, {
+                                    fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
+                                    lineNumber: 429,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                     className: "sm:ml-16",
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                            className: "block font-medium text-gray-700",
+                                            className: "block font-medium text-gray-700 mb-2",
                                             children: "صور المنتج"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
-                                            lineNumber: 385,
+                                            lineNumber: 431,
                                             columnNumber: 15
                                         }, this),
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
-                                            type: "file",
-                                            multiple: true,
-                                            name: "gallery",
-                                            onChange: handleInputChange,
-                                            className: "w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
-                                        }, void 0, false, {
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                            className: "flex flex-wrap gap-4",
+                                            children: [
+                                                galleryFiles.map((img, index)=>{
+                                                    const previewUrl = img instanceof File ? URL.createObjectURL(img) : img;
+                                                    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                        className: "relative w-24 h-24 border-2 border-cgreen rounded-lg overflow-hidden cursor-pointer",
+                                                        children: [
+                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                                                type: "file",
+                                                                accept: "image/*",
+                                                                className: "hidden",
+                                                                onChange: (e)=>handleGalleryChange(e, index),
+                                                                ref: (el)=>{
+                                                                    inputRefs.current[index] = el;
+                                                                }
+                                                            }, void 0, false, {
+                                                                fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
+                                                                lineNumber: 444,
+                                                                columnNumber: 23
+                                                            }, this),
+                                                            previewUrl && previewUrl !== "" ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
+                                                                src: previewUrl,
+                                                                alt: `Gallery image ${index + 1}`,
+                                                                fill: true,
+                                                                style: {
+                                                                    objectFit: "cover"
+                                                                },
+                                                                onClick: ()=>triggerFileInput(index),
+                                                                onLoad: ()=>img instanceof File && URL.revokeObjectURL(previewUrl)
+                                                            }, void 0, false, {
+                                                                fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
+                                                                lineNumber: 454,
+                                                                columnNumber: 25
+                                                            }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                                onClick: ()=>triggerFileInput(index),
+                                                                className: "flex justify-center items-center w-full h-full text-cgreen text-4xl",
+                                                                children: "+"
+                                                            }, void 0, false, {
+                                                                fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
+                                                                lineNumber: 466,
+                                                                columnNumber: 25
+                                                            }, this),
+                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                                                type: "button",
+                                                                onClick: ()=>handleRemoveImage(index),
+                                                                className: "absolute top-0 right-0 bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center",
+                                                                children: "×"
+                                                            }, void 0, false, {
+                                                                fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
+                                                                lineNumber: 473,
+                                                                columnNumber: 23
+                                                            }, this)
+                                                        ]
+                                                    }, index, true, {
+                                                        fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
+                                                        lineNumber: 440,
+                                                        columnNumber: 21
+                                                    }, this);
+                                                }),
+                                                galleryFiles.length < 5 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                    onClick: handleAddNewGallerySlot,
+                                                    className: "w-24 h-24 border-2 border-dashed border-cgreen rounded-lg flex items-center justify-center cursor-pointer text-cgreen text-4xl",
+                                                    children: "+"
+                                                }, void 0, false, {
+                                                    fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
+                                                    lineNumber: 484,
+                                                    columnNumber: 19
+                                                }, this)
+                                            ]
+                                        }, void 0, true, {
                                             fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
-                                            lineNumber: 386,
+                                            lineNumber: 434,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
-                                    lineNumber: 384,
+                                    lineNumber: 430,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
-                            lineNumber: 337,
+                            lineNumber: 381,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3035,13 +3155,13 @@ const EditElectronics = ()=>{
                                                     children: "*"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
-                                                    lineNumber: 399,
+                                                    lineNumber: 500,
                                                     columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
-                                            lineNumber: 397,
+                                            lineNumber: 498,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
@@ -3059,7 +3179,7 @@ const EditElectronics = ()=>{
                                                     children: "اختر الإدخال"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
-                                                    lineNumber: 409,
+                                                    lineNumber: 510,
                                                     columnNumber: 17
                                                 }, this),
                                                 __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$signup$2f$step2$2f$syrianGovernorates$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["syrianGovernorates"].map((gov)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -3067,19 +3187,19 @@ const EditElectronics = ()=>{
                                                         children: gov.name
                                                     }, gov.value, false, {
                                                         fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
-                                                        lineNumber: 411,
+                                                        lineNumber: 512,
                                                         columnNumber: 19
                                                     }, this))
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
-                                            lineNumber: 401,
+                                            lineNumber: 502,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
-                                    lineNumber: 396,
+                                    lineNumber: 497,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3094,13 +3214,13 @@ const EditElectronics = ()=>{
                                                     children: "*"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
-                                                    lineNumber: 419,
+                                                    lineNumber: 520,
                                                     columnNumber: 25
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
-                                            lineNumber: 418,
+                                            lineNumber: 519,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -3112,19 +3232,19 @@ const EditElectronics = ()=>{
                                             placeholder: "المنطقة"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
-                                            lineNumber: 421,
+                                            lineNumber: 522,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
-                                    lineNumber: 417,
+                                    lineNumber: 518,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
-                            lineNumber: 395,
+                            lineNumber: 496,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3137,7 +3257,7 @@ const EditElectronics = ()=>{
                                         children: "تفاصيل العنوان"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
-                                        lineNumber: 433,
+                                        lineNumber: 534,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -3148,18 +3268,18 @@ const EditElectronics = ()=>{
                                         placeholder: "تفاصيل العنوان"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
-                                        lineNumber: 434,
+                                        lineNumber: 535,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
-                                lineNumber: 432,
+                                lineNumber: 533,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
-                            lineNumber: 431,
+                            lineNumber: 532,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3176,13 +3296,13 @@ const EditElectronics = ()=>{
                                                 children: "*"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
-                                                lineNumber: 446,
+                                                lineNumber: 547,
                                                 columnNumber: 28
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
-                                        lineNumber: 445,
+                                        lineNumber: 546,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("textarea", {
@@ -3194,24 +3314,24 @@ const EditElectronics = ()=>{
                                         placeholder: "ادخل وصف المنتج هنا"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
-                                        lineNumber: 448,
+                                        lineNumber: 549,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
-                                lineNumber: 444,
+                                lineNumber: 545,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
-                            lineNumber: 443,
+                            lineNumber: 544,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
-                    lineNumber: 307,
+                    lineNumber: 351,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
@@ -3222,7 +3342,7 @@ const EditElectronics = ()=>{
                             children: "سعر المنتج"
                         }, void 0, false, {
                             fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
-                            lineNumber: 461,
+                            lineNumber: 562,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -3230,7 +3350,7 @@ const EditElectronics = ()=>{
                             children: "حدد سعر الإعلان أو اختر إذا كان قابل للتفاوض، وسيساعد المستخدمين على معرفة القيمة بسهولة."
                         }, void 0, false, {
                             fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
-                            lineNumber: 462,
+                            lineNumber: 563,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3247,13 +3367,13 @@ const EditElectronics = ()=>{
                                                 children: "*"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
-                                                lineNumber: 469,
+                                                lineNumber: 570,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
-                                        lineNumber: 467,
+                                        lineNumber: 568,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -3266,18 +3386,18 @@ const EditElectronics = ()=>{
                                         placeholder: "ادخل سعر المنتج"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
-                                        lineNumber: 471,
+                                        lineNumber: 572,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
-                                lineNumber: 466,
+                                lineNumber: 567,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
-                            lineNumber: 465,
+                            lineNumber: 566,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3292,13 +3412,13 @@ const EditElectronics = ()=>{
                                             children: "*"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
-                                            lineNumber: 484,
+                                            lineNumber: 585,
                                             columnNumber: 25
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
-                                    lineNumber: 483,
+                                    lineNumber: 584,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3317,20 +3437,20 @@ const EditElectronics = ()=>{
                                                     className: "accent-cgreen"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
-                                                    lineNumber: 488,
+                                                    lineNumber: 589,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                     children: "سعر قابل للتفاوض"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
-                                                    lineNumber: 497,
+                                                    lineNumber: 598,
                                                     columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
-                                            lineNumber: 487,
+                                            lineNumber: 588,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
@@ -3345,38 +3465,38 @@ const EditElectronics = ()=>{
                                                     className: "accent-cgreen"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
-                                                    lineNumber: 500,
+                                                    lineNumber: 601,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                     children: "سعر ثابت"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
-                                                    lineNumber: 508,
+                                                    lineNumber: 609,
                                                     columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
-                                            lineNumber: 499,
+                                            lineNumber: 600,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
-                                    lineNumber: 486,
+                                    lineNumber: 587,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
-                            lineNumber: 482,
+                            lineNumber: 583,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
-                    lineNumber: 460,
+                    lineNumber: 561,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
@@ -3387,7 +3507,7 @@ const EditElectronics = ()=>{
                             children: "تفاصيل الإلكترونيات"
                         }, void 0, false, {
                             fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
-                            lineNumber: 515,
+                            lineNumber: 616,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3402,13 +3522,13 @@ const EditElectronics = ()=>{
                                             children: "*"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
-                                            lineNumber: 518,
+                                            lineNumber: 619,
                                             columnNumber: 27
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
-                                    lineNumber: 517,
+                                    lineNumber: 618,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3426,38 +3546,38 @@ const EditElectronics = ()=>{
                                                     className: "accent-cgreen"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
-                                                    lineNumber: 523,
+                                                    lineNumber: 624,
                                                     columnNumber: 19
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                     children: label
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
-                                                    lineNumber: 532,
+                                                    lineNumber: 633,
                                                     columnNumber: 19
                                                 }, this)
                                             ]
                                         }, value, true, {
                                             fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
-                                            lineNumber: 522,
+                                            lineNumber: 623,
                                             columnNumber: 17
                                         }, this))
                                 }, void 0, false, {
                                     fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
-                                    lineNumber: 520,
+                                    lineNumber: 621,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
-                            lineNumber: 516,
+                            lineNumber: 617,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("hr", {
                             className: "mt-6 mb-3 text-clightgray"
                         }, void 0, false, {
                             fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
-                            lineNumber: 537,
+                            lineNumber: 638,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3470,39 +3590,40 @@ const EditElectronics = ()=>{
                                     children: isPending ? "جارٍ التعديل ..." : "تعديل"
                                 }, void 0, false, {
                                     fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
-                                    lineNumber: 543,
+                                    lineNumber: 644,
                                     columnNumber: 15
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
-                                lineNumber: 539,
+                                lineNumber: 640,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
-                            lineNumber: 538,
+                            lineNumber: 639,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
-                    lineNumber: 514,
+                    lineNumber: 615,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
-            lineNumber: 250,
+            lineNumber: 294,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/app/(public)/editpost/editElectronics/[id]/page.tsx",
-        lineNumber: 249,
+        lineNumber: 293,
         columnNumber: 5
     }, this);
 };
-_s(EditElectronics, "bmJ0TpXbiOjXkjLXEuwSJkQyhEs=", false, function() {
+_s(EditElectronics, "52Jllc5kxYACYOJ23BdfUJMRGyA=", false, function() {
     return [
+        __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$hook$2d$form$2f$dist$2f$index$2e$esm$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useForm"],
         __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useParams"],
         __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$lib$2f$postServices$2f$postQueries$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useGetElectronicsPostId"],
         __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$lib$2f$postServices$2f$editPostMutation$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEditElectronicForm"]

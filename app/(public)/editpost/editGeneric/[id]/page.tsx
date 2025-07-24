@@ -13,10 +13,9 @@ import Image from "next/image";
 import { useForm } from "react-hook-form";
 
 const EditGeneric = () => {
-
   const {
     register,
-    formState: {  },
+    formState: {},
   } = useForm<GenericPostPayload>({
     defaultValues: {
       gallery_images: [], // تهيئة gallery كمصفوفة فارغة
@@ -28,26 +27,20 @@ const EditGeneric = () => {
 
   const getPostDetail = useGetGenericPostId(id);
   const { data, isLoading } = getPostDetail;
-  
+
   const [notification, setNotification] = useState<{
     message: string;
     type: "success" | "error";
   } | null>(null);
-  
+
   const editGenericForm = useEditGenericForm(setNotification);
   const isPending = editGenericForm.isPending;
-  
+
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
-  
-  const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
-  const [galleryFiles, setGalleryFiles] = useState<(File | string)[]>([]);
-  
-  // لما تضغط على صندوق رفع الصورة يفتح اختيار الملفات
-  const handleClick = () => {
+    const handleClick = () => {
     inputRef.current?.click();
   };
-  // لما تختار صورة جديدة يتم تحديث preview و formData.cover_image
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (files && files.length > 0) {
@@ -60,10 +53,9 @@ const EditGeneric = () => {
     }
   };
   
-
-
-  
-  // تحديث صورة في المعرض
+  const MAX_GALLERY_IMAGES = 7;
+  const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
+    const [galleryFiles, setGalleryFiles] = useState<(File | string)[]>([]);
   const handleGalleryChange = (
     e: React.ChangeEvent<HTMLInputElement>,
     index: number
@@ -73,53 +65,42 @@ const EditGeneric = () => {
       setGalleryFiles((prev) => {
         const updated = [...prev];
         updated[index] = file;
-        
+
         setFormData((prevForm) => ({
           ...prevForm,
           gallery: updated,
         }));
-        
+
         return updated;
       });
     }
   };
-  
-  
-  // Handler to remove image at index
   const handleRemoveImage = (index: number) => {
     setGalleryFiles((prev) => {
       const updated = prev.filter((_, i) => i !== index);
-      
       setFormData((prevForm) => ({
         ...prevForm,
         gallery: updated,
       }));
-      
       return updated;
     });
   };
-  
-  // Handler to add new empty slot (up to max 5)
   const handleAddNewGallerySlot = () => {
     setGalleryFiles((prev) => {
-      if (prev.length >= 5) return prev;
-      
+      if (prev.length >= MAX_GALLERY_IMAGES) return prev;
       const updated = [...prev, ""];
-      
       setFormData((prevForm) => ({
         ...prevForm,
         gallery: updated,
       }));
-      
+
       return updated;
     });
   };
-  
-  // فتح نافذة اختيار الملفات لصورة معينة
   const triggerFileInput = (index: number) => {
     inputRefs.current[index]?.click();
   };
-  
+
   const [formData, setFormData] = useState<Partial<GenericPostPayload>>({
     category: "",
     subcategory: "",
@@ -133,12 +114,12 @@ const EditGeneric = () => {
     cover_image: null,
     gallery: [],
   });
-  
+
   // تحديث الحقول بمجرد استلام البيانات
   useEffect(() => {
     if (data) {
       const galleryImages = data.gallery_images?.map((img) => img.image) || [];
-      
+
       setFormData({
         category: data.category || "",
         subcategory: data.subcategory || "",
@@ -157,15 +138,15 @@ const EditGeneric = () => {
       setIsSearch(data.offer_type === "search");
     }
   }, [data]);
-  
+
   const handleInputChange = (
     e: React.ChangeEvent<
-    HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
     >
   ) => {
     const { name, value, type } = e.target;
     const files = (e.target as HTMLInputElement).files;
-    
+
     if (type === "file") {
       if (name === "gallery") {
         setFormData((prev) => ({
@@ -185,9 +166,9 @@ const EditGeneric = () => {
       }));
     }
   };
-  
+
   const [isSearch, setIsSearch] = useState<boolean | undefined>(false);
-  
+
   // تحديث offer_type عند الضغط على الأزرار
   const handleOfferType = (type: "sell" | "search") => {
     setIsSearch(type === "search");
@@ -196,13 +177,28 @@ const EditGeneric = () => {
       offer_type: type,
     }));
   };
-  const afasfaf = data?.gallery_images;
+
+
+
+  const convertURLtoFile = async (url: string): Promise<File> => {
+    const response = await fetch(url);
+    const blob = await response.blob();
+  
+    let name = url.split("/").pop() || "";
+    if (!/\.(jpg|jpeg|png|webp|gif)$/i.test(name)) {
+      name = `image-${Date.now()}.jpg`; // اسم افتراضي بامتداد مسموح
+    }
+  
+    return new File([blob], name, { type: blob.type });
+  };
+  
+  
+
+
   // دالة الإرسال الصحيحة
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    console.log("hooooooooon ",afasfaf)
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const data = formData;
-    
     const form = new FormData();
     if (!id) {
       setNotification({ message: "معرف الإعلان غير صالح.", type: "error" });
@@ -218,23 +214,27 @@ const EditGeneric = () => {
     form.append("detailed_location", data.detailed_location ?? "");
 
     if (data.cover_image instanceof File) {
-        form.append("cover_image", data.cover_image);
+      form.append("cover_image", data.cover_image);
     }
 
-    if (formData.gallery && formData.gallery.length > 0) {
-      formData.gallery.forEach((img) => {
-        if (img instanceof File) {
-          form.append("gallery", img);
-        }
-      });
-    }
 
-    console.log("📋 Gallery content:");
+
+    for (const img of formData.gallery || []) {
+      if (img instanceof File) {
+        form.append("gallery", img);
+      } else if (typeof img === "string") {
+        const file = await convertURLtoFile(img);
+        form.append("gallery", file);
+      }
+    }
+    
+
+    console.log("📋 Gallery content ");
     const galleryItems = form.getAll("gallery");
     galleryItems.forEach((item, index) => {
       if (item instanceof File) {
         console.log(`[${index}]  ${item.name}`);
-      } 
+      }
     });
 
 
@@ -365,22 +365,10 @@ const EditGeneric = () => {
               </Button>
             </div>
           </div>
+          <span className="text-lg max-sm:text-sm border p-2 bg-cgreen text-cwhite rounded-md ">ملاحظة:   يوجد زر معاينة المنشور  في الأسفل</span>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-            <div className="sm:ml-16">
-              <label className="block font-medium text-gray-700">
-                اسم المنتج <span className="text-red-500 text-xl mr-1">*</span>
-              </label>
-              <input
-                required
-                name="title"
-                value={formData.title || ""}
-                onChange={handleInputChange}
-                type="text"
-                placeholder="اسم المنتج"
-                className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
-              />
-            </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-6">
+
 
             <div className="sm:ml-16">
               <label className="block font-medium text-gray-700 mb-2">
@@ -399,7 +387,7 @@ const EditGeneric = () => {
               {/* Upload Box */}
               <div
                 onClick={handleClick}
-                className="w-64 h-40 border-2 border-dashed border-cgreen rounded-lg flex items-center justify-center cursor-pointer bg-cwhite overflow-hidden"
+                className="w-[70%] max-sm:w-full h-52  border-2 border-dashed border-cgreen rounded-lg flex items-center justify-center cursor-pointer bg-cwhite overflow-hidden"
               >
                 {preview ? (
                   <Image
@@ -415,14 +403,12 @@ const EditGeneric = () => {
               </div>
             </div>
 
-
-            
             <input type="hidden" {...register("gallery")} />
-            <div className="sm:ml-16">
+            <div className="sm:ml-16  ">
               <label className="block font-medium text-gray-700 mb-2">
                 صور المنتج
               </label>
-              <div className="flex flex-wrap gap-4">
+              <div className="flex flex-wrap gap-2">
                 {galleryFiles.map((img, index) => {
                   const previewUrl =
                     img instanceof File ? URL.createObjectURL(img) : img;
@@ -430,7 +416,7 @@ const EditGeneric = () => {
                   return (
                     <div
                       key={index}
-                      className="relative w-24 h-24 border-2 border-cgreen rounded-lg overflow-hidden cursor-pointer"
+                      className="relative max-sm:w-32 w-24  h-24 border-2 border-cgreen rounded-lg overflow-hidden cursor-pointer"
                     >
                       <input
                         type="file"
@@ -471,7 +457,7 @@ const EditGeneric = () => {
                     </div>
                   );
                 })}
-                {galleryFiles.length < 5 && (
+                {galleryFiles.length < MAX_GALLERY_IMAGES && (
                   <div
                     onClick={handleAddNewGallerySlot}
                     className="w-24 h-24 border-2 border-dashed border-cgreen rounded-lg flex items-center justify-center cursor-pointer text-cgreen text-4xl"
@@ -481,12 +467,22 @@ const EditGeneric = () => {
                 )}
               </div>
             </div>
-
-
-
-
-
           </div>
+
+          <div className="sm:ml-16">
+              <label className="block font-medium text-gray-700">
+                اسم المنتج <span className="text-red-500 text-xl mr-1">*</span>
+              </label>
+              <input
+                required
+                name="title"
+                value={formData.title || ""}
+                onChange={handleInputChange}
+                type="text"
+                placeholder="اسم المنتج"
+                className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
+              />
+            </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
             <div className="sm:ml-16">
               <label className="block font-medium text-gray-700">

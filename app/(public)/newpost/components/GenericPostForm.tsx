@@ -66,8 +66,11 @@ export default function GenericPostForm({
   };
   // ------------------------------------------------------------------
 
+
+
   // GALLERY -------------------------------------------------
 
+  const MAX_GALLERY_IMAGES  = 7;
   // State for gallery files (images)
   const [galleryFiles, setGalleryFiles] = useState<(File | string)[]>([]);
 
@@ -101,7 +104,7 @@ export default function GenericPostForm({
   
   // Handler to add new empty slot (up to max 5)
   const handleAddNewGallerySlot = () => {
-    if (galleryFiles.length < 5) {
+    if (galleryFiles.length < MAX_GALLERY_IMAGES ) {
       setGalleryFiles((prev) => [...prev, ""]);
       setValue("gallery", [...galleryFiles, ""], {
         shouldValidate: true,
@@ -213,22 +216,12 @@ export default function GenericPostForm({
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-          <div className="sm:ml-16">
-            <label className="block font-medium text-gray-700">
-              اسم المنتج
-              <span className="text-red-500 text-xl mr-1">*</span>
-            </label>
-            <input
-              required
-              {...register("title")}
-              type="text"
-              placeholder="اسم المنتج"
-              className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
-            />
-          </div>
 
-          <div className="sm:ml-16">
+        <span className="text-lg max-sm:text-sm border p-2 bg-cgreen text-cwhite rounded-md ">ملاحظة:   يوجد زر معاينة المنشور  في الأسفل</span>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6 mt-6">
+              
+
+          <div className="sm:ml-16  ">
             <label className="block font-medium text-gray-700 mb-2">
               صورة غلاف المنتج
             </label>
@@ -245,8 +238,8 @@ export default function GenericPostForm({
             {/* Upload Box */}
             <div
               onClick={handleClick}
-              className="w-64 h-40 border-2 border-dashed border-cgreen rounded-lg flex items-center justify-center cursor-pointer bg-cwhite overflow-hidden"
-            >
+              className="w-[70%] max-sm:w-full h-52  border-2 border-dashed border-cgreen rounded-lg flex items-center justify-center cursor-pointer bg-cwhite overflow-hidden"
+              >
               {preview ? (
                 <Image
                   src={preview}
@@ -268,7 +261,7 @@ export default function GenericPostForm({
             <label className="block font-medium text-gray-700 mb-2">
               صور المنتج
             </label>
-            <div className="flex flex-wrap gap-4">
+            <div className="flex flex-wrap gap-4 ">
               {galleryFiles.map((img, index) => {
                 const previewUrl =
                   img instanceof File ? URL.createObjectURL(img) : img;
@@ -276,8 +269,8 @@ export default function GenericPostForm({
                 return (
                   <div
                     key={index}
-                    className="relative w-24 h-24 border-2 border-cgreen rounded-lg overflow-hidden cursor-pointer"
-                  >
+                    className="relative max-sm:w-32 w-24  h-24 border-2 border-cgreen rounded-lg overflow-hidden cursor-pointer"
+                    >
                     <input
                       type="file"
                       accept="image/*"
@@ -316,7 +309,7 @@ export default function GenericPostForm({
               })}
 
               {/* مربع إضافة صورة جديد إذا أقل من 5 صور */}
-              {galleryFiles.length < 5 && (
+              {galleryFiles.length < MAX_GALLERY_IMAGES  && (
                 <div
                   onClick={handleAddNewGallerySlot}
                   className="w-24 h-24 border-2 border-dashed border-cgreen rounded-lg flex items-center justify-center cursor-pointer text-cgreen text-4xl"
@@ -325,6 +318,19 @@ export default function GenericPostForm({
                 </div>
               )}
             </div>
+          </div>
+          <div className="sm:ml-16">
+            <label className="block font-medium text-gray-700">
+              اسم المنتج
+              <span className="text-red-500 text-xl mr-1">*</span>
+            </label>
+            <input
+              required
+              {...register("title")}
+              type="text"
+              placeholder="اسم المنتج"
+              className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
+            />
           </div>
 
           <div className="sm:ml-16">

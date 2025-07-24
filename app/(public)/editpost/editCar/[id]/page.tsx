@@ -12,8 +12,18 @@ import { Search } from "lucide-react";
 import Image from "next/image";
 import { useParams } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
+import { useForm } from "react-hook-form";
 
 const EditCar = () => {
+  const {
+    register,
+    formState: {},
+  } = useForm<CarPostPayload>({
+    defaultValues: {
+      gallery_images: [], // تهيئة gallery كمصفوفة فارغة
+    },
+  });
+
   const params = useParams();
   const id = params.id as string | undefined;
 
@@ -29,11 +39,56 @@ const EditCar = () => {
   const isPending = editCarForm.isPending;
 
 
+  const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
+  const [galleryFiles, setGalleryFiles] = useState<(File | string)[]>([]);
 
 
+const handleGalleryChange = (
+  e: React.ChangeEvent<HTMLInputElement>,
+  index: number
+) => {
+  const file = e.target.files?.[0];
+  if (file) {
+    setGalleryFiles((prev) => {
+      const updated = [...prev];
+      updated[index] = file;
+
+      setFormData((prevForm) => ({
+        ...prevForm,
+        gallery: updated,
+      }));
+
+      return updated;
+    });
+  }
+};
+const handleRemoveImage = (index: number) => {
+  setGalleryFiles((prev) => {
+    const updated = prev.filter((_, i) => i !== index);
+    setFormData((prevForm) => ({
+      ...prevForm,
+      gallery: updated,
+    }));
+    return updated;
+  });
+};
+const handleAddNewGallerySlot = () => {
+  setGalleryFiles((prev) => {
+    if (prev.length >= 10) return prev;
+    const updated = [...prev, ""];
+    setFormData((prevForm) => ({
+      ...prevForm,
+      gallery: updated,
+    }));
+
+    return updated;
+  });
+};
+const triggerFileInput = (index: number) => {
+  inputRefs.current[index]?.click();
+};
 
 
-  // عدل تعريف formData ليكون car: CarPostPayload['car'] | undefined
   const [formData, setFormData] = useState<Partial<CarPostPayload>>({
     category: "",
     subcategory: "",
@@ -49,9 +104,9 @@ const EditCar = () => {
     car: undefined,
   });
 
-  // تحديث الحقول بمجرد استلام البيانات
   useEffect(() => {
     if (data) {
+      const galleryImages = data.gallery_images?.map((img) => img.image) || [];
       setFormData({
         category: data.category || "",
         subcategory: data.subcategory || "",
@@ -63,16 +118,15 @@ const EditCar = () => {
         hood: data.hood || "",
         detailed_location: data.detailed_location || "",
         cover_image: data.cover_image || "",
-        gallery: data.gallery || [],
+        gallery: galleryImages,
         offer_type: data.offer_type || "sell",
         car: data.car || {},
       });
+      setGalleryFiles(galleryImages);
       setIsSearch(data.offer_type === "search");
     }
   }, [data]);
 
-
-  // --- أضف دالة تغيير لحقول تفاصيل السيارة مع إصلاحات linter النهائية ---
   const handleCarInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
@@ -126,7 +180,6 @@ const EditCar = () => {
 
   const [isSearch, setIsSearch] = useState<boolean | undefined>(false);
 
-  // تحديث offer_type عند الضغط على الأزرار
   const handleOfferType = (type: "sell" | "search") => {
     setIsSearch(type === "search");
     setFormData((prev) => ({
@@ -135,8 +188,12 @@ const EditCar = () => {
     }));
   };
 
+
+  
   // دالة الإرسال الصحيحة
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+
+    
     e.preventDefault();
     const data = formData;
     const form = new FormData();
@@ -156,10 +213,27 @@ const EditCar = () => {
     form.append("subcategory", data.subcategory ?? "");
     form.append("detailed_location", data.detailed_location ?? "");
 
-
     if (data.cover_image instanceof File) {
       form.append("cover_image", data.cover_image);
   }
+
+  for (const img of formData.gallery || []) {
+    if (img instanceof File) {
+      form.append("gallery", img);
+    } else if (typeof img === "string") {
+      const file = await convertURLtoFile(img);
+      form.append("gallery", file);
+    }
+  }
+  
+  console.log("📋 Gallery send from me");
+  const galleryItems = form.getAll("gallery");
+  galleryItems.forEach((item, index) => {
+    if (item instanceof File) {
+      console.log(`[${index}]  ${item.name}`);
+    }
+  });
+
 
     const carDetails = {
       fuel_type: data.car?.fuel_type,
@@ -210,9 +284,12 @@ const EditCar = () => {
     }
 
     editCarForm.mutate({ formData: form, id });
-  };
 
-  function getArabicName(input: string): string | null {
+
+    
+  };
+  
+ function getArabicName(input: string): string | null {
     for (const category of categories) {
       if (category.slug === input) {
         return category.name;
@@ -284,49 +361,18 @@ const EditCar = () => {
     }
   };
 
-
-//   <div className="sm:ml-16">
-//   <label className="block font-medium text-gray-700 mb-2">
-//     صورة غلاف المنتج
-//   </label>
-
-//   {/* Hidden File Input */}
-//   <input
-//     type="file"
-//     accept="image/*"
-//     ref={inputRef}
-//     onChange={handleImageChange}
-//     className="hidden"
-//   />
-
-//   {/* Upload Box */}
-//   <div
-//     onClick={handleClick}
-//     className="w-64 h-40 border-2 border-dashed border-cgreen rounded-lg flex items-center justify-center cursor-pointer bg-cwhite overflow-hidden"
-//   >
-//     {preview ? (
-//       <Image
-//         src={preview}
-//         alt="preview"
-//         width={256}
-//         height={160}
-//         className="object-cover w-full h-full"
-//       />
-//     ) : (
-//       <span className="text-cgreen text-4xl">+</span>
-//     )}
-//   </div>
-// </div>
-
-
-  // if (formData.gallery && formData.gallery.length > 0) {
-  //   formData.gallery.forEach((img) => {
-  //     if (img instanceof File) {
-  //       form.append("gallery", img);
-  //     }
-  //   });
-  // }
-
+  const convertURLtoFile = async (url: string): Promise<File> => {
+    const response = await fetch(url);
+    const blob = await response.blob();
+  
+    let name = url.split("/").pop() || "";
+    if (!/\.(jpg|jpeg|png|webp|gif)$/i.test(name)) {
+      name = `image-${Date.now()}.jpg`; // اسم افتراضي بامتداد مسموح
+    }
+  
+    return new File([blob], name, { type: blob.type });
+  };
+  
   // ////////////////////////////////////////////////////////////////////
 
 
@@ -482,18 +528,73 @@ const EditCar = () => {
             </div>
 
 
+            <input type="hidden" {...register("gallery")} />
             <div className="sm:ml-16">
-              <label className="block font-medium text-gray-700">
+              <label className="block font-medium text-gray-700 mb-2">
                 صور المنتج
               </label>
-              <input
-                type="file"
-                multiple
-                name="gallery"
-                onChange={handleInputChange}
-                className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
-              />
+              <div className="flex flex-wrap gap-4">
+                {galleryFiles.map((img, index) => {
+                  const previewUrl =
+                    img instanceof File ? URL.createObjectURL(img) : img;
+
+                  return (
+                    <div
+                      key={index}
+                      className="relative max-sm:w-32 w-24  h-24 border-2 border-cgreen rounded-lg overflow-hidden cursor-pointer"
+                    >
+                      <input
+                        type="file"
+                        accept="image/*"
+                        className="hidden"
+                        onChange={(e) => handleGalleryChange(e, index)}
+                        ref={(el) => {
+                          inputRefs.current[index] = el;
+                        }}
+                      />
+                      {previewUrl && previewUrl !== "" ? (
+                        <Image
+                          src={previewUrl}
+                          alt={`Gallery image ${index + 1}`}
+                          fill
+                          style={{ objectFit: "cover" }}
+                          onClick={() => triggerFileInput(index)}
+                          onLoad={() =>
+                            img instanceof File &&
+                            URL.revokeObjectURL(previewUrl)
+                          }
+                        />
+                      ) : (
+                        <div
+                          onClick={() => triggerFileInput(index)}
+                          className="flex justify-center items-center w-full h-full text-cgreen text-4xl"
+                        >
+                          +
+                        </div>
+                      )}
+                      <button
+                        type="button"
+                        onClick={() => handleRemoveImage(index)}
+                        className="absolute top-0 right-0 bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center"
+                      >
+                        ×
+                      </button>
+                    </div>
+                  );
+                })}
+                {galleryFiles.length < 5 && (
+                  <div
+                    onClick={handleAddNewGallerySlot}
+                    className="w-24 h-24 border-2 border-dashed border-cgreen rounded-lg flex items-center justify-center cursor-pointer text-cgreen text-4xl"
+                  >
+                    +
+                  </div>
+                )}
+              </div>
             </div>
+
+
+
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
             <div className="sm:ml-16">
