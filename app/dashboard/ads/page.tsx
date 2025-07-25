@@ -43,6 +43,7 @@ const AdsPage = () => {
               id={ad.id}
               subcat={ad.subcategory ?? ""}
               offer_type={ad.offer_type}
+              fav={ad.fav}
             />
           ))}
         </div>
