@@ -1,10 +1,11 @@
 "use client";
 
-import { FC } from "react";
+import { FC, useState } from "react";
 import { Heart, MapPin, Pencil } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import clsx from "clsx";
+import { useAddPostFav } from "@/app/lib/dashboardServices/dashboardMutation";
 
 type AdCardProps = {
   id: number;
@@ -17,6 +18,7 @@ type AdCardProps = {
   published?: "accepted" | "pending" | "declined";
   isFav: boolean;
   subcat: string;
+  fav: "added" | "removed"
 };
 
 const AdCard: FC<AdCardProps> = ({
@@ -29,7 +31,8 @@ const AdCard: FC<AdCardProps> = ({
   price,
   imageUrl,
   published,
-  isFav = false,
+  isFav ,
+  fav
 }) => {
   const status = {
     accepted: {
@@ -46,6 +49,8 @@ const AdCard: FC<AdCardProps> = ({
     },
   };
 
+  
+
   const currentStatus =
     published && status[published]
       ? status[published]
@@ -56,11 +61,11 @@ const AdCard: FC<AdCardProps> = ({
 
   function goToEdit() {
     if (subcat === "cars") {
-      return(`/editpost/editCar/${id}`);
+      return `/editpost/editCar/${id}`;
     } else if (subcat === "outdoor-space") {
-      return(`/editpost/editOutdoorspace/${id}`);
+      return `/editpost/editOutdoorspace/${id}`;
     } else if (subcat === "houses") {
-      return(`/editpost/editHouse/${id}`);
+      return `/editpost/editHouse/${id}`;
     } else if (
       subcat === "pc" ||
       subcat === "tablets" ||
@@ -70,16 +75,35 @@ const AdCard: FC<AdCardProps> = ({
       subcat === "audio_video_accessories" ||
       subcat === "parts_accessories"
     ) {
-      return(`/editpost/editElectronics/${id}`);
+      return `/editpost/editElectronics/${id}`;
     } else if (subcat === "mobiles") {
       console.log("why ", subcat);
-      return(`/editpost/editMobile/${id}`);
+      return `/editpost/editMobile/${id}`;
     } else if (subcat === "apartments") {
-      return(`/editpost/editApartment/${id}`);
+      return `/editpost/editApartment/${id}`;
     } else {
-      return(`/editpost/editGeneric/${id}`);
+      return `/editpost/editGeneric/${id}`;
     }
   }
+
+  const [isFavorite, setIsFavorite] = useState<string>(fav );
+  const addPostFavMutation = useAddPostFav();
+  function handleFavClick() {
+    addPostFavMutation.mutate(
+      { post_id: id },
+      {
+        onSuccess: (res) => {
+          setIsFavorite( res.status );
+          console.log("res= ", res.status ) 
+        },
+        onError: () => {
+          console.error("فشل في تحديث المفضلة");
+        },
+      }
+    );
+  }
+
+  console.log("FAV ", isFavorite , id);
 
   return (
     <div className="block h-64 ">
@@ -102,11 +126,19 @@ const AdCard: FC<AdCardProps> = ({
           )}
 
           {isFav && (
-            <Link
-              href="/FAVOURITES"
-              className="hover:bg-chgreen group absolute top-2 right-2 p-1.5 bg-white rounded-md shadow "            >
-              <Heart className="group-hover:text-white w-5 h-5 text-cdarkgray"/>
-            </Link>
+            <button
+              onClick={handleFavClick}
+              className={`absolute top-2 right-2 rounded-md  shadow group `}
+            >
+              <Heart
+                className={clsx(
+                  "w-8 h-8 transition-colors rounded-md p-1",
+                  isFavorite == "added" 
+                    ? "bg-cgreen text-white group-hover:bg-cwhite group-hover:text-cgreen"
+                    : "bg-cwhite text-cgreen group-hover:bg-cgreen group-hover:text-white"
+                )}
+              />
+            </button>
           )}
         </div>
 
@@ -116,7 +148,9 @@ const AdCard: FC<AdCardProps> = ({
             <div className="flex justify-between items-center">
               <h3 className="text-sm font-bold truncate">
                 {offer_type === "search" && (
-                  <span className="text-chgreen underline decoration-chgreen">{" أبحث عن"} </span>
+                  <span className="text-chgreen underline decoration-chgreen">
+                    {" أبحث عن"}{" "}
+                  </span>
                 )}
                 {title}
               </h3>

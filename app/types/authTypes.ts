@@ -55,6 +55,12 @@ export interface changePasswordDashType{
   new_password: string
 }
 
+export interface addPostFavType{
+  post_id: number;
+}
+
+
+
 export interface EmailNotificationsDashType{
   receive_private_messages: string,
   receive_activity_notifications: string
@@ -107,12 +113,13 @@ export type Ad = {
   price: string;
   status: 'accepted' | 'pending' | 'declined';
   cover_image: string;
-  subcategory: string;
-  user_first_name: string;
-  user_last_name: string;
-  user_city: string;
-  user_profile_image: string;
-  username: string;
+  subcategory?: string;
+  user_first_name?: string;
+  user_last_name?: string;
+  user_city?: string;
+  user_profile_image?: string;
+  username?: string;
+  fav: "added" | "removed"
 };
 
 

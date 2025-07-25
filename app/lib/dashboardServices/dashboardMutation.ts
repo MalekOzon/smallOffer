@@ -1,8 +1,36 @@
 import axios from "axios";
 import { extractMessages } from "../loginservices/mutations";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { changePasswordDash, deleteAccount, EmailNotificationsDash, feedbackEmail, setUserInfo } from "./dashboardApi";
-import { changePasswordDashType, deleteAccountType, EmailNotificationsDashType, feedbackEmailType } from "@/app/types/authTypes";
+import { addPostFav, changePasswordDash, deleteAccount, EmailNotificationsDash, feedbackEmail, setUserInfo } from "./dashboardApi";
+import {  addPostFavType, changePasswordDashType, deleteAccountType, EmailNotificationsDashType, feedbackEmailType } from "@/app/types/authTypes";
+// Hook
+export function useAddPostFav() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: ({  post_id }: addPostFavType) => addPostFav( post_id),
+
+    onMutate: () => {
+      console.log("جاري تنفيذ الإجراء...");
+    },
+
+    onError: () => {
+      console.log("حدث خطأ في المفضلة");
+    },
+
+    onSuccess: (data) => {
+      console.log(`تم ${data.status === "added" ? "إضافة" : "إزالة"} الإعلان إلى المفضلة`);
+    },
+
+    onSettled: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["accounts/dashboard/favorites"],
+      });
+    },
+  });
+}
+
+// ---------------------------------------------------------------------------------------------------------------------------
 
 
 // Change Password Dash

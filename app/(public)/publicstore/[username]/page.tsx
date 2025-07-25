@@ -8,7 +8,8 @@ import AdCard from "@/app/components/ui/AdCard";
 import userAvatar from "../../../../public/resourses/userAvatar.svg";
 import placeholderPost from "../../../../public/resourses/placeholderPost.svg";
 import type { Ad } from "@/app/types/authTypes";
-import { useGetPublicProfileInfo } from "@/app/lib/postServices/postQueries";
+import Link from "next/link";
+import { useGetPublicPage } from "@/app/lib/postServices/postQueries";
 
 const Star = ({ filled }: { filled: boolean }) => (
   <svg
@@ -18,6 +19,8 @@ const Star = ({ filled }: { filled: boolean }) => (
     fill={filled ? "#FFD600" : "#E0E0E0"}
     xmlns="http://www.w3.org/2000/svg"
     style={{ display: "inline" }}
+    role="img"
+    aria-label={filled ? "نجمة مملوءة" : "نجمة فارغة"}
   >
     <path d="M10 15.27L16.18 19l-1.64-7.03L20 7.24l-7.19-.61L10 0 7.19 6.63 0 7.24l5.46 4.73L3.82 19z" />
   </svg>
@@ -33,7 +36,9 @@ type PublicPost = {
   cover_image: string | null;
   subcategory: string;
   created_at: string;
+  fav: "added" | "removed";
 };
+
 type PublicUser = {
   first_name: string;
   last_name: string;
@@ -46,41 +51,55 @@ type PublicUser = {
 };
 
 const PublicStore = () => {
+  // استدعاء جميع الهوكات في أعلى المكون
   const params = useParams();
-  const username = params.username as string;
-  const pageSize = 8;
-
   const [page, setPage] = useState(1);
   const [allPosts, setAllPosts] = useState<PublicPost[]>([]);
   const [hasMore, setHasMore] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [user, setUser] = useState<PublicUser | null>(null);
 
-  const { data } = useGetPublicProfileInfo(username, page, pageSize);
+  const username = Array.isArray(params.username) ? params.username[0] : params.username;
+
+  // التحقق المبكر من username
+  const pageSize = 8;
+  const { data, error: postError, isLoading: isFetchingPosts } = useGetPublicPage(username!, page, pageSize);
+
+
   useEffect(() => {
     if (!data) return;
 
-    // إذا لم يكن هناك منشورات جديدة، لا تقم بأي تحديث
     if (!data.results.posts || data.results.posts.length === 0) {
       setHasMore(false);
       setIsLoading(false);
       return;
     }
 
+    // تحويل البيانات لتتوافق مع نوع PublicPost
+    const postsWithFav: PublicPost[] = data.results.posts.map((post) => ({
+      ...post,
+      fav: post.fav ? "added" : "removed", // تحويل boolean إلى "added" | "removed"
+    }));
+
     if (page === 1) {
-      setAllPosts(data.results.posts);
+      setAllPosts(postsWithFav);
     } else {
-      // دمج بدون تكرار حسب id
       setAllPosts((prev) => {
         const ids = new Set(prev.map((p) => p.id));
-        const newPosts = data.results.posts.filter((p) => !ids.has(p.id));
+        const newPosts = postsWithFav.filter((p) => !ids.has(p.id));
         return [...prev, ...newPosts];
       });
     }
-    setUser(data.results.user);
+    setUser(data.results.user || null);
     setHasMore(!!data.next);
     setIsLoading(false);
   }, [data, page]);
+
+  if (postError) {
+    return <div className="text-center text-red-500 py-12">حدث خطأ أثناء جلب البيانات. حاول مرة أخرى.</div>;
+  }
+
+  if (isFetchingPosts && page === 1) return <SkeletonNotificationSettings />;
 
   const mappedAds: Ad[] = allPosts.map((post) => ({
     id: post.id,
@@ -96,32 +115,31 @@ const PublicStore = () => {
     user_last_name: user?.last_name || "",
     user_city: user?.city || "",
     user_profile_image: user?.profile_image || "",
-    username: "",
+    username: username,
+    fav: post.fav,
   }));
 
   const rating = user?.average_rating || 0;
   const ratingCount = user?.rating_count || 0;
   const stars = Array.from({ length: 5 }, (_, i) => i < Math.round(rating));
 
-  if (isLoading && page === 1) return <SkeletonNotificationSettings />;
-
   return (
     <div className="w-full flex flex-col justify-between items-start px-8 py-6 gap-8 rtl">
       {/* User Info & Store Info */}
-      <div className="flex w-full max-md:flex-col justify-between gap-8 ">
+      <div className="flex w-full max-md:flex-col justify-between gap-8">
         {/* Right: User Info */}
-        <div className="flex max-md:flex-col items-center w-full md:w-1/2 gap-4  justify-center md:pr-10">
+        <div className="flex max-md:flex-col items-center w-full md:w-1/2 gap-4 justify-center md:pr-12">
           <div className="rounded-full overflow-hidden border-2 border-cgreen w-36 h-36 shrink-0">
             <Image
               src={user?.profile_image || userAvatar}
-              alt="profile image"
+              alt="صورة الملف الشخصي"
               width={128}
               height={128}
               className="object-cover w-full h-full"
             />
           </div>
-          <div className="flex flex-col justify-center md:text-right w-full md:mr-5 text-center ">
-            <div className="text-2xl font-bold  text-gray-700 mb-4">
+          <div className="flex flex-col justify-center md:text-right w-full md:mr-2 text-center">
+            <div className="text-2xl font-bold text-gray-700 mb-4">
               {user ? `${user.first_name} ${user.last_name}` : "---"}
             </div>
             <div className="flex items-center max-md:justify-center gap-1 mb-1">
@@ -137,7 +155,7 @@ const PublicStore = () => {
         </div>
 
         {/* Left: Store Info */}
-        <div className="shadow-xl rounded-xl  px-6 py-2 w-full md:w-[45%] md:ml-10 flex flex-col gap-6 border border-gray-100 bg-cwhite">
+        <div className="shadow-xl rounded-xl px-6 py-2 w-full md:w-[45%] md:ml-10 flex flex-col gap-6 border border-gray-100 bg-cwhite">
           <div className="flex items-center gap-2 text-gray-600 text-lg">
             <MapPin size={20} />
             <span className="text-xl">{user?.city || "---"}</span>
@@ -150,12 +168,14 @@ const PublicStore = () => {
           <div className="flex gap-3 mt-2">
             <button
               type="button"
+              aria-label="إبلاغ عن المتجر"
               className="flex-1 py-2 border border-cgreen text-cgreen rounded-md font-semibold hover:bg-cgreen hover:text-white transition"
             >
               إبلاغ
             </button>
             <button
               type="button"
+              aria-label="تقييم المتجر"
               className="flex-1 py-2 bg-cgreen text-white rounded-md font-semibold hover:bg-chgreen transition"
             >
               تقييم المتجر
@@ -163,17 +183,26 @@ const PublicStore = () => {
           </div>
         </div>
       </div>
+      <div className="md:hidden w-full">
+        <Link href="/contact">
+          <div className="w-full flex items-center justify-center bg-cgreen relative min-h-[150px]">
+            <p className="text-white text-xl font-bold whitespace-nowrap transform-origin-left">
+              تواصل معنا لعرض إعلانك هنا
+            </p>
+          </div>
+        </Link>
+      </div>
 
       {/* Bottom: Ads */}
       <div className="w-full flex-col flex h-full">
-        <div className="border-b  mb-4 border-clightgray text-xl text-gray-700">
-          الاعلانات المنشورة
+        <div className="border-b mb-4 border-cgreen text-xl font-bold text-cgreen">
+          الإعلانات المنشورة
         </div>
-        <div className="flex ">
+        <div className="flex">
           <div className="w-[85%] max-lg:w-[80%] max-md:w-full ml-1">
             {mappedAds.length > 0 ? (
               <div className="h-full rounded-md mb-10">
-                <div className="grid gap-4 grid-cols-2  lg:grid-cols-3 xl:grid-cols-4">
+                <div className="grid gap-4 grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                   {mappedAds.map((ad) => (
                     <AdCard
                       key={ad.id}
@@ -185,12 +214,12 @@ const PublicStore = () => {
                       isFav={true}
                       imageUrl={ad.cover_image}
                       id={ad.id}
-                      subcat={ad.subcategory}
+                      subcat={ad.subcategory ?? ""}
                       offer_type={ad.offer_type}
+                      fav={ad.fav}
                     />
                   ))}
                 </div>
-
                 {hasMore && mappedAds.length > 0 && (
                   <div className="text-center mt-6">
                     <button
@@ -212,12 +241,14 @@ const PublicStore = () => {
               </div>
             )}
           </div>
-
-          <div className="max-md:hidden w-[15%] max-lg:w-[20%] flex items-center justify-center bg-cgreen relative min-h-[330px]">
+          <Link
+            href="/contact"
+            className="max-md:hidden w-[15%] max-lg:w-[20%] flex items-center justify-center bg-cgreen relative min-h-[330px]"
+          >
             <p className="text-white text-xl font-bold whitespace-nowrap rotate-[-90deg] transform-origin-left">
               تواصل معنا لعرض إعلانك هنا
             </p>
-          </div>
+          </Link>
         </div>
       </div>
     </div>

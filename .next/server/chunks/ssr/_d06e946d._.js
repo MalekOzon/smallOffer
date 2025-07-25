@@ -152,6 +152,19 @@ const AdCard = ({ id, offer_type, subcat, title, description, city, price, image
             return `/editpost/editGeneric/${id}`;
         }
     }
+    function handleFavClick() {
+        addPostFavMutation.mutate({
+            post_id: id
+        }, {
+            onSuccess: (data)=>{
+                // تحديث حالة القلب بناءً على استجابة الـ API
+                setIsFavorite(data.status === "added");
+            },
+            onError: ()=>{
+                console.error("فشل في تحديث المفضلة");
+            }
+        });
+    }
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         className: "block h-64 ",
         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -169,12 +182,12 @@ const AdCard = ({ id, offer_type, subcat, title, description, city, price, image
                                 className: "object-cover"
                             }, void 0, false, {
                                 fileName: "[project]/app/components/ui/AdCard.tsx",
-                                lineNumber: 91,
+                                lineNumber: 110,
                                 columnNumber: 15
                             }, this) : null
                         }, void 0, false, {
                             fileName: "[project]/app/components/ui/AdCard.tsx",
-                            lineNumber: 89,
+                            lineNumber: 108,
                             columnNumber: 11
                         }, this),
                         !isFav && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -184,33 +197,33 @@ const AdCard = ({ id, offer_type, subcat, title, description, city, price, image
                                 className: "group-hover:text-white w-5 h-5 text-cdarkgray"
                             }, void 0, false, {
                                 fileName: "[project]/app/components/ui/AdCard.tsx",
-                                lineNumber: 100,
+                                lineNumber: 119,
                                 columnNumber: 15
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/app/components/ui/AdCard.tsx",
-                            lineNumber: 96,
+                            lineNumber: 115,
                             columnNumber: 13
                         }, this),
                         isFav && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
-                            href: "/FAVOURITES",
-                            className: "hover:bg-chgreen group absolute top-2 right-2 p-1.5 bg-white rounded-md shadow ",
+                            href: handleFavClick(),
+                            className: `hover:bg-chgreen group absolute top-2 right-2 p-1.5 bg-white rounded-md shadow `,
                             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$heart$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Heart$3e$__["Heart"], {
                                 className: "group-hover:text-white w-5 h-5 text-cdarkgray"
                             }, void 0, false, {
                                 fileName: "[project]/app/components/ui/AdCard.tsx",
-                                lineNumber: 108,
+                                lineNumber: 128,
                                 columnNumber: 15
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/app/components/ui/AdCard.tsx",
-                            lineNumber: 105,
+                            lineNumber: 124,
                             columnNumber: 13
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/components/ui/AdCard.tsx",
-                    lineNumber: 88,
+                    lineNumber: 107,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -232,14 +245,14 @@ const AdCard = ({ id, offer_type, subcat, title, description, city, price, image
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/app/components/ui/AdCard.tsx",
-                                                lineNumber: 119,
+                                                lineNumber: 139,
                                                 columnNumber: 19
                                             }, this),
                                             title
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/components/ui/AdCard.tsx",
-                                        lineNumber: 117,
+                                        lineNumber: 137,
                                         columnNumber: 15
                                     }, this),
                                     published && !isFav && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -247,13 +260,13 @@ const AdCard = ({ id, offer_type, subcat, title, description, city, price, image
                                         children: currentStatus.label
                                     }, void 0, false, {
                                         fileName: "[project]/app/components/ui/AdCard.tsx",
-                                        lineNumber: 124,
+                                        lineNumber: 146,
                                         columnNumber: 17
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/components/ui/AdCard.tsx",
-                                lineNumber: 116,
+                                lineNumber: 136,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -261,7 +274,7 @@ const AdCard = ({ id, offer_type, subcat, title, description, city, price, image
                                 children: description
                             }, void 0, false, {
                                 fileName: "[project]/app/components/ui/AdCard.tsx",
-                                lineNumber: 135,
+                                lineNumber: 157,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -274,20 +287,20 @@ const AdCard = ({ id, offer_type, subcat, title, description, city, price, image
                                                 className: "w-4 h-4"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/components/ui/AdCard.tsx",
-                                                lineNumber: 141,
+                                                lineNumber: 163,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                 children: city
                                             }, void 0, false, {
                                                 fileName: "[project]/app/components/ui/AdCard.tsx",
-                                                lineNumber: 142,
+                                                lineNumber: 164,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/components/ui/AdCard.tsx",
-                                        lineNumber: 140,
+                                        lineNumber: 162,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -295,35 +308,35 @@ const AdCard = ({ id, offer_type, subcat, title, description, city, price, image
                                         children: price.toLocaleString()
                                     }, void 0, false, {
                                         fileName: "[project]/app/components/ui/AdCard.tsx",
-                                        lineNumber: 144,
+                                        lineNumber: 166,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/components/ui/AdCard.tsx",
-                                lineNumber: 139,
+                                lineNumber: 161,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/components/ui/AdCard.tsx",
-                        lineNumber: 115,
+                        lineNumber: 135,
                         columnNumber: 11
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/app/components/ui/AdCard.tsx",
-                    lineNumber: 114,
+                    lineNumber: 134,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/app/components/ui/AdCard.tsx",
-            lineNumber: 86,
+            lineNumber: 105,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/app/components/ui/AdCard.tsx",
-        lineNumber: 85,
+        lineNumber: 104,
         columnNumber: 5
     }, this);
 };

@@ -958,6 +958,7 @@ var { g: global, __dirname, k: __turbopack_refresh__, m: module } = __turbopack_
 {
 __turbopack_context__.s({
     "EmailNotificationsDash": (()=>EmailNotificationsDash),
+    "addPostFav": (()=>addPostFav),
     "changePasswordDash": (()=>changePasswordDash),
     "deleteAccount": (()=>deleteAccount),
     "feedbackEmail": (()=>feedbackEmail),
@@ -969,6 +970,10 @@ __turbopack_context__.s({
 });
 var __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$lib$2f$loginservices$2f$api$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/app/lib/loginservices/api.ts [app-client] (ecmascript)");
 ;
+const addPostFav = async (post_id)=>{
+    const response = await __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$lib$2f$loginservices$2f$api$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].post(`accounts/favorites/${post_id}/toggle/`);
+    return response.data;
+};
 const changePasswordDash = async (data)=>{
     const response = await __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$lib$2f$loginservices$2f$api$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].post("accounts/dashboard/change-password/", data);
     return response.data;

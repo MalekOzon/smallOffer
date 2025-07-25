@@ -1219,13 +1219,13 @@ __turbopack_context__.s({
 });
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/server/route-modules/app-page/vendored/ssr/react-jsx-dev-runtime.js [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$hook$2d$form$2f$dist$2f$index$2e$esm$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/react-hook-form/dist/index.esm.mjs [app-ssr] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/server/route-modules/app-page/vendored/ssr/react.js [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$lib$2f$postServices$2f$postMutations$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/app/lib/postServices/postMutations.ts [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$signup$2f$step2$2f$syrianGovernorates$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/app/signup/step2/syrianGovernorates.ts [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$components$2f$ui$2f$Notification$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/app/components/ui/Notification.tsx [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$search$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Search$3e$__ = __turbopack_context__.i("[project]/node_modules/lucide-react/dist/esm/icons/search.js [app-ssr] (ecmascript) <export default as Search>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$components$2f$ui$2f$Button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/app/components/ui/Button.tsx [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/image.js [app-ssr] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/server/route-modules/app-page/vendored/ssr/react.js [app-ssr] (ecmascript)");
 ;
 ;
 ;
@@ -1321,7 +1321,7 @@ function MobileForm({ Gcategory, Gsubcategory }) {
     const createMobilePost = (0, __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$lib$2f$postServices$2f$postMutations$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useCreateMobilePost"])(setNotification);
     const { isPending: isLoading } = createMobilePost;
     const [accessoriesValue, setAccessoriesValue] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false);
-    ////////////////////////////////  // //////////////////////////////////////
+    // COVER IMAGE -------------------------------------------------
     const coverImage = watch("cover_image");
     const [preview, setPreview] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(null);
     const inputRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useRef"])(null);
@@ -1343,12 +1343,75 @@ function MobileForm({ Gcategory, Gsubcategory }) {
                 shouldValidate: true,
                 shouldDirty: true
             });
+            e.target.value = ""; // إعادة تعيين قيمة الـ input
         }
     };
     const handleClick = ()=>{
         inputRef.current?.click();
     };
-    ////////////////////////////////  // //////////////////////////////////////
+    // GALLERY -------------------------------------------------
+    const MAX_GALLERY_IMAGES = 7;
+    const [galleryFiles, setGalleryFiles] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])([]);
+    const inputRefs = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useRef"])([]);
+    const galleryInputRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useRef"])(null);
+    // دالة للتعامل مع تغيير الصور في المعرض
+    const handleGalleryChange = (e, index)=>{
+        const file = e.target.files?.[0];
+        if (file) {
+            setGalleryFiles((prev)=>{
+                const newGallery = [
+                    ...prev
+                ];
+                newGallery[index] = file;
+                setValue("gallery", newGallery, {
+                    shouldValidate: true,
+                    shouldDirty: true
+                });
+                return newGallery;
+            });
+            e.target.value = ""; // إعادة تعيين قيمة الـ input
+        }
+    };
+    // دالة لإزالة صورة من المعرض
+    const handleRemoveImage = (index)=>{
+        setGalleryFiles((prev)=>{
+            const newGallery = prev.filter((_, i)=>i !== index);
+            setValue("gallery", newGallery, {
+                shouldValidate: true,
+                shouldDirty: true
+            });
+            return newGallery;
+        });
+    };
+    // دالة لإضافة صورة جديدة
+    const handleNewGalleryImage = (e)=>{
+        const file = e.target.files?.[0];
+        if (file && galleryFiles.length < MAX_GALLERY_IMAGES) {
+            setGalleryFiles((prev)=>{
+                const newGallery = [
+                    ...prev,
+                    file
+                ];
+                setValue("gallery", newGallery, {
+                    shouldValidate: true,
+                    shouldDirty: true
+                });
+                return newGallery;
+            });
+            e.target.value = ""; // إعادة تعيين قيمة الـ input
+        }
+    };
+    // دالة لفتح نافذة اختيار الملفات
+    const handleAddNewGallerySlot = ()=>{
+        if (galleryFiles.length < MAX_GALLERY_IMAGES) {
+            galleryInputRef.current?.click();
+        }
+    };
+    // دالة لتحريك إدخال الصورة
+    const triggerFileInput = (index)=>{
+        inputRefs.current[index]?.click();
+    };
+    // -------------------------------------------------
     const [isSearch, setIsSearch] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false);
     const onSubmit = (data)=>{
         console.log("daTA: ", data);
@@ -1377,16 +1440,12 @@ function MobileForm({ Gcategory, Gsubcategory }) {
             accessories: data.mobile.accessories
         };
         formData.append("mobile_details", JSON.stringify(mobileDetails));
-        if (data.gallery && data.gallery.length > 0) {
-            if (typeof globalThis.FileList !== "undefined" && data.gallery instanceof globalThis.FileList) {
-                Array.from(data.gallery).forEach((img)=>{
+        if (galleryFiles && galleryFiles.length > 0) {
+            galleryFiles.forEach((img)=>{
+                if (img instanceof File) {
                     formData.append("gallery", img);
-                });
-            } else if (Array.isArray(data.gallery)) {
-                data.gallery.forEach((img)=>{
-                    formData.append("gallery", img);
-                });
-            }
+                }
+            });
         }
         createMobilePost.mutate(formData);
     };
@@ -1400,30 +1459,30 @@ function MobileForm({ Gcategory, Gsubcategory }) {
                 onClose: ()=>setNotification(null)
             }, void 0, false, {
                 fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                lineNumber: 160,
-                columnNumber: 7
+                lineNumber: 211,
+                columnNumber: 9
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
-                className: "bg-white rounded-2xl shadow-lg border border-gray-200 p-8 mb-6 ",
+                className: "bg-white rounded-2xl shadow-lg border border-gray-200 p-8 mb-6",
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
                         className: "font-bold text-xl text-gray-800 mb-2 text-right",
                         children: "معلومات أساسية"
                     }, void 0, false, {
                         fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                        lineNumber: 169,
-                        columnNumber: 7
+                        lineNumber: 220,
+                        columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                         className: "text-gray-600 mb-6 text-right",
                         children: "أدخل معلومات الإعلان الأساسية لتظهر بوضوح للمشترين، مثل العنوان والوصف العام والموقع."
                     }, void 0, false, {
                         fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                        lineNumber: 172,
-                        columnNumber: 7
+                        lineNumber: 223,
+                        columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: " mb-6 sm:ml-16 border-b border-clightgray",
+                        className: "mb-6 sm:ml-16 border-b border-clightgray",
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
                                 className: "font-medium mb-3 mt-6 text-lg text-gray-700",
@@ -1434,17 +1493,17 @@ function MobileForm({ Gcategory, Gsubcategory }) {
                                         children: "*"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                        lineNumber: 180,
-                                        columnNumber: 11
+                                        lineNumber: 231,
+                                        columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                lineNumber: 178,
-                                columnNumber: 9
+                                lineNumber: 229,
+                                columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                className: "w-full mt-2 max-w-sm  border-2 border-clightgray p-1.5 rounded-xl mb-6 flex",
+                                className: "w-full mt-2 max-w-sm border-2 border-clightgray p-1.5 rounded-xl mb-6 flex",
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$app$2f$components$2f$ui$2f$Button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
                                         type: "button",
@@ -1457,8 +1516,8 @@ function MobileForm({ Gcategory, Gsubcategory }) {
                                         children: "أنا أعرض"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                        lineNumber: 183,
-                                        columnNumber: 11
+                                        lineNumber: 234,
+                                        columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$app$2f$components$2f$ui$2f$Button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
                                         type: "button",
@@ -1471,62 +1530,32 @@ function MobileForm({ Gcategory, Gsubcategory }) {
                                         children: "أنا أبحث"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                        lineNumber: 194,
-                                        columnNumber: 11
+                                        lineNumber: 245,
+                                        columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                lineNumber: 182,
-                                columnNumber: 9
+                                lineNumber: 233,
+                                columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                        lineNumber: 176,
-                        columnNumber: 7
+                        lineNumber: 227,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                        className: "text-lg max-sm:text-sm border p-2 bg-cgreen text-cwhite rounded-md",
+                        children: "ملاحظة: يوجد زر معاينة المنشور في الأسفل"
+                    }, void 0, false, {
+                        fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
+                        lineNumber: 259,
+                        columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "grid grid-cols-1 md:grid-cols-2 gap-6 mb-6",
+                        className: "grid grid-cols-1 md:grid-cols-2 gap-6 my-6",
                         children: [
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                className: "sm:ml-16",
-                                children: [
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                        className: "block font-medium text-gray-700",
-                                        children: [
-                                            "اسم المنتج",
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                className: "text-red-500 text-xl mr-1",
-                                                children: "*"
-                                            }, void 0, false, {
-                                                fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                                lineNumber: 212,
-                                                columnNumber: 13
-                                            }, this)
-                                        ]
-                                    }, void 0, true, {
-                                        fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                        lineNumber: 210,
-                                        columnNumber: 11
-                                    }, this),
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
-                                        required: true,
-                                        ...register("title"),
-                                        type: "text",
-                                        placeholder: "اسم المنتج",
-                                        className: "w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
-                                    }, void 0, false, {
-                                        fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                        lineNumber: 214,
-                                        columnNumber: 11
-                                    }, this)
-                                ]
-                            }, void 0, true, {
-                                fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                lineNumber: 209,
-                                columnNumber: 9
-                            }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 className: "sm:ml-16",
                                 children: [
@@ -1535,8 +1564,8 @@ function MobileForm({ Gcategory, Gsubcategory }) {
                                         children: "صورة غلاف المنتج"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                        lineNumber: 225,
-                                        columnNumber: 1
+                                        lineNumber: 267,
+                                        columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
                                         type: "file",
@@ -1546,8 +1575,8 @@ function MobileForm({ Gcategory, Gsubcategory }) {
                                         className: "hidden"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                        lineNumber: 229,
-                                        columnNumber: 1
+                                        lineNumber: 270,
+                                        columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                         onClick: handleClick,
@@ -1560,53 +1589,167 @@ function MobileForm({ Gcategory, Gsubcategory }) {
                                             className: "object-cover w-full h-full"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                            lineNumber: 242,
-                                            columnNumber: 5
+                                            lineNumber: 282,
+                                            columnNumber: 17
                                         }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                             className: "text-cgreen text-4xl",
                                             children: "+"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                            lineNumber: 250,
-                                            columnNumber: 5
+                                            lineNumber: 290,
+                                            columnNumber: 17
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                        lineNumber: 237,
-                                        columnNumber: 1
+                                        lineNumber: 277,
+                                        columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                lineNumber: 224,
-                                columnNumber: 1
+                                lineNumber: 266,
+                                columnNumber: 11
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "sm:ml-16",
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
+                                        className: "block font-medium text-gray-700 mb-2",
+                                        children: "صور المنتج"
+                                    }, void 0, false, {
+                                        fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
+                                        lineNumber: 296,
+                                        columnNumber: 13
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                        className: "flex flex-wrap gap-4",
+                                        children: [
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                                type: "file",
+                                                accept: "image/*",
+                                                className: "hidden",
+                                                onChange: handleNewGalleryImage,
+                                                ref: galleryInputRef
+                                            }, void 0, false, {
+                                                fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
+                                                lineNumber: 300,
+                                                columnNumber: 15
+                                            }, this),
+                                            galleryFiles.map((img, index)=>{
+                                                const previewUrl = img instanceof File ? URL.createObjectURL(img) : img;
+                                                return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                    className: "relative max-sm:w-32 w-24 h-24 border-2 border-cgreen rounded-lg overflow-hidden cursor-pointer",
+                                                    children: [
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                                            type: "file",
+                                                            accept: "image/*",
+                                                            className: "hidden",
+                                                            onChange: (e)=>handleGalleryChange(e, index),
+                                                            ref: (el)=>{
+                                                                inputRefs.current[index] = el;
+                                                            }
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
+                                                            lineNumber: 316,
+                                                            columnNumber: 21
+                                                        }, this),
+                                                        previewUrl && img !== "" ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
+                                                            src: previewUrl,
+                                                            alt: `Gallery image ${index + 1}`,
+                                                            fill: true,
+                                                            style: {
+                                                                objectFit: "cover"
+                                                            },
+                                                            onClick: ()=>triggerFileInput(index),
+                                                            onLoad: ()=>img instanceof File && URL.revokeObjectURL(previewUrl)
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
+                                                            lineNumber: 326,
+                                                            columnNumber: 23
+                                                        }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                            onClick: ()=>triggerFileInput(index),
+                                                            className: "flex justify-center items-center w-full h-full text-cgreen text-4xl",
+                                                            children: "+"
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
+                                                            lineNumber: 337,
+                                                            columnNumber: 23
+                                                        }, this),
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                                            type: "button",
+                                                            onClick: ()=>handleRemoveImage(index),
+                                                            className: "absolute top-0 right-0 bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center",
+                                                            children: "×"
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
+                                                            lineNumber: 344,
+                                                            columnNumber: 21
+                                                        }, this)
+                                                    ]
+                                                }, index, true, {
+                                                    fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
+                                                    lineNumber: 312,
+                                                    columnNumber: 19
+                                                }, this);
+                                            }),
+                                            galleryFiles.length < MAX_GALLERY_IMAGES && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                onClick: handleAddNewGallerySlot,
+                                                className: "w-24 h-24 border-2 border-dashed border-cgreen rounded-lg flex items-center justify-center cursor-pointer text-cgreen text-4xl",
+                                                children: "+"
+                                            }, void 0, false, {
+                                                fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
+                                                lineNumber: 355,
+                                                columnNumber: 17
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
+                                        lineNumber: 299,
+                                        columnNumber: 13
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
+                                lineNumber: 295,
+                                columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 className: "sm:ml-16",
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                         className: "block font-medium text-gray-700",
-                                        children: "صور المنتج"
-                                    }, void 0, false, {
+                                        children: [
+                                            "اسم المنتج",
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                className: "text-red-500 text-xl mr-1",
+                                                children: "*"
+                                            }, void 0, false, {
+                                                fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
+                                                lineNumber: 367,
+                                                columnNumber: 15
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                        lineNumber: 257,
-                                        columnNumber: 11
+                                        lineNumber: 365,
+                                        columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
-                                        type: "file",
-                                        multiple: true,
-                                        ...register("gallery"),
+                                        required: true,
+                                        ...register("title"),
+                                        type: "text",
+                                        placeholder: "اسم المنتج",
                                         className: "w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                        lineNumber: 260,
-                                        columnNumber: 11
+                                        lineNumber: 369,
+                                        columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                lineNumber: 256,
-                                columnNumber: 9
+                                lineNumber: 364,
+                                columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 className: "sm:ml-16",
@@ -1620,19 +1763,19 @@ function MobileForm({ Gcategory, Gsubcategory }) {
                                                 children: "*"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                                lineNumber: 271,
-                                                columnNumber: 13
+                                                lineNumber: 380,
+                                                columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                        lineNumber: 269,
-                                        columnNumber: 11
+                                        lineNumber: 378,
+                                        columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
                                         required: true,
                                         ...register("city"),
-                                        className: "mt-1  w-full p-3 border-2 rounded-lg bg-cwhite text-gray-700 focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200",
+                                        className: "mt-1 w-full p-3 border-2 rounded-lg bg-cwhite text-gray-700 focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200",
                                         style: {
                                             borderColor: "#277F60"
                                         },
@@ -1642,28 +1785,28 @@ function MobileForm({ Gcategory, Gsubcategory }) {
                                                 children: "اختر الإدخال"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                                lineNumber: 281,
-                                                columnNumber: 13
+                                                lineNumber: 390,
+                                                columnNumber: 15
                                             }, this),
                                             __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$signup$2f$step2$2f$syrianGovernorates$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["syrianGovernorates"].map((gov)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
                                                     value: gov.value,
                                                     children: gov.name
                                                 }, gov.value, false, {
                                                     fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                                    lineNumber: 283,
-                                                    columnNumber: 15
+                                                    lineNumber: 392,
+                                                    columnNumber: 17
                                                 }, this))
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                        lineNumber: 273,
-                                        columnNumber: 11
+                                        lineNumber: 382,
+                                        columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                lineNumber: 268,
-                                columnNumber: 9
+                                lineNumber: 377,
+                                columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 className: "sm:ml-16",
@@ -1677,14 +1820,14 @@ function MobileForm({ Gcategory, Gsubcategory }) {
                                                 children: "*"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                                lineNumber: 293,
-                                                columnNumber: 13
+                                                lineNumber: 402,
+                                                columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                        lineNumber: 291,
-                                        columnNumber: 11
+                                        lineNumber: 400,
+                                        columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
                                         required: true,
@@ -1693,28 +1836,28 @@ function MobileForm({ Gcategory, Gsubcategory }) {
                                         placeholder: "المنطقة"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                        lineNumber: 295,
-                                        columnNumber: 11
+                                        lineNumber: 404,
+                                        columnNumber: 13
                                     }, this),
                                     errors.hood && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                         className: "text-red-600 text-sm mt-1",
                                         children: String(errors.hood.message)
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                        lineNumber: 302,
-                                        columnNumber: 13
+                                        lineNumber: 411,
+                                        columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                lineNumber: 290,
-                                columnNumber: 9
+                                lineNumber: 399,
+                                columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                        lineNumber: 208,
-                        columnNumber: 7
+                        lineNumber: 263,
+                        columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         className: "grid grid-cols-1 md:grid-cols-2 gap-6 mb-6 sm:ml-16",
@@ -1727,8 +1870,8 @@ function MobileForm({ Gcategory, Gsubcategory }) {
                                         children: "تفاصيل العنوان"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                        lineNumber: 310,
-                                        columnNumber: 11
+                                        lineNumber: 419,
+                                        columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
                                         ...register("detailed_location"),
@@ -1736,22 +1879,22 @@ function MobileForm({ Gcategory, Gsubcategory }) {
                                         placeholder: "تفاصيل العنوان"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                        lineNumber: 313,
-                                        columnNumber: 11
+                                        lineNumber: 422,
+                                        columnNumber: 13
                                     }, this),
                                     errors.detailed_location && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                         className: "text-red-600 text-sm mt-1",
                                         children: String(errors.detailed_location.message)
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                        lineNumber: 319,
-                                        columnNumber: 13
+                                        lineNumber: 428,
+                                        columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                lineNumber: 309,
-                                columnNumber: 9
+                                lineNumber: 418,
+                                columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 className: "flex flex-col gap-2 md:col-span-2",
@@ -1765,14 +1908,14 @@ function MobileForm({ Gcategory, Gsubcategory }) {
                                                 children: "*"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                                lineNumber: 327,
-                                                columnNumber: 13
+                                                lineNumber: 436,
+                                                columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                        lineNumber: 325,
-                                        columnNumber: 11
+                                        lineNumber: 434,
+                                        columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("textarea", {
                                         required: true,
@@ -1781,34 +1924,34 @@ function MobileForm({ Gcategory, Gsubcategory }) {
                                         placeholder: "ادخل وصف المنتج هنا"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                        lineNumber: 329,
-                                        columnNumber: 11
+                                        lineNumber: 438,
+                                        columnNumber: 13
                                     }, this),
                                     errors.description && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                         className: "text-red-600 text-sm mt-1",
                                         children: String(errors.description.message)
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                        lineNumber: 336,
-                                        columnNumber: 13
+                                        lineNumber: 445,
+                                        columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                lineNumber: 324,
-                                columnNumber: 9
+                                lineNumber: 433,
+                                columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                        lineNumber: 308,
-                        columnNumber: 7
+                        lineNumber: 417,
+                        columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                lineNumber: 168,
-                columnNumber: 5
+                lineNumber: 219,
+                columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
                 className: "bg-white rounded-2xl shadow-lg border border-gray-200 p-8",
@@ -1818,7 +1961,7 @@ function MobileForm({ Gcategory, Gsubcategory }) {
                         children: "سعر المنتج"
                     }, void 0, false, {
                         fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                        lineNumber: 346,
+                        lineNumber: 455,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1826,7 +1969,7 @@ function MobileForm({ Gcategory, Gsubcategory }) {
                         children: "حدد سعر الإعلان أو اختر إذا كان قابل للتفاوض، وسيساعد المستخدمين على معرفة القيمة بسهولة."
                     }, void 0, false, {
                         fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                        lineNumber: 349,
+                        lineNumber: 458,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1843,13 +1986,13 @@ function MobileForm({ Gcategory, Gsubcategory }) {
                                             children: "*"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                            lineNumber: 357,
+                                            lineNumber: 466,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                    lineNumber: 355,
+                                    lineNumber: 464,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -1860,18 +2003,18 @@ function MobileForm({ Gcategory, Gsubcategory }) {
                                     placeholder: "ادخل سعر المنتج"
                                 }, void 0, false, {
                                     fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                    lineNumber: 359,
+                                    lineNumber: 468,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                            lineNumber: 354,
+                            lineNumber: 463,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                        lineNumber: 353,
+                        lineNumber: 462,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1886,13 +2029,13 @@ function MobileForm({ Gcategory, Gsubcategory }) {
                                         children: "*"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                        lineNumber: 372,
+                                        lineNumber: 481,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                lineNumber: 370,
+                                lineNumber: 479,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1909,20 +2052,20 @@ function MobileForm({ Gcategory, Gsubcategory }) {
                                                 className: "accent-cgreen"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                                lineNumber: 376,
+                                                lineNumber: 485,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                 children: "سعر قابل للتفاوض"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                                lineNumber: 383,
+                                                lineNumber: 492,
                                                 columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                        lineNumber: 375,
+                                        lineNumber: 484,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
@@ -1935,38 +2078,38 @@ function MobileForm({ Gcategory, Gsubcategory }) {
                                                 className: "accent-cgreen"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                                lineNumber: 386,
+                                                lineNumber: 495,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                 children: "سعر ثابت"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                                lineNumber: 392,
+                                                lineNumber: 501,
                                                 columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                        lineNumber: 385,
+                                        lineNumber: 494,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                lineNumber: 374,
+                                lineNumber: 483,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                        lineNumber: 369,
+                        lineNumber: 478,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                lineNumber: 345,
+                lineNumber: 454,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
@@ -1977,7 +2120,7 @@ function MobileForm({ Gcategory, Gsubcategory }) {
                         children: "تفاصيل الموبايل"
                     }, void 0, false, {
                         fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                        lineNumber: 400,
+                        lineNumber: 509,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1995,13 +2138,13 @@ function MobileForm({ Gcategory, Gsubcategory }) {
                                                 children: "*"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                                lineNumber: 406,
+                                                lineNumber: 515,
                                                 columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                        lineNumber: 404,
+                                        lineNumber: 513,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -2011,13 +2154,13 @@ function MobileForm({ Gcategory, Gsubcategory }) {
                                         dir: "rtl"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                        lineNumber: 408,
+                                        lineNumber: 517,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                lineNumber: 403,
+                                lineNumber: 512,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2028,12 +2171,12 @@ function MobileForm({ Gcategory, Gsubcategory }) {
                                         children: "اللون"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                        lineNumber: 417,
+                                        lineNumber: 526,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
                                         ...register("mobile.color"),
-                                        className: "mt-1  w-full p-3 py-3.5 border-2 rounded-lg bg-cwhite text-gray-700 focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200",
+                                        className: "mt-1 w-full p-3 py-3.5 border-2 rounded-lg bg-cwhite text-gray-700 focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200",
                                         style: {
                                             borderColor: "#277F60"
                                         },
@@ -2044,7 +2187,7 @@ function MobileForm({ Gcategory, Gsubcategory }) {
                                                 children: "اختر اللون"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                                lineNumber: 426,
+                                                lineNumber: 535,
                                                 columnNumber: 15
                                             }, this),
                                             COLOR_CHOICES.map(([value, label])=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -2052,25 +2195,25 @@ function MobileForm({ Gcategory, Gsubcategory }) {
                                                     children: label
                                                 }, value, false, {
                                                     fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                                    lineNumber: 428,
+                                                    lineNumber: 537,
                                                     columnNumber: 17
                                                 }, this))
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                        lineNumber: 418,
+                                        lineNumber: 527,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                lineNumber: 416,
+                                lineNumber: 525,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                        lineNumber: 402,
+                        lineNumber: 511,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2088,13 +2231,13 @@ function MobileForm({ Gcategory, Gsubcategory }) {
                                                 children: "*"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                                lineNumber: 440,
+                                                lineNumber: 549,
                                                 columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                        lineNumber: 438,
+                                        lineNumber: 547,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2110,39 +2253,39 @@ function MobileForm({ Gcategory, Gsubcategory }) {
                                                         className: "accent-cgreen"
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                                        lineNumber: 449,
+                                                        lineNumber: 557,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                         children: label
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                                        lineNumber: 456,
+                                                        lineNumber: 564,
                                                         columnNumber: 19
                                                     }, this)
                                                 ]
                                             }, value, true, {
                                                 fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                                lineNumber: 445,
+                                                lineNumber: 553,
                                                 columnNumber: 17
                                             }, this))
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                        lineNumber: 443,
+                                        lineNumber: 551,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                lineNumber: 437,
+                                lineNumber: 546,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
-                                className: "font-medium mb-3 mt-6 ",
+                                className: "font-medium mb-3 mt-6",
                                 children: "الملحقات المتوفرة"
                             }, void 0, false, {
                                 fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                lineNumber: 463,
+                                lineNumber: 570,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2159,7 +2302,7 @@ function MobileForm({ Gcategory, Gsubcategory }) {
                                         children: "يوجد ملحقات"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                        lineNumber: 465,
+                                        lineNumber: 572,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$app$2f$components$2f$ui$2f$Button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -2173,34 +2316,35 @@ function MobileForm({ Gcategory, Gsubcategory }) {
                                         children: "لا يوجد ملحقات"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                        lineNumber: 476,
+                                        lineNumber: 583,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                lineNumber: 464,
+                                lineNumber: 571,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                        lineNumber: 436,
+                        lineNumber: 545,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("hr", {
                         className: "mt-6 mb-3 text-clightgray"
                     }, void 0, false, {
                         fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                        lineNumber: 490,
+                        lineNumber: 597,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         className: "flex justify-end max-sm:flex-col max-sm:justify-center max-sm:items-center max-sm:gap-4 mb-5",
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                type: "button" // تغيير إلى button لمنع إرسال النموذج
+                                ,
                                 onClick: ()=>window.location.href = "/perview",
-                                type: "submit",
                                 className: "mt-8 ml-6 max-sm:ml-0 text-white rounded",
                                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                     className: "flex items-center group outline-2 outline-cgreen text-gray-800 hover:bg-chgreen hover:outline-chgreen hover:text-cwhite py-3 px-12 max-sm:px-[55px] rounded text-xl transition-all duration-300",
@@ -2209,7 +2353,7 @@ function MobileForm({ Gcategory, Gsubcategory }) {
                                             className: "ml-1 text-cgreen group-hover:text-cwhite"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                            lineNumber: 499,
+                                            lineNumber: 606,
                                             columnNumber: 15
                                         }, this),
                                         " ",
@@ -2217,12 +2361,12 @@ function MobileForm({ Gcategory, Gsubcategory }) {
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                    lineNumber: 498,
+                                    lineNumber: 605,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                lineNumber: 493,
+                                lineNumber: 600,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -2233,30 +2377,30 @@ function MobileForm({ Gcategory, Gsubcategory }) {
                                     children: isLoading ? "جار النشر ..." : "نشر"
                                 }, void 0, false, {
                                     fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                    lineNumber: 509,
+                                    lineNumber: 616,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                                lineNumber: 505,
+                                lineNumber: 612,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                        lineNumber: 491,
+                        lineNumber: 598,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-                lineNumber: 399,
+                lineNumber: 508,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/app/(public)/newpost/components/MobileForm.tsx",
-        lineNumber: 154,
+        lineNumber: 205,
         columnNumber: 5
     }, this);
 }
@@ -2281,6 +2425,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$sections$2f$categorie
 var __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$components$2f$ui$2f$SkeletonNotificationSettings$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/app/components/ui/SkeletonNotificationSettings.tsx [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$app$2f28$public$292f$newpost$2f$components$2f$MobileForm$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/app/(public)/newpost/components/MobileForm.tsx [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/image.js [app-ssr] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$hook$2d$form$2f$dist$2f$index$2e$esm$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/react-hook-form/dist/index.esm.mjs [app-ssr] (ecmascript)");
 "use client";
 ;
 ;
@@ -2294,13 +2439,99 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$imag
 ;
 ;
 ;
+;
 const EditMobile = ()=>{
+    const { register, setValue, formState: {} } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$hook$2d$form$2f$dist$2f$index$2e$esm$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useForm"])({
+        defaultValues: {
+            gallery_images: []
+        }
+    });
     const params = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useParams"])();
     const id = params.id;
     const { data, isLoading } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$lib$2f$postServices$2f$postQueries$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useGetMobilePostId"])(id);
     const [notification, setNotification] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(null);
     const editMobileForm = (0, __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$lib$2f$postServices$2f$editPostMutation$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEditMobileForm"])(setNotification);
     const isPending = editMobileForm.isPending;
+    const inputRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useRef"])(null);
+    const [preview, setPreview] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(null);
+    const MAX_GALLERY_IMAGES = 7; // تماشياً مع EditGeneric
+    const inputRefs = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useRef"])([]);
+    const galleryInputRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useRef"])(null);
+    const [galleryFiles, setGalleryFiles] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])([]);
+    // دالة للتعامل مع تغيير صورة الغلاف
+    const handleImageChange = (e)=>{
+        const files = e.target.files;
+        if (files && files.length > 0) {
+            const file = files[0];
+            setFormData((prev)=>({
+                    ...prev,
+                    cover_image: file
+                }));
+            setPreview(URL.createObjectURL(file));
+            e.target.value = ""; // إعادة تعيين قيمة الـ input
+        }
+    };
+    // دالة للتعامل مع تغيير الصور في المعرض
+    const handleGalleryChange = (e, index)=>{
+        const file = e.target.files?.[0];
+        if (file) {
+            setGalleryFiles((prev)=>{
+                const updated = [
+                    ...prev
+                ];
+                updated[index] = file;
+                setValue("gallery", updated, {
+                    shouldValidate: true,
+                    shouldDirty: true
+                });
+                return updated;
+            });
+            e.target.value = ""; // إعادة تعيين قيمة الـ input
+        }
+    };
+    // دالة لإزالة صورة من المعرض
+    const handleRemoveImage = (index)=>{
+        setGalleryFiles((prev)=>{
+            const updated = prev.filter((_, i)=>i !== index);
+            setValue("gallery", updated, {
+                shouldValidate: true,
+                shouldDirty: true
+            });
+            return updated;
+        });
+    };
+    // دالة لإضافة صورة جديدة
+    const handleNewGalleryImage = (e)=>{
+        const file = e.target.files?.[0];
+        if (file && galleryFiles.length < MAX_GALLERY_IMAGES) {
+            setGalleryFiles((prev)=>{
+                const updated = [
+                    ...prev,
+                    file
+                ];
+                setValue("gallery", updated, {
+                    shouldValidate: true,
+                    shouldDirty: true
+                });
+                return updated;
+            });
+            e.target.value = ""; // إعادة تعيين قيمة الـ input
+        }
+    };
+    // دالة لفتح نافذة اختيار الملفات
+    const handleAddNewGallerySlot = ()=>{
+        if (galleryFiles.length < MAX_GALLERY_IMAGES) {
+            galleryInputRef.current?.click();
+        }
+    };
+    // دالة لتحريك إدخال الصورة
+    const triggerFileInput = (index)=>{
+        inputRefs.current[index]?.click();
+    };
+    // لما تضغط على صندوق رفع الصورة يفتح اختيار الملفات
+    const handleClick = ()=>{
+        inputRef.current?.click();
+    };
     const [formData, setFormData] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])({
         category: "",
         subcategory: "",
@@ -2325,18 +2556,41 @@ const EditMobile = ()=>{
     const [accessoriesValue, setAccessoriesValue] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false);
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
         if (data) {
+            const galleryImages = data.gallery_images?.map((img)=>img.image) || [];
             setFormData({
-                ...data,
+                category: data.category || "",
+                subcategory: data.subcategory || "",
+                title: data.title || "",
+                description: data.description || "",
+                price: data.price || "",
+                price_type: data.price_type || "fixed",
+                city: data.city || "",
+                hood: data.hood || "",
+                detailed_location: data.detailed_location || "",
+                cover_image: data.cover_image || "",
+                gallery: galleryImages,
+                offer_type: data.offer_type || "sell",
                 mobile: {
                     ...data.mobile
                 }
             });
+            setGalleryFiles(galleryImages);
             setIsSearch(data.offer_type === "search");
             setAccessoriesValue(data.mobile?.accessories ?? false);
+            if (data.cover_image && typeof data.cover_image === "string") {
+                setPreview(data.cover_image);
+            }
         }
     }, [
         data
     ]);
+    const handleInputChange = (e)=>{
+        const { name, value } = e.target;
+        setFormData((prev)=>({
+                ...prev,
+                [name]: value
+            }));
+    };
     const handleMobileInputChange = (e)=>{
         const { name, value, type } = e.target;
         const key = name.replace("mobile.", "");
@@ -2385,7 +2639,20 @@ const EditMobile = ()=>{
                 }
             }));
     };
-    const onSubmit = (e)=>{
+    const convertURLtoFile = async (url)=>{
+        const response = await fetch(url);
+        const blob = await response.blob();
+        let name = url.split("/").pop() || "";
+        if (!/\.(jpg|jpeg|png|webp|gif)$/i.test(name)) {
+            name = `image-${Date.now()}.jpg`;
+        }
+        return new File([
+            blob
+        ], name, {
+            type: blob.type
+        });
+    };
+    const onSubmit = async (e)=>{
         e.preventDefault();
         if (!id) {
             setNotification({
@@ -2409,21 +2676,21 @@ const EditMobile = ()=>{
         if (data.cover_image instanceof File) {
             form.append("cover_image", data.cover_image);
         }
-        if (data.gallery && data.gallery.length > 0) {
-            if (typeof globalThis.FileList !== "undefined" && data.gallery instanceof globalThis.FileList) {
-                Array.from(data.gallery).forEach((img)=>{
-                    form.append("gallery", img);
-                });
-            } else if (Array.isArray(data.gallery)) {
-                data.gallery.forEach((img)=>{
-                    if (img instanceof File) {
-                        form.append("gallery", img);
-                    } else if (typeof img === "string") {
-                        form.append("gallery", img);
-                    }
-                });
+        for (const img of galleryFiles){
+            if (img instanceof File) {
+                form.append("gallery", img);
+            } else if (typeof img === "string") {
+                const file = await convertURLtoFile(img);
+                form.append("gallery", file);
             }
         }
+        console.log("📋 Gallery content ");
+        const galleryItems = form.getAll("gallery");
+        galleryItems.forEach((item, index)=>{
+            if (item instanceof File) {
+                console.log(`[${index}]  ${item.name}`);
+            }
+        });
         // Mobile details
         const mobileDetails = {
             brand: data.mobile?.brand,
@@ -2450,59 +2717,9 @@ const EditMobile = ()=>{
         }
         return null;
     }
-    ////////////////////////////////////////////////////////////////////////////////////////
-    const inputRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useRef"])(null);
-    const [preview, setPreview] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(null);
-    // لما تضغط على صندوق رفع الصورة يفتح اختيار الملفات
-    const handleClick = ()=>{
-        inputRef.current?.click();
-    };
-    // لما تختار صورة جديدة يتم تحديث preview و formData.cover_image
-    const handleImageChange = (e)=>{
-        const files = e.target.files;
-        if (files && files.length > 0) {
-            const file = files[0];
-            setFormData((prev)=>({
-                    ...prev,
-                    cover_image: file
-                }));
-            setPreview(URL.createObjectURL(file));
-        }
-    };
-    // تحديث preview لو جت بيانات موجودة كسلسلة نصية (رابط صورة من السيرفر مثلا)
-    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
-        if (formData.cover_image && typeof formData.cover_image === "string") {
-            setPreview(formData.cover_image);
-        }
-    }, [
-        formData.cover_image
-    ]);
-    const handleInputChange = (e)=>{
-        const { name, value, type } = e.target;
-        const files = e.target.files;
-        if (type === "file") {
-            if (name === "gallery") {
-                setFormData((prev)=>({
-                        ...prev,
-                        [name]: files ? Array.from(files) : []
-                    }));
-            } else if (name === "cover_image") {
-                setFormData((prev)=>({
-                        ...prev,
-                        [name]: files && files.length > 0 ? files[0] : null
-                    }));
-            }
-        } else {
-            setFormData((prev)=>({
-                    ...prev,
-                    [name]: value
-                }));
-        }
-    };
-    // ////////////////////////////////////////////////////////////////////
     if (isLoading) return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$app$2f$components$2f$ui$2f$SkeletonNotificationSettings$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {}, void 0, false, {
         fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-        lineNumber: 247,
+        lineNumber: 323,
         columnNumber: 25
     }, this);
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2517,7 +2734,7 @@ const EditMobile = ()=>{
                     onClose: ()=>setNotification(null)
                 }, void 0, false, {
                     fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                    lineNumber: 253,
+                    lineNumber: 329,
                     columnNumber: 11
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2528,13 +2745,13 @@ const EditMobile = ()=>{
                             children: "تعديل إعلان الموبايل"
                         }, void 0, false, {
                             fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                            lineNumber: 261,
+                            lineNumber: 337,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                             className: "text-gray-600 flex justify-start max-sm:block",
                             children: [
-                                "بنشرك تعديلاتك فإنك توافق على ",
+                                "بنشرك تعديلاتك فإنك توافق على",
                                 " ",
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
                                     href: "#",
@@ -2542,7 +2759,7 @@ const EditMobile = ()=>{
                                     children: "سياسة النشر"
                                 }, void 0, false, {
                                     fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                                    lineNumber: 266,
+                                    lineNumber: 342,
                                     columnNumber: 13
                                 }, this),
                                 " ",
@@ -2550,13 +2767,13 @@ const EditMobile = ()=>{
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                            lineNumber: 264,
+                            lineNumber: 340,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                    lineNumber: 260,
+                    lineNumber: 336,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2567,14 +2784,14 @@ const EditMobile = ()=>{
                             children: "تصنيف المنتج"
                         }, void 0, false, {
                             fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                            lineNumber: 274,
+                            lineNumber: 353,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("hr", {
                             className: "mb-6 text-clightgray"
                         }, void 0, false, {
                             fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                            lineNumber: 275,
+                            lineNumber: 354,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2592,13 +2809,13 @@ const EditMobile = ()=>{
                                                     children: "*"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                                                    lineNumber: 280,
+                                                    lineNumber: 359,
                                                     columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                                            lineNumber: 278,
+                                            lineNumber: 357,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -2610,13 +2827,13 @@ const EditMobile = ()=>{
                                             className: "w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                                            lineNumber: 282,
+                                            lineNumber: 361,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                                    lineNumber: 277,
+                                    lineNumber: 356,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2631,13 +2848,13 @@ const EditMobile = ()=>{
                                                     children: "*"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                                                    lineNumber: 294,
+                                                    lineNumber: 373,
                                                     columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                                            lineNumber: 292,
+                                            lineNumber: 371,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -2649,25 +2866,25 @@ const EditMobile = ()=>{
                                             className: "w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                                            lineNumber: 296,
+                                            lineNumber: 375,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                                    lineNumber: 291,
+                                    lineNumber: 370,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                            lineNumber: 276,
+                            lineNumber: 355,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                    lineNumber: 273,
+                    lineNumber: 352,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
@@ -2678,7 +2895,7 @@ const EditMobile = ()=>{
                             children: "معلومات أساسية"
                         }, void 0, false, {
                             fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                            lineNumber: 309,
+                            lineNumber: 388,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2686,11 +2903,11 @@ const EditMobile = ()=>{
                             children: "أدخل معلومات الإعلان الأساسية لتظهر بوضوح للمشترين، مثل العنوان والوصف العام والموقع."
                         }, void 0, false, {
                             fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                            lineNumber: 310,
+                            lineNumber: 391,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            className: " mb-6 sm:ml-16 border-b border-clightgray",
+                            className: "mb-6 sm:ml-16 border-b border-clightgray",
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
                                     className: "font-medium mb-3 mt-6 text-lg text-gray-700",
@@ -2701,17 +2918,17 @@ const EditMobile = ()=>{
                                             children: "*"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                                            lineNumber: 317,
+                                            lineNumber: 399,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                                    lineNumber: 315,
+                                    lineNumber: 397,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "w-full mt-2 max-w-sm  border-2 border-clightgray p-1.5 rounded-xl mb-6 flex",
+                                    className: "w-full mt-2 max-w-sm border-2 border-clightgray p-1.5 rounded-xl mb-6 flex",
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$app$2f$components$2f$ui$2f$Button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
                                             type: "button",
@@ -2721,7 +2938,7 @@ const EditMobile = ()=>{
                                             children: "أنا أعرض"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                                            lineNumber: 320,
+                                            lineNumber: 402,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$app$2f$components$2f$ui$2f$Button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -2732,19 +2949,201 @@ const EditMobile = ()=>{
                                             children: "أنا أبحث"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                                            lineNumber: 328,
+                                            lineNumber: 410,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                                    lineNumber: 319,
+                                    lineNumber: 401,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                            lineNumber: 313,
+                            lineNumber: 395,
+                            columnNumber: 11
+                        }, this),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                            className: "text-lg max-sm:text-sm border p-2 bg-cgreen text-cwhite rounded-md",
+                            children: "ملاحظة: يوجد زر معاينة المنشور في الأسفل"
+                        }, void 0, false, {
+                            fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
+                            lineNumber: 422,
+                            columnNumber: 9
+                        }, this),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                            className: "grid grid-cols-1 md:grid-cols-2 gap-6 my-6",
+                            children: [
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                    className: "sm:ml-16",
+                                    children: [
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
+                                            className: "block font-medium text-gray-700 mb-2",
+                                            children: "صورة غلاف المنتج"
+                                        }, void 0, false, {
+                                            fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
+                                            lineNumber: 429,
+                                            columnNumber: 15
+                                        }, this),
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                            type: "file",
+                                            accept: "image/*",
+                                            ref: inputRef,
+                                            onChange: handleImageChange,
+                                            className: "hidden"
+                                        }, void 0, false, {
+                                            fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
+                                            lineNumber: 432,
+                                            columnNumber: 15
+                                        }, this),
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                            onClick: handleClick,
+                                            className: "w-[70%] max-sm:w-full h-52 border-2 border-dashed border-cgreen rounded-lg flex items-center justify-center cursor-pointer bg-cwhite overflow-hidden",
+                                            children: preview ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
+                                                src: preview,
+                                                alt: "preview",
+                                                width: 256,
+                                                height: 160,
+                                                className: "object-cover w-full h-full"
+                                            }, void 0, false, {
+                                                fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
+                                                lineNumber: 444,
+                                                columnNumber: 19
+                                            }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                className: "text-cgreen text-4xl",
+                                                children: "+"
+                                            }, void 0, false, {
+                                                fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
+                                                lineNumber: 452,
+                                                columnNumber: 19
+                                            }, this)
+                                        }, void 0, false, {
+                                            fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
+                                            lineNumber: 439,
+                                            columnNumber: 15
+                                        }, this)
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
+                                    lineNumber: 428,
+                                    columnNumber: 13
+                                }, this),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                    type: "hidden",
+                                    ...register("gallery")
+                                }, void 0, false, {
+                                    fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
+                                    lineNumber: 457,
+                                    columnNumber: 13
+                                }, this),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                    className: "sm:ml-16",
+                                    children: [
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
+                                            className: "block font-medium text-gray-700 mb-2",
+                                            children: "صور المنتج"
+                                        }, void 0, false, {
+                                            fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
+                                            lineNumber: 459,
+                                            columnNumber: 15
+                                        }, this),
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                            className: "flex flex-wrap gap-2",
+                                            children: [
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                                    type: "file",
+                                                    accept: "image/*",
+                                                    className: "hidden",
+                                                    onChange: handleNewGalleryImage,
+                                                    ref: galleryInputRef
+                                                }, void 0, false, {
+                                                    fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
+                                                    lineNumber: 463,
+                                                    columnNumber: 17
+                                                }, this),
+                                                galleryFiles.map((img, index)=>{
+                                                    const previewUrl = img instanceof File ? URL.createObjectURL(img) : img;
+                                                    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                        className: "relative max-sm:w-32 w-24 h-24 border-2 border-cgreen rounded-lg overflow-hidden cursor-pointer",
+                                                        children: [
+                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                                                type: "file",
+                                                                accept: "image/*",
+                                                                className: "hidden",
+                                                                onChange: (e)=>handleGalleryChange(e, index),
+                                                                ref: (el)=>{
+                                                                    inputRefs.current[index] = el;
+                                                                }
+                                                            }, void 0, false, {
+                                                                fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
+                                                                lineNumber: 479,
+                                                                columnNumber: 23
+                                                            }, this),
+                                                            previewUrl && previewUrl !== "" ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
+                                                                src: previewUrl,
+                                                                alt: `Gallery image ${index + 1}`,
+                                                                fill: true,
+                                                                style: {
+                                                                    objectFit: "cover"
+                                                                },
+                                                                onClick: ()=>triggerFileInput(index),
+                                                                onLoad: ()=>img instanceof File && URL.revokeObjectURL(previewUrl)
+                                                            }, void 0, false, {
+                                                                fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
+                                                                lineNumber: 489,
+                                                                columnNumber: 25
+                                                            }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                                onClick: ()=>triggerFileInput(index),
+                                                                className: "flex justify-center items-center w-full h-full text-cgreen text-4xl",
+                                                                children: "+"
+                                                            }, void 0, false, {
+                                                                fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
+                                                                lineNumber: 501,
+                                                                columnNumber: 25
+                                                            }, this),
+                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                                                type: "button",
+                                                                onClick: ()=>handleRemoveImage(index),
+                                                                className: "absolute top-0 right-0 bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center",
+                                                                children: "×"
+                                                            }, void 0, false, {
+                                                                fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
+                                                                lineNumber: 508,
+                                                                columnNumber: 23
+                                                            }, this)
+                                                        ]
+                                                    }, index, true, {
+                                                        fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
+                                                        lineNumber: 475,
+                                                        columnNumber: 21
+                                                    }, this);
+                                                }),
+                                                galleryFiles.length < MAX_GALLERY_IMAGES && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                    onClick: handleAddNewGallerySlot,
+                                                    className: "w-24 h-24 border-2 border-dashed border-cgreen rounded-lg flex items-center justify-center cursor-pointer text-cgreen text-4xl",
+                                                    children: "+"
+                                                }, void 0, false, {
+                                                    fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
+                                                    lineNumber: 519,
+                                                    columnNumber: 19
+                                                }, this)
+                                            ]
+                                        }, void 0, true, {
+                                            fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
+                                            lineNumber: 462,
+                                            columnNumber: 15
+                                        }, this)
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
+                                    lineNumber: 458,
+                                    columnNumber: 13
+                                }, this)
+                            ]
+                        }, void 0, true, {
+                            fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
+                            lineNumber: 425,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2762,13 +3161,13 @@ const EditMobile = ()=>{
                                                     children: "*"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                                                    lineNumber: 341,
+                                                    lineNumber: 532,
                                                     columnNumber: 28
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                                            lineNumber: 340,
+                                            lineNumber: 531,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -2781,106 +3180,15 @@ const EditMobile = ()=>{
                                             className: "w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                                            lineNumber: 343,
+                                            lineNumber: 534,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                                    lineNumber: 339,
-                                    columnNumber: 13
+                                    lineNumber: 530,
+                                    columnNumber: 11
                                 }, this),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "sm:ml-16",
-                                    children: [
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                            className: "block font-medium text-gray-700 mb-2",
-                                            children: "صورة غلاف المنتج"
-                                        }, void 0, false, {
-                                            fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                                            lineNumber: 355,
-                                            columnNumber: 3
-                                        }, this),
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
-                                            type: "file",
-                                            accept: "image/*",
-                                            ref: inputRef,
-                                            onChange: handleImageChange,
-                                            className: "hidden"
-                                        }, void 0, false, {
-                                            fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                                            lineNumber: 359,
-                                            columnNumber: 3
-                                        }, this),
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                            onClick: handleClick,
-                                            className: "w-64 h-40 border-2 border-dashed border-cgreen rounded-lg flex items-center justify-center cursor-pointer bg-cwhite overflow-hidden",
-                                            children: preview ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
-                                                src: preview,
-                                                alt: "preview",
-                                                width: 256,
-                                                height: 160,
-                                                className: "object-cover w-full h-full"
-                                            }, void 0, false, {
-                                                fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                                                lineNumber: 372,
-                                                columnNumber: 7
-                                            }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                className: "text-cgreen text-4xl",
-                                                children: "+"
-                                            }, void 0, false, {
-                                                fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                                                lineNumber: 380,
-                                                columnNumber: 7
-                                            }, this)
-                                        }, void 0, false, {
-                                            fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                                            lineNumber: 367,
-                                            columnNumber: 3
-                                        }, this)
-                                    ]
-                                }, void 0, true, {
-                                    fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                                    lineNumber: 354,
-                                    columnNumber: 13
-                                }, this),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "sm:ml-16",
-                                    children: [
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                            className: "block font-medium text-gray-700",
-                                            children: "صور المنتج"
-                                        }, void 0, false, {
-                                            fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                                            lineNumber: 386,
-                                            columnNumber: 15
-                                        }, this),
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
-                                            type: "file",
-                                            multiple: true,
-                                            name: "gallery",
-                                            onChange: handleInputChange,
-                                            className: "w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
-                                        }, void 0, false, {
-                                            fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                                            lineNumber: 387,
-                                            columnNumber: 15
-                                        }, this)
-                                    ]
-                                }, void 0, true, {
-                                    fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                                    lineNumber: 385,
-                                    columnNumber: 13
-                                }, this)
-                            ]
-                        }, void 0, true, {
-                            fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                            lineNumber: 338,
-                            columnNumber: 11
-                        }, this),
-                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            className: "grid grid-cols-1 md:grid-cols-2 gap-6 mb-6",
-                            children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                     className: "sm:ml-16",
                                     children: [
@@ -2893,13 +3201,13 @@ const EditMobile = ()=>{
                                                     children: "*"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                                                    lineNumber: 400,
+                                                    lineNumber: 547,
                                                     columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                                            lineNumber: 398,
+                                            lineNumber: 545,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
@@ -2907,7 +3215,7 @@ const EditMobile = ()=>{
                                             name: "city",
                                             value: formData.city || "",
                                             onChange: handleInputChange,
-                                            className: "mt-1  w-full p-3 border-2 rounded-lg bg-cwhite text-gray-700 focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200",
+                                            className: "mt-1 w-full p-3 border-2 rounded-lg bg-cwhite text-gray-700 focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200",
                                             style: {
                                                 borderColor: "#277F60"
                                             },
@@ -2917,7 +3225,7 @@ const EditMobile = ()=>{
                                                     children: "اختر الإدخال"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                                                    lineNumber: 410,
+                                                    lineNumber: 557,
                                                     columnNumber: 17
                                                 }, this),
                                                 __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$signup$2f$step2$2f$syrianGovernorates$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["syrianGovernorates"].map((gov)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -2925,19 +3233,19 @@ const EditMobile = ()=>{
                                                         children: gov.name
                                                     }, gov.value, false, {
                                                         fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                                                        lineNumber: 412,
+                                                        lineNumber: 559,
                                                         columnNumber: 19
                                                     }, this))
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                                            lineNumber: 402,
+                                            lineNumber: 549,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                                    lineNumber: 397,
+                                    lineNumber: 544,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2952,13 +3260,13 @@ const EditMobile = ()=>{
                                                     children: "*"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                                                    lineNumber: 420,
+                                                    lineNumber: 567,
                                                     columnNumber: 25
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                                            lineNumber: 419,
+                                            lineNumber: 566,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -2970,19 +3278,19 @@ const EditMobile = ()=>{
                                             placeholder: "المنطقة"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                                            lineNumber: 422,
+                                            lineNumber: 569,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                                    lineNumber: 418,
+                                    lineNumber: 565,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                            lineNumber: 396,
+                            lineNumber: 529,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2995,7 +3303,7 @@ const EditMobile = ()=>{
                                         children: "تفاصيل العنوان"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                                        lineNumber: 434,
+                                        lineNumber: 581,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -3006,18 +3314,18 @@ const EditMobile = ()=>{
                                         placeholder: "تفاصيل العنوان"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                                        lineNumber: 435,
+                                        lineNumber: 584,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                                lineNumber: 433,
+                                lineNumber: 580,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                            lineNumber: 432,
+                            lineNumber: 579,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3034,13 +3342,13 @@ const EditMobile = ()=>{
                                                 children: "*"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                                                lineNumber: 447,
+                                                lineNumber: 596,
                                                 columnNumber: 28
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                                        lineNumber: 446,
+                                        lineNumber: 595,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("textarea", {
@@ -3052,24 +3360,24 @@ const EditMobile = ()=>{
                                         placeholder: "ادخل وصف المنتج هنا"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                                        lineNumber: 449,
+                                        lineNumber: 598,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                                lineNumber: 445,
+                                lineNumber: 594,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                            lineNumber: 444,
+                            lineNumber: 593,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                    lineNumber: 308,
+                    lineNumber: 387,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
@@ -3080,7 +3388,7 @@ const EditMobile = ()=>{
                             children: "سعر المنتج"
                         }, void 0, false, {
                             fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                            lineNumber: 462,
+                            lineNumber: 611,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -3088,7 +3396,7 @@ const EditMobile = ()=>{
                             children: "حدد سعر الإعلان أو اختر إذا كان قابل للتفاوض، وسيساعد المستخدمين على معرفة القيمة بسهولة."
                         }, void 0, false, {
                             fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                            lineNumber: 463,
+                            lineNumber: 614,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3105,13 +3413,13 @@ const EditMobile = ()=>{
                                                 children: "*"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                                                lineNumber: 470,
+                                                lineNumber: 622,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                                        lineNumber: 468,
+                                        lineNumber: 620,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -3124,18 +3432,18 @@ const EditMobile = ()=>{
                                         placeholder: "ادخل سعر المنتج"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                                        lineNumber: 472,
+                                        lineNumber: 624,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                                lineNumber: 467,
+                                lineNumber: 619,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                            lineNumber: 466,
+                            lineNumber: 618,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3150,13 +3458,13 @@ const EditMobile = ()=>{
                                             children: "*"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                                            lineNumber: 485,
+                                            lineNumber: 637,
                                             columnNumber: 25
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                                    lineNumber: 484,
+                                    lineNumber: 636,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3175,20 +3483,20 @@ const EditMobile = ()=>{
                                                     className: "accent-cgreen"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                                                    lineNumber: 489,
+                                                    lineNumber: 641,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                     children: "سعر قابل للتفاوض"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                                                    lineNumber: 498,
+                                                    lineNumber: 650,
                                                     columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                                            lineNumber: 488,
+                                            lineNumber: 640,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
@@ -3203,38 +3511,38 @@ const EditMobile = ()=>{
                                                     className: "accent-cgreen"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                                                    lineNumber: 501,
+                                                    lineNumber: 653,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                     children: "سعر ثابت"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                                                    lineNumber: 509,
+                                                    lineNumber: 661,
                                                     columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                                            lineNumber: 500,
+                                            lineNumber: 652,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                                    lineNumber: 487,
+                                    lineNumber: 639,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                            lineNumber: 483,
+                            lineNumber: 635,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                    lineNumber: 461,
+                    lineNumber: 610,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
@@ -3245,7 +3553,7 @@ const EditMobile = ()=>{
                             children: "تفاصيل الموبايل"
                         }, void 0, false, {
                             fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                            lineNumber: 516,
+                            lineNumber: 668,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3257,19 +3565,20 @@ const EditMobile = ()=>{
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                             className: "block font-medium text-gray-700",
                                             children: [
-                                                "أدخل ماركة الموبايل ",
+                                                "أدخل ماركة الموبايل",
+                                                " ",
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                     className: "text-red-500 text-xl mr-1",
                                                     children: "*"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                                                    lineNumber: 520,
-                                                    columnNumber: 37
+                                                    lineNumber: 673,
+                                                    columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                                            lineNumber: 519,
+                                            lineNumber: 671,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -3281,13 +3590,13 @@ const EditMobile = ()=>{
                                             dir: "rtl"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                                            lineNumber: 522,
+                                            lineNumber: 675,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                                    lineNumber: 518,
+                                    lineNumber: 670,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3298,14 +3607,14 @@ const EditMobile = ()=>{
                                             children: "اللون"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                                            lineNumber: 532,
+                                            lineNumber: 685,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
                                             name: "mobile.color",
                                             value: formData.mobile?.color || "",
                                             onChange: handleMobileInputChange,
-                                            className: "mt-1  w-full p-3 py-3.5 border-2 rounded-lg bg-cwhite text-gray-700 focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200",
+                                            className: "mt-1 w-full p-3 py-3.5 border-2 rounded-lg bg-cwhite text-gray-700 focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200",
                                             style: {
                                                 borderColor: "#277F60"
                                             },
@@ -3316,7 +3625,7 @@ const EditMobile = ()=>{
                                                     children: "اختر اللون"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                                                    lineNumber: 541,
+                                                    lineNumber: 694,
                                                     columnNumber: 17
                                                 }, this),
                                                 __TURBOPACK__imported__module__$5b$project$5d2f$app$2f28$public$292f$newpost$2f$components$2f$MobileForm$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["COLOR_CHOICES"].map(([value, label])=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -3324,25 +3633,25 @@ const EditMobile = ()=>{
                                                         children: label
                                                     }, value, false, {
                                                         fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                                                        lineNumber: 543,
+                                                        lineNumber: 696,
                                                         columnNumber: 19
                                                     }, this))
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                                            lineNumber: 533,
+                                            lineNumber: 686,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                                    lineNumber: 531,
+                                    lineNumber: 684,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                            lineNumber: 517,
+                            lineNumber: 669,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3360,13 +3669,13 @@ const EditMobile = ()=>{
                                                     children: "*"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                                                    lineNumber: 553,
+                                                    lineNumber: 706,
                                                     columnNumber: 29
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                                            lineNumber: 552,
+                                            lineNumber: 705,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3384,39 +3693,39 @@ const EditMobile = ()=>{
                                                             className: "accent-cgreen"
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                                                            lineNumber: 558,
+                                                            lineNumber: 714,
                                                             columnNumber: 21
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                             children: label
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                                                            lineNumber: 567,
+                                                            lineNumber: 723,
                                                             columnNumber: 21
                                                         }, this)
                                                     ]
                                                 }, value, true, {
                                                     fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                                                    lineNumber: 557,
+                                                    lineNumber: 710,
                                                     columnNumber: 19
                                                 }, this))
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                                            lineNumber: 555,
+                                            lineNumber: 708,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                                    lineNumber: 551,
+                                    lineNumber: 704,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
-                                    className: "font-medium mb-3 mt-6 ",
+                                    className: "font-medium mb-3 mt-6",
                                     children: "الملحقات المتوفرة"
                                 }, void 0, false, {
                                     fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                                    lineNumber: 573,
+                                    lineNumber: 729,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3430,7 +3739,7 @@ const EditMobile = ()=>{
                                             children: "يوجد ملحقات"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                                            lineNumber: 575,
+                                            lineNumber: 731,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$app$2f$components$2f$ui$2f$Button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -3441,66 +3750,85 @@ const EditMobile = ()=>{
                                             children: "لا يوجد ملحقات"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                                            lineNumber: 583,
+                                            lineNumber: 739,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                                    lineNumber: 574,
+                                    lineNumber: 730,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                            lineNumber: 550,
+                            lineNumber: 703,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("hr", {
                             className: "mt-6 mb-3 text-clightgray"
                         }, void 0, false, {
                             fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                            lineNumber: 593,
+                            lineNumber: 749,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                             className: "flex justify-end max-sm:flex-col max-sm:justify-center max-sm:items-center max-sm:gap-4 mb-5",
-                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                type: "submit",
-                                className: "mt-8 ml-6 max-sm:ml-0 text-white rounded",
-                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                    className: "bg-cgreen hover:bg-chgreen py-3 px-32 max-md:px-20 rounded text-xl transition-all duration-300",
-                                    children: isPending ? "جارٍ التعديل ..." : "تعديل"
+                            children: [
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                    type: "button",
+                                    onClick: ()=>window.location.href = "/preview",
+                                    className: "mt-8 ml-6 max-sm:ml-0 text-white rounded",
+                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                        className: "flex items-center group outline-2 outline-cgreen text-gray-800 hover:bg-chgreen hover:outline-chgreen hover:text-cwhite py-3 px-12 max-sm:px-[55px] rounded text-xl transition-all duration-300",
+                                        children: "معاينة"
+                                    }, void 0, false, {
+                                        fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
+                                        lineNumber: 757,
+                                        columnNumber: 15
+                                    }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                                    lineNumber: 599,
-                                    columnNumber: 15
+                                    lineNumber: 752,
+                                    columnNumber: 13
+                                }, this),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                    type: "submit",
+                                    className: "mt-8 ml-6 max-sm:ml-0 text-white rounded",
+                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                        className: "bg-cgreen hover:bg-chgreen py-3 px-32 max-md:px-20 rounded text-xl transition-all duration-300",
+                                        children: isPending ? "جارٍ التعديل ..." : "تعديل"
+                                    }, void 0, false, {
+                                        fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
+                                        lineNumber: 766,
+                                        columnNumber: 15
+                                    }, this)
+                                }, void 0, false, {
+                                    fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
+                                    lineNumber: 762,
+                                    columnNumber: 13
                                 }, this)
-                            }, void 0, false, {
-                                fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                                lineNumber: 595,
-                                columnNumber: 13
-                            }, this)
-                        }, void 0, false, {
+                            ]
+                        }, void 0, true, {
                             fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                            lineNumber: 594,
+                            lineNumber: 750,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-                    lineNumber: 515,
+                    lineNumber: 667,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-            lineNumber: 251,
+            lineNumber: 327,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/app/(public)/editpost/editMobile/[id]/page.tsx",
-        lineNumber: 250,
+        lineNumber: 326,
         columnNumber: 5
     }, this);
 };

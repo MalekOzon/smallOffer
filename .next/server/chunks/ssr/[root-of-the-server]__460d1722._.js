@@ -2322,7 +2322,7 @@ const Page = ()=>{
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$app$2f$components$2f$resgister$2f$HeaderSignup$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {}, void 0, false, {
                 fileName: "[project]/app/signup/step2/page.tsx",
-                lineNumber: 101,
+                lineNumber: 102,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2332,7 +2332,7 @@ const Page = ()=>{
                         isLogin: false
                     }, void 0, false, {
                         fileName: "[project]/app/signup/step2/page.tsx",
-                        lineNumber: 104,
+                        lineNumber: 105,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2343,7 +2343,7 @@ const Page = ()=>{
                                 totalSteps: 4
                             }, void 0, false, {
                                 fileName: "[project]/app/signup/step2/page.tsx",
-                                lineNumber: 108,
+                                lineNumber: 109,
                                 columnNumber: 11
                             }, this),
                             notification && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$app$2f$components$2f$ui$2f$Notification$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -2352,7 +2352,7 @@ const Page = ()=>{
                                 onClose: ()=>setNotification(null)
                             }, void 0, false, {
                                 fileName: "[project]/app/signup/step2/page.tsx",
-                                lineNumber: 111,
+                                lineNumber: 112,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2363,7 +2363,7 @@ const Page = ()=>{
                                         children: "خطوة أخيرة وننطلق!"
                                     }, void 0, false, {
                                         fileName: "[project]/app/signup/step2/page.tsx",
-                                        lineNumber: 118,
+                                        lineNumber: 119,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2375,13 +2375,13 @@ const Page = ()=>{
                                                 children: " Small Offer!"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/signup/step2/page.tsx",
-                                                lineNumber: 123,
+                                                lineNumber: 124,
                                                 columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/signup/step2/page.tsx",
-                                        lineNumber: 121,
+                                        lineNumber: 122,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2389,7 +2389,7 @@ const Page = ()=>{
                                         children: "Small Offer!"
                                     }, void 0, false, {
                                         fileName: "[project]/app/signup/step2/page.tsx",
-                                        lineNumber: 125,
+                                        lineNumber: 126,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2397,7 +2397,7 @@ const Page = ()=>{
                                         children: "يرجى إكمال معلوماتك الشخصية لتمكينك من نشر إعلانك , التواصل بسهولة مع الآخرين والاستفادة الكاملة من جميع مزايا المنصة."
                                     }, void 0, false, {
                                         fileName: "[project]/app/signup/step2/page.tsx",
-                                        lineNumber: 128,
+                                        lineNumber: 129,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
@@ -2417,7 +2417,7 @@ const Page = ()=>{
                                                                 children: "الاسم الأول"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/app/signup/step2/page.tsx",
-                                                                lineNumber: 141,
+                                                                lineNumber: 142,
                                                                 columnNumber: 19
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -2428,7 +2428,7 @@ const Page = ()=>{
                                                                 className: `mt-1 p-2 w-full  border border-clightgray rounded-md focus:outline-none focus:border-blue-500 ${errors.firstName ? "border-red-500" : ""}`
                                                             }, void 0, false, {
                                                                 fileName: "[project]/app/signup/step2/page.tsx",
-                                                                lineNumber: 147,
+                                                                lineNumber: 148,
                                                                 columnNumber: 19
                                                             }, this),
                                                             errors.firstName && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2436,13 +2436,13 @@ const Page = ()=>{
                                                                 children: errors.firstName.message
                                                             }, void 0, false, {
                                                                 fileName: "[project]/app/signup/step2/page.tsx",
-                                                                lineNumber: 157,
+                                                                lineNumber: 158,
                                                                 columnNumber: 21
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/app/signup/step2/page.tsx",
-                                                        lineNumber: 140,
+                                                        lineNumber: 141,
                                                         columnNumber: 17
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2454,7 +2454,7 @@ const Page = ()=>{
                                                                 children: "الاسم الأخير"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/app/signup/step2/page.tsx",
-                                                                lineNumber: 164,
+                                                                lineNumber: 165,
                                                                 columnNumber: 19
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -2465,7 +2465,7 @@ const Page = ()=>{
                                                                 className: `mt-1 p-2 w-full border border-clightgray rounded-md focus:outline-none focus:border-blue-500 ${errors.lastName ? "border-red-500" : ""}`
                                                             }, void 0, false, {
                                                                 fileName: "[project]/app/signup/step2/page.tsx",
-                                                                lineNumber: 170,
+                                                                lineNumber: 171,
                                                                 columnNumber: 19
                                                             }, this),
                                                             errors.lastName && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2473,19 +2473,19 @@ const Page = ()=>{
                                                                 children: errors.lastName.message
                                                             }, void 0, false, {
                                                                 fileName: "[project]/app/signup/step2/page.tsx",
-                                                                lineNumber: 180,
+                                                                lineNumber: 181,
                                                                 columnNumber: 21
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/app/signup/step2/page.tsx",
-                                                        lineNumber: 163,
+                                                        lineNumber: 164,
                                                         columnNumber: 17
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/app/signup/step2/page.tsx",
-                                                lineNumber: 139,
+                                                lineNumber: 140,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2497,7 +2497,7 @@ const Page = ()=>{
                                                         children: "اسم المستخدم"
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/signup/step2/page.tsx",
-                                                        lineNumber: 189,
+                                                        lineNumber: 190,
                                                         columnNumber: 17
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -2508,7 +2508,7 @@ const Page = ()=>{
                                                         className: `mt-1 p-2 w-full border border-clightgray rounded-md focus:outline-none focus:border-blue-500 ${errors.username ? "border-red-500" : ""}`
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/signup/step2/page.tsx",
-                                                        lineNumber: 195,
+                                                        lineNumber: 196,
                                                         columnNumber: 17
                                                     }, this),
                                                     errors.username && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2516,13 +2516,13 @@ const Page = ()=>{
                                                         children: errors.username.message
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/signup/step2/page.tsx",
-                                                        lineNumber: 205,
+                                                        lineNumber: 206,
                                                         columnNumber: 19
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/app/signup/step2/page.tsx",
-                                                lineNumber: 188,
+                                                lineNumber: 189,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2537,7 +2537,7 @@ const Page = ()=>{
                                                                 children: "رقم الهاتف"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/app/signup/step2/page.tsx",
-                                                                lineNumber: 214,
+                                                                lineNumber: 215,
                                                                 columnNumber: 19
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -2548,7 +2548,7 @@ const Page = ()=>{
                                                                 className: `mt-1 p-2 w-full border rounded-md  border-clightgray focus:outline-none focus:border-blue-500 ${errors.phoneNumber ? "border-red-500" : ""}`
                                                             }, void 0, false, {
                                                                 fileName: "[project]/app/signup/step2/page.tsx",
-                                                                lineNumber: 220,
+                                                                lineNumber: 221,
                                                                 columnNumber: 19
                                                             }, this),
                                                             errors.phoneNumber && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2556,13 +2556,13 @@ const Page = ()=>{
                                                                 children: errors.phoneNumber.message
                                                             }, void 0, false, {
                                                                 fileName: "[project]/app/signup/step2/page.tsx",
-                                                                lineNumber: 230,
+                                                                lineNumber: 231,
                                                                 columnNumber: 21
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/app/signup/step2/page.tsx",
-                                                        lineNumber: 213,
+                                                        lineNumber: 214,
                                                         columnNumber: 17
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2574,7 +2574,7 @@ const Page = ()=>{
                                                                 children: "رمز الدولة"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/app/signup/step2/page.tsx",
-                                                                lineNumber: 238,
+                                                                lineNumber: 239,
                                                                 columnNumber: 19
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$hook$2d$form$2f$dist$2f$index$2e$esm$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Controller"], {
@@ -2590,12 +2590,12 @@ const Page = ()=>{
                                                                                     placeholder: "اختر الرمز"
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/app/signup/step2/page.tsx",
-                                                                                    lineNumber: 254,
+                                                                                    lineNumber: 255,
                                                                                     columnNumber: 27
                                                                                 }, void 0)
                                                                             }, void 0, false, {
                                                                                 fileName: "[project]/app/signup/step2/page.tsx",
-                                                                                lineNumber: 253,
+                                                                                lineNumber: 254,
                                                                                 columnNumber: 25
                                                                             }, void 0),
                                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$app$2f$components$2f$ui$2f$select$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["SelectContent"], {
@@ -2610,23 +2610,23 @@ const Page = ()=>{
                                                                                         ]
                                                                                     }, country.code, true, {
                                                                                         fileName: "[project]/app/signup/step2/page.tsx",
-                                                                                        lineNumber: 260,
+                                                                                        lineNumber: 261,
                                                                                         columnNumber: 29
                                                                                     }, void 0))
                                                                             }, void 0, false, {
                                                                                 fileName: "[project]/app/signup/step2/page.tsx",
-                                                                                lineNumber: 258,
+                                                                                lineNumber: 259,
                                                                                 columnNumber: 25
                                                                             }, void 0)
                                                                         ]
                                                                     }, void 0, true, {
                                                                         fileName: "[project]/app/signup/step2/page.tsx",
-                                                                        lineNumber: 248,
+                                                                        lineNumber: 249,
                                                                         columnNumber: 23
                                                                     }, void 0)
                                                             }, void 0, false, {
                                                                 fileName: "[project]/app/signup/step2/page.tsx",
-                                                                lineNumber: 244,
+                                                                lineNumber: 245,
                                                                 columnNumber: 19
                                                             }, this),
                                                             errors.phoneCode && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2634,19 +2634,19 @@ const Page = ()=>{
                                                                 children: errors.phoneCode.message
                                                             }, void 0, false, {
                                                                 fileName: "[project]/app/signup/step2/page.tsx",
-                                                                lineNumber: 273,
+                                                                lineNumber: 274,
                                                                 columnNumber: 21
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/app/signup/step2/page.tsx",
-                                                        lineNumber: 237,
+                                                        lineNumber: 238,
                                                         columnNumber: 17
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/app/signup/step2/page.tsx",
-                                                lineNumber: 212,
+                                                lineNumber: 213,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2661,56 +2661,39 @@ const Page = ()=>{
                                                                 children: "المحافظة"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/app/signup/step2/page.tsx",
-                                                                lineNumber: 283,
+                                                                lineNumber: 284,
                                                                 columnNumber: 19
                                                             }, this),
-                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$hook$2d$form$2f$dist$2f$index$2e$esm$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Controller"], {
-                                                                name: "city",
-                                                                control: control,
-                                                                render: ({ field })=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$app$2f$components$2f$ui$2f$select$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Select"], {
-                                                                        value: field.value,
-                                                                        onValueChange: field.onChange,
-                                                                        children: [
-                                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$app$2f$components$2f$ui$2f$select$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["SelectTrigger"], {
-                                                                                className: "border border-clightgray w-full text-cdarkgray py-5 mt-1",
-                                                                                dir: "rtl",
-                                                                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$app$2f$components$2f$ui$2f$select$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["SelectValue"], {
-                                                                                    placeholder: "اختر المحافظة"
-                                                                                }, void 0, false, {
-                                                                                    fileName: "[project]/app/signup/step2/page.tsx",
-                                                                                    lineNumber: 301,
-                                                                                    columnNumber: 27
-                                                                                }, void 0)
-                                                                            }, void 0, false, {
-                                                                                fileName: "[project]/app/signup/step2/page.tsx",
-                                                                                lineNumber: 297,
-                                                                                columnNumber: 25
-                                                                            }, void 0),
-                                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$app$2f$components$2f$ui$2f$select$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["SelectContent"], {
-                                                                                className: "bg-cwhite w-full max-w-full",
-                                                                                children: __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$signup$2f$step2$2f$syrianGovernorates$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["syrianGovernorates"].map((gov)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$app$2f$components$2f$ui$2f$select$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["SelectItem"], {
-                                                                                        className: "hover:bg-cgreen hover:text-cwhite text-cdarkgray flex justify-end",
-                                                                                        value: gov.value,
-                                                                                        children: gov.name
-                                                                                    }, gov.value, false, {
-                                                                                        fileName: "[project]/app/signup/step2/page.tsx",
-                                                                                        lineNumber: 306,
-                                                                                        columnNumber: 29
-                                                                                    }, void 0))
-                                                                            }, void 0, false, {
-                                                                                fileName: "[project]/app/signup/step2/page.tsx",
-                                                                                lineNumber: 304,
-                                                                                columnNumber: 25
-                                                                            }, void 0)
-                                                                        ]
-                                                                    }, void 0, true, {
+                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
+                                                                ...register("city"),
+                                                                id: "city",
+                                                                required: true,
+                                                                dir: "rtl",
+                                                                className: "border border-clightgray w-full text-cdarkgray py-2.5 mt-1  focus:outline-none transition duration-200 rounded-lg",
+                                                                defaultValue: "",
+                                                                children: [
+                                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
+                                                                        value: "",
+                                                                        disabled: true,
+                                                                        children: "اختر المحافظة"
+                                                                    }, void 0, false, {
                                                                         fileName: "[project]/app/signup/step2/page.tsx",
-                                                                        lineNumber: 293,
-                                                                        columnNumber: 23
-                                                                    }, void 0)
-                                                            }, void 0, false, {
+                                                                        lineNumber: 299,
+                                                                        columnNumber: 21
+                                                                    }, this),
+                                                                    __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$signup$2f$step2$2f$syrianGovernorates$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["syrianGovernorates"].map((gov)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
+                                                                            value: gov.value,
+                                                                            className: "text-cdarkgray",
+                                                                            children: gov.name
+                                                                        }, gov.value, false, {
+                                                                            fileName: "[project]/app/signup/step2/page.tsx",
+                                                                            lineNumber: 303,
+                                                                            columnNumber: 23
+                                                                        }, this))
+                                                                ]
+                                                            }, void 0, true, {
                                                                 fileName: "[project]/app/signup/step2/page.tsx",
-                                                                lineNumber: 289,
+                                                                lineNumber: 291,
                                                                 columnNumber: 19
                                                             }, this),
                                                             errors.city && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2718,13 +2701,13 @@ const Page = ()=>{
                                                                 children: errors.city.message
                                                             }, void 0, false, {
                                                                 fileName: "[project]/app/signup/step2/page.tsx",
-                                                                lineNumber: 319,
+                                                                lineNumber: 314,
                                                                 columnNumber: 21
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/app/signup/step2/page.tsx",
-                                                        lineNumber: 282,
+                                                        lineNumber: 283,
                                                         columnNumber: 17
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2736,7 +2719,7 @@ const Page = ()=>{
                                                                 children: "المنطقة"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/app/signup/step2/page.tsx",
-                                                                lineNumber: 327,
+                                                                lineNumber: 322,
                                                                 columnNumber: 19
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -2747,7 +2730,7 @@ const Page = ()=>{
                                                                 className: `mt-1 p-2 w-full border border-clightgray rounded-md focus:outline-none focus:border-blue-500 ${errors.hood ? "border-red-500" : ""}`
                                                             }, void 0, false, {
                                                                 fileName: "[project]/app/signup/step2/page.tsx",
-                                                                lineNumber: 333,
+                                                                lineNumber: 328,
                                                                 columnNumber: 19
                                                             }, this),
                                                             errors.hood && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2755,19 +2738,19 @@ const Page = ()=>{
                                                                 children: errors.hood.message
                                                             }, void 0, false, {
                                                                 fileName: "[project]/app/signup/step2/page.tsx",
-                                                                lineNumber: 343,
+                                                                lineNumber: 338,
                                                                 columnNumber: 21
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/app/signup/step2/page.tsx",
-                                                        lineNumber: 326,
+                                                        lineNumber: 321,
                                                         columnNumber: 17
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/app/signup/step2/page.tsx",
-                                                lineNumber: 280,
+                                                lineNumber: 281,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2779,7 +2762,7 @@ const Page = ()=>{
                                                         children: "تفاصيل العنوان"
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/signup/step2/page.tsx",
-                                                        lineNumber: 352,
+                                                        lineNumber: 347,
                                                         columnNumber: 17
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("textarea", {
@@ -2790,7 +2773,7 @@ const Page = ()=>{
                                                         className: `mt-1 h-[48px] flex justify-center items-center pt-2 pr-2 w-full border border-clightgray rounded-md focus:outline-none focus:border-blue-500 ${errors.detailed_location ? "border-red-500" : ""}`
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/signup/step2/page.tsx",
-                                                        lineNumber: 358,
+                                                        lineNumber: 353,
                                                         columnNumber: 17
                                                     }, this),
                                                     errors.detailed_location && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2798,13 +2781,13 @@ const Page = ()=>{
                                                         children: errors.detailed_location.message
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/signup/step2/page.tsx",
-                                                        lineNumber: 368,
+                                                        lineNumber: 363,
                                                         columnNumber: 19
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/app/signup/step2/page.tsx",
-                                                lineNumber: 351,
+                                                lineNumber: 346,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2817,7 +2800,7 @@ const Page = ()=>{
                                                         className: "w-[18px] h-[18px] accent-cgreen ml-3"
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/signup/step2/page.tsx",
-                                                        lineNumber: 376,
+                                                        lineNumber: 371,
                                                         columnNumber: 17
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
@@ -2826,13 +2809,13 @@ const Page = ()=>{
                                                         children: "أرغب في تلقي إشعارات حول العروض والأخبار الجديدة"
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/signup/step2/page.tsx",
-                                                        lineNumber: 382,
+                                                        lineNumber: 377,
                                                         columnNumber: 17
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/app/signup/step2/page.tsx",
-                                                lineNumber: 375,
+                                                lineNumber: 370,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2846,12 +2829,12 @@ const Page = ()=>{
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/app/signup/step2/page.tsx",
-                                                    lineNumber: 391,
+                                                    lineNumber: 386,
                                                     columnNumber: 17
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/app/signup/step2/page.tsx",
-                                                lineNumber: 390,
+                                                lineNumber: 385,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -2863,42 +2846,42 @@ const Page = ()=>{
                                                     children: "جاري المعالجة..."
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/signup/step2/page.tsx",
-                                                    lineNumber: 405,
+                                                    lineNumber: 400,
                                                     columnNumber: 19
                                                 }, this) : "إنشاء حساب شخصي"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/signup/step2/page.tsx",
-                                                lineNumber: 399,
+                                                lineNumber: 394,
                                                 columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/signup/step2/page.tsx",
-                                        lineNumber: 133,
+                                        lineNumber: 134,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/signup/step2/page.tsx",
-                                lineNumber: 117,
+                                lineNumber: 118,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/signup/step2/page.tsx",
-                        lineNumber: 107,
+                        lineNumber: 108,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/app/signup/step2/page.tsx",
-                lineNumber: 102,
+                lineNumber: 103,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/app/signup/step2/page.tsx",
-        lineNumber: 100,
+        lineNumber: 101,
         columnNumber: 5
     }, this);
 };

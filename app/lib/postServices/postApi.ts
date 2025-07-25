@@ -259,8 +259,8 @@ export const editOutdoor_spaceForm = async (formData: FormData, id: string) => {
 
 // Get ---------------
 
-// Get Public Profile Info
-export const getPublicProfileInfo = async (
+// Get Post Public Page
+export const getPublicPage = async (
   username: string,
   page: number,
   page_size: number

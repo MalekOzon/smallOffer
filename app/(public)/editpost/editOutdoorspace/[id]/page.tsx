@@ -19,6 +19,7 @@ import { useForm } from "react-hook-form";
 const EditOutdoorspace = () => {
   const {
     register,
+    setValue,
     formState: {},
   } = useForm<LandPostPayload>({
     defaultValues: {
@@ -38,8 +39,30 @@ const EditOutdoorspace = () => {
   const editOutdoorspaceForm = useEditOutdoor_spaceForm(setNotification);
   const isPending = editOutdoorspaceForm.isPending;
 
+  const inputRef = useRef<HTMLInputElement | null>(null);
+  const [preview, setPreview] = useState<string | null>(null);
+
+  const MAX_GALLERY_IMAGES = 7; // تماشياً مع EditGeneric
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
+  const galleryInputRef = useRef<HTMLInputElement | null>(null);
+
   const [galleryFiles, setGalleryFiles] = useState<(File | string)[]>([]);
+
+  // دالة للتعامل مع تغيير صورة الغلاف
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (files && files.length > 0) {
+      const file = files[0];
+      setFormData((prev) => ({
+        ...prev,
+        cover_image: file,
+      }));
+      setPreview(URL.createObjectURL(file));
+      e.target.value = ""; // إعادة تعيين قيمة الـ input
+    }
+  };
+
+  // دالة للتعامل مع تغيير الصور في المعرض
   const handleGalleryChange = (
     e: React.ChangeEvent<HTMLInputElement>,
     index: number
@@ -49,52 +72,59 @@ const EditOutdoorspace = () => {
       setGalleryFiles((prev) => {
         const updated = [...prev];
         updated[index] = file;
-
-        setFormData((prevForm) => ({
-          ...prevForm,
-          gallery: updated,
-        }));
-
+        setValue("gallery", updated, {
+          shouldValidate: true,
+          shouldDirty: true,
+        });
         return updated;
       });
+      e.target.value = ""; // إعادة تعيين قيمة الـ input
     }
   };
+
+  // دالة لإزالة صورة من المعرض
   const handleRemoveImage = (index: number) => {
     setGalleryFiles((prev) => {
       const updated = prev.filter((_, i) => i !== index);
-      setFormData((prevForm) => ({
-        ...prevForm,
-        gallery: updated,
-      }));
+      setValue("gallery", updated, {
+        shouldValidate: true,
+        shouldDirty: true,
+      });
       return updated;
     });
   };
-  const handleAddNewGallerySlot = () => {
-    setGalleryFiles((prev) => {
-      if (prev.length >= 10) return prev;
-      const updated = [...prev, ""];
-      setFormData((prevForm) => ({
-        ...prevForm,
-        gallery: updated,
-      }));
 
-      return updated;
-    });
+  // دالة لإضافة صورة جديدة
+  const handleNewGalleryImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file && galleryFiles.length < MAX_GALLERY_IMAGES) {
+      setGalleryFiles((prev) => {
+        const updated = [...prev, file];
+        setValue("gallery", updated, {
+          shouldValidate: true,
+          shouldDirty: true,
+        });
+        return updated;
+      });
+      e.target.value = ""; // إعادة تعيين قيمة الـ input
+    }
   };
+
+  // دالة لفتح نافذة اختيار الملفات
+  const handleAddNewGallerySlot = () => {
+    if (galleryFiles.length < MAX_GALLERY_IMAGES) {
+      galleryInputRef.current?.click();
+    }
+  };
+
+  // دالة لتحريك إدخال الصورة
   const triggerFileInput = (index: number) => {
     inputRefs.current[index]?.click();
   };
 
-  const convertURLtoFile = async (url: string): Promise<File> => {
-    const response = await fetch(url);
-    const blob = await response.blob();
-
-    let name = url.split("/").pop() || "";
-    if (!/\.(jpg|jpeg|png|webp|gif)$/i.test(name)) {
-      name = `image-${Date.now()}.jpg`; // اسم افتراضي بامتداد مسموح
-    }
-
-    return new File([blob], name, { type: blob.type });
+  // لما تضغط على صندوق رفع الصورة يفتح اختيار الملفات
+  const handleClick = () => {
+    inputRef.current?.click();
   };
 
   const [formData, setFormData] = useState<Partial<LandPostPayload>>({
@@ -142,8 +172,23 @@ const EditOutdoorspace = () => {
       });
       setGalleryFiles(galleryImages);
       setIsSearch(data.offer_type === "search");
+      if (data.cover_image && typeof data.cover_image === "string") {
+        setPreview(data.cover_image);
+      }
     }
   }, [data]);
+
+  const handleInputChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
 
   const handleOutdoorspaceInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -183,6 +228,16 @@ const EditOutdoorspace = () => {
     }));
   };
 
+  const convertURLtoFile = async (url: string): Promise<File> => {
+    const response = await fetch(url);
+    const blob = await response.blob();
+    let name = url.split("/").pop() || "";
+    if (!/\.(jpg|jpeg|png|webp|gif)$/i.test(name)) {
+      name = `image-${Date.now()}.jpg`;
+    }
+    return new File([blob], name, { type: blob.type });
+  };
+
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!id) {
@@ -201,10 +256,12 @@ const EditOutdoorspace = () => {
     form.append("category", data.category ?? "");
     form.append("subcategory", data.subcategory ?? "");
     form.append("detailed_location", data.detailed_location ?? "");
+
     if (data.cover_image instanceof File) {
       form.append("cover_image", data.cover_image);
     }
-    for (const img of formData.gallery || []) {
+
+    for (const img of galleryFiles) {
       if (img instanceof File) {
         form.append("gallery", img);
       } else if (typeof img === "string") {
@@ -245,63 +302,6 @@ const EditOutdoorspace = () => {
     }
     return null;
   }
-
-  ////////////////////////////////////////////////////////////////////////////////////////
-
-  const inputRef = useRef<HTMLInputElement | null>(null);
-  const [preview, setPreview] = useState<string | null>(null);
-  // لما تضغط على صندوق رفع الصورة يفتح اختيار الملفات
-  const handleClick = () => {
-    inputRef.current?.click();
-  };
-  // لما تختار صورة جديدة يتم تحديث preview و formData.cover_image
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files;
-    if (files && files.length > 0) {
-      const file = files[0];
-      setFormData((prev) => ({
-        ...prev,
-        cover_image: file,
-      }));
-      setPreview(URL.createObjectURL(file));
-    }
-  };
-  // تحديث preview لو جت بيانات موجودة كسلسلة نصية (رابط صورة من السيرفر مثلا)
-  useEffect(() => {
-    if (formData.cover_image && typeof formData.cover_image === "string") {
-      setPreview(formData.cover_image);
-    }
-  }, [formData.cover_image]);
-
-  const handleInputChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >
-  ) => {
-    const { name, value, type } = e.target;
-    const files = (e.target as HTMLInputElement).files;
-
-    if (type === "file") {
-      if (name === "gallery") {
-        setFormData((prev) => ({
-          ...prev,
-          [name]: files ? Array.from(files) : [],
-        }));
-      } else if (name === "cover_image") {
-        setFormData((prev) => ({
-          ...prev,
-          [name]: files && files.length > 0 ? files[0] : null,
-        }));
-      }
-    } else {
-      setFormData((prev) => ({
-        ...prev,
-        [name]: value,
-      }));
-    }
-  };
-
-  // ////////////////////////////////////////////////////////////////////
 
   if (isLoading) return <SkeletonNotificationSettings />;
 
@@ -375,13 +375,13 @@ const EditOutdoorspace = () => {
             أدخل معلومات الإعلان الأساسية لتظهر بوضوح للمشترين، مثل العنوان
             والوصف العام والموقع.
           </p>
-          <div className=" mb-6 sm:ml-16 border-b border-clightgray">
+          <div className="mb-6 sm:ml-16 border-b border-clightgray">
             {/* SEARCH || SELL */}
             <h3 className="font-medium mb-3 mt-6 text-lg text-gray-700">
               نوع المنشور
               <span className="text-red-500 text-xl mr-1">*</span>
             </h3>
-            <div className="w-full mt-2 max-w-sm  border-2 border-clightgray p-1.5 rounded-xl mb-6 flex">
+            <div className="w-full mt-2 max-w-sm border-2 border-clightgray p-1.5 rounded-xl mb-6 flex">
               <Button
                 type="button"
                 className="w-1/2 text-6 font-semibold"
@@ -400,27 +400,17 @@ const EditOutdoorspace = () => {
               </Button>
             </div>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-            <div className="sm:ml-16">
-              <label className="block font-medium text-gray-700">
-                اسم المنتج <span className="text-red-500 text-xl mr-1">*</span>
-              </label>
-              <input
-                required
-                name="title"
-                value={formData.title || ""}
-                onChange={handleInputChange}
-                type="text"
-                placeholder="اسم المنتج"
-                className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
-              />
-            </div>
+          
+        <span className="text-lg max-sm:text-sm border p-2 bg-cgreen text-cwhite rounded-md">
+          ملاحظة: يوجد زر معاينة المنشور في الأسفل
+        </span>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-6">
+
 
             <div className="sm:ml-16">
               <label className="block font-medium text-gray-700 mb-2">
                 صورة غلاف المنتج
               </label>
-
               <input
                 type="file"
                 accept="image/*"
@@ -428,10 +418,9 @@ const EditOutdoorspace = () => {
                 onChange={handleImageChange}
                 className="hidden"
               />
-
               <div
                 onClick={handleClick}
-                className="w-64 h-40 border-2 border-dashed border-cgreen rounded-lg flex items-center justify-center cursor-pointer bg-cwhite overflow-hidden"
+                className="w-[70%] max-sm:w-full h-52 border-2 border-dashed border-cgreen rounded-lg flex items-center justify-center cursor-pointer bg-cwhite overflow-hidden"
               >
                 {preview ? (
                   <Image
@@ -452,7 +441,14 @@ const EditOutdoorspace = () => {
               <label className="block font-medium text-gray-700 mb-2">
                 صور المنتج
               </label>
-              <div className="flex flex-wrap gap-4">
+              <div className="flex flex-wrap gap-2">
+                <input
+                  type="file"
+                  accept="image/*"
+                  className="hidden"
+                  onChange={handleNewGalleryImage}
+                  ref={galleryInputRef}
+                />
                 {galleryFiles.map((img, index) => {
                   const previewUrl =
                     img instanceof File ? URL.createObjectURL(img) : img;
@@ -460,7 +456,7 @@ const EditOutdoorspace = () => {
                   return (
                     <div
                       key={index}
-                      className="relative max-sm:w-32 w-24  h-24 border-2 border-cgreen rounded-lg overflow-hidden cursor-pointer"
+                      className="relative max-sm:w-32 w-24 h-24 border-2 border-cgreen rounded-lg overflow-hidden cursor-pointer"
                     >
                       <input
                         type="file"
@@ -501,7 +497,7 @@ const EditOutdoorspace = () => {
                     </div>
                   );
                 })}
-                {galleryFiles.length < 5 && (
+                {galleryFiles.length < MAX_GALLERY_IMAGES && (
                   <div
                     onClick={handleAddNewGallerySlot}
                     className="w-24 h-24 border-2 border-dashed border-cgreen rounded-lg flex items-center justify-center cursor-pointer text-cgreen text-4xl"
@@ -513,6 +509,20 @@ const EditOutdoorspace = () => {
             </div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+          <div className="sm:ml-16">
+              <label className="block font-medium text-gray-700">
+                اسم المنتج <span className="text-red-500 text-xl mr-1">*</span>
+              </label>
+              <input
+                required
+                name="title"
+                value={formData.title || ""}
+                onChange={handleInputChange}
+                type="text"
+                placeholder="اسم المنتج"
+                className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
+              />
+            </div>
             <div className="sm:ml-16">
               <label className="block font-medium text-gray-700">
                 المحافظة
@@ -523,7 +533,7 @@ const EditOutdoorspace = () => {
                 name="city"
                 value={formData.city || ""}
                 onChange={handleInputChange}
-                className="mt-1  w-full p-3 border-2 rounded-lg bg-cwhite text-gray-700 focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200"
+                className="mt-1 w-full p-3 border-2 rounded-lg bg-cwhite text-gray-700 focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200"
                 style={{ borderColor: "#277F60" }}
               >
                 <option value="">اختر الإدخال</option>
@@ -650,7 +660,7 @@ const EditOutdoorspace = () => {
                 name="outdoorspace.offer_type"
                 value={formData.outdoorspace?.offer_type || ""}
                 onChange={handleOutdoorspaceInputChange}
-                className="mt-2  w-full p-3 py-3.5 border-2 rounded-lg bg-cwhite text-cdarkgray focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200"
+                className="mt-2 w-full p-3 py-3.5 border-2 rounded-lg bg-cwhite text-cdarkgray focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200"
                 style={{ borderColor: "#277F60" }}
                 dir="rtl"
               >
@@ -671,7 +681,7 @@ const EditOutdoorspace = () => {
                 name="outdoorspace.land_type"
                 value={formData.outdoorspace?.land_type || ""}
                 onChange={handleOutdoorspaceInputChange}
-                className="mt-2  w-full p-3 py-3.5 border-2 rounded-lg bg-cwhite text-cdarkgray focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200"
+                className="mt-2 w-full p-3 py-3.5 border-2 rounded-lg bg-cwhite text-cdarkgray focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200"
                 style={{ borderColor: "#277F60" }}
                 dir="rtl"
               >
@@ -685,7 +695,7 @@ const EditOutdoorspace = () => {
             </div>
             <div className="sm:ml-16">
               <label className="block font-medium text-gray-700">
-                المساحة العقارية (م²){" "}
+                المساحة العقارية (م²)
                 <span className="text-red-500 text-xl mr-1">*</span>
               </label>
               <input
@@ -713,6 +723,17 @@ const EditOutdoorspace = () => {
           </div>
           <hr className="mt-6 mb-3 text-clightgray" />
           <div className="flex justify-end max-sm:flex-col max-sm:justify-center max-sm:items-center max-sm:gap-4 mb-5">
+            {/* زر "معاينة" */}
+            <button
+              type="button"
+              onClick={() => (window.location.href = "/preview")}
+              className="mt-8 ml-6 max-sm:ml-0 text-white rounded"
+            >
+              <span className="flex items-center group outline-2 outline-cgreen text-gray-800 hover:bg-chgreen hover:outline-chgreen hover:text-cwhite py-3 px-12 max-sm:px-[55px] rounded text-xl transition-all duration-300">
+                معاينة
+              </span>
+            </button>
+            {/* زر "تعديل" */}
             <button
               type="submit"
               className="mt-8 ml-6 max-sm:ml-0 text-white rounded"

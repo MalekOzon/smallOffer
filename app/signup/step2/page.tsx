@@ -76,11 +76,12 @@ const Page = () => {
   const onSubmit: SubmitHandler<FormData> = (data) => {
     console.log("Data: ", data);
 
-    const phoneNumberWithout0: string =  data.phoneCode + (
-      data.phoneNumber.startsWith("0")
-    ? data.phoneNumber.slice(1)
-    : data.phoneNumber);
-  
+    const phoneNumberWithout0: string =
+      data.phoneCode +
+      (data.phoneNumber.startsWith("0")
+        ? data.phoneNumber.slice(1)
+        : data.phoneNumber);
+
     const jsonData = JSON.stringify({
       email: emailSignupContext,
       first_name: data.firstName,
@@ -286,35 +287,29 @@ const Page = () => {
                   >
                     المحافظة
                   </label>
-                  <Controller
-                    name="city"
-                    control={control}
-                    render={({ field }) => (
-                      <Select
-                        value={field.value}
-                        onValueChange={field.onChange}
-                      >
-                        <SelectTrigger
-                          className="border border-clightgray w-full text-cdarkgray py-5 mt-1"
-                          dir="rtl"
-                        >
-                          <SelectValue placeholder="اختر المحافظة" />
-                        </SelectTrigger>
 
-                        <SelectContent className="bg-cwhite w-full max-w-full">
-                          {syrianGovernorates.map((gov) => (
-                            <SelectItem
-                              key={gov.value}
-                              className="hover:bg-cgreen hover:text-cwhite text-cdarkgray flex justify-end"
-                              value={gov.value}
-                            >
-                              {gov.name}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                    )}
-                  />
+                  <select
+                    {...register("city")}
+                    id="city"
+                    required
+                    dir="rtl"
+                    className="border border-clightgray w-full text-cdarkgray py-2.5 mt-1  focus:outline-none transition duration-200 rounded-lg"
+                    defaultValue=""
+                  >
+                    <option value="" disabled>
+                      اختر المحافظة
+                    </option>
+                    {syrianGovernorates.map((gov) => (
+                      <option
+                        key={gov.value}
+                        value={gov.value}
+                        className="text-cdarkgray"
+                      >
+                        {gov.name}
+                      </option>
+                    ))}
+                  </select>
+
                   {errors.city && (
                     <p className="text-red-500 text-sm mt-1">
                       {errors.city.message}

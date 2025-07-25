@@ -40,9 +40,9 @@ const ProfileCard = () => {
       </div>
 
       {/* ------INFO---------------- */}
-      <div className="flex w-full justify-center items-center flex-col  pr-6">
+      <div className="flex w-full justify-center items-start flex-col  pr-6">
         {/* القسم الأول: المدينة والحي */}
-        <div className="text-center sm:text-left">
+        <div className="text-right w-full">
           <h2 className="text-xl text-cdarkgray">{data?.city}</h2>
           <p className="text-cdarkgray my-2">{data?.hood}</p>
         </div>

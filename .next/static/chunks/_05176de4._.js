@@ -115,13 +115,15 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$re
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/image.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/client/app-dir/link.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$clsx$2f$dist$2f$clsx$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/clsx/dist/clsx.mjs [app-client] (ecmascript)");
+;
+var _s = __turbopack_context__.k.signature();
 "use client";
 ;
 ;
 ;
 ;
-;
 const AdCard = ({ id, offer_type, subcat, title, description, city, price, imageUrl, published, isFav = false })=>{
+    _s();
     const status = {
         accepted: {
             label: "تم النشر",
@@ -158,6 +160,11 @@ const AdCard = ({ id, offer_type, subcat, title, description, city, price, image
             return `/editpost/editGeneric/${id}`;
         }
     }
+    const addPostFavMutation = useAddPostFav(setNotification);
+    addPostFavMutation.mutate({
+        data: {},
+        post_id: "12345"
+    });
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         className: "block h-64 ",
         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -175,12 +182,12 @@ const AdCard = ({ id, offer_type, subcat, title, description, city, price, image
                                 className: "object-cover"
                             }, void 0, false, {
                                 fileName: "[project]/app/components/ui/AdCard.tsx",
-                                lineNumber: 91,
+                                lineNumber: 98,
                                 columnNumber: 15
                             }, this) : null
                         }, void 0, false, {
                             fileName: "[project]/app/components/ui/AdCard.tsx",
-                            lineNumber: 89,
+                            lineNumber: 96,
                             columnNumber: 11
                         }, this),
                         !isFav && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
@@ -190,12 +197,12 @@ const AdCard = ({ id, offer_type, subcat, title, description, city, price, image
                                 className: "group-hover:text-white w-5 h-5 text-cdarkgray"
                             }, void 0, false, {
                                 fileName: "[project]/app/components/ui/AdCard.tsx",
-                                lineNumber: 100,
+                                lineNumber: 107,
                                 columnNumber: 15
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/app/components/ui/AdCard.tsx",
-                            lineNumber: 96,
+                            lineNumber: 103,
                             columnNumber: 13
                         }, this),
                         isFav && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
@@ -205,18 +212,18 @@ const AdCard = ({ id, offer_type, subcat, title, description, city, price, image
                                 className: "group-hover:text-white w-5 h-5 text-cdarkgray"
                             }, void 0, false, {
                                 fileName: "[project]/app/components/ui/AdCard.tsx",
-                                lineNumber: 108,
+                                lineNumber: 115,
                                 columnNumber: 15
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/app/components/ui/AdCard.tsx",
-                            lineNumber: 105,
+                            lineNumber: 112,
                             columnNumber: 13
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/components/ui/AdCard.tsx",
-                    lineNumber: 88,
+                    lineNumber: 95,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
@@ -238,14 +245,14 @@ const AdCard = ({ id, offer_type, subcat, title, description, city, price, image
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/app/components/ui/AdCard.tsx",
-                                                lineNumber: 119,
+                                                lineNumber: 126,
                                                 columnNumber: 19
                                             }, this),
                                             title
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/components/ui/AdCard.tsx",
-                                        lineNumber: 117,
+                                        lineNumber: 124,
                                         columnNumber: 15
                                     }, this),
                                     published && !isFav && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -253,13 +260,13 @@ const AdCard = ({ id, offer_type, subcat, title, description, city, price, image
                                         children: currentStatus.label
                                     }, void 0, false, {
                                         fileName: "[project]/app/components/ui/AdCard.tsx",
-                                        lineNumber: 124,
+                                        lineNumber: 131,
                                         columnNumber: 17
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/components/ui/AdCard.tsx",
-                                lineNumber: 116,
+                                lineNumber: 123,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -267,7 +274,7 @@ const AdCard = ({ id, offer_type, subcat, title, description, city, price, image
                                 children: description
                             }, void 0, false, {
                                 fileName: "[project]/app/components/ui/AdCard.tsx",
-                                lineNumber: 135,
+                                lineNumber: 142,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -280,20 +287,20 @@ const AdCard = ({ id, offer_type, subcat, title, description, city, price, image
                                                 className: "w-4 h-4"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/components/ui/AdCard.tsx",
-                                                lineNumber: 141,
+                                                lineNumber: 148,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                 children: city
                                             }, void 0, false, {
                                                 fileName: "[project]/app/components/ui/AdCard.tsx",
-                                                lineNumber: 142,
+                                                lineNumber: 149,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/components/ui/AdCard.tsx",
-                                        lineNumber: 140,
+                                        lineNumber: 147,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -301,38 +308,39 @@ const AdCard = ({ id, offer_type, subcat, title, description, city, price, image
                                         children: price.toLocaleString()
                                     }, void 0, false, {
                                         fileName: "[project]/app/components/ui/AdCard.tsx",
-                                        lineNumber: 144,
+                                        lineNumber: 151,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/components/ui/AdCard.tsx",
-                                lineNumber: 139,
+                                lineNumber: 146,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/components/ui/AdCard.tsx",
-                        lineNumber: 115,
+                        lineNumber: 122,
                         columnNumber: 11
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/app/components/ui/AdCard.tsx",
-                    lineNumber: 114,
+                    lineNumber: 121,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/app/components/ui/AdCard.tsx",
-            lineNumber: 86,
+            lineNumber: 93,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/app/components/ui/AdCard.tsx",
-        lineNumber: 85,
+        lineNumber: 92,
         columnNumber: 5
     }, this);
 };
+_s(AdCard, "GaJlpvO42Defo1NcuITLFciuagc=", true);
 _c = AdCard;
 const __TURBOPACK__default__export__ = AdCard;
 var _c;
@@ -750,9 +758,11 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$components$2f$ui$2f$A
 var __TURBOPACK__imported__module__$5b$project$5d2f$public$2f$resourses$2f$userAvatar$2e$svg$2e$mjs__$7b$__IMAGE__$3d3e$__$225b$project$5d2f$public$2f$resourses$2f$userAvatar$2e$svg__$28$static__in__ecmascript$2922$__$7d$__$5b$app$2d$client$5d$__$28$structured__image__object$2c$__ecmascript$29$__ = __turbopack_context__.i('[project]/public/resourses/userAvatar.svg.mjs { IMAGE => "[project]/public/resourses/userAvatar.svg (static in ecmascript)" } [app-client] (structured image object, ecmascript)');
 var __TURBOPACK__imported__module__$5b$project$5d2f$public$2f$resourses$2f$placeholderPost$2e$svg$2e$mjs__$7b$__IMAGE__$3d3e$__$225b$project$5d2f$public$2f$resourses$2f$placeholderPost$2e$svg__$28$static__in__ecmascript$2922$__$7d$__$5b$app$2d$client$5d$__$28$structured__image__object$2c$__ecmascript$29$__ = __turbopack_context__.i('[project]/public/resourses/placeholderPost.svg.mjs { IMAGE => "[project]/public/resourses/placeholderPost.svg (static in ecmascript)" } [app-client] (structured image object, ecmascript)');
 var __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$lib$2f$postServices$2f$postQueries$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/app/lib/postServices/postQueries.ts [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/client/app-dir/link.js [app-client] (ecmascript)");
 ;
 var _s = __turbopack_context__.k.signature();
 "use client";
+;
 ;
 ;
 ;
@@ -775,12 +785,12 @@ const Star = ({ filled })=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$
             d: "M10 15.27L16.18 19l-1.64-7.03L20 7.24l-7.19-.61L10 0 7.19 6.63 0 7.24l5.46 4.73L3.82 19z"
         }, void 0, false, {
             fileName: "[project]/app/(public)/publicstore/[username]/page.tsx",
-            lineNumber: 22,
+            lineNumber: 23,
             columnNumber: 5
         }, this)
     }, void 0, false, {
         fileName: "[project]/app/(public)/publicstore/[username]/page.tsx",
-        lineNumber: 14,
+        lineNumber: 15,
         columnNumber: 3
     }, this);
 _c = Star;
@@ -854,7 +864,7 @@ const PublicStore = ()=>{
     }, (_, i)=>i < Math.round(rating));
     if (isLoading && page === 1) return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$app$2f$components$2f$ui$2f$SkeletonNotificationSettings$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {}, void 0, false, {
         fileName: "[project]/app/(public)/publicstore/[username]/page.tsx",
-        lineNumber: 106,
+        lineNumber: 107,
         columnNumber: 39
     }, this);
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -864,7 +874,7 @@ const PublicStore = ()=>{
                 className: "flex w-full max-md:flex-col justify-between gap-8 ",
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "flex max-md:flex-col items-center w-full md:w-1/2 gap-4  justify-center md:pr-10",
+                        className: "flex max-md:flex-col items-center w-full md:w-1/2 gap-4  justify-center md:pr-12",
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 className: "rounded-full overflow-hidden border-2 border-cgreen w-36 h-36 shrink-0",
@@ -876,23 +886,23 @@ const PublicStore = ()=>{
                                     className: "object-cover w-full h-full"
                                 }, void 0, false, {
                                     fileName: "[project]/app/(public)/publicstore/[username]/page.tsx",
-                                    lineNumber: 115,
+                                    lineNumber: 116,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/app/(public)/publicstore/[username]/page.tsx",
-                                lineNumber: 114,
+                                lineNumber: 115,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                className: "flex flex-col justify-center md:text-right w-full md:mr-5 text-center ",
+                                className: "flex flex-col justify-center md:text-right w-full md:mr-2 text-center ",
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                         className: "text-2xl font-bold  text-gray-700 mb-4",
                                         children: user ? `${user.first_name} ${user.last_name}` : "---"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/publicstore/[username]/page.tsx",
-                                        lineNumber: 124,
+                                        lineNumber: 125,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -901,12 +911,12 @@ const PublicStore = ()=>{
                                                 filled: filled
                                             }, idx, false, {
                                                 fileName: "[project]/app/(public)/publicstore/[username]/page.tsx",
-                                                lineNumber: 129,
+                                                lineNumber: 130,
                                                 columnNumber: 17
                                             }, this))
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/publicstore/[username]/page.tsx",
-                                        lineNumber: 127,
+                                        lineNumber: 128,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -920,7 +930,7 @@ const PublicStore = ()=>{
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/app/(public)/publicstore/[username]/page.tsx",
-                                                lineNumber: 133,
+                                                lineNumber: 134,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -928,25 +938,25 @@ const PublicStore = ()=>{
                                                 children: rating.toFixed(1)
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/publicstore/[username]/page.tsx",
-                                                lineNumber: 134,
+                                                lineNumber: 135,
                                                 columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/(public)/publicstore/[username]/page.tsx",
-                                        lineNumber: 132,
+                                        lineNumber: 133,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/publicstore/[username]/page.tsx",
-                                lineNumber: 123,
+                                lineNumber: 124,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/(public)/publicstore/[username]/page.tsx",
-                        lineNumber: 113,
+                        lineNumber: 114,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -959,7 +969,7 @@ const PublicStore = ()=>{
                                         size: 20
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/publicstore/[username]/page.tsx",
-                                        lineNumber: 142,
+                                        lineNumber: 143,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -967,13 +977,13 @@ const PublicStore = ()=>{
                                         children: user?.city || "---"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/publicstore/[username]/page.tsx",
-                                        lineNumber: 143,
+                                        lineNumber: 144,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/publicstore/[username]/page.tsx",
-                                lineNumber: 141,
+                                lineNumber: 142,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -983,7 +993,7 @@ const PublicStore = ()=>{
                                         size: 20
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/publicstore/[username]/page.tsx",
-                                        lineNumber: 146,
+                                        lineNumber: 147,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -991,20 +1001,20 @@ const PublicStore = ()=>{
                                         children: user?.total_views || 0
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/publicstore/[username]/page.tsx",
-                                        lineNumber: 147,
+                                        lineNumber: 148,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                         children: "مشاهدة"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/publicstore/[username]/page.tsx",
-                                        lineNumber: 148,
+                                        lineNumber: 149,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/publicstore/[username]/page.tsx",
-                                lineNumber: 145,
+                                lineNumber: 146,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1016,7 +1026,7 @@ const PublicStore = ()=>{
                                         children: "إبلاغ"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/publicstore/[username]/page.tsx",
-                                        lineNumber: 151,
+                                        lineNumber: 152,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -1025,36 +1035,65 @@ const PublicStore = ()=>{
                                         children: "تقييم المتجر"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/publicstore/[username]/page.tsx",
-                                        lineNumber: 157,
+                                        lineNumber: 158,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/publicstore/[username]/page.tsx",
-                                lineNumber: 150,
+                                lineNumber: 151,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/(public)/publicstore/[username]/page.tsx",
-                        lineNumber: 140,
+                        lineNumber: 141,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/app/(public)/publicstore/[username]/page.tsx",
-                lineNumber: 111,
+                lineNumber: 112,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                className: "md:hidden  w-full",
+                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
+                    href: "/contact",
+                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        className: " w-full flex items-center justify-center bg-cgreen relative min-h-[150px]",
+                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                            className: "text-white text-xl font-bold whitespace-nowrap  transform-origin-left",
+                            children: "تواصل معنا لعرض إعلانك هنا"
+                        }, void 0, false, {
+                            fileName: "[project]/app/(public)/publicstore/[username]/page.tsx",
+                            lineNumber: 170,
+                            columnNumber: 13
+                        }, this)
+                    }, void 0, false, {
+                        fileName: "[project]/app/(public)/publicstore/[username]/page.tsx",
+                        lineNumber: 169,
+                        columnNumber: 11
+                    }, this)
+                }, void 0, false, {
+                    fileName: "[project]/app/(public)/publicstore/[username]/page.tsx",
+                    lineNumber: 168,
+                    columnNumber: 9
+                }, this)
+            }, void 0, false, {
+                fileName: "[project]/app/(public)/publicstore/[username]/page.tsx",
+                lineNumber: 167,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: "w-full flex-col flex h-full",
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "border-b  mb-4 border-clightgray text-xl text-gray-700",
+                        className: "border-b  mb-4 border-cgreen text-xl font-bold text-cgreen",
                         children: "الاعلانات المنشورة"
                     }, void 0, false, {
                         fileName: "[project]/app/(public)/publicstore/[username]/page.tsx",
-                        lineNumber: 169,
+                        lineNumber: 179,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1080,12 +1119,12 @@ const PublicStore = ()=>{
                                                     offer_type: ad.offer_type
                                                 }, ad.id, false, {
                                                     fileName: "[project]/app/(public)/publicstore/[username]/page.tsx",
-                                                    lineNumber: 178,
+                                                    lineNumber: 188,
                                                     columnNumber: 21
                                                 }, this))
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/publicstore/[username]/page.tsx",
-                                            lineNumber: 176,
+                                            lineNumber: 186,
                                             columnNumber: 17
                                         }, this),
                                         hasMore && mappedAds.length > 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1100,63 +1139,64 @@ const PublicStore = ()=>{
                                                 children: isLoading ? "جاري التحميل..." : "تحميل المزيد"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/publicstore/[username]/page.tsx",
-                                                lineNumber: 196,
+                                                lineNumber: 206,
                                                 columnNumber: 21
                                             }, this)
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/publicstore/[username]/page.tsx",
-                                            lineNumber: 195,
+                                            lineNumber: 205,
                                             columnNumber: 19
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/publicstore/[username]/page.tsx",
-                                    lineNumber: 175,
+                                    lineNumber: 185,
                                     columnNumber: 15
                                 }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                     className: "text-center text-gray-500 py-12",
                                     children: "لا توجد إعلانات حاليًا."
                                 }, void 0, false, {
                                     fileName: "[project]/app/(public)/publicstore/[username]/page.tsx",
-                                    lineNumber: 210,
+                                    lineNumber: 220,
                                     columnNumber: 15
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/app/(public)/publicstore/[username]/page.tsx",
-                                lineNumber: 173,
+                                lineNumber: 183,
                                 columnNumber: 11
                             }, this),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
+                                href: "/contact",
                                 className: "max-md:hidden w-[15%] max-lg:w-[20%] flex items-center justify-center bg-cgreen relative min-h-[330px]",
                                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                     className: "text-white text-xl font-bold whitespace-nowrap rotate-[-90deg] transform-origin-left",
                                     children: "تواصل معنا لعرض إعلانك هنا"
                                 }, void 0, false, {
                                     fileName: "[project]/app/(public)/publicstore/[username]/page.tsx",
-                                    lineNumber: 217,
-                                    columnNumber: 13
+                                    lineNumber: 226,
+                                    columnNumber: 15
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/app/(public)/publicstore/[username]/page.tsx",
-                                lineNumber: 216,
+                                lineNumber: 225,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/(public)/publicstore/[username]/page.tsx",
-                        lineNumber: 172,
+                        lineNumber: 182,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/app/(public)/publicstore/[username]/page.tsx",
-                lineNumber: 168,
+                lineNumber: 178,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/app/(public)/publicstore/[username]/page.tsx",
-        lineNumber: 109,
+        lineNumber: 110,
         columnNumber: 5
     }, this);
 };

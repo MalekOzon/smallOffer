@@ -17,6 +17,7 @@ const Favorites = () => {
 
   if (isLoading) return <SkeletonNotificationSettings />;
 
+
   return (
     <div className="w-full  ">
       <Title title="المفضلة" isPostPage={false} />
@@ -44,8 +45,9 @@ const Favorites = () => {
               isFav={true}
               imageUrl={ad.cover_image ?? placeholderPost }
               id={ad.id}
-              subcat={ad.subcategory}
+              subcat={ad.subcategory ?? ""}
               offer_type={ad.offer_type}
+              fav="added"
             />
             ))}
           </div>

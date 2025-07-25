@@ -38,7 +38,7 @@ export default function GenericPostForm({
   // COVER IMAGE -------------------------------------------------
   const coverImage = watch("cover_image");
   const [preview, setPreview] = useState<string | null>(null);
-  const inputRef = useRef<HTMLInputElement>(null);
+  const inputRef = useRef<HTMLInputElement | null>(null);
 
   // Create preview URL when coverImage changes
   useEffect(() => {
@@ -66,15 +66,13 @@ export default function GenericPostForm({
   };
   // ------------------------------------------------------------------
 
-
-
   // GALLERY -------------------------------------------------
-
-  const MAX_GALLERY_IMAGES  = 7;
-  // State for gallery files (images)
+  const MAX_GALLERY_IMAGES = 7;
   const [galleryFiles, setGalleryFiles] = useState<(File | string)[]>([]);
+  const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
+  const galleryInputRef = useRef<HTMLInputElement | null>(null); // مرجع جديد لإدخال الصور
 
-  // Handler to add or replace image at index
+  // دالة للتعامل مع تغيير الصور في المعرض
   const handleGalleryChange = (
     e: React.ChangeEvent<HTMLInputElement>,
     index: number
@@ -84,42 +82,57 @@ export default function GenericPostForm({
       setGalleryFiles((prev) => {
         const newGallery = [...prev];
         newGallery[index] = file;
+        setValue("gallery", newGallery, {
+          shouldValidate: true,
+          shouldDirty: true,
+        });
         return newGallery;
       });
-      setValue("gallery", [...galleryFiles, file], {
+      // إعادة تعيين قيمة الـ input للسماح باختيار نفس الصورة
+      e.target.value = "";
+    }
+  };
+
+  // دالة لإزالة صورة من المعرض
+  const handleRemoveImage = (index: number) => {
+    setGalleryFiles((prev) => {
+      const newGallery = prev.filter((_, i) => i !== index);
+      setValue("gallery", newGallery, {
         shouldValidate: true,
         shouldDirty: true,
       });
-    }
-  };
-  
-  // Handler to remove image at index
-  const handleRemoveImage = (index: number) => {
-    setGalleryFiles((prev) => prev.filter((_, i) => i !== index));
-    setValue("gallery", galleryFiles.filter((_, i) => i !== index), {
-      shouldValidate: true,
-      shouldDirty: true,
+      return newGallery;
     });
   };
-  
-  // Handler to add new empty slot (up to max 5)
-  const handleAddNewGallerySlot = () => {
-    if (galleryFiles.length < MAX_GALLERY_IMAGES ) {
-      setGalleryFiles((prev) => [...prev, ""]);
-      setValue("gallery", [...galleryFiles, ""], {
-        shouldValidate: true,
-        shouldDirty: true,
+
+  // دالة لإضافة صورة جديدة
+  const handleNewGalleryImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file && galleryFiles.length < MAX_GALLERY_IMAGES) {
+      setGalleryFiles((prev) => {
+        const newGallery = [...prev, file];
+        setValue("gallery", newGallery, {
+          shouldValidate: true,
+          shouldDirty: true,
+        });
+        return newGallery;
       });
+      // إعادة تعيين قيمة الـ input للسماح باختيار نفس الصورة
+      e.target.value = "";
     }
   };
 
-  // To trigger hidden file input per each gallery box
-  const inputRefs = React.useRef<(HTMLInputElement | null)[]>([]);
+  // دالة لفتح نافذة اختيار الملفات
+  const handleAddNewGallerySlot = () => {
+    if (galleryFiles.length < MAX_GALLERY_IMAGES) {
+      galleryInputRef.current?.click();
+    }
+  };
 
+  // دالة لتحريك إدخال الصورة
   const triggerFileInput = (index: number) => {
     inputRefs.current[index]?.click();
   };
-
   // ---------------------------------------------------------
 
   const [isSearch, setIsSearch] = useState<boolean | undefined>(false);
@@ -144,19 +157,17 @@ export default function GenericPostForm({
         formData.append("cover_image", data.cover_image);
       }
     }
-  
+
     formData.append("category", Gcategory);
     formData.append("subcategory", Gsubcategory);
 
     if (galleryFiles && galleryFiles.length > 0) {
-      (galleryFiles as (File | string)[]).forEach((img) => {
+      galleryFiles.forEach((img) => {
         if (img instanceof File) {
           formData.append("gallery", img);
-        } 
+        }
       });
     }
-
-// for (let [key, value] of formData.entries()) {console.log(key, value);}
 
     createPost.mutate(formData);
   };
@@ -176,7 +187,7 @@ export default function GenericPostForm({
       )}
 
       {/* معلومات أساسية */}
-      <section className="bg-white rounded-2xl shadow-lg border border-gray-200 p-8 mb-6 ">
+      <section className="bg-white rounded-2xl shadow-lg border border-gray-200 p-8 mb-6">
         <h2 className="font-bold text-xl text-gray-800 mb-2 text-right">
           معلومات أساسية
         </h2>
@@ -184,13 +195,13 @@ export default function GenericPostForm({
           أدخل معلومات الإعلان الأساسية لتظهر بوضوح للمشترين، مثل العنوان والوصف
           العام والموقع.
         </p>
-        <div className=" mb-6 sm:ml-16 border-b border-clightgray">
+        <div className="mb-6 sm:ml-16 border-b border-clightgray">
           {/* SEARCH || SELL */}
           <h3 className="font-medium mb-3 mt-6 text-lg text-gray-700">
             نوع المنشور
             <span className="text-red-500 text-xl mr-1">*</span>
           </h3>
-          <div className="w-full mt-2 max-w-sm  border-2 border-clightgray p-1.5 rounded-xl mb-6 flex">
+          <div className="w-full mt-2 max-w-sm border-2 border-clightgray p-1.5 rounded-xl mb-6 flex">
             <Button
               type="button"
               className="w-1/2 text-6 font-semibold"
@@ -216,12 +227,11 @@ export default function GenericPostForm({
           </div>
         </div>
 
-
-        <span className="text-lg max-sm:text-sm border p-2 bg-cgreen text-cwhite rounded-md ">ملاحظة:   يوجد زر معاينة المنشور  في الأسفل</span>
+        <span className="text-lg max-sm:text-sm border p-2 bg-cgreen text-cwhite rounded-md">
+          ملاحظة: يوجد زر معاينة المنشور في الأسفل
+        </span>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6 mt-6">
-              
-
-          <div className="sm:ml-16  ">
+          <div className="sm:ml-16">
             <label className="block font-medium text-gray-700 mb-2">
               صورة غلاف المنتج
             </label>
@@ -238,8 +248,8 @@ export default function GenericPostForm({
             {/* Upload Box */}
             <div
               onClick={handleClick}
-              className="w-[70%] max-sm:w-full h-52  border-2 border-dashed border-cgreen rounded-lg flex items-center justify-center cursor-pointer bg-cwhite overflow-hidden"
-              >
+              className="w-[70%] max-sm:w-full h-52 border-2 border-dashed border-cgreen rounded-lg flex items-center justify-center cursor-pointer bg-cwhite overflow-hidden"
+            >
               {preview ? (
                 <Image
                   src={preview}
@@ -254,14 +264,21 @@ export default function GenericPostForm({
             </div>
           </div>
 
-          
-          <input type="hidden" {...register("gallery")} />
           {/* قسم معرض الصور */}
+          <input type="hidden" {...register("gallery")} />
           <div className="sm:ml-16">
             <label className="block font-medium text-gray-700 mb-2">
               صور المنتج
             </label>
-            <div className="flex flex-wrap gap-4 ">
+            <div className="flex flex-wrap gap-4">
+              {/* إدخال مخفي لاختيار صورة جديدة */}
+              <input
+                type="file"
+                accept="image/*"
+                className="hidden"
+                onChange={handleNewGalleryImage}
+                ref={galleryInputRef}
+              />
               {galleryFiles.map((img, index) => {
                 const previewUrl =
                   img instanceof File ? URL.createObjectURL(img) : img;
@@ -269,8 +286,8 @@ export default function GenericPostForm({
                 return (
                   <div
                     key={index}
-                    className="relative max-sm:w-32 w-24  h-24 border-2 border-cgreen rounded-lg overflow-hidden cursor-pointer"
-                    >
+                    className="relative max-sm:w-32 w-24 h-24 border-2 border-cgreen rounded-lg overflow-hidden cursor-pointer"
+                  >
                     <input
                       type="file"
                       accept="image/*"
@@ -280,14 +297,16 @@ export default function GenericPostForm({
                         inputRefs.current[index] = el;
                       }}
                     />
-                    {previewUrl ? (
+                    {previewUrl && img !== "" ? (
                       <Image
                         src={previewUrl}
                         alt={`Gallery image ${index + 1}`}
                         fill
                         style={{ objectFit: "cover" }}
                         onClick={() => triggerFileInput(index)}
-                        onLoad={() => URL.revokeObjectURL(previewUrl)} // تنظيف الذاكرة
+                        onLoad={() =>
+                          img instanceof File && URL.revokeObjectURL(previewUrl)
+                        }
                       />
                     ) : (
                       <div
@@ -302,14 +321,14 @@ export default function GenericPostForm({
                       onClick={() => handleRemoveImage(index)}
                       className="absolute top-0 right-0 bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center"
                     >
-                      &times;
+                      ×
                     </button>
                   </div>
                 );
               })}
 
-              {/* مربع إضافة صورة جديد إذا أقل من 5 صور */}
-              {galleryFiles.length < MAX_GALLERY_IMAGES  && (
+              {/* مربع إضافة صورة جديد إذا أقل من 7 صور */}
+              {galleryFiles.length < MAX_GALLERY_IMAGES && (
                 <div
                   onClick={handleAddNewGallerySlot}
                   className="w-24 h-24 border-2 border-dashed border-cgreen rounded-lg flex items-center justify-center cursor-pointer text-cgreen text-4xl"
@@ -341,9 +360,9 @@ export default function GenericPostForm({
             <select
               required
               {...register("city")}
-              className="mt-1  w-full p-3 border-2 rounded-lg bg-cwhite text-gray-700 focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200"
+              className="mt-1 w-full p-3 border-2 rounded-lg bg-cwhite text-gray-700 focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200"
               style={{
-                borderColor: "#277F60", // لون الحدود
+                borderColor: "#277F60",
               }}
             >
               <option value="">اختر الإدخال</option>
@@ -467,7 +486,7 @@ export default function GenericPostForm({
           {/* زر "معاينة" */}
           <button
             onClick={() => (window.location.href = "/perview")}
-            type="submit"
+            type="button" // تغيير إلى type="button" لمنع إرسال النموذج
             className="mt-8 ml-6 max-sm:ml-0 text-white rounded"
           >
             <span className="flex items-center group outline-2 outline-cgreen text-gray-800 hover:bg-chgreen hover:outline-chgreen hover:text-cwhite py-3 px-12 max-sm:px-[55px] rounded text-xl transition-all duration-300">

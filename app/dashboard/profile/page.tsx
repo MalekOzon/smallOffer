@@ -1,10 +1,6 @@
 "use client";
 
-import {
-  useForm,
-  Controller,
-  SubmitHandler,
-} from "react-hook-form";
+import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useRef, useState } from "react";
@@ -260,7 +256,6 @@ const schema = z.object({
   profile_image: z.union([z.instanceof(File), z.string()]),
 });
 
-
 type FormData = {
   email: string;
   firstName: string;
@@ -295,7 +290,7 @@ const EditProfilePage = () => {
       hood: "",
       detailed_location: "",
       email: "",
-      // profile_image: ""
+      profile_image: "",
     },
   });
 
@@ -314,7 +309,6 @@ const EditProfilePage = () => {
   const [cityFromApi, setCityFromApi] = useState<string>("");
 
   useEffect(() => {
-
     if (data) {
       const code = extractCountryCode(data.phone_number) || "+963";
       const localNumber: string = data.phone_number
@@ -347,18 +341,15 @@ const EditProfilePage = () => {
 
   const onSubmit: SubmitHandler<FormData> = (formData) => {
     const form = new FormData();
-  
+
     form.append("city", formData.city);
     form.append("hood", formData.hood);
     form.append("detailed_location", formData.detailed_location);
-  
+
     if (formData.profile_image instanceof File) {
       form.append("profile_image", formData.profile_image);
-    } else {
-      // في حال كانت صورة قديمة على شكل رابط فقط، يمكنك تجاهلها أو إرسالها كنص إن كانت API تدعمه
-      form.append("profile_image", formData.profile_image);
     }
-  
+
     setUserInfo.mutate(form);
   };
 
@@ -376,7 +367,6 @@ const EditProfilePage = () => {
       setPreview(null);
     }
   }, [coverImage]);
-
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -432,7 +422,6 @@ const EditProfilePage = () => {
               onClick={handleClick}
               className="w-40  h-40 hover:opacity-50 group border-2 rounded-full border-cgreen  flex items-center justify-center cursor-pointer bg-cwhite overflow-hidden"
             >
-              
               {preview ? (
                 <Image
                   src={preview}
@@ -634,46 +623,34 @@ const EditProfilePage = () => {
         {/* المحافظة والمنطقة */}
         <div className="flex w-full gap-4">
           {/* المحافظة */}
-          <div className=" w-1/2">
+          <div className="w-1/2">
             <label
               htmlFor="city"
               className="block text-6 font-medium text-cdarkgray"
             >
               المحافظة
             </label>
-            <Controller
-              name="city"
-              control={control}
-              render={({ field }) => (
-                <Select value={field.value} onValueChange={field.onChange}>
-                  <SelectTrigger
-                    className="border border-clightgray w-full py-5 mt-1 text-6 text-black font-medium "
-                    dir="rtl"
-                  >
-                    <SelectValue
-                      placeholder={data?.city}
-                      className="text-6 text-black font-medium"
-                    />
-                  </SelectTrigger>
-
-                  <SelectContent className="bg-cwhite w-full max-w-full">
-                    {syrianGovernorates.map((gov) => (
-                      <SelectItem
-                        key={gov.value}
-                        className="hover:bg-cgreen hover:text-cwhite text-cdarkgray flex justify-end"
-                        value={gov.value}
-                      >
-                        {gov.name}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              )}
-            />
-
-            {errors.city && (
-              <p className="text-red-500 text-6 mt-1">{errors.city.message}</p>
-            )}
+            <select
+              {...register("city")}
+              required
+              id="city"
+              dir="rtl"
+              className="border border-clightgray w-full py-2.5 mt-1 text-6 text-black font-medium  focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200 rounded-lg"
+              defaultValue=""
+            >
+              <option value="" disabled>
+                {data?.city ?? "اختر الإدخال"}
+              </option>
+              {syrianGovernorates.map((gov) => (
+                <option
+                  key={gov.value}
+                  value={gov.value}
+                  className="text-cdarkgray"
+                >
+                  {gov.name}
+                </option>
+              ))}
+            </select>
           </div>
 
           {/* المنطقة */}
@@ -689,7 +666,7 @@ const EditProfilePage = () => {
               type="text"
               id="hood"
               {...register("hood")}
-              className={`mt-1 p-2 w-full border text-6 font-medium border-clightgray rounded-md focus:outline-none focus:border-blue-500 ${
+              className={`mt-1 p-2 w-full border text-6 font-medium border-clightgray rounded-md focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent  ${
                 errors.hood ? "border-red-500" : ""
               }`}
             />
@@ -712,7 +689,7 @@ const EditProfilePage = () => {
             rows={2}
             {...register("detailed_location")}
             placeholder="تفاصيل العنوان"
-            className={`focus:border-blue-500 mt-1 block w-full p-2 text-6 font-medium border rounded-md focus:outline-none ${
+            className={`focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent  mt-1 block w-full p-2 text-6 font-medium border rounded-md  ${
               errors.detailed_location ? "border-red-500" : "border-gray-300"
             } placeholder:text-gray-400`}
           />

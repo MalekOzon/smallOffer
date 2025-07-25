@@ -12,12 +12,14 @@ interface GenericPostFormProps {
   Gcategory: string;
   Gsubcategory: string;
 }
+
 export const EXTERNAL_FEATURES_CHOICES = [
   ["alloy_wheels", "عجلات معدنية"],
   ["xenon_headlights", "مصابيح أمامية زينون"],
   ["parking_assist", "مساعدة ركن سيارة"],
   ["trailer_hitch", "وصلة مقطورة"],
 ];
+
 export const INTERNAL_FEATURES_CHOICES = [
   ["ac", "تكييف"],
   ["navigation", "نظام ملاحة"],
@@ -29,14 +31,17 @@ export const INTERNAL_FEATURES_CHOICES = [
   ["sunroof", "فتحة سقف/سقف بانورامي"],
   ["non_smoking", "مركبة خالية من التدخين"],
 ];
+
 export const PROTECTION_CHOICES = [
   ["service_book", "تم صيانة دفتر الخدمة"],
   ["abs", "نظام المكابح المانعة للانزلاق ABS"],
 ];
+
 export const STATUS_CHOICES = [
   ["damaged", "متضررة"],
   ["undamaged", "غير متضررة"],
 ];
+
 export const FUEL_CHOICES = [
   ["gasoline", "بنزين"],
   ["diesel", "ديزل"],
@@ -45,10 +50,12 @@ export const FUEL_CHOICES = [
   ["lpg", "غاز البترول المسال"],
   ["cng", "الغاز الطبيعي"],
 ];
+
 export const GEARBOX_CHOICES = [
   ["manual", "غيار يدوي"],
   ["automatic", "غيار أوتوماتيك"],
 ];
+
 export const TYPE_CHOICES = [
   ["small_car", "سيارة صغيرة"],
   ["limousine", "ليموزين"],
@@ -58,12 +65,14 @@ export const TYPE_CHOICES = [
   ["coupe", "كوبيه"],
   ["other", "أنواع أخرى"],
 ];
+
 export const DOORS_CHOICES = [
   ["two_three", "2/3"],
   ["four_five", "4/5"],
   ["six_seven", "6/7"],
   ["other_doors", "عدد مختلف من الأبواب"],
 ];
+
 export const COLOR_CHOICES = [
   ["beige", "بيج"],
   ["blue", "أزرق"],
@@ -80,6 +89,7 @@ export const COLOR_CHOICES = [
   ["white", "أبيض"],
   ["other", "ألوان أخرى"],
 ];
+
 export const INTERNAL_MATERIALS_CHOICES = [
   ["full_leather", "جلد كامل"],
   ["partial_leather", "جلد جزئي"],
@@ -87,6 +97,7 @@ export const INTERNAL_MATERIALS_CHOICES = [
   ["velvet", "مخمل"],
   ["other_materials", "مواد أخرى"],
 ];
+
 export const BRAND_CHOICES = [
   ["alfa_romeo", "ألفا روميو"],
   ["audi", "أودي"],
@@ -132,10 +143,7 @@ export const BRAND_CHOICES = [
   ["other", "ماركات السيارات الأخرى"],
 ];
 
-export default function CarForm({
-  Gcategory,
-  Gsubcategory,
-}: GenericPostFormProps) {
+export default function CarForm({ Gcategory, Gsubcategory }: GenericPostFormProps) {
   const {
     register,
     setValue,
@@ -144,7 +152,6 @@ export default function CarForm({
     formState: { errors },
   } = useForm<CarPostPayload>({});
 
-
   const [notification, setNotification] = useState<{
     message: string;
     type: "success" | "error";
@@ -152,81 +159,110 @@ export default function CarForm({
   const createCarPost = useCreateCarPost(setNotification);
   const { isPending: isLoading } = createCarPost;
 
-////////////////////////////////  // //////////////////////////////////////
+  // COVER IMAGE -------------------------------------------------
+  const coverImage = watch("cover_image");
+  const [preview, setPreview] = useState<string | null>(null);
+  const inputRef = useRef<HTMLInputElement | null>(null);
 
-const coverImage = watch("cover_image");
-const [preview, setPreview] = useState<string | null>(null);
-const inputRef = useRef<HTMLInputElement>(null);
-useEffect(() => {
-  if (coverImage instanceof File) {
-    const objectUrl = URL.createObjectURL(coverImage);
-    setPreview(objectUrl);
-    return () => URL.revokeObjectURL(objectUrl);
-  } else {
-    setPreview(null);
-  }
-}, [coverImage]);
+  useEffect(() => {
+    if (coverImage instanceof File) {
+      const objectUrl = URL.createObjectURL(coverImage);
+      setPreview(objectUrl);
+      return () => URL.revokeObjectURL(objectUrl);
+    } else {
+      setPreview(null);
+    }
+  }, [coverImage]);
 
-const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  const file = e.target.files?.[0];
-  if (file) {
-    setValue("cover_image", file, {
-      shouldValidate: true,
-      shouldDirty: true,
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setValue("cover_image", file, {
+        shouldValidate: true,
+        shouldDirty: true,
+      });
+      e.target.value = ""; // إعادة تعيين قيمة الـ input
+    }
+  };
+
+  const handleClick = () => {
+    inputRef.current?.click();
+  };
+
+  // GALLERY -------------------------------------------------
+  const MAX_GALLERY_IMAGES = 7;
+  const [galleryFiles, setGalleryFiles] = useState<(File | string)[]>([]);
+  const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
+  const galleryInputRef = useRef<HTMLInputElement | null>(null);
+
+  // دالة للتعامل مع تغيير الصور في المعرض
+  const handleGalleryChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    index: number
+  ) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setGalleryFiles((prev) => {
+        const newGallery = [...prev];
+        newGallery[index] = file;
+        setValue("gallery", newGallery, {
+          shouldValidate: true,
+          shouldDirty: true,
+        });
+        return newGallery;
+      });
+      e.target.value = ""; // إعادة تعيين قيمة الـ input
+    }
+  };
+
+  // دالة لإزالة صورة من المعرض
+  const handleRemoveImage = (index: number) => {
+    setGalleryFiles((prev) => {
+      const newGallery = prev.filter((_, i) => i !== index);
+      setValue("gallery", newGallery, {
+        shouldValidate: true,
+        shouldDirty: true,
+      });
+      return newGallery;
     });
-  }
-};
+  };
 
-const handleClick = () => {
-  inputRef.current?.click();
-};
+  // دالة لإضافة صورة جديدة
+  const handleNewGalleryImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file && galleryFiles.length < MAX_GALLERY_IMAGES) {
+      setGalleryFiles((prev) => {
+        const newGallery = [...prev, file];
+        setValue("gallery", newGallery, {
+          shouldValidate: true,
+          shouldDirty: true,
+        });
+        return newGallery;
+      });
+      e.target.value = ""; // إعادة تعيين قيمة الـ input
+    }
+  };
 
-// if (data.cover_image) {
-//   if (data.cover_image instanceof File) {
-//     formData.append("cover_image", data.cover_image);
-//   } else if (typeof data.cover_image === "string") {
-//     formData.append("cover_image", data.cover_image);
-//   }
-// }
+  // دالة لفتح نافذة اختيار الملفات
+  const handleAddNewGallerySlot = () => {
+    if (galleryFiles.length < MAX_GALLERY_IMAGES) {
+      galleryInputRef.current?.click();
+    }
+  };
 
-{/* <div className="sm:ml-16">
-<label className="block font-medium text-gray-700 mb-2">
-  صورة غلاف المنتج
-</label>
+  // دالة لتحريك إدخال الصورة
+  const triggerFileInput = (index: number) => {
+    inputRefs.current[index]?.click();
+  };
 
-<input
-  type="file"
-  accept="image/*"
-  ref={inputRef}
-  onChange={handleImageChange}
-  className="hidden"
-/>
-
-<div
-  onClick={handleClick}
-  className="w-64 h-40 border-2 border-dashed border-cgreen rounded-lg flex items-center justify-center cursor-pointer bg-cwhite overflow-hidden"
->
-  {preview ? (
-    <Image
-      src={preview}
-      alt="preview"
-      width={256}
-      height={160}
-      className="object-cover w-full h-full"
-    />
-  ) : (
-    <span className="text-cgreen text-4xl">+</span>
-  )}
-</div>
-</div> */}
-
-////////////////////////////////  // //////////////////////////////////////
+  // -------------------------------------------------
 
   const [isSearch, setIsSearch] = useState<boolean | undefined>(false);
+
   const onSubmit = (data: CarPostPayload) => {
     console.log("daTA: ", data);
     const formData = new FormData();
-    
+
     formData.append("offer_type", data.offer_type ?? "sell");
     formData.append("title", data.title ?? "");
     formData.append("description", data.description ?? "");
@@ -288,102 +324,82 @@ const handleClick = () => {
 
     formData.append("car_details", JSON.stringify(cleanCarDetails));
 
-    if (data.gallery && data.gallery.length > 0) {
-      if (
-        typeof globalThis.FileList !== "undefined" &&
-        data.gallery instanceof globalThis.FileList
-      ) {
-        Array.from(data.gallery).forEach((img: File) => {
+    if (galleryFiles && galleryFiles.length > 0) {
+      galleryFiles.forEach((img) => {
+        if (img instanceof File) {
           formData.append("gallery", img);
-        });
-      } else if (Array.isArray(data.gallery)) {
-        (data.gallery as string[]).forEach((img) => {
-          formData.append("gallery", img);
-        });
-      }
+        }
+      });
     }
 
     createCarPost.mutate(formData);
   };
 
-
-
   return (
     <form
-    onSubmit={handleSubmit(onSubmit)}
-    className="w-full mx-auto space-y-10"
-  >
-    {/* ------------- Noti -------------- */}
-    {notification && (
-      <Notification
-        message={notification.message}
-        type={notification.type}
-        onClose={() => setNotification(null)}
-      />
-    )}
+      onSubmit={handleSubmit(onSubmit)}
+      className="w-full mx-auto space-y-10"
+    >
+      {/* ------------- Noti -------------- */}
+      {notification && (
+        <Notification
+          message={notification.message}
+          type={notification.type}
+          onClose={() => setNotification(null)}
+        />
+      )}
 
-    {/* معلومات أساسية */}
-    <section className="bg-white rounded-2xl shadow-lg border border-gray-200 p-8 mb-6 ">
-      <h2 className="font-bold text-xl text-gray-800 mb-2 text-right">
-        معلومات أساسية
-      </h2>
-      <p className="text-gray-600 mb-6 text-right">
-        أدخل معلومات الإعلان الأساسية لتظهر بوضوح للمشترين، مثل العنوان والوصف
-        العام والموقع.
-      </p>
-      <div className=" mb-6 sm:ml-16 border-b border-clightgray">
-        {/* SEARCH || SELL */}
-        <h3 className="font-medium mb-3 mt-6 text-lg text-gray-700">
-          نوع المنشور
-          <span className="text-red-500 text-xl mr-1">*</span>
-        </h3>
-        <div className="w-full mt-2 max-w-sm  border-2 border-clightgray p-1.5 rounded-xl mb-6 flex">
-          <Button
-            type="button"
-            className="w-1/2 text-6 font-semibold"
-            variant={isSearch === false ? "primary" : "none"}
-            onClick={() => {
-              setIsSearch(false);
-              setValue("offer_type", "sell");
-            }}
-          >
-            أنا أعرض
-          </Button>
-          <Button
-            type="button"
-            className="w-1/2 text-6 font-semibold"
-            variant={isSearch === true ? "primary" : "none"}
-            onClick={() => {
-              setIsSearch(true);
-              setValue("offer_type", "search");
-            }}
-          >
-            أنا أبحث
-          </Button>
-        </div>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-        <div className="sm:ml-16">
-          <label className="block font-medium text-gray-700">
-            اسم المنتج
+      {/* معلومات أساسية */}
+      <section className="bg-white rounded-2xl shadow-lg border border-gray-200 p-8 mb-6">
+        <h2 className="font-bold text-xl text-gray-800 mb-2 text-right">
+          معلومات أساسية
+        </h2>
+        <p className="text-gray-600 mb-6 text-right">
+          أدخل معلومات الإعلان الأساسية لتظهر بوضوح للمشترين، مثل العنوان والوصف
+          العام والموقع.
+        </p>
+        <div className="mb-6 sm:ml-16 border-b border-clightgray">
+          {/* SEARCH || SELL */}
+          <h3 className="font-medium mb-3 mt-6 text-lg text-gray-700">
+            نوع المنشور
             <span className="text-red-500 text-xl mr-1">*</span>
-          </label>
-          <input
-            required
-            {...register("title")}
-            type="text"
-            placeholder="اسم المنتج"
-            className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
-          />
+          </h3>
+          <div className="w-full mt-2 max-w-sm border-2 border-clightgray p-1.5 rounded-xl mb-6 flex">
+            <Button
+              type="button"
+              className="w-1/2 text-6 font-semibold"
+              variant={isSearch === false ? "primary" : "none"}
+              onClick={() => {
+                setIsSearch(false);
+                setValue("offer_type", "sell");
+              }}
+            >
+              أنا أعرض
+            </Button>
+            <Button
+              type="button"
+              className="w-1/2 text-6 font-semibold"
+              variant={isSearch === true ? "primary" : "none"}
+              onClick={() => {
+                setIsSearch(true);
+                setValue("offer_type", "search");
+              }}
+            >
+              أنا أبحث
+            </Button>
+          </div>
         </div>
 
-        <div className="sm:ml-16">
+        <span className="text-lg max-sm:text-sm border p-2 bg-cgreen text-cwhite rounded-md">
+          ملاحظة: يوجد زر معاينة المنشور في الأسفل
+        </span>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-6">
+
+
+          <div className="sm:ml-16">
             <label className="block font-medium text-gray-700 mb-2">
               صورة غلاف المنتج
             </label>
-
-            {/* Hidden File Input */}
             <input
               type="file"
               accept="image/*"
@@ -391,8 +407,6 @@ const handleClick = () => {
               onChange={handleImageChange}
               className="hidden"
             />
-
-            {/* Upload Box */}
             <div
               onClick={handleClick}
               className="w-64 h-40 border-2 border-dashed border-cgreen rounded-lg flex items-center justify-center cursor-pointer bg-cwhite overflow-hidden"
@@ -411,93 +425,165 @@ const handleClick = () => {
             </div>
           </div>
 
-        <div className="sm:ml-16">
-          <label className="block font-medium text-gray-700">
-            صور المنتج
-          </label>
-          <input
-            type="file"
-            multiple
-            {...register("gallery")}
-            className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
-          />
-        </div>
+          <div className="sm:ml-16">
+            <label className="block font-medium text-gray-700 mb-2">
+              صور المنتج
+            </label>
+            <div className="flex flex-wrap gap-4">
+              <input
+                type="file"
+                accept="image/*"
+                className="hidden"
+                onChange={handleNewGalleryImage}
+                ref={galleryInputRef}
+              />
+              {galleryFiles.map((img, index) => {
+                const previewUrl =
+                  img instanceof File ? URL.createObjectURL(img) : img;
 
-        <div className="sm:ml-16">
-          <label className="block font-medium text-gray-700">
-            المحافظة
-            <span className="text-red-500 text-xl mr-1">*</span>
-          </label>
-          <select
-            required
-            {...register("city")}
-            className="mt-1  w-full p-3 border-2 rounded-lg bg-cwhite text-gray-700 focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200"
-            style={{
-              borderColor: "#277F60", // لون الحدود
-            }}
-          >
-            <option value="">اختر الإدخال</option>
-            {syrianGovernorates.map((gov) => (
-              <option key={gov.value} value={gov.value}>
-                {gov.name}
-              </option>
-            ))}
-          </select>
-        </div>
+                return (
+                  <div
+                    key={index}
+                    className="relative max-sm:w-32 w-24 h-24 border-2 border-cgreen rounded-lg overflow-hidden cursor-pointer"
+                  >
+                    <input
+                      type="file"
+                      accept="image/*"
+                      className="hidden"
+                      onChange={(e) => handleGalleryChange(e, index)}
+                      ref={(el) => {
+                        inputRefs.current[index] = el;
+                      }}
+                    />
+                    {previewUrl && img !== "" ? (
+                      <Image
+                        src={previewUrl}
+                        alt={`Gallery image ${index + 1}`}
+                        fill
+                        style={{ objectFit: "cover" }}
+                        onClick={() => triggerFileInput(index)}
+                        onLoad={() =>
+                          img instanceof File && URL.revokeObjectURL(previewUrl)
+                        }
+                      />
+                    ) : (
+                      <div
+                        onClick={() => triggerFileInput(index)}
+                        className="flex justify-center items-center w-full h-full text-cgreen text-4xl"
+                      >
+                        +
+                      </div>
+                    )}
+                    <button
+                      type="button"
+                      onClick={() => handleRemoveImage(index)}
+                      className="absolute top-0 right-0 bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center"
+                    >
+                      ×
+                    </button>
+                  </div>
+                );
+              })}
+              {galleryFiles.length < MAX_GALLERY_IMAGES && (
+                <div
+                  onClick={handleAddNewGallerySlot}
+                  className="w-24 h-24 border-2 border-dashed border-cgreen rounded-lg flex items-center justify-center cursor-pointer text-cgreen text-4xl"
+                >
+                  +
+                </div>
+              )}
+            </div>
+          </div>
+          <div className="sm:ml-16">
+            <label className="block font-medium text-gray-700">
+              اسم المنتج
+              <span className="text-red-500 text-xl mr-1">*</span>
+            </label>
+            <input
+              required
+              {...register("title")}
+              type="text"
+              placeholder="اسم المنتج"
+              className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
+            />
+          </div>
 
-        <div className="sm:ml-16">
-          <label className="block font-medium text-gray-700">
-            المنطقة
-            <span className="text-red-500 text-xl mr-1">*</span>
-          </label>
-          <input
-            required
-            {...register("hood")}
-            className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
-            placeholder="المنطقة"
-          />
-          {errors.hood && (
-            <p className="text-red-600 text-sm mt-1">
-              {String(errors.hood.message)}
-            </p>
-          )}
+          <div className="sm:ml-16">
+            <label className="block font-medium text-gray-700">
+              المحافظة
+              <span className="text-red-500 text-xl mr-1">*</span>
+            </label>
+            <select
+              required
+              {...register("city")}
+              className="mt-1 w-full p-3 border-2 rounded-lg bg-cwhite text-gray-700 focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200"
+              style={{
+                borderColor: "#277F60",
+              }}
+            >
+              <option value="">اختر الإدخال</option>
+              {syrianGovernorates.map((gov) => (
+                <option key={gov.value} value={gov.value}>
+                  {gov.name}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className="sm:ml-16">
+            <label className="block font-medium text-gray-700">
+              المنطقة
+              <span className="text-red-500 text-xl mr-1">*</span>
+            </label>
+            <input
+              required
+              {...register("hood")}
+              className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
+              placeholder="المنطقة"
+            />
+            {errors.hood && (
+              <p className="text-red-600 text-sm mt-1">
+                {String(errors.hood.message)}
+              </p>
+            )}
+          </div>
         </div>
-      </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6 sm:ml-16">
-        <div className="flex flex-col gap-2 md:col-span-2">
-          <label className="block font-medium text-gray-700">
-            تفاصيل العنوان
-          </label>
-          <input
-            {...register("detailed_location")}
-            className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
-            placeholder="تفاصيل العنوان"
-          />
-          {errors.detailed_location && (
-            <p className="text-red-600 text-sm mt-1">
-              {String(errors.detailed_location.message)}
-            </p>
-          )}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6 sm:ml-16">
+          <div className="flex flex-col gap-2 md:col-span-2">
+            <label className="block font-medium text-gray-700">
+              تفاصيل العنوان
+            </label>
+            <input
+              {...register("detailed_location")}
+              className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
+              placeholder="تفاصيل العنوان"
+            />
+            {errors.detailed_location && (
+              <p className="text-red-600 text-sm mt-1">
+                {String(errors.detailed_location.message)}
+              </p>
+            )}
+          </div>
+          <div className="flex flex-col gap-2 md:col-span-2">
+            <label className="block font-medium text-gray-700">
+              وصف المنتج
+              <span className="text-red-500 text-xl mr-1">*</span>
+            </label>
+            <textarea
+              required
+              {...register("description")}
+              className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
+              placeholder="ادخل وصف المنتج هنا"
+            />
+            {errors.description && (
+              <p className="text-red-600 text-sm mt-1">
+                {String(errors.description.message)}
+              </p>
+            )}
+          </div>
         </div>
-        <div className="flex flex-col gap-2 md:col-span-2">
-          <label className="block font-medium text-gray-700">
-            وصف المنتج
-            <span className="text-red-500 text-xl mr-1">*</span>
-          </label>
-          <textarea
-            required
-            {...register("description")}
-            className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
-            placeholder="ادخل وصف المنتج هنا"
-          />
-          {errors.description && (
-            <p className="text-red-600 text-sm mt-1">
-              {String(errors.description.message)}
-            </p>
-          )}
-        </div>
-      </div>
-    </section>
+      </section>
+
       {/* سعر المنتج */}
       <section className="bg-white rounded-2xl shadow-lg border border-gray-200 p-8">
         <h2 className="font-bold text-xl text-gray-800 mb-2 text-right">
@@ -514,9 +600,8 @@ const handleClick = () => {
               <span className="text-red-500 text-xl mr-1">*</span>
             </label>
             <input
-                        type="number"
-
-            required
+              type="number"
+              required
               {...register("price")}
               className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
               placeholder="ادخل سعر المنتج"
@@ -525,13 +610,14 @@ const handleClick = () => {
         </div>
 
         <div className="flex flex-col gap-2">
-          <label className="block font-medium text-gray-700">نوع السعر
-          <span className="text-red-500 text-xl mr-1">*</span>
+          <label className="block font-medium text-gray-700">
+            نوع السعر
+            <span className="text-red-500 text-xl mr-1">*</span>
           </label>
           <div className="flex flex-wrap gap-4 mt-2">
             <label className="ml-2 flex items-center gap-2 text-gray-700 cursor-pointer">
               <input
-              required
+                required
                 type="radio"
                 value="negotiable"
                 {...register("price_type")}
@@ -551,19 +637,20 @@ const handleClick = () => {
           </div>
         </div>
       </section>
-      {/* --------------------------------------------------------------------------------------------------------------------------------------------------- */}
+
+      {/* تفاصيل السيارة */}
       <section className="bg-white rounded-2xl shadow-lg border border-gray-200 p-8 mb-6">
         <h2 className="text-xl font-bold mb-4">تفاصيل السيارة</h2>
-        {/* ---------------------------- */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="sm:ml-16">
-            <label className="block font-medium text-gray-700">الماركة
-            <span className="text-red-500 text-xl mr-1">*</span>
+            <label className="block font-medium text-gray-700">
+              الماركة
+              <span className="text-red-500 text-xl mr-1">*</span>
             </label>
             <select
-            required
+              required
               {...register("car.brand")}
-              className="mt-1  w-full p-3 py-3.5 border-2 rounded-lg bg-cwhite text-gray-700 focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200"
+              className="mt-1 w-full p-3 py-3.5 border-2 rounded-lg bg-cwhite text-gray-700 focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200"
               style={{
                 borderColor: "#277F60",
               }}
@@ -592,7 +679,7 @@ const handleClick = () => {
               <span className="text-red-500 text-xl mr-1">*</span>
             </label>
             <input
-            required
+              required
               type="number"
               {...register("car.mileage", { valueAsNumber: true })}
               className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
@@ -603,8 +690,8 @@ const handleClick = () => {
           <div className="sm:ml-16">
             <label className="block font-medium text-gray-700">الأداء</label>
             <input
-            type="number"
-              {...register("car.performance")}
+              type="number"
+              {...register("car.performance", { valueAsNumber: true })}
               className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
               dir="rtl"
               placeholder="مثال: 150 حصان"
@@ -615,7 +702,7 @@ const handleClick = () => {
             <label className="block font-medium text-gray-700">اللون</label>
             <select
               {...register("car.color")}
-              className="mt-1  w-full p-3 py-3.5 border-2 rounded-lg bg-cwhite text-gray-700 focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200"
+              className="mt-1 w-full p-3 py-3.5 border-2 rounded-lg bg-cwhite text-gray-700 focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200"
               style={{
                 borderColor: "#277F60",
               }}
@@ -636,11 +723,11 @@ const handleClick = () => {
               <span className="text-red-500 text-xl mr-1">*</span>
             </label>
             <input
-            required
+              required
               type="number"
               placeholder="ادخل سنة التسجيل"
-              {...register("car.first_registration")}
-              className="mt-1  w-full p-3 py-3.5 border-2 rounded-lg bg-cwhite text-gray-700 focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200"
+              {...register("car.first_registration", { valueAsNumber: true })}
+              className="mt-1 w-full p-3 py-3.5 border-2 rounded-lg bg-cwhite text-gray-700 focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200"
               style={{
                 borderColor: "#277F60",
               }}
@@ -655,7 +742,7 @@ const handleClick = () => {
             <input
               type="date"
               {...register("car.hu")}
-              className="mt-1  w-full p-3 py-3.5 border-2 rounded-lg bg-cwhite text-gray-700 focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200"
+              className="mt-1 w-full p-3 py-3.5 border-2 rounded-lg bg-cwhite text-gray-700 focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200"
               style={{
                 borderColor: "#277F60",
               }}
@@ -672,7 +759,7 @@ const handleClick = () => {
               <span className="text-red-500 text-xl mr-1">*</span>
             </label>
             <input
-            required
+              required
               {...register("car.environmental_sticker")}
               className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
               dir="rtl"
@@ -685,7 +772,7 @@ const handleClick = () => {
               <span className="text-red-500 text-xl mr-1">*</span>
             </label>
             <input
-            required
+              required
               {...register("car.class_of_pollutants")}
               className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
               dir="rtl"
@@ -693,14 +780,13 @@ const handleClick = () => {
           </div>
         </div>
 
-        {/* حقول المصفوفات -------------------------------------------------------------------------------------*/}
+        {/* حقول المصفوفات */}
         <div className="space-y-4 mt-6">
           <div className="sm:ml-16 bg-cwhite rounded-md p-2 shadow-md">
             <label className="block font-medium text-gray-700">
               اختر حالة السيارة
               <span className="text-red-500 text-xl mr-1">*</span>
             </label>
-            {/* قائمة الخيارات */}
             <div className="flex flex-wrap gap-4 mt-2">
               {STATUS_CHOICES.map(([value, label]) => (
                 <label
@@ -708,10 +794,10 @@ const handleClick = () => {
                   className="flex items-center gap-1 ml-2 text-gray-700 cursor-pointer"
                 >
                   <input
-                  required
+                    required
                     type="radio"
                     value={value}
-                    {...register("car.status")} // اسم الحقل في النموذج
+                    {...register("car.status")}
                     className="accent-cgreen"
                   />
                   <span>{label}</span>
@@ -724,7 +810,6 @@ const handleClick = () => {
               اختر ناقل الحركة
               <span className="text-red-500 text-xl mr-1">*</span>
             </label>
-            {/* قائمة الخيارات */}
             <div className="flex flex-wrap gap-4 mt-2">
               {GEARBOX_CHOICES.map(([value, label]) => (
                 <label
@@ -732,10 +817,10 @@ const handleClick = () => {
                   className="flex items-center gap-1 ml-2 text-gray-700 cursor-pointer"
                 >
                   <input
-                  required
+                    required
                     type="radio"
                     value={value}
-                    {...register("car.gearbox")} // اسم الحقل في النموذج
+                    {...register("car.gearbox")}
                     className="accent-cgreen"
                   />
                   <span>{label}</span>
@@ -745,11 +830,9 @@ const handleClick = () => {
           </div>
 
           <div className="sm:ml-16 bg-cwhite rounded-md p-2 shadow-md">
-            {/* عنوان اختيار  عدد الأبواب */}
             <label className="block font-medium text-gray-700">
               عدد الأبواب
             </label>
-            {/* قائمة الخيارات */}
             <div className="flex flex-wrap gap-4 mt-2">
               {DOORS_CHOICES.map(([value, label]) => (
                 <label
@@ -759,7 +842,7 @@ const handleClick = () => {
                   <input
                     type="radio"
                     value={value}
-                    {...register("car.number_of_doors")} // اسم الحقل في النموذج
+                    {...register("car.number_of_doors")}
                     className="accent-cgreen"
                   />
                   <span>{label}</span>
@@ -769,11 +852,9 @@ const handleClick = () => {
           </div>
 
           <div className="sm:ml-16 bg-cwhite rounded-md p-2 shadow-md">
-            {/* عنوان اختيار المواد الداخلية */}
             <label className="block font-medium text-gray-700">
               المواد الداخلية
             </label>
-            {/* قائمة الخيارات */}
             <div className="flex flex-wrap gap-4 mt-2">
               {INTERNAL_MATERIALS_CHOICES.map(([value, label]) => (
                 <label
@@ -783,7 +864,7 @@ const handleClick = () => {
                   <input
                     type="radio"
                     value={value}
-                    {...register("car.internal_materials")} // اسم الحقل في النموذج
+                    {...register("car.internal_materials")}
                     className="accent-cgreen"
                   />
                   <span>{label}</span>
@@ -793,23 +874,21 @@ const handleClick = () => {
           </div>
 
           <div className="sm:ml-16 bg-cwhite rounded-md p-2 shadow-md">
-            {/* اختيار نوع الوقود */}
             <label className="block font-medium text-gray-700">
               اختر نوع الوقود
-              <span className="text-red-500 text-xl mr-1">*</span>  
+              <span className="text-red-500 text-xl mr-1">*</span>
             </label>
-            <div className="flex flex-wrap gap-2 mt-2 ">
+            <div className="flex flex-wrap gap-2 mt-2">
               {FUEL_CHOICES.map(([value, label]) => (
                 <label
                   key={value}
                   className="flex items-center gap-1 ml-2 text-gray-700 cursor-pointer"
                 >
-                  {" "}
                   <input
-                  required
+                    required
                     type="radio"
                     value={value}
-                    {...register("car.fuel_type")} // اسم الحقل في النموذج
+                    {...register("car.fuel_type")}
                     className="accent-cgreen"
                   />
                   <span>{label}</span>
@@ -818,11 +897,9 @@ const handleClick = () => {
             </div>
           </div>
           <div className="sm:ml-16 bg-cwhite rounded-md p-2 shadow-md">
-            {/* عنوان اختيار نوع السيارة */}
             <label className="block font-medium text-gray-700">
               نوع السيارة
             </label>
-            {/* قائمة الخيارات */}
             <div className="flex flex-wrap gap-4 mt-2">
               {TYPE_CHOICES.map(([value, label]) => (
                 <label
@@ -832,7 +909,7 @@ const handleClick = () => {
                   <input
                     type="radio"
                     value={value}
-                    {...register("car.car_type")} // اسم الحقل في النموذج
+                    {...register("car.car_type")}
                     className="accent-cgreen"
                   />
                   <span>{label}</span>
@@ -845,7 +922,7 @@ const handleClick = () => {
             <label className="block font-medium text-gray-700">
               أنظمة الحماية
             </label>
-            <div className="flex flex-wrap gap-2 mt-2 ">
+            <div className="flex flex-wrap gap-2 mt-2">
               {PROTECTION_CHOICES.map(([value, label]) => (
                 <label
                   key={value}
@@ -867,7 +944,7 @@ const handleClick = () => {
             <label className="block font-medium text-gray-700">
               المميزات الخارجية
             </label>
-            <div className="flex flex-wrap gap-2 mt-2 ">
+            <div className="flex flex-wrap gap-2 mt-2">
               {EXTERNAL_FEATURES_CHOICES.map(([value, label]) => (
                 <label
                   key={value}
@@ -889,7 +966,7 @@ const handleClick = () => {
             <label className="block font-medium text-gray-700">
               المميزات الداخلية
             </label>
-            <div className="flex flex-wrap gap-2 mt-2 ">
+            <div className="flex flex-wrap gap-2 mt-2">
               {INTERNAL_FEATURES_CHOICES.map(([value, label]) => (
                 <label
                   key={value}
@@ -912,8 +989,8 @@ const handleClick = () => {
         <div className="flex justify-end max-sm:flex-col max-sm:justify-center max-sm:items-center max-sm:gap-4 mb-5">
           {/* زر "معاينة" */}
           <button
+            type="button" // تغيير إلى button لمنع إرسال النموذج
             onClick={() => (window.location.href = "/perview")}
-            type="submit"
             className="mt-8 ml-6 max-sm:ml-0 text-white rounded"
           >
             <span className="flex items-center group outline-2 outline-cgreen text-gray-800 hover:bg-chgreen hover:outline-chgreen hover:text-cwhite py-3 px-12 max-sm:px-[55px] rounded text-xl transition-all duration-300">

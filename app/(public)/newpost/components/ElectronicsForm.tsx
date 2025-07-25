@@ -19,6 +19,7 @@ export const STATUS_CHOICES = [
   ["working_good", "يعمل بشكل جيد"],
   ["defective", "عيب (يحتاج صيانة)"],
 ];
+
 export default function ElectronicsForm({
   Gcategory,
   Gsubcategory,
@@ -31,9 +32,6 @@ export default function ElectronicsForm({
     formState: { errors },
   } = useForm<ElectronicsPostPayload>({});
 
-
-
-
   const [notification, setNotification] = useState<{
     message: string;
     type: "success" | "error";
@@ -41,45 +39,110 @@ export default function ElectronicsForm({
   const CreateElectronicsPost = useCreateElectronicsPost(setNotification);
   const { isPending: isLoading } = CreateElectronicsPost;
 
+  // COVER IMAGE -------------------------------------------------
+  const coverImage = watch("cover_image");
+  const [preview, setPreview] = useState<string | null>(null);
+  const inputRef = useRef<HTMLInputElement | null>(null);
 
-  
-////////////////////////////////  // //////////////////////////////////////
+  useEffect(() => {
+    if (coverImage instanceof File) {
+      const objectUrl = URL.createObjectURL(coverImage);
+      setPreview(objectUrl);
+      return () => URL.revokeObjectURL(objectUrl);
+    } else {
+      setPreview(null);
+    }
+  }, [coverImage]);
 
-const coverImage = watch("cover_image");
-const [preview, setPreview] = useState<string | null>(null);
-const inputRef = useRef<HTMLInputElement>(null);
-useEffect(() => {
-  if (coverImage instanceof File) {
-    const objectUrl = URL.createObjectURL(coverImage);
-    setPreview(objectUrl);
-    return () => URL.revokeObjectURL(objectUrl);
-  } else {
-    setPreview(null);
-  }
-}, [coverImage]);
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setValue("cover_image", file, {
+        shouldValidate: true,
+        shouldDirty: true,
+      });
+      e.target.value = ""; // إعادة تعيين قيمة الـ input
+    }
+  };
 
-const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  const file = e.target.files?.[0];
-  if (file) {
-    setValue("cover_image", file, {
-      shouldValidate: true,
-      shouldDirty: true,
+  const handleClick = () => {
+    inputRef.current?.click();
+  };
+
+  // GALLERY -------------------------------------------------
+  const MAX_GALLERY_IMAGES = 7;
+  const [galleryFiles, setGalleryFiles] = useState<(File | string)[]>([]);
+  const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
+  const galleryInputRef = useRef<HTMLInputElement | null>(null);
+
+  // دالة للتعامل مع تغيير الصور في المعرض
+  const handleGalleryChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    index: number
+  ) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setGalleryFiles((prev) => {
+        const newGallery = [...prev];
+        newGallery[index] = file;
+        setValue("gallery", newGallery, {
+          shouldValidate: true,
+          shouldDirty: true,
+        });
+        return newGallery;
+      });
+      e.target.value = ""; // إعادة تعيين قيمة الـ input
+    }
+  };
+
+  // دالة لإزالة صورة من المعرض
+  const handleRemoveImage = (index: number) => {
+    setGalleryFiles((prev) => {
+      const newGallery = prev.filter((_, i) => i !== index);
+      setValue("gallery", newGallery, {
+        shouldValidate: true,
+        shouldDirty: true,
+      });
+      return newGallery;
     });
-  }
-};
+  };
 
-const handleClick = () => {
-  inputRef.current?.click();
-};
+  // دالة لإضافة صورة جديدة
+  const handleNewGalleryImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file && galleryFiles.length < MAX_GALLERY_IMAGES) {
+      setGalleryFiles((prev) => {
+        const newGallery = [...prev, file];
+        setValue("gallery", newGallery, {
+          shouldValidate: true,
+          shouldDirty: true,
+        });
+        return newGallery;
+      });
+      e.target.value = ""; // إعادة تعيين قيمة الـ input
+    }
+  };
 
-////////////////////////////////  // //////////////////////////////////////
+  // دالة لفتح نافذة اختيار الملفات
+  const handleAddNewGallerySlot = () => {
+    if (galleryFiles.length < MAX_GALLERY_IMAGES) {
+      galleryInputRef.current?.click();
+    }
+  };
+
+  // دالة لتحريك إدخال الصورة
+  const triggerFileInput = (index: number) => {
+    inputRefs.current[index]?.click();
+  };
+
+  // -------------------------------------------------
 
   const [isSearch, setIsSearch] = useState<boolean | undefined>(false);
-  
+
   const onSubmit = (data: ElectronicsPostPayload) => {
     console.log("daTA: ", data);
     const formData = new FormData();
-    
+
     formData.append("offer_type", data.offer_type ?? "sell");
     formData.append("title", data.title ?? "");
     formData.append("description", data.description ?? "");
@@ -89,13 +152,13 @@ const handleClick = () => {
     formData.append("hood", data.hood ?? "");
     formData.append("detailed_location", data.detailed_location ?? "");
 
-if (data.cover_image) {
-  if (data.cover_image instanceof File) {
-    formData.append("cover_image", data.cover_image);
-  } else if (typeof data.cover_image === "string") {
-    formData.append("cover_image", data.cover_image);
-  }
-}
+    if (data.cover_image) {
+      if (data.cover_image instanceof File) {
+        formData.append("cover_image", data.cover_image);
+      } else if (typeof data.cover_image === "string") {
+        formData.append("cover_image", data.cover_image);
+      }
+    }
 
     formData.append("category", Gcategory);
     formData.append("subcategory", Gsubcategory);
@@ -106,28 +169,19 @@ if (data.cover_image) {
 
     formData.append("electronics_details", JSON.stringify(electronicsDetails));
 
-    if (data.gallery && data.gallery.length > 0) {
-      if (
-        typeof globalThis.FileList !== "undefined" &&
-        data.gallery instanceof globalThis.FileList
-      ) {
-        Array.from(data.gallery).forEach((img: File) => {
+    if (galleryFiles && galleryFiles.length > 0) {
+      galleryFiles.forEach((img) => {
+        if (img instanceof File) {
           formData.append("gallery", img);
-        });
-      } else if (Array.isArray(data.gallery)) {
-        (data.gallery as string[]).forEach((img) => {
-          formData.append("gallery", img);
-        });
-      }
+        }
+      });
     }
 
     CreateElectronicsPost.mutate(formData);
   };
 
-
-
   return (
-<form
+    <form
       onSubmit={handleSubmit(onSubmit)}
       className="w-full mx-auto space-y-10"
     >
@@ -141,7 +195,7 @@ if (data.cover_image) {
       )}
 
       {/* معلومات أساسية */}
-      <section className="bg-white rounded-2xl shadow-lg border border-gray-200 p-8 mb-6 ">
+      <section className="bg-white rounded-2xl shadow-lg border border-gray-200 p-8 mb-6">
         <h2 className="font-bold text-xl text-gray-800 mb-2 text-right">
           معلومات أساسية
         </h2>
@@ -149,13 +203,13 @@ if (data.cover_image) {
           أدخل معلومات الإعلان الأساسية لتظهر بوضوح للمشترين، مثل العنوان والوصف
           العام والموقع.
         </p>
-        <div className=" mb-6 sm:ml-16 border-b border-clightgray">
+        <div className="mb-6 sm:ml-16 border-b border-clightgray">
           {/* SEARCH || SELL */}
           <h3 className="font-medium mb-3 mt-6 text-lg text-gray-700">
             نوع المنشور
             <span className="text-red-500 text-xl mr-1">*</span>
           </h3>
-          <div className="w-full mt-2 max-w-sm  border-2 border-clightgray p-1.5 rounded-xl mb-6 flex">
+          <div className="w-full mt-2 max-w-sm border-2 border-clightgray p-1.5 rounded-xl mb-6 flex">
             <Button
               type="button"
               className="w-1/2 text-6 font-semibold"
@@ -181,7 +235,108 @@ if (data.cover_image) {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <span className="text-lg max-sm:text-sm border p-2 bg-cgreen text-cwhite rounded-md">
+          ملاحظة: يوجد زر معاينة المنشور في الأسفل
+        </span>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-6">
+          <div className="sm:ml-16">
+            <label className="block font-medium text-gray-700 mb-2">
+              صورة غلاف المنتج
+            </label>
+            <input
+              type="file"
+              accept="image/*"
+              ref={inputRef}
+              onChange={handleImageChange}
+              className="hidden"
+            />
+            <div
+              onClick={handleClick}
+              className="w-64 h-40 border-2 border-dashed border-cgreen rounded-lg flex items-center justify-center cursor-pointer bg-cwhite overflow-hidden"
+            >
+              {preview ? (
+                <Image
+                  src={preview}
+                  alt="preview"
+                  width={256}
+                  height={160}
+                  className="object-cover w-full h-full"
+                />
+              ) : (
+                <span className="text-cgreen text-4xl">+</span>
+              )}
+            </div>
+          </div>
+
+          <div className="sm:ml-16">
+            <label className="block font-medium text-gray-700 mb-2">
+              صور المنتج
+            </label>
+            <div className="flex flex-wrap gap-4">
+              <input
+                type="file"
+                accept="image/*"
+                className="hidden"
+                onChange={handleNewGalleryImage}
+                ref={galleryInputRef}
+              />
+              {galleryFiles.map((img, index) => {
+                const previewUrl =
+                  img instanceof File ? URL.createObjectURL(img) : img;
+
+                return (
+                  <div
+                    key={index}
+                    className="relative max-sm:w-32 w-24 h-24 border-2 border-cgreen rounded-lg overflow-hidden cursor-pointer"
+                  >
+                    <input
+                      type="file"
+                      accept="image/*"
+                      className="hidden"
+                      onChange={(e) => handleGalleryChange(e, index)}
+                      ref={(el) => {
+                        inputRefs.current[index] = el;
+                      }}
+                    />
+                    {previewUrl && img !== "" ? (
+                      <Image
+                        src={previewUrl}
+                        alt={`Gallery image ${index + 1}`}
+                        fill
+                        style={{ objectFit: "cover" }}
+                        onClick={() => triggerFileInput(index)}
+                        onLoad={() =>
+                          img instanceof File && URL.revokeObjectURL(previewUrl)
+                        }
+                      />
+                    ) : (
+                      <div
+                        onClick={() => triggerFileInput(index)}
+                        className="flex justify-center items-center w-full h-full text-cgreen text-4xl"
+                      >
+                        +
+                      </div>
+                    )}
+                    <button
+                      type="button"
+                      onClick={() => handleRemoveImage(index)}
+                      className="absolute top-0 right-0 bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center"
+                    >
+                      ×
+                    </button>
+                  </div>
+                );
+              })}
+              {galleryFiles.length < MAX_GALLERY_IMAGES && (
+                <div
+                  onClick={handleAddNewGallerySlot}
+                  className="w-24 h-24 border-2 border-dashed border-cgreen rounded-lg flex items-center justify-center cursor-pointer text-cgreen text-4xl"
+                >
+                  +
+                </div>
+              )}
+            </div>
+          </div>
           <div className="sm:ml-16">
             <label className="block font-medium text-gray-700">
               اسم المنتج
@@ -195,50 +350,6 @@ if (data.cover_image) {
               className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
             />
           </div>
-
-
-<div className="sm:ml-16">
-<label className="block font-medium text-gray-700 mb-2">
-  صورة غلاف المنتج
-</label>
-
-<input
-  type="file"
-  accept="image/*"
-  ref={inputRef}
-  onChange={handleImageChange}
-  className="hidden"
-/>
-
-<div
-  onClick={handleClick}
-  className="w-64 h-40 border-2 border-dashed border-cgreen rounded-lg flex items-center justify-center cursor-pointer bg-cwhite overflow-hidden"
->
-  {preview ? (
-    <Image
-      src={preview}
-      alt="preview"
-      width={256}
-      height={160}
-      className="object-cover w-full h-full"
-    />
-  ) : (
-    <span className="text-cgreen text-4xl">+</span>
-  )}
-</div>
-</div>
-          <div className="sm:ml-16">
-            <label className="block font-medium text-gray-700">
-              صور المنتج
-            </label>
-            <input
-              type="file"
-              multiple
-              {...register("gallery")}
-              className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
-            />
-          </div>
-
           <div className="sm:ml-16">
             <label className="block font-medium text-gray-700">
               المحافظة
@@ -247,9 +358,9 @@ if (data.cover_image) {
             <select
               required
               {...register("city")}
-              className="mt-1  w-full p-3 border-2 rounded-lg bg-cwhite text-gray-700 focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200"
+              className="mt-1 w-full p-3 border-2 rounded-lg bg-cwhite text-gray-700 focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200"
               style={{
-                borderColor: "#277F60", // لون الحدود
+                borderColor: "#277F60",
               }}
             >
               <option value="">اختر الإدخال</option>
@@ -330,9 +441,9 @@ if (data.cover_image) {
               سعر المنتج (السعر بالليرة السورية)
               <span className="text-red-500 text-xl mr-1">*</span>
             </label>
-            <input            type="number"
-
-            required
+            <input
+              type="number"
+              required
               {...register("price")}
               className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
               placeholder="ادخل سعر المنتج"
@@ -341,13 +452,14 @@ if (data.cover_image) {
         </div>
 
         <div className="flex flex-col gap-2">
-          <label className="block font-medium text-gray-700">نوع السعر
-          <span className="text-red-500 text-xl mr-1">*</span>
+          <label className="block font-medium text-gray-700">
+            نوع السعر
+            <span className="text-red-500 text-xl mr-1">*</span>
           </label>
           <div className="flex flex-wrap gap-4 mt-2">
             <label className="ml-2 flex items-center gap-2 text-gray-700 cursor-pointer">
               <input
-              required
+                required
                 type="radio"
                 value="negotiable"
                 {...register("price_type")}
@@ -367,44 +479,41 @@ if (data.cover_image) {
           </div>
         </div>
       </section>
-      {/* ------------------------------------------- */}
+
+      {/* تفاصيل الإلكترونيات */}
       <section className="rounded-2xl shadow-lg border bg-white border-gray-200 p-8 mb-6 w-full">
+        <h2 className="font-bold text-lg mb-2">تفاصيل الإلكترونيات</h2>
 
-      <h2 className="font-bold text-lg mb-2">تفاصيل الإلكترونيات</h2>
-
-      <div className="sm:ml-16 bg-cwhite rounded-md p-4 shadow-md ">
-            <label className="block font-medium text-gray-700">
-              حالة الجهاز
-              <span className="text-red-500 text-xl mr-1">*</span>
-            </label>
-            {/* قائمة الخيارات */}
-            <div className="flex flex-wrap gap-4 mt-2">
-              {STATUS_CHOICES.map(([value, label]) => (
-                <label
-                  key={value}
-                  className="flex items-center gap-1 ml-2 text-gray-700 cursor-pointer"
-                >
-                  <input
+        <div className="sm:ml-16 bg-cwhite rounded-md p-4 shadow-md">
+          <label className="block font-medium text-gray-700">
+            حالة الجهاز
+            <span className="text-red-500 text-xl mr-1">*</span>
+          </label>
+          <div className="flex flex-wrap gap-4 mt-2">
+            {STATUS_CHOICES.map(([value, label]) => (
+              <label
+                key={value}
+                className="flex items-center gap-1 ml-2 text-gray-700 cursor-pointer"
+              >
+                <input
                   required
-                    type="radio"
-                    value={value}
-                    {...register("electronics.status")} // اسم الحقل في النموذج
-                    className="accent-cgreen"
-                  />
-                  <span>{label}</span>
-                </label>
-              ))}
-            </div>
+                  type="radio"
+                  value={value}
+                  {...register("electronics.status")}
+                  className="accent-cgreen"
+                />
+                <span>{label}</span>
+              </label>
+            ))}
           </div>
+        </div>
 
-
-
-      <hr className="mt-6 mb-3 text-clightgray" />
-      <div className="flex justify-end max-sm:flex-col max-sm:justify-center max-sm:items-center max-sm:gap-4 mb-5">
+        <hr className="mt-6 mb-3 text-clightgray" />
+        <div className="flex justify-end max-sm:flex-col max-sm:justify-center max-sm:items-center max-sm:gap-4 mb-5">
           {/* زر "معاينة" */}
           <button
+            type="button" // تغيير إلى button لمنع إرسال النموذج
             onClick={() => (window.location.href = "/perview")}
-            type="submit"
             className="mt-8 ml-6 max-sm:ml-0 text-white rounded"
           >
             <span className="flex items-center group outline-2 outline-cgreen text-gray-800 hover:bg-chgreen hover:outline-chgreen hover:text-cwhite py-3 px-12 max-sm:px-[55px] rounded text-xl transition-all duration-300">

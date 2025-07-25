@@ -17,6 +17,7 @@ import { useForm } from "react-hook-form";
 const EditCar = () => {
   const {
     register,
+    setValue,
     formState: {},
   } = useForm<CarPostPayload>({
     defaultValues: {
@@ -38,56 +39,103 @@ const EditCar = () => {
   const editCarForm = useEditCarForm(setNotification);
   const isPending = editCarForm.isPending;
 
+  const inputRef = useRef<HTMLInputElement | null>(null);
+  const [preview, setPreview] = useState<string | null>(null);
 
+  const MAX_GALLERY_IMAGES = 7; // تماشياً مع EditGeneric، EditMobile، EditHouse، و EditElectronics
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
+  const galleryInputRef = useRef<HTMLInputElement | null>(null);
+
   const [galleryFiles, setGalleryFiles] = useState<(File | string)[]>([]);
 
-
-const handleGalleryChange = (
-  e: React.ChangeEvent<HTMLInputElement>,
-  index: number
-) => {
-  const file = e.target.files?.[0];
-  if (file) {
-    setGalleryFiles((prev) => {
-      const updated = [...prev];
-      updated[index] = file;
-
-      setFormData((prevForm) => ({
-        ...prevForm,
-        gallery: updated,
+  // دالة للتعامل مع تغيير صورة الغلاف
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (files && files.length > 0) {
+      const file = files[0];
+      setFormData((prev) => ({
+        ...prev,
+        cover_image: file,
       }));
+      setPreview(URL.createObjectURL(file));
+      e.target.value = ""; // إعادة تعيين قيمة الـ input
+    }
+  };
 
+  // دالة للتعامل مع تغيير الصور في المعرض
+  const handleGalleryChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    index: number
+  ) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setGalleryFiles((prev) => {
+        const updated = [...prev];
+        updated[index] = file;
+        setValue("gallery", updated, {
+          shouldValidate: true,
+          shouldDirty: true,
+        });
+        return updated;
+      });
+      e.target.value = ""; // إعادة تعيين قيمة الـ input
+    }
+  };
+
+  // دالة لإزالة صورة من المعرض
+  const handleRemoveImage = (index: number) => {
+    setGalleryFiles((prev) => {
+      const updated = prev.filter((_, i) => i !== index);
+      setValue("gallery", updated, {
+        shouldValidate: true,
+        shouldDirty: true,
+      });
       return updated;
     });
-  }
-};
-const handleRemoveImage = (index: number) => {
-  setGalleryFiles((prev) => {
-    const updated = prev.filter((_, i) => i !== index);
-    setFormData((prevForm) => ({
-      ...prevForm,
-      gallery: updated,
-    }));
-    return updated;
-  });
-};
-const handleAddNewGallerySlot = () => {
-  setGalleryFiles((prev) => {
-    if (prev.length >= 10) return prev;
-    const updated = [...prev, ""];
-    setFormData((prevForm) => ({
-      ...prevForm,
-      gallery: updated,
-    }));
+  };
 
-    return updated;
-  });
-};
-const triggerFileInput = (index: number) => {
-  inputRefs.current[index]?.click();
-};
+  // دالة لإضافة صورة جديدة
+  const handleNewGalleryImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file && galleryFiles.length < MAX_GALLERY_IMAGES) {
+      setGalleryFiles((prev) => {
+        const updated = [...prev, file];
+        setValue("gallery", updated, {
+          shouldValidate: true,
+          shouldDirty: true,
+        });
+        return updated;
+      });
+      e.target.value = ""; // إعادة تعيين قيمة الـ input
+    }
+  };
 
+  // دالة لفتح نافذة اختيار الملفات
+  const handleAddNewGallerySlot = () => {
+    if (galleryFiles.length < MAX_GALLERY_IMAGES) {
+      galleryInputRef.current?.click();
+    }
+  };
+
+  // دالة لتحريك إدخال الصورة
+  const triggerFileInput = (index: number) => {
+    inputRefs.current[index]?.click();
+  };
+
+  // دالة لفتح نافذة اختيار الملفات لصورة الغلاف
+  const handleClick = () => {
+    inputRef.current?.click();
+  };
+
+  const convertURLtoFile = async (url: string): Promise<File> => {
+    const response = await fetch(url);
+    const blob = await response.blob();
+    let name = url.split("/").pop() || "";
+    if (!/\.(jpg|jpeg|png|webp|gif)$/i.test(name)) {
+      name = `image-${Date.now()}.jpg`;
+    }
+    return new File([blob], name, { type: blob.type });
+  };
 
   const [formData, setFormData] = useState<Partial<CarPostPayload>>({
     category: "",
@@ -103,6 +151,8 @@ const triggerFileInput = (index: number) => {
     gallery: [],
     car: undefined,
   });
+
+  const [isSearch, setIsSearch] = useState<boolean | undefined>(false);
 
   useEffect(() => {
     if (data) {
@@ -124,17 +174,31 @@ const triggerFileInput = (index: number) => {
       });
       setGalleryFiles(galleryImages);
       setIsSearch(data.offer_type === "search");
+      if (data.cover_image && typeof data.cover_image === "string") {
+        setPreview(data.cover_image);
+      }
     }
   }, [data]);
+
+  const handleInputChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
 
   const handleCarInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     const { name, value, type } = e.target;
-    const key = name.replace("car.", "") as keyof CarPostPayload['car'];
+    const key = name.replace("car.", "") as keyof CarPostPayload["car"];
     setFormData((prev) => {
-      // إذا لم تكن car موجودة، أنشئ نسخة افتراضية كاملة
-      const baseCar: CarPostPayload['car'] = prev.car ?? {
+      const baseCar: CarPostPayload["car"] = prev.car ?? {
         external_features: [],
         internal_features: [],
         protection: [],
@@ -154,7 +218,7 @@ const triggerFileInput = (index: number) => {
         gearbox: "",
         car_type: "",
       };
-      const newCar: CarPostPayload['car'] = { ...baseCar };
+      const newCar: CarPostPayload["car"] = { ...baseCar };
       if (type === "checkbox") {
         const checked = (e.target as HTMLInputElement).checked;
         const arr = Array.isArray(newCar[key]) ? [...(newCar[key] as string[])] : [];
@@ -178,8 +242,6 @@ const triggerFileInput = (index: number) => {
     });
   };
 
-  const [isSearch, setIsSearch] = useState<boolean | undefined>(false);
-
   const handleOfferType = (type: "sell" | "search") => {
     setIsSearch(type === "search");
     setFormData((prev) => ({
@@ -188,20 +250,15 @@ const triggerFileInput = (index: number) => {
     }));
   };
 
-
-  
-  // دالة الإرسال الصحيحة
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-
-    
     e.preventDefault();
-    const data = formData;
-    const form = new FormData();
     if (!id) {
       setNotification({ message: "معرف الإعلان غير صالح.", type: "error" });
       return;
     }
 
+    const data = formData;
+    const form = new FormData();
     form.append("offer_type", data.offer_type ?? "sell");
     form.append("title", data.title ?? "");
     form.append("description", data.description ?? "");
@@ -215,25 +272,24 @@ const triggerFileInput = (index: number) => {
 
     if (data.cover_image instanceof File) {
       form.append("cover_image", data.cover_image);
-  }
-
-  for (const img of formData.gallery || []) {
-    if (img instanceof File) {
-      form.append("gallery", img);
-    } else if (typeof img === "string") {
-      const file = await convertURLtoFile(img);
-      form.append("gallery", file);
     }
-  }
-  
-  console.log("📋 Gallery send from me");
-  const galleryItems = form.getAll("gallery");
-  galleryItems.forEach((item, index) => {
-    if (item instanceof File) {
-      console.log(`[${index}]  ${item.name}`);
-    }
-  });
 
+    for (const img of galleryFiles) {
+      if (img instanceof File) {
+        form.append("gallery", img);
+      } else if (typeof img === "string") {
+        const file = await convertURLtoFile(img);
+        form.append("gallery", file);
+      }
+    }
+
+    console.log("📋 Gallery content ");
+    const galleryItems = form.getAll("gallery");
+    galleryItems.forEach((item, index) => {
+      if (item instanceof File) {
+        console.log(`[${index}]  ${item.name}`);
+      }
+    });
 
     const carDetails = {
       fuel_type: data.car?.fuel_type,
@@ -260,7 +316,6 @@ const triggerFileInput = (index: number) => {
         : [],
     };
 
-    // تنظيف البيانات وإزالة القيم الفارغة
     const cleanCarDetails: Record<string, unknown> = {};
     Object.entries(carDetails).forEach(([key, value]) => {
       if (value !== undefined && value !== null && value !== "") {
@@ -274,27 +329,15 @@ const triggerFileInput = (index: number) => {
       }
     });
     form.append("car_details", JSON.stringify(cleanCarDetails));
-    
-    if (formData.gallery && formData.gallery.length > 0) {
-      formData.gallery.forEach((img) => {
-        if (img instanceof File) {
-          form.append("gallery", img);
-        }
-      });
-    }
 
     editCarForm.mutate({ formData: form, id });
-
-
-    
   };
-  
- function getArabicName(input: string): string | null {
+
+  function getArabicName(input: string): string | null {
     for (const category of categories) {
       if (category.slug === input) {
         return category.name;
       }
-
       for (const item of category.items) {
         if (item.slug === input) {
           return item.label;
@@ -304,84 +347,11 @@ const triggerFileInput = (index: number) => {
     return null;
   }
 
-
-
-  // /////////////////////////////////////////////////////////////////////////////////////
-
-  const inputRef = useRef<HTMLInputElement | null>(null);
-  const [preview, setPreview] = useState<string | null>(null);
-  // لما تضغط على صندوق رفع الصورة يفتح اختيار الملفات
-  const handleClick = () => {
-    inputRef.current?.click();
-  };
-    // لما تختار صورة جديدة يتم تحديث preview و formData.cover_image
-    const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-      const files = e.target.files;
-      if (files && files.length > 0) {
-        const file = files[0];
-        setFormData((prev) => ({
-          ...prev,
-          cover_image: file,
-        }));
-        setPreview(URL.createObjectURL(file));
-      }
-    };
-     // تحديث preview لو جت بيانات موجودة كسلسلة نصية (رابط صورة من السيرفر مثلا)
-  useEffect(() => {
-    if (formData.cover_image && typeof formData.cover_image === "string") {
-      setPreview(formData.cover_image);
-    }
-  }, [formData.cover_image]);
-
-  const handleInputChange = (
-    e: React.ChangeEvent<
-    HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >
-  ) => {
-    const { name, value, type } = e.target;
-    const files = (e.target as HTMLInputElement).files;
-    
-    if (type === "file") {
-      if (name === "gallery") {
-        setFormData((prev) => ({
-          ...prev,
-          [name]: files ? Array.from(files) : [],
-        }));
-      } else if (name === "cover_image") {
-        setFormData((prev) => ({
-          ...prev,
-          [name]: files && files.length > 0 ? files[0] : null,
-        }));
-      }
-    } else {
-      setFormData((prev) => ({
-        ...prev,
-        [name]: value,
-      }));
-    }
-  };
-
-  const convertURLtoFile = async (url: string): Promise<File> => {
-    const response = await fetch(url);
-    const blob = await response.blob();
-  
-    let name = url.split("/").pop() || "";
-    if (!/\.(jpg|jpeg|png|webp|gif)$/i.test(name)) {
-      name = `image-${Date.now()}.jpg`; // اسم افتراضي بامتداد مسموح
-    }
-  
-    return new File([blob], name, { type: blob.type });
-  };
-  
-  // ////////////////////////////////////////////////////////////////////
-
-
   if (isLoading) return <SkeletonNotificationSettings />;
 
   return (
-    <div className="min-h-screen py-4 bg-gray-100  flex flex-col items-center">
+    <div className="min-h-screen py-4 bg-gray-100 flex flex-col items-center">
       <form onSubmit={onSubmit} className="w-[90%]">
-        {/* ------------- Noti -------------- */}
         {notification && (
           <Notification
             message={notification.message}
@@ -389,24 +359,19 @@ const triggerFileInput = (index: number) => {
             onClose={() => setNotification(null)}
           />
         )}
-
         {/* العنوان والوصف */}
         <div className="mb-6 w-full">
           <h1 className="text-3xl font-bold mb-2 flex justify-start max-sm:text-2xl">
-            تعديل الإعلان
+            تعديل إعلان السيارة
           </h1>
           <p className="text-gray-600 flex justify-start max-sm:block">
             بنشرك تعديلاتك فإنك توافق على{" "}
-            <a
-              href="#"
-              className="text-cgreen underline hover:text-chgreen mx-1"
-            >
+            <a href="#" className="text-cgreen underline hover:text-chgreen mx-1">
               سياسة النشر
             </a>{" "}
             الخاصة بـ small-offer
           </p>
         </div>
-
         {/* تصنيف المنتج */}
         <div className="bg-white rounded-xl shadow-md border border-gray-200 p-6 mb-8">
           <h2 className="font-bold text-xl mb-2 text-gray-800">تصنيف المنتج</h2>
@@ -426,7 +391,6 @@ const triggerFileInput = (index: number) => {
                 className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
               />
             </div>
-
             <div className="sm:ml-16">
               <label className="block font-medium text-gray-700">
                 التصنيف الفرعي
@@ -443,7 +407,6 @@ const triggerFileInput = (index: number) => {
             </div>
           </div>
         </div>
-
         {/* معلومات أساسية */}
         <section className="bg-white rounded-2xl shadow-lg border border-gray-200 p-8 mb-6">
           <h2 className="font-bold text-xl text-gray-800 mb-2 text-right">
@@ -453,13 +416,13 @@ const triggerFileInput = (index: number) => {
             أدخل معلومات الإعلان الأساسية لتظهر بوضوح للمشترين، مثل العنوان
             والوصف العام والموقع.
           </p>
-          <div className=" mb-6 sm:ml-16 border-b border-clightgray">
+          <div className="mb-6 sm:ml-16 border-b border-clightgray">
             {/* SEARCH || SELL */}
             <h3 className="font-medium mb-3 mt-6 text-lg text-gray-700">
               نوع المنشور
               <span className="text-red-500 text-xl mr-1">*</span>
             </h3>
-            <div className="w-full mt-2 max-w-sm  border-2 border-clightgray p-1.5 rounded-xl mb-6 flex">
+            <div className="w-full mt-2 max-w-sm border-2 border-clightgray p-1.5 rounded-xl mb-6 flex">
               <Button
                 type="button"
                 className="w-1/2 text-6 font-semibold"
@@ -478,28 +441,16 @@ const triggerFileInput = (index: number) => {
               </Button>
             </div>
           </div>
+          
+        <span className="text-lg max-sm:text-sm border p-2 bg-cgreen text-cwhite rounded-md">
+          ملاحظة: يوجد زر معاينة المنشور في الأسفل
+        </span>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-6">
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-            <div className="sm:ml-16">
-              <label className="block font-medium text-gray-700">
-                اسم المنتج <span className="text-red-500 text-xl mr-1">*</span>
-              </label>
-              <input
-                required
-                name="title"
-                value={formData.title || ""}
-                onChange={handleInputChange}
-                type="text"
-                placeholder="اسم المنتج"
-                className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
-              />
-            </div>
             <div className="sm:ml-16">
               <label className="block font-medium text-gray-700 mb-2">
                 صورة غلاف المنتج
               </label>
-
-              {/* Hidden File Input */}
               <input
                 type="file"
                 accept="image/*"
@@ -507,11 +458,9 @@ const triggerFileInput = (index: number) => {
                 onChange={handleImageChange}
                 className="hidden"
               />
-
-              {/* Upload Box */}
               <div
                 onClick={handleClick}
-                className="w-64 h-40 border-2 border-dashed border-cgreen rounded-lg flex items-center justify-center cursor-pointer bg-cwhite overflow-hidden"
+                className="w-[70%] max-sm:w-full h-52 border-2 border-dashed border-cgreen rounded-lg flex items-center justify-center cursor-pointer bg-cwhite overflow-hidden"
               >
                 {preview ? (
                   <Image
@@ -526,14 +475,19 @@ const triggerFileInput = (index: number) => {
                 )}
               </div>
             </div>
-
-
             <input type="hidden" {...register("gallery")} />
             <div className="sm:ml-16">
               <label className="block font-medium text-gray-700 mb-2">
                 صور المنتج
               </label>
-              <div className="flex flex-wrap gap-4">
+              <div className="flex flex-wrap gap-2">
+                <input
+                  type="file"
+                  accept="image/*"
+                  className="hidden"
+                  onChange={handleNewGalleryImage}
+                  ref={galleryInputRef}
+                />
                 {galleryFiles.map((img, index) => {
                   const previewUrl =
                     img instanceof File ? URL.createObjectURL(img) : img;
@@ -541,7 +495,7 @@ const triggerFileInput = (index: number) => {
                   return (
                     <div
                       key={index}
-                      className="relative max-sm:w-32 w-24  h-24 border-2 border-cgreen rounded-lg overflow-hidden cursor-pointer"
+                      className="relative max-sm:w-32 w-24 h-24 border-2 border-cgreen rounded-lg overflow-hidden cursor-pointer"
                     >
                       <input
                         type="file"
@@ -582,7 +536,7 @@ const triggerFileInput = (index: number) => {
                     </div>
                   );
                 })}
-                {galleryFiles.length < 5 && (
+                {galleryFiles.length < MAX_GALLERY_IMAGES && (
                   <div
                     onClick={handleAddNewGallerySlot}
                     className="w-24 h-24 border-2 border-dashed border-cgreen rounded-lg flex items-center justify-center cursor-pointer text-cgreen text-4xl"
@@ -592,11 +546,22 @@ const triggerFileInput = (index: number) => {
                 )}
               </div>
             </div>
-
-
-
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+          <div className="sm:ml-16">
+              <label className="block font-medium text-gray-700">
+                اسم المنتج <span className="text-red-500 text-xl mr-1">*</span>
+              </label>
+              <input
+                required
+                name="title"
+                value={formData.title || ""}
+                onChange={handleInputChange}
+                type="text"
+                placeholder="اسم المنتج"
+                className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
+              />
+            </div>
             <div className="sm:ml-16">
               <label className="block font-medium text-gray-700">
                 المحافظة
@@ -607,10 +572,8 @@ const triggerFileInput = (index: number) => {
                 name="city"
                 value={formData.city || ""}
                 onChange={handleInputChange}
-                className="mt-1  w-full p-3 border-2 rounded-lg bg-cwhite text-gray-700 focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200"
-                style={{
-                  borderColor: "#277F60", // لون الحدود
-                }}
+                className="mt-1 w-full p-3 border-2 rounded-lg bg-cwhite text-gray-700 focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200"
+                style={{ borderColor: "#277F60" }}
               >
                 <option value="">اختر الإدخال</option>
                 {syrianGovernorates.map((gov) => (
@@ -620,7 +583,6 @@ const triggerFileInput = (index: number) => {
                 ))}
               </select>
             </div>
-
             <div className="sm:ml-16">
               <label className="block font-medium text-gray-700">
                 المنطقة <span className="text-red-500 text-xl mr-1">*</span>
@@ -665,7 +627,6 @@ const triggerFileInput = (index: number) => {
             </div>
           </div>
         </section>
-
         {/* سعر المنتج */}
         <section className="bg-white rounded-2xl shadow-lg border border-gray-200 p-8">
           <h2 className="font-bold text-xl text-gray-800 mb-2 text-right">
@@ -724,409 +685,380 @@ const triggerFileInput = (index: number) => {
           </div>
         </section>
         <section className="bg-white rounded-2xl shadow-lg border border-gray-200 p-8 mb-6">
-        <h2 className="text-xl font-bold mb-4">تفاصيل السيارة</h2>
-        {/* ---------------------------- */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="sm:ml-16">
-            <label className="block font-medium text-gray-700">الماركة
-            <span className="text-red-500 text-xl mr-1">*</span>
-            </label>
-            <select
-            required
-              name="car.brand"
-              value={formData.car?.brand || ""}
-              onChange={handleCarInputChange}
-              className="mt-1  w-full p-3 py-3.5 border-2 rounded-lg bg-cwhite text-gray-700 focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200"
-              style={{ borderColor: "#277F60" }}
-              dir="rtl"
+          <h2 className="text-xl font-bold mb-4">تفاصيل السيارة</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="sm:ml-16">
+              <label className="block font-medium text-gray-700">
+                الماركة
+                <span className="text-red-500 text-xl mr-1">*</span>
+              </label>
+              <select
+                required
+                name="car.brand"
+                value={formData.car?.brand || ""}
+                onChange={handleCarInputChange}
+                className="mt-1 w-full p-3 py-3.5 border-2 rounded-lg bg-cwhite text-gray-700 focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200"
+                style={{ borderColor: "#277F60" }}
+                dir="rtl"
+              >
+                <option value="">اختر الماركة</option>
+                {BRAND_CHOICES.map(([value, label]) => (
+                  <option key={value} value={value}>
+                    {label}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="sm:ml-16">
+              <label className="block font-medium text-gray-700">الموديل</label>
+              <input
+                name="car.model"
+                value={formData.car?.model || ""}
+                onChange={handleCarInputChange}
+                className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
+                dir="rtl"
+              />
+            </div>
+            <div className="sm:ml-16">
+              <label className="block font-medium text-gray-700">
+                عدد الكيلومترات
+                <span className="text-red-500 text-xl mr-1">*</span>
+              </label>
+              <input
+                required
+                type="number"
+                name="car.mileage"
+                value={formData.car?.mileage || ""}
+                onChange={handleCarInputChange}
+                className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
+                dir="rtl"
+              />
+            </div>
+            <div className="sm:ml-16">
+              <label className="block font-medium text-gray-700">الأداء</label>
+              <input
+                type="number"
+                name="car.performance"
+                value={formData.car?.performance || ""}
+                onChange={handleCarInputChange}
+                className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
+                dir="rtl"
+                placeholder="مثال: 150 حصان"
+              />
+            </div>
+            <div className="sm:ml-16">
+              <label className="block font-medium text-gray-700">اللون</label>
+              <select
+                name="car.color"
+                value={formData.car?.color || ""}
+                onChange={handleCarInputChange}
+                className="mt-1 w-full p-3 py-3.5 border-2 rounded-lg bg-cwhite text-gray-700 focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200"
+                style={{ borderColor: "#277F60" }}
+                dir="rtl"
+              >
+                <option value="">اختر اللون</option>
+                {COLOR_CHOICES.map(([value, label]) => (
+                  <option key={value} value={value}>
+                    {label}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="sm:ml-16">
+              <label className="block font-medium text-gray-700">
+                تاريخ التسجيل الأول
+                <span className="text-red-500 text-xl mr-1">*</span>
+              </label>
+              <input
+                required
+                type="number"
+                name="car.first_registration"
+                value={formData.car?.first_registration || ""}
+                onChange={handleCarInputChange}
+                className="mt-1 w-full p-3 py-3.5 border-2 rounded-lg bg-cwhite text-gray-700 focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200"
+                style={{ borderColor: "#277F60" }}
+                dir="rtl"
+              />
+            </div>
+            <div className="sm:ml-16">
+              <label className="block font-medium text-gray-700">
+                تاريخ الفحص الفني
+              </label>
+              <input
+                type="date"
+                name="car.hu"
+                value={formData.car?.hu || ""}
+                onChange={handleCarInputChange}
+                className="mt-1 w-full p-3 py-3.5 border-2 rounded-lg bg-cwhite text-gray-700 focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200"
+                style={{ borderColor: "#277F60" }}
+                dir="rtl"
+              />
+            </div>
+            <div className="sm:ml-16">
+              <label className="block font-medium text-gray-700">
+                ملصق البيئة
+                <span className="text-red-500 text-xl mr-1">*</span>
+              </label>
+              <input
+                required
+                name="car.environmental_sticker"
+                value={formData.car?.environmental_sticker || ""}
+                onChange={handleCarInputChange}
+                className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
+                dir="rtl"
+              />
+            </div>
+            <div className="sm:ml-16">
+              <label className="block font-medium text-gray-700">
+                فئة الملوثات
+                <span className="text-red-500 text-xl mr-1">*</span>
+              </label>
+              <input
+                required
+                name="car.class_of_pollutants"
+                value={formData.car?.class_of_pollutants || ""}
+                onChange={handleCarInputChange}
+                className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
+                dir="rtl"
+              />
+            </div>
+          </div>
+          <div className="space-y-4 mt-6">
+            <div className="sm:ml-16 bg-cwhite rounded-md p-2 shadow-md">
+              <label className="block font-medium text-gray-700">
+                اختر حالة السيارة
+                <span className="text-red-500 text-xl mr-1">*</span>
+              </label>
+              <div className="flex flex-wrap gap-4 mt-2">
+                {STATUS_CHOICES.map(([value, label]) => (
+                  <label
+                    key={value}
+                    className="flex items-center gap-1 ml-2 text-gray-700 cursor-pointer"
+                  >
+                    <input
+                      required
+                      type="radio"
+                      value={value}
+                      name="car.status"
+                      checked={formData.car?.status === value}
+                      onChange={handleCarInputChange}
+                      className="accent-cgreen"
+                    />
+                    <span>{label}</span>
+                  </label>
+                ))}
+              </div>
+            </div>
+            <div className="sm:ml-16 bg-cwhite rounded-md p-2 shadow-md">
+              <label className="block font-medium text-gray-700">
+                اختر ناقل الحركة
+                <span className="text-red-500 text-xl mr-1">*</span>
+              </label>
+              <div className="flex flex-wrap gap-4 mt-2">
+                {GEARBOX_CHOICES.map(([value, label]) => (
+                  <label
+                    key={value}
+                    className="flex items-center gap-1 ml-2 text-gray-700 cursor-pointer"
+                  >
+                    <input
+                      required
+                      type="radio"
+                      value={value}
+                      name="car.gearbox"
+                      checked={formData.car?.gearbox === value}
+                      onChange={handleCarInputChange}
+                      className="accent-cgreen"
+                    />
+                    <span>{label}</span>
+                  </label>
+                ))}
+              </div>
+            </div>
+            <div className="sm:ml-16 bg-cwhite rounded-md p-2 shadow-md">
+              <label className="block font-medium text-gray-700">
+                عدد الأبواب
+              </label>
+              <div className="flex flex-wrap gap-4 mt-2">
+                {DOORS_CHOICES.map(([value, label]) => (
+                  <label
+                    key={value}
+                    className="flex items-center gap-1 ml-2 text-gray-700 cursor-pointer"
+                  >
+                    <input
+                      type="radio"
+                      value={value}
+                      name="car.number_of_doors"
+                      checked={formData.car?.number_of_doors === value}
+                      onChange={handleCarInputChange}
+                      className="accent-cgreen"
+                    />
+                    <span>{label}</span>
+                  </label>
+                ))}
+              </div>
+            </div>
+            <div className="sm:ml-16 bg-cwhite rounded-md p-2 shadow-md">
+              <label className="block font-medium text-gray-700">
+                المواد الداخلية
+              </label>
+              <div className="flex flex-wrap gap-4 mt-2">
+                {INTERNAL_MATERIALS_CHOICES.map(([value, label]) => (
+                  <label
+                    key={value}
+                    className="flex items-center gap-1 ml-2 text-gray-700 cursor-pointer"
+                  >
+                    <input
+                      type="radio"
+                      value={value}
+                      name="car.internal_materials"
+                      checked={formData.car?.internal_materials === value}
+                      onChange={handleCarInputChange}
+                      className="accent-cgreen"
+                    />
+                    <span>{label}</span>
+                  </label>
+                ))}
+              </div>
+            </div>
+            <div className="sm:ml-16 bg-cwhite rounded-md p-2 shadow-md">
+              <label className="block font-medium text-gray-700">
+                اختر نوع الوقود
+                <span className="text-red-500 text-xl mr-1">*</span>
+              </label>
+              <div className="flex flex-wrap gap-2 mt-2">
+                {FUEL_CHOICES.map(([value, label]) => (
+                  <label
+                    key={value}
+                    className="flex items-center gap-1 ml-2 text-gray-700 cursor-pointer"
+                  >
+                    <input
+                      required
+                      type="radio"
+                      value={value}
+                      name="car.fuel_type"
+                      checked={formData.car?.fuel_type === value}
+                      onChange={handleCarInputChange}
+                      className="accent-cgreen"
+                    />
+                    <span>{label}</span>
+                  </label>
+                ))}
+              </div>
+            </div>
+            <div className="sm:ml-16 bg-cwhite rounded-md p-2 shadow-md">
+              <label className="block font-medium text-gray-700">
+                نوع السيارة
+              </label>
+              <div className="flex flex-wrap gap-4 mt-2">
+                {TYPE_CHOICES.map(([value, label]) => (
+                  <label
+                    key={value}
+                    className="flex items-center gap-1 ml-2 text-gray-700 cursor-pointer"
+                  >
+                    <input
+                      type="radio"
+                      value={value}
+                      name="car.car_type"
+                      checked={formData.car?.car_type === value}
+                      onChange={handleCarInputChange}
+                      className="accent-cgreen"
+                    />
+                    <span>{label}</span>
+                  </label>
+                ))}
+              </div>
+            </div>
+            <div className="sm:ml-16 bg-cwhite rounded-md p-2 shadow-md">
+              <label className="block font-medium text-gray-700">
+                أنظمة الحماية
+              </label>
+              <div className="flex flex-wrap gap-2 mt-2">
+                {PROTECTION_CHOICES.map(([value, label]) => (
+                  <label
+                    key={value}
+                    className="flex items-center gap-1 ml-2 text-gray-700 cursor-pointer"
+                  >
+                    <input
+                      className="custom-checkbox"
+                      type="checkbox"
+                      value={value}
+                      name="car.protection"
+                      checked={Array.isArray(formData.car?.protection) && formData.car.protection.includes(value)}
+                      onChange={handleCarInputChange}
+                    />
+                    {label}
+                  </label>
+                ))}
+              </div>
+            </div>
+            <div className="sm:ml-16 bg-cwhite rounded-md p-2 shadow-md">
+              <label className="block font-medium text-gray-700">
+                المميزات الخارجية
+              </label>
+              <div className="flex flex-wrap gap-2 mt-2">
+                {EXTERNAL_FEATURES_CHOICES.map(([value, label]) => (
+                  <label
+                    key={value}
+                    className="flex items-center gap-1 ml-2 text-gray-700 cursor-pointer"
+                  >
+                    <input
+                      className="custom-checkbox"
+                      type="checkbox"
+                      value={value}
+                      name="car.external_features"
+                      checked={Array.isArray(formData.car?.external_features) && formData.car.external_features.includes(value)}
+                      onChange={handleCarInputChange}
+                    />
+                    {label}
+                  </label>
+                ))}
+              </div>
+            </div>
+            <div className="sm:ml-16 bg-cwhite rounded-md p-2 shadow-md">
+              <label className="block font-medium text-gray-700">
+                المميزات الداخلية
+              </label>
+              <div className="flex flex-wrap gap-2 mt-2">
+                {INTERNAL_FEATURES_CHOICES.map(([value, label]) => (
+                  <label
+                    key={value}
+                    className="flex items-center gap-1 ml-2 text-gray-700 cursor-pointer"
+                  >
+                    <input
+                      className="custom-checkbox"
+                      type="checkbox"
+                      value={value}
+                      name="car.internal_features"
+                      checked={Array.isArray(formData.car?.internal_features) && formData.car.internal_features.includes(value)}
+                      onChange={handleCarInputChange}
+                    />
+                    {label}
+                  </label>
+                ))}
+              </div>
+            </div>
+          </div>
+          <hr className="mt-6 mb-3 text-clightgray" />
+          <div className="flex justify-end max-sm:flex-col max-sm:justify-center max-sm:items-center max-sm:gap-4 mb-5">
+            <button
+              type="button"
+              onClick={() => (window.location.href = "/preview")}
+              className="mt-8 ml-6 max-sm:ml-0 text-white rounded"
             >
-              <option value="">اختر الماركة</option>
-              {BRAND_CHOICES.map(([value, label]) => (
-                <option key={value} value={value}>
-                  {label}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div className="sm:ml-16">
-            <label className="block font-medium text-gray-700">الموديل</label>
-            <input
-              name="car.model"
-              value={formData.car?.model || ""}
-              onChange={handleCarInputChange}
-              className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
-              dir="rtl"
-            />
-          </div>
-
-          <div className="sm:ml-16">
-            <label className="block font-medium text-gray-700">
-              عدد الكيلومترات
-              <span className="text-red-500 text-xl mr-1">*</span>
-            </label>
-            <input
-            required
-              type="number"
-              name="car.mileage"
-              value={formData.car?.mileage || ""}
-              onChange={handleCarInputChange}
-              className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
-              dir="rtl"
-            />
-          </div>
-
-          <div className="sm:ml-16">
-            <label className="block font-medium text-gray-700">الأداء</label>
-            <input
-            type="number"
-              name="car.performance"
-              value={formData.car?.performance || ""}
-              onChange={handleCarInputChange}
-              className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
-              dir="rtl"
-              placeholder="مثال: 150 حصان"
-            />
-          </div>
-
-          <div className="sm:ml-16">
-            <label className="block font-medium text-gray-700">اللون</label>
-            <select
-              name="car.color"
-              value={formData.car?.color || ""}
-              onChange={handleCarInputChange}
-              className="mt-1  w-full p-3 py-3.5 border-2 rounded-lg bg-cwhite text-gray-700 focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200"
-              style={{ borderColor: "#277F60" }}
-              dir="rtl"
+              <span className="flex items-center group outline-2 outline-cgreen text-gray-800 hover:bg-chgreen hover:outline-chgreen hover:text-cwhite py-3 px-12 max-sm:px-[55px] rounded text-xl transition-all duration-300">
+                معاينة
+                <Search />
+              </span>
+            </button>
+            <button
+              type="submit"
+              className="mt-8 ml-6 max-sm:ml-0 text-white rounded"
             >
-              <option value="">اختر اللون</option>
-              {COLOR_CHOICES.map(([value, label]) => (
-                <option key={value} value={value}>
-                  {label}
-                </option>
-              ))}
-            </select>
+              <span className="bg-cgreen hover:bg-chgreen py-3 px-32 max-md:px-20 rounded text-xl transition-all duration-300">
+                {isPending ? "جارٍ التعديل ..." : "تعديل"}
+              </span>
+            </button>
           </div>
-
-          <div className="sm:ml-16">
-            <label className="block font-medium text-gray-700">
-              تاريخ التسجيل الأول
-              <span className="text-red-500 text-xl mr-1">*</span>
-            </label>
-            <input
-            required
-              type="number"
-              name="car.first_registration"
-              value={formData.car?.first_registration || ""}
-              onChange={handleCarInputChange}
-              className="mt-1  w-full p-3 py-3.5 border-2 rounded-lg bg-cwhite text-gray-700 focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200"
-              style={{ borderColor: "#277F60" }}
-              dir="rtl"
-            />
-          </div>
-
-          <div className="sm:ml-16">
-            <label className="block font-medium text-gray-700">
-              تاريخ الفحص الفني
-            </label>
-            <input
-              type="date"
-              name="car.hu"
-              value={formData.car?.hu || ""}
-              onChange={handleCarInputChange}
-              className="mt-1  w-full p-3 py-3.5 border-2 rounded-lg bg-cwhite text-gray-700 focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200"
-              style={{ borderColor: "#277F60" }}
-              dir="rtl"
-            />
-
-          </div>
-
-          <div className="sm:ml-16">
-            <label className="block font-medium text-gray-700">
-              ملصق البيئة
-              <span className="text-red-500 text-xl mr-1">*</span>
-            </label>
-            <input
-            required
-              name="car.environmental_sticker"
-              value={formData.car?.environmental_sticker || ""}
-              onChange={handleCarInputChange}
-              className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
-              dir="rtl"
-            />
-          </div>
-
-          <div className="sm:ml-16">
-            <label className="block font-medium text-gray-700">
-              فئة الملوثات
-              <span className="text-red-500 text-xl mr-1">*</span>
-            </label>
-            <input
-            required
-              name="car.class_of_pollutants"
-              value={formData.car?.class_of_pollutants || ""}
-              onChange={handleCarInputChange}
-              className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
-              dir="rtl"
-            />
-          </div>
-        </div>
-
-        {/* حقول المصفوفات -------------------------------------------------------------------------------------*/}
-        <div className="space-y-4 mt-6">
-          <div className="sm:ml-16 bg-cwhite rounded-md p-2 shadow-md">
-            <label className="block font-medium text-gray-700">
-              اختر حالة السيارة
-              <span className="text-red-500 text-xl mr-1">*</span>
-            </label>
-            {/* قائمة الخيارات */}
-            <div className="flex flex-wrap gap-4 mt-2">
-              {STATUS_CHOICES.map(([value, label]) => (
-                <label
-                  key={value}
-                  className="flex items-center gap-1 ml-2 text-gray-700 cursor-pointer"
-                >
-                  <input
-                  required
-                    type="radio"
-                    value={value}
-                    name="car.status"
-                    checked={formData.car?.status === value}
-                    onChange={handleCarInputChange}
-                    className="accent-cgreen"
-                  />
-                  <span>{label}</span>
-                </label>
-              ))}
-            </div>
-          </div>
-          <div className="sm:ml-16 bg-cwhite rounded-md p-2 shadow-md">
-            <label className="block font-medium text-gray-700">
-              اختر ناقل الحركة
-              <span className="text-red-500 text-xl mr-1">*</span>
-            </label>
-            {/* قائمة الخيارات */}
-            <div className="flex flex-wrap gap-4 mt-2">
-              {GEARBOX_CHOICES.map(([value, label]) => (
-                <label
-                  key={value}
-                  className="flex items-center gap-1 ml-2 text-gray-700 cursor-pointer"
-                >
-                  <input
-                  required
-                    type="radio"
-                    value={value}
-                    name="car.gearbox"
-                    checked={formData.car?.gearbox === value}
-                    onChange={handleCarInputChange}
-                    className="accent-cgreen"
-                  />
-                  <span>{label}</span>
-                </label>
-              ))}
-            </div>
-          </div>
-
-          <div className="sm:ml-16 bg-cwhite rounded-md p-2 shadow-md">
-            {/* عنوان اختيار  عدد الأبواب */}
-            <label className="block font-medium text-gray-700">
-              عدد الأبواب
-            </label>
-            {/* قائمة الخيارات */}
-            <div className="flex flex-wrap gap-4 mt-2">
-              {DOORS_CHOICES.map(([value, label]) => (
-                <label
-                  key={value}
-                  className="flex items-center gap-1 ml-2 text-gray-700 cursor-pointer"
-                >
-                  <input
-                    type="radio"
-                    value={value}
-                    name="car.number_of_doors"
-                    checked={formData.car?.number_of_doors === value}
-                    onChange={handleCarInputChange}
-                    className="accent-cgreen"
-                  />
-                  <span>{label}</span>
-                </label>
-              ))}
-            </div>
-          </div>
-
-          <div className="sm:ml-16 bg-cwhite rounded-md p-2 shadow-md">
-            {/* عنوان اختيار المواد الداخلية */}
-            <label className="block font-medium text-gray-700">
-              المواد الداخلية
-            </label>
-            {/* قائمة الخيارات */}
-            <div className="flex flex-wrap gap-4 mt-2">
-              {INTERNAL_MATERIALS_CHOICES.map(([value, label]) => (
-                <label
-                  key={value}
-                  className="flex items-center gap-1 ml-2 text-gray-700 cursor-pointer"
-                >
-                  <input
-                    type="radio"
-                    value={value}
-                    name="car.internal_materials"
-                    checked={formData.car?.internal_materials === value}
-                    onChange={handleCarInputChange}
-                    className="accent-cgreen"
-                  />
-                  <span>{label}</span>
-                </label>
-              ))}
-            </div>
-          </div>
-
-          <div className="sm:ml-16 bg-cwhite rounded-md p-2 shadow-md">
-            {/* اختيار نوع الوقود */}
-            <label className="block font-medium text-gray-700">
-              اختر نوع الوقود
-              <span className="text-red-500 text-xl mr-1">*</span>  
-            </label>
-            <div className="flex flex-wrap gap-2 mt-2 ">
-              {FUEL_CHOICES.map(([value, label]) => (
-                <label
-                  key={value}
-                  className="flex items-center gap-1 ml-2 text-gray-700 cursor-pointer"
-                >
-                  {" "}
-                  <input
-                  required
-                    type="radio"
-                    value={value}
-                    name="car.fuel_type"
-                    checked={formData.car?.fuel_type === value}
-                    onChange={handleCarInputChange}
-                    className="accent-cgreen"
-                  />
-                  <span>{label}</span>
-                </label>
-              ))}
-            </div>
-          </div>
-          <div className="sm:ml-16 bg-cwhite rounded-md p-2 shadow-md">
-            {/* عنوان اختيار نوع السيارة */}
-            <label className="block font-medium text-gray-700">
-              نوع السيارة
-            </label>
-            {/* قائمة الخيارات */}
-            <div className="flex flex-wrap gap-4 mt-2">
-              {TYPE_CHOICES.map(([value, label]) => (
-                <label
-                  key={value}
-                  className="flex items-center gap-1 ml-2 text-gray-700 cursor-pointer"
-                >
-                  <input
-                    type="radio"
-                    value={value}
-                    name="car.car_type"
-                    checked={formData.car?.car_type === value}
-                    onChange={handleCarInputChange}
-                    className="accent-cgreen"
-                  />
-                  <span>{label}</span>
-                </label>
-              ))}
-            </div>
-          </div>
-
-          <div className="sm:ml-16 bg-cwhite rounded-md p-2 shadow-md">
-            <label className="block font-medium text-gray-700">
-              أنظمة الحماية
-            </label>
-            <div className="flex flex-wrap gap-2 mt-2 ">
-              {PROTECTION_CHOICES.map(([value, label]) => (
-                <label
-                  key={value}
-                  className="flex items-center gap-1 ml-2 text-gray-700 cursor-pointer"
-                >
-                  <input
-                    className="custom-checkbox"
-                    type="checkbox"
-                    value={value}
-                    name="car.protection"
-                    checked={Array.isArray(formData.car?.protection) && formData.car.protection.includes(value)}
-                    onChange={handleCarInputChange}
-                  />
-                  {label}
-                </label>
-              ))}
-            </div>
-          </div>
-
-          <div className="sm:ml-16 bg-cwhite rounded-md p-2 shadow-md">
-            <label className="block font-medium text-gray-700">
-              المميزات الخارجية
-            </label>
-            <div className="flex flex-wrap gap-2 mt-2 ">
-              {EXTERNAL_FEATURES_CHOICES.map(([value, label]) => (
-                <label
-                  key={value}
-                  className="flex items-center gap-1 ml-2 text-gray-700 cursor-pointer"
-                >
-                  <input
-                    className="custom-checkbox"
-                    type="checkbox"
-                    value={value}
-                    name="car.external_features"
-                    checked={Array.isArray(formData.car?.external_features) && formData.car.external_features.includes(value)}
-                    onChange={handleCarInputChange}
-                  />
-                  {label}
-                </label>
-              ))}
-            </div>
-          </div>
-
-          <div className="sm:ml-16 bg-cwhite rounded-md p-2 shadow-md">
-            <label className="block font-medium text-gray-700">
-              المميزات الداخلية
-            </label>
-            <div className="flex flex-wrap gap-2 mt-2 ">
-              {INTERNAL_FEATURES_CHOICES.map(([value, label]) => (
-                <label
-                  key={value}
-                  className="flex items-center gap-1 ml-2 text-gray-700 cursor-pointer"
-                >
-                  <input
-                    className="custom-checkbox"
-                    type="checkbox"
-                    value={value}
-                    name="car.internal_features"
-                    checked={Array.isArray(formData.car?.internal_features) && formData.car.internal_features.includes(value)}
-                    onChange={handleCarInputChange}
-                  />
-                  {label}
-                </label>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        <hr className="mt-6 mb-3 text-clightgray" />
-        <div className="flex justify-end max-sm:flex-col max-sm:justify-center max-sm:items-center max-sm:gap-4 mb-5">
-          {/* زر "معاينة" */}
-          <button
-            type="button"
-            onClick={() => (window.location.href = "/perview")}
-            className="mt-8 ml-6 max-sm:ml-0 text-white rounded"
-          >
-            <span className="flex items-center group outline-2 outline-cgreen text-gray-800 hover:bg-chgreen hover:outline-chgreen hover:text-cwhite py-3 px-12 max-sm:px-[55px] rounded text-xl transition-all duration-300">
-              معاينة
-              <Search />
-            </span>
-          </button>
-          {/* زر "إعادة نشر" */}
-          <button
-            type="submit"
-            className="mt-8 ml-6 max-sm:ml-0 text-white rounded"
-          >
-            <span className="bg-cgreen hover:bg-chgreen py-3 px-32 max-md:px-20 rounded text-xl transition-all duration-300">
-              {isPending ? "جارٍ النشر ..." : "إعادة نشر"}
-            </span>
-          </button>
-        </div>
         </section>
       </form>
     </div>

@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import {  ApartmentPostPayload, CarPostPayload, ElectronicsPostPayload, GenericPostPayload, HousePostPayload, LandPostPayload, MobilePostPayload, PublicProfileInfoType } from "./postType";
-import { getApartmentPostId, getCarPostId, getElectronicPostId, getGenericPostId, getHousePostId, getMobilePostId, getOutdoorSpacePostId, getPublicProfileInfo } from "./postApi";
+import { getApartmentPostId, getCarPostId, getElectronicPostId, getGenericPostId, getHousePostId, getMobilePostId, getOutdoorSpacePostId, getPublicPage } from "./postApi";
 
 //  Get Generic Post ID
 export function useGetGenericPostId(id?: string) {
@@ -82,10 +82,10 @@ export function useGetOutdoorSpacePostId(id?: string) {
 
 // getPublicProfileInfo
 //  Get Public profile Info
-export function useGetPublicProfileInfo(username: string , page?: number , page_size?: number) {
+export function useGetPublicPage(username: string , page?: number , page_size?: number) {
   return useQuery<PublicProfileInfoType, AxiosError>({
     queryKey: ["accounts/posts/", username , page],
-    queryFn: () => getPublicProfileInfo(username!, page ?? 1, page_size ?? 10),
+    queryFn: () => getPublicPage(username!, page ?? 1, page_size ?? 10),
     enabled: !!username,
     staleTime: 1000 * 60 * 5,
   });

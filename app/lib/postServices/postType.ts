@@ -130,8 +130,9 @@ export type PublicProfileInfoType = {
       city: string;
       cover_image: string | null;
       subcategory: string;
+      status: string;
       created_at: string;
+      fav: boolean; // تم تغييره إلى boolean بناءً على استجابة الـ API
     }>;
   };
 };
-

@@ -1226,7 +1226,7 @@ function CarForm({ Gcategory, Gsubcategory }) {
     const [notification, setNotification] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
     const createCarPost = (0, __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$lib$2f$postServices$2f$postMutations$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useCreateCarPost"])(setNotification);
     const { isPending: isLoading } = createCarPost;
-    ////////////////////////////////  // //////////////////////////////////////
+    // COVER IMAGE -------------------------------------------------
     const coverImage = watch("cover_image");
     const [preview, setPreview] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
     const inputRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(null);
@@ -1252,20 +1252,75 @@ function CarForm({ Gcategory, Gsubcategory }) {
                 shouldValidate: true,
                 shouldDirty: true
             });
+            e.target.value = ""; // إعادة تعيين قيمة الـ input
         }
     };
     const handleClick = ()=>{
         inputRef.current?.click();
     };
-    // if (data.cover_image) {
-    //   if (data.cover_image instanceof File) {
-    //     formData.append("cover_image", data.cover_image);
-    //   } else if (typeof data.cover_image === "string") {
-    //     formData.append("cover_image", data.cover_image);
-    //   }
-    // }
-    {}
-    ////////////////////////////////  // //////////////////////////////////////
+    // GALLERY -------------------------------------------------
+    const MAX_GALLERY_IMAGES = 7;
+    const [galleryFiles, setGalleryFiles] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])([]);
+    const inputRefs = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])([]);
+    const galleryInputRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(null);
+    // دالة للتعامل مع تغيير الصور في المعرض
+    const handleGalleryChange = (e, index)=>{
+        const file = e.target.files?.[0];
+        if (file) {
+            setGalleryFiles((prev)=>{
+                const newGallery = [
+                    ...prev
+                ];
+                newGallery[index] = file;
+                setValue("gallery", newGallery, {
+                    shouldValidate: true,
+                    shouldDirty: true
+                });
+                return newGallery;
+            });
+            e.target.value = ""; // إعادة تعيين قيمة الـ input
+        }
+    };
+    // دالة لإزالة صورة من المعرض
+    const handleRemoveImage = (index)=>{
+        setGalleryFiles((prev)=>{
+            const newGallery = prev.filter((_, i)=>i !== index);
+            setValue("gallery", newGallery, {
+                shouldValidate: true,
+                shouldDirty: true
+            });
+            return newGallery;
+        });
+    };
+    // دالة لإضافة صورة جديدة
+    const handleNewGalleryImage = (e)=>{
+        const file = e.target.files?.[0];
+        if (file && galleryFiles.length < MAX_GALLERY_IMAGES) {
+            setGalleryFiles((prev)=>{
+                const newGallery = [
+                    ...prev,
+                    file
+                ];
+                setValue("gallery", newGallery, {
+                    shouldValidate: true,
+                    shouldDirty: true
+                });
+                return newGallery;
+            });
+            e.target.value = ""; // إعادة تعيين قيمة الـ input
+        }
+    };
+    // دالة لفتح نافذة اختيار الملفات
+    const handleAddNewGallerySlot = ()=>{
+        if (galleryFiles.length < MAX_GALLERY_IMAGES) {
+            galleryInputRef.current?.click();
+        }
+    };
+    // دالة لتحريك إدخال الصورة
+    const triggerFileInput = (index)=>{
+        inputRefs.current[index]?.click();
+    };
+    // -------------------------------------------------
     const [isSearch, setIsSearch] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
     const onSubmit = (data)=>{
         console.log("daTA: ", data);
@@ -1321,16 +1376,12 @@ function CarForm({ Gcategory, Gsubcategory }) {
             }
         });
         formData.append("car_details", JSON.stringify(cleanCarDetails));
-        if (data.gallery && data.gallery.length > 0) {
-            if (typeof globalThis.FileList !== "undefined" && data.gallery instanceof globalThis.FileList) {
-                Array.from(data.gallery).forEach((img)=>{
+        if (galleryFiles && galleryFiles.length > 0) {
+            galleryFiles.forEach((img)=>{
+                if (img instanceof File) {
                     formData.append("gallery", img);
-                });
-            } else if (Array.isArray(data.gallery)) {
-                data.gallery.forEach((img)=>{
-                    formData.append("gallery", img);
-                });
-            }
+                }
+            });
         }
         createCarPost.mutate(formData);
     };
@@ -1344,30 +1395,30 @@ function CarForm({ Gcategory, Gsubcategory }) {
                 onClose: ()=>setNotification(null)
             }, void 0, false, {
                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                lineNumber: 318,
-                columnNumber: 7
+                lineNumber: 345,
+                columnNumber: 9
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
-                className: "bg-white rounded-2xl shadow-lg border border-gray-200 p-8 mb-6 ",
+                className: "bg-white rounded-2xl shadow-lg border border-gray-200 p-8 mb-6",
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
                         className: "font-bold text-xl text-gray-800 mb-2 text-right",
                         children: "معلومات أساسية"
                     }, void 0, false, {
                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                        lineNumber: 327,
-                        columnNumber: 7
+                        lineNumber: 354,
+                        columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                         className: "text-gray-600 mb-6 text-right",
                         children: "أدخل معلومات الإعلان الأساسية لتظهر بوضوح للمشترين، مثل العنوان والوصف العام والموقع."
                     }, void 0, false, {
                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                        lineNumber: 330,
-                        columnNumber: 7
+                        lineNumber: 357,
+                        columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: " mb-6 sm:ml-16 border-b border-clightgray",
+                        className: "mb-6 sm:ml-16 border-b border-clightgray",
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
                                 className: "font-medium mb-3 mt-6 text-lg text-gray-700",
@@ -1378,17 +1429,17 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                         children: "*"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 338,
-                                        columnNumber: 11
+                                        lineNumber: 365,
+                                        columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                lineNumber: 336,
-                                columnNumber: 9
+                                lineNumber: 363,
+                                columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                className: "w-full mt-2 max-w-sm  border-2 border-clightgray p-1.5 rounded-xl mb-6 flex",
+                                className: "w-full mt-2 max-w-sm border-2 border-clightgray p-1.5 rounded-xl mb-6 flex",
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$app$2f$components$2f$ui$2f$Button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
                                         type: "button",
@@ -1401,8 +1452,8 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                         children: "أنا أعرض"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 341,
-                                        columnNumber: 11
+                                        lineNumber: 368,
+                                        columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$app$2f$components$2f$ui$2f$Button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
                                         type: "button",
@@ -1415,62 +1466,32 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                         children: "أنا أبحث"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 352,
-                                        columnNumber: 11
-                                    }, this)
-                                ]
-                            }, void 0, true, {
-                                fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                lineNumber: 340,
-                                columnNumber: 9
-                            }, this)
-                        ]
-                    }, void 0, true, {
-                        fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                        lineNumber: 334,
-                        columnNumber: 7
-                    }, this),
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "grid grid-cols-1 md:grid-cols-2 gap-6 mb-6",
-                        children: [
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                className: "sm:ml-16",
-                                children: [
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                        className: "block font-medium text-gray-700",
-                                        children: [
-                                            "اسم المنتج",
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                className: "text-red-500 text-xl mr-1",
-                                                children: "*"
-                                            }, void 0, false, {
-                                                fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                                lineNumber: 370,
-                                                columnNumber: 13
-                                            }, this)
-                                        ]
-                                    }, void 0, true, {
-                                        fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 368,
-                                        columnNumber: 11
-                                    }, this),
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
-                                        required: true,
-                                        ...register("title"),
-                                        type: "text",
-                                        placeholder: "اسم المنتج",
-                                        className: "w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
-                                    }, void 0, false, {
-                                        fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 372,
-                                        columnNumber: 11
+                                        lineNumber: 379,
+                                        columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
                                 lineNumber: 367,
-                                columnNumber: 9
-                            }, this),
+                                columnNumber: 11
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
+                        lineNumber: 361,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                        className: "text-lg max-sm:text-sm border p-2 bg-cgreen text-cwhite rounded-md",
+                        children: "ملاحظة: يوجد زر معاينة المنشور في الأسفل"
+                    }, void 0, false, {
+                        fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
+                        lineNumber: 393,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        className: "grid grid-cols-1 md:grid-cols-2 gap-6 my-6",
+                        children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 className: "sm:ml-16",
                                 children: [
@@ -1479,7 +1500,7 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                         children: "صورة غلاف المنتج"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 382,
+                                        lineNumber: 400,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -1490,7 +1511,7 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                         className: "hidden"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 387,
+                                        lineNumber: 403,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1504,53 +1525,167 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                             className: "object-cover w-full h-full"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                            lineNumber: 401,
+                                            lineNumber: 415,
                                             columnNumber: 17
                                         }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                             className: "text-cgreen text-4xl",
                                             children: "+"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                            lineNumber: 409,
+                                            lineNumber: 423,
                                             columnNumber: 17
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 396,
+                                        lineNumber: 410,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                lineNumber: 381,
-                                columnNumber: 9
+                                lineNumber: 399,
+                                columnNumber: 11
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "sm:ml-16",
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
+                                        className: "block font-medium text-gray-700 mb-2",
+                                        children: "صور المنتج"
+                                    }, void 0, false, {
+                                        fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
+                                        lineNumber: 429,
+                                        columnNumber: 13
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                        className: "flex flex-wrap gap-4",
+                                        children: [
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                                type: "file",
+                                                accept: "image/*",
+                                                className: "hidden",
+                                                onChange: handleNewGalleryImage,
+                                                ref: galleryInputRef
+                                            }, void 0, false, {
+                                                fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
+                                                lineNumber: 433,
+                                                columnNumber: 15
+                                            }, this),
+                                            galleryFiles.map((img, index)=>{
+                                                const previewUrl = img instanceof File ? URL.createObjectURL(img) : img;
+                                                return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                    className: "relative max-sm:w-32 w-24 h-24 border-2 border-cgreen rounded-lg overflow-hidden cursor-pointer",
+                                                    children: [
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                                            type: "file",
+                                                            accept: "image/*",
+                                                            className: "hidden",
+                                                            onChange: (e)=>handleGalleryChange(e, index),
+                                                            ref: (el)=>{
+                                                                inputRefs.current[index] = el;
+                                                            }
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
+                                                            lineNumber: 449,
+                                                            columnNumber: 21
+                                                        }, this),
+                                                        previewUrl && img !== "" ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
+                                                            src: previewUrl,
+                                                            alt: `Gallery image ${index + 1}`,
+                                                            fill: true,
+                                                            style: {
+                                                                objectFit: "cover"
+                                                            },
+                                                            onClick: ()=>triggerFileInput(index),
+                                                            onLoad: ()=>img instanceof File && URL.revokeObjectURL(previewUrl)
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
+                                                            lineNumber: 459,
+                                                            columnNumber: 23
+                                                        }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                            onClick: ()=>triggerFileInput(index),
+                                                            className: "flex justify-center items-center w-full h-full text-cgreen text-4xl",
+                                                            children: "+"
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
+                                                            lineNumber: 470,
+                                                            columnNumber: 23
+                                                        }, this),
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                                            type: "button",
+                                                            onClick: ()=>handleRemoveImage(index),
+                                                            className: "absolute top-0 right-0 bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center",
+                                                            children: "×"
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
+                                                            lineNumber: 477,
+                                                            columnNumber: 21
+                                                        }, this)
+                                                    ]
+                                                }, index, true, {
+                                                    fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
+                                                    lineNumber: 445,
+                                                    columnNumber: 19
+                                                }, this);
+                                            }),
+                                            galleryFiles.length < MAX_GALLERY_IMAGES && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                onClick: handleAddNewGallerySlot,
+                                                className: "w-24 h-24 border-2 border-dashed border-cgreen rounded-lg flex items-center justify-center cursor-pointer text-cgreen text-4xl",
+                                                children: "+"
+                                            }, void 0, false, {
+                                                fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
+                                                lineNumber: 488,
+                                                columnNumber: 17
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
+                                        lineNumber: 432,
+                                        columnNumber: 13
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
+                                lineNumber: 428,
+                                columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 className: "sm:ml-16",
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                         className: "block font-medium text-gray-700",
-                                        children: "صور المنتج"
-                                    }, void 0, false, {
+                                        children: [
+                                            "اسم المنتج",
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                className: "text-red-500 text-xl mr-1",
+                                                children: "*"
+                                            }, void 0, false, {
+                                                fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
+                                                lineNumber: 500,
+                                                columnNumber: 15
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 415,
-                                        columnNumber: 11
+                                        lineNumber: 498,
+                                        columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
-                                        type: "file",
-                                        multiple: true,
-                                        ...register("gallery"),
+                                        required: true,
+                                        ...register("title"),
+                                        type: "text",
+                                        placeholder: "اسم المنتج",
                                         className: "w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 418,
-                                        columnNumber: 11
+                                        lineNumber: 502,
+                                        columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                lineNumber: 414,
-                                columnNumber: 9
+                                lineNumber: 497,
+                                columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 className: "sm:ml-16",
@@ -1564,19 +1699,19 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                                 children: "*"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                                lineNumber: 429,
-                                                columnNumber: 13
+                                                lineNumber: 514,
+                                                columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 427,
-                                        columnNumber: 11
+                                        lineNumber: 512,
+                                        columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
                                         required: true,
                                         ...register("city"),
-                                        className: "mt-1  w-full p-3 border-2 rounded-lg bg-cwhite text-gray-700 focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200",
+                                        className: "mt-1 w-full p-3 border-2 rounded-lg bg-cwhite text-gray-700 focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200",
                                         style: {
                                             borderColor: "#277F60"
                                         },
@@ -1586,28 +1721,28 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                                 children: "اختر الإدخال"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                                lineNumber: 439,
-                                                columnNumber: 13
+                                                lineNumber: 524,
+                                                columnNumber: 15
                                             }, this),
                                             __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$signup$2f$step2$2f$syrianGovernorates$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["syrianGovernorates"].map((gov)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
                                                     value: gov.value,
                                                     children: gov.name
                                                 }, gov.value, false, {
                                                     fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                                    lineNumber: 441,
-                                                    columnNumber: 15
+                                                    lineNumber: 526,
+                                                    columnNumber: 17
                                                 }, this))
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 431,
-                                        columnNumber: 11
+                                        lineNumber: 516,
+                                        columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                lineNumber: 426,
-                                columnNumber: 9
+                                lineNumber: 511,
+                                columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 className: "sm:ml-16",
@@ -1621,14 +1756,14 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                                 children: "*"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                                lineNumber: 451,
-                                                columnNumber: 13
+                                                lineNumber: 536,
+                                                columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 449,
-                                        columnNumber: 11
+                                        lineNumber: 534,
+                                        columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
                                         required: true,
@@ -1637,28 +1772,28 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                         placeholder: "المنطقة"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 453,
-                                        columnNumber: 11
+                                        lineNumber: 538,
+                                        columnNumber: 13
                                     }, this),
                                     errors.hood && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                         className: "text-red-600 text-sm mt-1",
                                         children: String(errors.hood.message)
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 460,
-                                        columnNumber: 13
+                                        lineNumber: 545,
+                                        columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                lineNumber: 448,
-                                columnNumber: 9
+                                lineNumber: 533,
+                                columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                        lineNumber: 366,
-                        columnNumber: 7
+                        lineNumber: 396,
+                        columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         className: "grid grid-cols-1 md:grid-cols-2 gap-6 mb-6 sm:ml-16",
@@ -1671,8 +1806,8 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                         children: "تفاصيل العنوان"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 468,
-                                        columnNumber: 11
+                                        lineNumber: 553,
+                                        columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
                                         ...register("detailed_location"),
@@ -1680,22 +1815,22 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                         placeholder: "تفاصيل العنوان"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 471,
-                                        columnNumber: 11
+                                        lineNumber: 556,
+                                        columnNumber: 13
                                     }, this),
                                     errors.detailed_location && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                         className: "text-red-600 text-sm mt-1",
                                         children: String(errors.detailed_location.message)
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 477,
-                                        columnNumber: 13
+                                        lineNumber: 562,
+                                        columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                lineNumber: 467,
-                                columnNumber: 9
+                                lineNumber: 552,
+                                columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 className: "flex flex-col gap-2 md:col-span-2",
@@ -1709,14 +1844,14 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                                 children: "*"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                                lineNumber: 485,
-                                                columnNumber: 13
+                                                lineNumber: 570,
+                                                columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 483,
-                                        columnNumber: 11
+                                        lineNumber: 568,
+                                        columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("textarea", {
                                         required: true,
@@ -1725,34 +1860,34 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                         placeholder: "ادخل وصف المنتج هنا"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 487,
-                                        columnNumber: 11
+                                        lineNumber: 572,
+                                        columnNumber: 13
                                     }, this),
                                     errors.description && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                         className: "text-red-600 text-sm mt-1",
                                         children: String(errors.description.message)
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 494,
-                                        columnNumber: 13
+                                        lineNumber: 579,
+                                        columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                lineNumber: 482,
-                                columnNumber: 9
+                                lineNumber: 567,
+                                columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                        lineNumber: 466,
-                        columnNumber: 7
+                        lineNumber: 551,
+                        columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                lineNumber: 326,
-                columnNumber: 5
+                lineNumber: 353,
+                columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
                 className: "bg-white rounded-2xl shadow-lg border border-gray-200 p-8",
@@ -1762,7 +1897,7 @@ function CarForm({ Gcategory, Gsubcategory }) {
                         children: "سعر المنتج"
                     }, void 0, false, {
                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                        lineNumber: 503,
+                        lineNumber: 589,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1770,7 +1905,7 @@ function CarForm({ Gcategory, Gsubcategory }) {
                         children: "حدد سعر الإعلان أو اختر إذا كان قابل للتفاوض، وسيساعد المستخدمين على معرفة القيمة بسهولة."
                     }, void 0, false, {
                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                        lineNumber: 506,
+                        lineNumber: 592,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1787,13 +1922,13 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                             children: "*"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                            lineNumber: 514,
+                                            lineNumber: 600,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                    lineNumber: 512,
+                                    lineNumber: 598,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -1804,18 +1939,18 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                     placeholder: "ادخل سعر المنتج"
                                 }, void 0, false, {
                                     fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                    lineNumber: 516,
+                                    lineNumber: 602,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                            lineNumber: 511,
+                            lineNumber: 597,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                        lineNumber: 510,
+                        lineNumber: 596,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1830,13 +1965,13 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                         children: "*"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 529,
-                                        columnNumber: 11
+                                        lineNumber: 615,
+                                        columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                lineNumber: 528,
+                                lineNumber: 613,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1853,20 +1988,20 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                                 className: "accent-cgreen"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                                lineNumber: 533,
+                                                lineNumber: 619,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                 children: "سعر قابل للتفاوض"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                                lineNumber: 540,
+                                                lineNumber: 626,
                                                 columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 532,
+                                        lineNumber: 618,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
@@ -1879,38 +2014,38 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                                 className: "accent-cgreen"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                                lineNumber: 543,
+                                                lineNumber: 629,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                 children: "سعر ثابت"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                                lineNumber: 549,
+                                                lineNumber: 635,
                                                 columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 542,
+                                        lineNumber: 628,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                lineNumber: 531,
+                                lineNumber: 617,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                        lineNumber: 527,
+                        lineNumber: 612,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                lineNumber: 502,
+                lineNumber: 588,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
@@ -1921,7 +2056,7 @@ function CarForm({ Gcategory, Gsubcategory }) {
                         children: "تفاصيل السيارة"
                     }, void 0, false, {
                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                        lineNumber: 556,
+                        lineNumber: 643,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1939,19 +2074,19 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                                 children: "*"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                                lineNumber: 561,
-                                                columnNumber: 13
+                                                lineNumber: 648,
+                                                columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 560,
+                                        lineNumber: 646,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
                                         required: true,
                                         ...register("car.brand"),
-                                        className: "mt-1  w-full p-3 py-3.5 border-2 rounded-lg bg-cwhite text-gray-700 focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200",
+                                        className: "mt-1 w-full p-3 py-3.5 border-2 rounded-lg bg-cwhite text-gray-700 focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200",
                                         style: {
                                             borderColor: "#277F60"
                                         },
@@ -1962,7 +2097,7 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                                 children: "اختر الماركة"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                                lineNumber: 572,
+                                                lineNumber: 659,
                                                 columnNumber: 15
                                             }, this),
                                             BRAND_CHOICES.map(([value, label])=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -1970,19 +2105,19 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                                     children: label
                                                 }, value, false, {
                                                     fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                                    lineNumber: 574,
+                                                    lineNumber: 661,
                                                     columnNumber: 17
                                                 }, this))
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 563,
+                                        lineNumber: 650,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                lineNumber: 559,
+                                lineNumber: 645,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1993,7 +2128,7 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                         children: "الموديل"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 581,
+                                        lineNumber: 668,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -2002,13 +2137,13 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                         dir: "rtl"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 582,
+                                        lineNumber: 669,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                lineNumber: 580,
+                                lineNumber: 667,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2023,13 +2158,13 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                                 children: "*"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                                lineNumber: 592,
+                                                lineNumber: 679,
                                                 columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 590,
+                                        lineNumber: 677,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -2042,13 +2177,13 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                         dir: "rtl"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 594,
+                                        lineNumber: 681,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                lineNumber: 589,
+                                lineNumber: 676,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2059,24 +2194,26 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                         children: "الأداء"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 604,
+                                        lineNumber: 691,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
                                         type: "number",
-                                        ...register("car.performance"),
+                                        ...register("car.performance", {
+                                            valueAsNumber: true
+                                        }),
                                         className: "w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm",
                                         dir: "rtl",
                                         placeholder: "مثال: 150 حصان"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 605,
+                                        lineNumber: 692,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                lineNumber: 603,
+                                lineNumber: 690,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2087,12 +2224,12 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                         children: "اللون"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 615,
+                                        lineNumber: 702,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
                                         ...register("car.color"),
-                                        className: "mt-1  w-full p-3 py-3.5 border-2 rounded-lg bg-cwhite text-gray-700 focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200",
+                                        className: "mt-1 w-full p-3 py-3.5 border-2 rounded-lg bg-cwhite text-gray-700 focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200",
                                         style: {
                                             borderColor: "#277F60"
                                         },
@@ -2103,7 +2240,7 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                                 children: "اختر اللون"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                                lineNumber: 624,
+                                                lineNumber: 711,
                                                 columnNumber: 15
                                             }, this),
                                             COLOR_CHOICES.map(([value, label])=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -2111,19 +2248,19 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                                     children: label
                                                 }, value, false, {
                                                     fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                                    lineNumber: 626,
+                                                    lineNumber: 713,
                                                     columnNumber: 17
                                                 }, this))
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 616,
+                                        lineNumber: 703,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                lineNumber: 614,
+                                lineNumber: 701,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2138,34 +2275,36 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                                 children: "*"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                                lineNumber: 636,
+                                                lineNumber: 723,
                                                 columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 634,
+                                        lineNumber: 721,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
                                         required: true,
                                         type: "number",
                                         placeholder: "ادخل سنة التسجيل",
-                                        ...register("car.first_registration"),
-                                        className: "mt-1  w-full p-3 py-3.5 border-2 rounded-lg bg-cwhite text-gray-700 focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200",
+                                        ...register("car.first_registration", {
+                                            valueAsNumber: true
+                                        }),
+                                        className: "mt-1 w-full p-3 py-3.5 border-2 rounded-lg bg-cwhite text-gray-700 focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200",
                                         style: {
                                             borderColor: "#277F60"
                                         },
                                         dir: "rtl"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 638,
+                                        lineNumber: 725,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                lineNumber: 633,
+                                lineNumber: 720,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2176,20 +2315,20 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                         children: "تاريخ الفحص الفني"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 652,
+                                        lineNumber: 739,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
                                         type: "date",
                                         ...register("car.hu"),
-                                        className: "mt-1  w-full p-3 py-3.5 border-2 rounded-lg bg-cwhite text-gray-700 focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200",
+                                        className: "mt-1 w-full p-3 py-3.5 border-2 rounded-lg bg-cwhite text-gray-700 focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200",
                                         style: {
                                             borderColor: "#277F60"
                                         },
                                         dir: "rtl"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 655,
+                                        lineNumber: 742,
                                         columnNumber: 13
                                     }, this),
                                     errors.car?.hu && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2197,13 +2336,13 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                         children: errors.car?.hu.message
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 665,
+                                        lineNumber: 752,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                lineNumber: 651,
+                                lineNumber: 738,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2218,13 +2357,13 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                                 children: "*"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                                lineNumber: 672,
+                                                lineNumber: 759,
                                                 columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 670,
+                                        lineNumber: 757,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -2234,13 +2373,13 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                         dir: "rtl"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 674,
+                                        lineNumber: 761,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                lineNumber: 669,
+                                lineNumber: 756,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2255,13 +2394,13 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                                 children: "*"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                                lineNumber: 685,
+                                                lineNumber: 772,
                                                 columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 683,
+                                        lineNumber: 770,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -2271,19 +2410,19 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                         dir: "rtl"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 687,
+                                        lineNumber: 774,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                lineNumber: 682,
+                                lineNumber: 769,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                        lineNumber: 558,
+                        lineNumber: 644,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2301,13 +2440,13 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                                 children: "*"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                                lineNumber: 701,
+                                                lineNumber: 788,
                                                 columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 699,
+                                        lineNumber: 786,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2323,31 +2462,31 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                                         className: "accent-cgreen"
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                                        lineNumber: 710,
+                                                        lineNumber: 796,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                         children: label
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                                        lineNumber: 717,
+                                                        lineNumber: 803,
                                                         columnNumber: 19
                                                     }, this)
                                                 ]
                                             }, value, true, {
                                                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                                lineNumber: 706,
+                                                lineNumber: 792,
                                                 columnNumber: 17
                                             }, this))
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 704,
+                                        lineNumber: 790,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                lineNumber: 698,
+                                lineNumber: 785,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2362,13 +2501,13 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                                 children: "*"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                                lineNumber: 725,
+                                                lineNumber: 811,
                                                 columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 723,
+                                        lineNumber: 809,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2384,31 +2523,31 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                                         className: "accent-cgreen"
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                                        lineNumber: 734,
+                                                        lineNumber: 819,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                         children: label
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                                        lineNumber: 741,
+                                                        lineNumber: 826,
                                                         columnNumber: 19
                                                     }, this)
                                                 ]
                                             }, value, true, {
                                                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                                lineNumber: 730,
+                                                lineNumber: 815,
                                                 columnNumber: 17
                                             }, this))
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 728,
+                                        lineNumber: 813,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                lineNumber: 722,
+                                lineNumber: 808,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2419,7 +2558,7 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                         children: "عدد الأبواب"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 749,
+                                        lineNumber: 833,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2434,31 +2573,31 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                                         className: "accent-cgreen"
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                                        lineNumber: 759,
+                                                        lineNumber: 842,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                         children: label
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                                        lineNumber: 765,
+                                                        lineNumber: 848,
                                                         columnNumber: 19
                                                     }, this)
                                                 ]
                                             }, value, true, {
                                                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                                lineNumber: 755,
+                                                lineNumber: 838,
                                                 columnNumber: 17
                                             }, this))
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 753,
+                                        lineNumber: 836,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                lineNumber: 747,
+                                lineNumber: 832,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2469,7 +2608,7 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                         children: "المواد الداخلية"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 773,
+                                        lineNumber: 855,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2484,31 +2623,31 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                                         className: "accent-cgreen"
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                                        lineNumber: 783,
+                                                        lineNumber: 864,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                         children: label
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                                        lineNumber: 789,
+                                                        lineNumber: 870,
                                                         columnNumber: 19
                                                     }, this)
                                                 ]
                                             }, value, true, {
                                                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                                lineNumber: 779,
+                                                lineNumber: 860,
                                                 columnNumber: 17
                                             }, this))
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 777,
+                                        lineNumber: 858,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                lineNumber: 771,
+                                lineNumber: 854,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2523,21 +2662,20 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                                 children: "*"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                                lineNumber: 799,
+                                                lineNumber: 879,
                                                 columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 797,
+                                        lineNumber: 877,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                        className: "flex flex-wrap gap-2 mt-2 ",
+                                        className: "flex flex-wrap gap-2 mt-2",
                                         children: FUEL_CHOICES.map(([value, label])=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                                 className: "flex items-center gap-1 ml-2 text-gray-700 cursor-pointer",
                                                 children: [
-                                                    " ",
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
                                                         required: true,
                                                         type: "radio",
@@ -2546,31 +2684,31 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                                         className: "accent-cgreen"
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                                        lineNumber: 808,
+                                                        lineNumber: 887,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                         children: label
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                                        lineNumber: 815,
+                                                        lineNumber: 894,
                                                         columnNumber: 19
                                                     }, this)
                                                 ]
                                             }, value, true, {
                                                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                                lineNumber: 803,
+                                                lineNumber: 883,
                                                 columnNumber: 17
                                             }, this))
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 801,
+                                        lineNumber: 881,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                lineNumber: 795,
+                                lineNumber: 876,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2581,7 +2719,7 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                         children: "نوع السيارة"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 822,
+                                        lineNumber: 900,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2596,31 +2734,31 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                                         className: "accent-cgreen"
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                                        lineNumber: 832,
+                                                        lineNumber: 909,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                         children: label
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                                        lineNumber: 838,
+                                                        lineNumber: 915,
                                                         columnNumber: 19
                                                     }, this)
                                                 ]
                                             }, value, true, {
                                                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                                lineNumber: 828,
+                                                lineNumber: 905,
                                                 columnNumber: 17
                                             }, this))
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 826,
+                                        lineNumber: 903,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                lineNumber: 820,
+                                lineNumber: 899,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2631,11 +2769,11 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                         children: "أنظمة الحماية"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 845,
+                                        lineNumber: 922,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                        className: "flex flex-wrap gap-2 mt-2 ",
+                                        className: "flex flex-wrap gap-2 mt-2",
                                         children: PROTECTION_CHOICES.map(([value, label])=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                                 className: "flex items-center gap-1 ml-2 text-gray-700 cursor-pointer",
                                                 children: [
@@ -2646,25 +2784,25 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                                         ...register("car.protection")
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                                        lineNumber: 854,
+                                                        lineNumber: 931,
                                                         columnNumber: 19
                                                     }, this),
                                                     label
                                                 ]
                                             }, value, true, {
                                                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                                lineNumber: 850,
+                                                lineNumber: 927,
                                                 columnNumber: 17
                                             }, this))
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 848,
+                                        lineNumber: 925,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                lineNumber: 844,
+                                lineNumber: 921,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2675,11 +2813,11 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                         children: "المميزات الخارجية"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 867,
+                                        lineNumber: 944,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                        className: "flex flex-wrap gap-2 mt-2 ",
+                                        className: "flex flex-wrap gap-2 mt-2",
                                         children: EXTERNAL_FEATURES_CHOICES.map(([value, label])=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                                 className: "flex items-center gap-1 ml-2 text-gray-700 cursor-pointer",
                                                 children: [
@@ -2690,25 +2828,25 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                                         ...register("car.external_features")
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                                        lineNumber: 876,
+                                                        lineNumber: 953,
                                                         columnNumber: 19
                                                     }, this),
                                                     label
                                                 ]
                                             }, value, true, {
                                                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                                lineNumber: 872,
+                                                lineNumber: 949,
                                                 columnNumber: 17
                                             }, this))
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 870,
+                                        lineNumber: 947,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                lineNumber: 866,
+                                lineNumber: 943,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2719,11 +2857,11 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                         children: "المميزات الداخلية"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 889,
+                                        lineNumber: 966,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                        className: "flex flex-wrap gap-2 mt-2 ",
+                                        className: "flex flex-wrap gap-2 mt-2",
                                         children: INTERNAL_FEATURES_CHOICES.map(([value, label])=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                                 className: "flex items-center gap-1 ml-2 text-gray-700 cursor-pointer",
                                                 children: [
@@ -2734,46 +2872,47 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                                         ...register("car.internal_features")
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                                        lineNumber: 898,
+                                                        lineNumber: 975,
                                                         columnNumber: 19
                                                     }, this),
                                                     label
                                                 ]
                                             }, value, true, {
                                                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                                lineNumber: 894,
+                                                lineNumber: 971,
                                                 columnNumber: 17
                                             }, this))
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                        lineNumber: 892,
+                                        lineNumber: 969,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                lineNumber: 888,
+                                lineNumber: 965,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                        lineNumber: 697,
+                        lineNumber: 784,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("hr", {
                         className: "mt-6 mb-3 text-clightgray"
                     }, void 0, false, {
                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                        lineNumber: 911,
+                        lineNumber: 988,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         className: "flex justify-end max-sm:flex-col max-sm:justify-center max-sm:items-center max-sm:gap-4 mb-5",
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                type: "button" // تغيير إلى button لمنع إرسال النموذج
+                                ,
                                 onClick: ()=>window.location.href = "/perview",
-                                type: "submit",
                                 className: "mt-8 ml-6 max-sm:ml-0 text-white rounded",
                                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                     className: "flex items-center group outline-2 outline-cgreen text-gray-800 hover:bg-chgreen hover:outline-chgreen hover:text-cwhite py-3 px-12 max-sm:px-[55px] rounded text-xl transition-all duration-300",
@@ -2782,7 +2921,7 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                             className: "ml-1 text-cgreen group-hover:text-cwhite"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                            lineNumber: 920,
+                                            lineNumber: 997,
                                             columnNumber: 15
                                         }, this),
                                         " ",
@@ -2790,12 +2929,12 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                    lineNumber: 919,
+                                    lineNumber: 996,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                lineNumber: 914,
+                                lineNumber: 991,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -2806,34 +2945,34 @@ function CarForm({ Gcategory, Gsubcategory }) {
                                     children: isLoading ? "جار النشر ..." : "نشر"
                                 }, void 0, false, {
                                     fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                    lineNumber: 930,
+                                    lineNumber: 1007,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                                lineNumber: 926,
+                                lineNumber: 1003,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                        lineNumber: 912,
+                        lineNumber: 989,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-                lineNumber: 555,
+                lineNumber: 642,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/app/(public)/newpost/components/CarForm.tsx",
-        lineNumber: 312,
+        lineNumber: 339,
         columnNumber: 5
     }, this);
 }
-_s(CarForm, "BRJ8Vvbpqcqf8BIRnrSY1O44Kvg=", false, function() {
+_s(CarForm, "yqUAgfNLXlHZX9zEVHBK0sF8xHM=", false, function() {
     return [
         __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$hook$2d$form$2f$dist$2f$index$2e$esm$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useForm"],
         __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$lib$2f$postServices$2f$postMutations$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useCreateCarPost"]
@@ -3653,7 +3792,7 @@ var _s = __turbopack_context__.k.signature();
 ;
 const EditCar = ()=>{
     _s();
-    const { register, formState: {} } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$hook$2d$form$2f$dist$2f$index$2e$esm$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useForm"])({
+    const { register, setValue, formState: {} } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$hook$2d$form$2f$dist$2f$index$2e$esm$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useForm"])({
         defaultValues: {
             gallery_images: []
         }
@@ -3665,8 +3804,26 @@ const EditCar = ()=>{
     const [notification, setNotification] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
     const editCarForm = (0, __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$lib$2f$postServices$2f$editPostMutation$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEditCarForm"])(setNotification);
     const isPending = editCarForm.isPending;
+    const inputRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(null);
+    const [preview, setPreview] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
+    const MAX_GALLERY_IMAGES = 7; // تماشياً مع EditGeneric، EditMobile، EditHouse، و EditElectronics
     const inputRefs = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])([]);
+    const galleryInputRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(null);
     const [galleryFiles, setGalleryFiles] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])([]);
+    // دالة للتعامل مع تغيير صورة الغلاف
+    const handleImageChange = (e)=>{
+        const files = e.target.files;
+        if (files && files.length > 0) {
+            const file = files[0];
+            setFormData((prev)=>({
+                    ...prev,
+                    cover_image: file
+                }));
+            setPreview(URL.createObjectURL(file));
+            e.target.value = ""; // إعادة تعيين قيمة الـ input
+        }
+    };
+    // دالة للتعامل مع تغيير الصور في المعرض
     const handleGalleryChange = (e, index)=>{
         const file = e.target.files?.[0];
         if (file) {
@@ -3675,40 +3832,70 @@ const EditCar = ()=>{
                     ...prev
                 ];
                 updated[index] = file;
-                setFormData((prevForm)=>({
-                        ...prevForm,
-                        gallery: updated
-                    }));
+                setValue("gallery", updated, {
+                    shouldValidate: true,
+                    shouldDirty: true
+                });
                 return updated;
             });
+            e.target.value = ""; // إعادة تعيين قيمة الـ input
         }
     };
+    // دالة لإزالة صورة من المعرض
     const handleRemoveImage = (index)=>{
         setGalleryFiles((prev)=>{
             const updated = prev.filter((_, i)=>i !== index);
-            setFormData((prevForm)=>({
-                    ...prevForm,
-                    gallery: updated
-                }));
+            setValue("gallery", updated, {
+                shouldValidate: true,
+                shouldDirty: true
+            });
             return updated;
         });
     };
+    // دالة لإضافة صورة جديدة
+    const handleNewGalleryImage = (e)=>{
+        const file = e.target.files?.[0];
+        if (file && galleryFiles.length < MAX_GALLERY_IMAGES) {
+            setGalleryFiles((prev)=>{
+                const updated = [
+                    ...prev,
+                    file
+                ];
+                setValue("gallery", updated, {
+                    shouldValidate: true,
+                    shouldDirty: true
+                });
+                return updated;
+            });
+            e.target.value = ""; // إعادة تعيين قيمة الـ input
+        }
+    };
+    // دالة لفتح نافذة اختيار الملفات
     const handleAddNewGallerySlot = ()=>{
-        setGalleryFiles((prev)=>{
-            if (prev.length >= 10) return prev;
-            const updated = [
-                ...prev,
-                ""
-            ];
-            setFormData((prevForm)=>({
-                    ...prevForm,
-                    gallery: updated
-                }));
-            return updated;
-        });
+        if (galleryFiles.length < MAX_GALLERY_IMAGES) {
+            galleryInputRef.current?.click();
+        }
     };
+    // دالة لتحريك إدخال الصورة
     const triggerFileInput = (index)=>{
         inputRefs.current[index]?.click();
+    };
+    // دالة لفتح نافذة اختيار الملفات لصورة الغلاف
+    const handleClick = ()=>{
+        inputRef.current?.click();
+    };
+    const convertURLtoFile = async (url)=>{
+        const response = await fetch(url);
+        const blob = await response.blob();
+        let name = url.split("/").pop() || "";
+        if (!/\.(jpg|jpeg|png|webp|gif)$/i.test(name)) {
+            name = `image-${Date.now()}.jpg`;
+        }
+        return new File([
+            blob
+        ], name, {
+            type: blob.type
+        });
     };
     const [formData, setFormData] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])({
         category: "",
@@ -3724,6 +3911,7 @@ const EditCar = ()=>{
         gallery: [],
         car: undefined
     });
+    const [isSearch, setIsSearch] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
         "EditCar.useEffect": ()=>{
             if (data) {
@@ -3747,16 +3935,25 @@ const EditCar = ()=>{
                 });
                 setGalleryFiles(galleryImages);
                 setIsSearch(data.offer_type === "search");
+                if (data.cover_image && typeof data.cover_image === "string") {
+                    setPreview(data.cover_image);
+                }
             }
         }
     }["EditCar.useEffect"], [
         data
     ]);
+    const handleInputChange = (e)=>{
+        const { name, value } = e.target;
+        setFormData((prev)=>({
+                ...prev,
+                [name]: value
+            }));
+    };
     const handleCarInputChange = (e)=>{
         const { name, value, type } = e.target;
         const key = name.replace("car.", "");
         setFormData((prev)=>{
-            // إذا لم تكن car موجودة، أنشئ نسخة افتراضية كاملة
             const baseCar = prev.car ?? {
                 external_features: [],
                 internal_features: [],
@@ -3807,7 +4004,6 @@ const EditCar = ()=>{
             };
         });
     };
-    const [isSearch, setIsSearch] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
     const handleOfferType = (type)=>{
         setIsSearch(type === "search");
         setFormData((prev)=>({
@@ -3815,11 +4011,8 @@ const EditCar = ()=>{
                 offer_type: type
             }));
     };
-    // دالة الإرسال الصحيحة
     const onSubmit = async (e)=>{
         e.preventDefault();
-        const data = formData;
-        const form = new FormData();
         if (!id) {
             setNotification({
                 message: "معرف الإعلان غير صالح.",
@@ -3827,6 +4020,8 @@ const EditCar = ()=>{
             });
             return;
         }
+        const data = formData;
+        const form = new FormData();
         form.append("offer_type", data.offer_type ?? "sell");
         form.append("title", data.title ?? "");
         form.append("description", data.description ?? "");
@@ -3840,7 +4035,7 @@ const EditCar = ()=>{
         if (data.cover_image instanceof File) {
             form.append("cover_image", data.cover_image);
         }
-        for (const img of formData.gallery || []){
+        for (const img of galleryFiles){
             if (img instanceof File) {
                 form.append("gallery", img);
             } else if (typeof img === "string") {
@@ -3848,7 +4043,7 @@ const EditCar = ()=>{
                 form.append("gallery", file);
             }
         }
-        console.log("📋 Gallery send from me");
+        console.log("📋 Gallery content ");
         const galleryItems = form.getAll("gallery");
         galleryItems.forEach((item, index)=>{
             if (item instanceof File) {
@@ -3875,7 +4070,6 @@ const EditCar = ()=>{
             environmental_sticker: data.car?.environmental_sticker,
             internal_features: Array.isArray(data.car?.internal_features) ? data.car?.internal_features : []
         };
-        // تنظيف البيانات وإزالة القيم الفارغة
         const cleanCarDetails = {};
         Object.entries(carDetails).forEach(([key, value])=>{
             if (value !== undefined && value !== null && value !== "") {
@@ -3889,13 +4083,6 @@ const EditCar = ()=>{
             }
         });
         form.append("car_details", JSON.stringify(cleanCarDetails));
-        if (formData.gallery && formData.gallery.length > 0) {
-            formData.gallery.forEach((img)=>{
-                if (img instanceof File) {
-                    form.append("gallery", img);
-                }
-            });
-        }
         editCarForm.mutate({
             formData: form,
             id
@@ -3914,78 +4101,13 @@ const EditCar = ()=>{
         }
         return null;
     }
-    // /////////////////////////////////////////////////////////////////////////////////////
-    const inputRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(null);
-    const [preview, setPreview] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
-    // لما تضغط على صندوق رفع الصورة يفتح اختيار الملفات
-    const handleClick = ()=>{
-        inputRef.current?.click();
-    };
-    // لما تختار صورة جديدة يتم تحديث preview و formData.cover_image
-    const handleImageChange = (e)=>{
-        const files = e.target.files;
-        if (files && files.length > 0) {
-            const file = files[0];
-            setFormData((prev)=>({
-                    ...prev,
-                    cover_image: file
-                }));
-            setPreview(URL.createObjectURL(file));
-        }
-    };
-    // تحديث preview لو جت بيانات موجودة كسلسلة نصية (رابط صورة من السيرفر مثلا)
-    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
-        "EditCar.useEffect": ()=>{
-            if (formData.cover_image && typeof formData.cover_image === "string") {
-                setPreview(formData.cover_image);
-            }
-        }
-    }["EditCar.useEffect"], [
-        formData.cover_image
-    ]);
-    const handleInputChange = (e)=>{
-        const { name, value, type } = e.target;
-        const files = e.target.files;
-        if (type === "file") {
-            if (name === "gallery") {
-                setFormData((prev)=>({
-                        ...prev,
-                        [name]: files ? Array.from(files) : []
-                    }));
-            } else if (name === "cover_image") {
-                setFormData((prev)=>({
-                        ...prev,
-                        [name]: files && files.length > 0 ? files[0] : null
-                    }));
-            }
-        } else {
-            setFormData((prev)=>({
-                    ...prev,
-                    [name]: value
-                }));
-        }
-    };
-    const convertURLtoFile = async (url)=>{
-        const response = await fetch(url);
-        const blob = await response.blob();
-        let name = url.split("/").pop() || "";
-        if (!/\.(jpg|jpeg|png|webp|gif)$/i.test(name)) {
-            name = `image-${Date.now()}.jpg`; // اسم افتراضي بامتداد مسموح
-        }
-        return new File([
-            blob
-        ], name, {
-            type: blob.type
-        });
-    };
-    // ////////////////////////////////////////////////////////////////////
     if (isLoading) return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$app$2f$components$2f$ui$2f$SkeletonNotificationSettings$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {}, void 0, false, {
         fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-        lineNumber: 379,
+        lineNumber: 350,
         columnNumber: 25
     }, this);
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-        className: "min-h-screen py-4 bg-gray-100  flex flex-col items-center",
+        className: "min-h-screen py-4 bg-gray-100 flex flex-col items-center",
         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
             onSubmit: onSubmit,
             className: "w-[90%]",
@@ -3996,7 +4118,7 @@ const EditCar = ()=>{
                     onClose: ()=>setNotification(null)
                 }, void 0, false, {
                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                    lineNumber: 386,
+                    lineNumber: 356,
                     columnNumber: 11
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4004,10 +4126,10 @@ const EditCar = ()=>{
                     children: [
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h1", {
                             className: "text-3xl font-bold mb-2 flex justify-start max-sm:text-2xl",
-                            children: "تعديل الإعلان"
+                            children: "تعديل إعلان السيارة"
                         }, void 0, false, {
                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                            lineNumber: 395,
+                            lineNumber: 364,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -4021,7 +4143,7 @@ const EditCar = ()=>{
                                     children: "سياسة النشر"
                                 }, void 0, false, {
                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                    lineNumber: 400,
+                                    lineNumber: 369,
                                     columnNumber: 13
                                 }, this),
                                 " ",
@@ -4029,13 +4151,13 @@ const EditCar = ()=>{
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                            lineNumber: 398,
+                            lineNumber: 367,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                    lineNumber: 394,
+                    lineNumber: 363,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4046,14 +4168,14 @@ const EditCar = ()=>{
                             children: "تصنيف المنتج"
                         }, void 0, false, {
                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                            lineNumber: 412,
+                            lineNumber: 377,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("hr", {
                             className: "mb-6 text-clightgray"
                         }, void 0, false, {
                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                            lineNumber: 413,
+                            lineNumber: 378,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4071,13 +4193,13 @@ const EditCar = ()=>{
                                                     children: "*"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                    lineNumber: 418,
+                                                    lineNumber: 383,
                                                     columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 416,
+                                            lineNumber: 381,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -4089,13 +4211,13 @@ const EditCar = ()=>{
                                             className: "w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 420,
+                                            lineNumber: 385,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                    lineNumber: 415,
+                                    lineNumber: 380,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4110,13 +4232,13 @@ const EditCar = ()=>{
                                                     children: "*"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                    lineNumber: 433,
+                                                    lineNumber: 397,
                                                     columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 431,
+                                            lineNumber: 395,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -4128,25 +4250,25 @@ const EditCar = ()=>{
                                             className: "w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 435,
+                                            lineNumber: 399,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                    lineNumber: 430,
+                                    lineNumber: 394,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                            lineNumber: 414,
+                            lineNumber: 379,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                    lineNumber: 411,
+                    lineNumber: 376,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
@@ -4157,7 +4279,7 @@ const EditCar = ()=>{
                             children: "معلومات أساسية"
                         }, void 0, false, {
                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                            lineNumber: 449,
+                            lineNumber: 412,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -4165,11 +4287,11 @@ const EditCar = ()=>{
                             children: "أدخل معلومات الإعلان الأساسية لتظهر بوضوح للمشترين، مثل العنوان والوصف العام والموقع."
                         }, void 0, false, {
                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                            lineNumber: 452,
+                            lineNumber: 415,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            className: " mb-6 sm:ml-16 border-b border-clightgray",
+                            className: "mb-6 sm:ml-16 border-b border-clightgray",
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
                                     className: "font-medium mb-3 mt-6 text-lg text-gray-700",
@@ -4180,17 +4302,17 @@ const EditCar = ()=>{
                                             children: "*"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 460,
+                                            lineNumber: 423,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                    lineNumber: 458,
+                                    lineNumber: 421,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "w-full mt-2 max-w-sm  border-2 border-clightgray p-1.5 rounded-xl mb-6 flex",
+                                    className: "w-full mt-2 max-w-sm border-2 border-clightgray p-1.5 rounded-xl mb-6 flex",
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$app$2f$components$2f$ui$2f$Button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
                                             type: "button",
@@ -4200,7 +4322,7 @@ const EditCar = ()=>{
                                             children: "أنا أعرض"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 463,
+                                            lineNumber: 426,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$app$2f$components$2f$ui$2f$Button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
@@ -4211,19 +4333,201 @@ const EditCar = ()=>{
                                             children: "أنا أبحث"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 471,
+                                            lineNumber: 434,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                    lineNumber: 462,
+                                    lineNumber: 425,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                            lineNumber: 456,
+                            lineNumber: 419,
+                            columnNumber: 11
+                        }, this),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                            className: "text-lg max-sm:text-sm border p-2 bg-cgreen text-cwhite rounded-md",
+                            children: "ملاحظة: يوجد زر معاينة المنشور في الأسفل"
+                        }, void 0, false, {
+                            fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
+                            lineNumber: 445,
+                            columnNumber: 9
+                        }, this),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                            className: "grid grid-cols-1 md:grid-cols-2 gap-6 my-6",
+                            children: [
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                    className: "sm:ml-16",
+                                    children: [
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
+                                            className: "block font-medium text-gray-700 mb-2",
+                                            children: "صورة غلاف المنتج"
+                                        }, void 0, false, {
+                                            fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
+                                            lineNumber: 451,
+                                            columnNumber: 15
+                                        }, this),
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                            type: "file",
+                                            accept: "image/*",
+                                            ref: inputRef,
+                                            onChange: handleImageChange,
+                                            className: "hidden"
+                                        }, void 0, false, {
+                                            fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
+                                            lineNumber: 454,
+                                            columnNumber: 15
+                                        }, this),
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                            onClick: handleClick,
+                                            className: "w-[70%] max-sm:w-full h-52 border-2 border-dashed border-cgreen rounded-lg flex items-center justify-center cursor-pointer bg-cwhite overflow-hidden",
+                                            children: preview ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
+                                                src: preview,
+                                                alt: "preview",
+                                                width: 256,
+                                                height: 160,
+                                                className: "object-cover w-full h-full"
+                                            }, void 0, false, {
+                                                fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
+                                                lineNumber: 466,
+                                                columnNumber: 19
+                                            }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                className: "text-cgreen text-4xl",
+                                                children: "+"
+                                            }, void 0, false, {
+                                                fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
+                                                lineNumber: 474,
+                                                columnNumber: 19
+                                            }, this)
+                                        }, void 0, false, {
+                                            fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
+                                            lineNumber: 461,
+                                            columnNumber: 15
+                                        }, this)
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
+                                    lineNumber: 450,
+                                    columnNumber: 13
+                                }, this),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                    type: "hidden",
+                                    ...register("gallery")
+                                }, void 0, false, {
+                                    fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
+                                    lineNumber: 478,
+                                    columnNumber: 13
+                                }, this),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                    className: "sm:ml-16",
+                                    children: [
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
+                                            className: "block font-medium text-gray-700 mb-2",
+                                            children: "صور المنتج"
+                                        }, void 0, false, {
+                                            fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
+                                            lineNumber: 480,
+                                            columnNumber: 15
+                                        }, this),
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                            className: "flex flex-wrap gap-2",
+                                            children: [
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                                    type: "file",
+                                                    accept: "image/*",
+                                                    className: "hidden",
+                                                    onChange: handleNewGalleryImage,
+                                                    ref: galleryInputRef
+                                                }, void 0, false, {
+                                                    fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
+                                                    lineNumber: 484,
+                                                    columnNumber: 17
+                                                }, this),
+                                                galleryFiles.map((img, index)=>{
+                                                    const previewUrl = img instanceof File ? URL.createObjectURL(img) : img;
+                                                    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                        className: "relative max-sm:w-32 w-24 h-24 border-2 border-cgreen rounded-lg overflow-hidden cursor-pointer",
+                                                        children: [
+                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                                                type: "file",
+                                                                accept: "image/*",
+                                                                className: "hidden",
+                                                                onChange: (e)=>handleGalleryChange(e, index),
+                                                                ref: (el)=>{
+                                                                    inputRefs.current[index] = el;
+                                                                }
+                                                            }, void 0, false, {
+                                                                fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
+                                                                lineNumber: 500,
+                                                                columnNumber: 23
+                                                            }, this),
+                                                            previewUrl && previewUrl !== "" ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
+                                                                src: previewUrl,
+                                                                alt: `Gallery image ${index + 1}`,
+                                                                fill: true,
+                                                                style: {
+                                                                    objectFit: "cover"
+                                                                },
+                                                                onClick: ()=>triggerFileInput(index),
+                                                                onLoad: ()=>img instanceof File && URL.revokeObjectURL(previewUrl)
+                                                            }, void 0, false, {
+                                                                fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
+                                                                lineNumber: 510,
+                                                                columnNumber: 25
+                                                            }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                                onClick: ()=>triggerFileInput(index),
+                                                                className: "flex justify-center items-center w-full h-full text-cgreen text-4xl",
+                                                                children: "+"
+                                                            }, void 0, false, {
+                                                                fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
+                                                                lineNumber: 522,
+                                                                columnNumber: 25
+                                                            }, this),
+                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                                                type: "button",
+                                                                onClick: ()=>handleRemoveImage(index),
+                                                                className: "absolute top-0 right-0 bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center",
+                                                                children: "×"
+                                                            }, void 0, false, {
+                                                                fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
+                                                                lineNumber: 529,
+                                                                columnNumber: 23
+                                                            }, this)
+                                                        ]
+                                                    }, index, true, {
+                                                        fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
+                                                        lineNumber: 496,
+                                                        columnNumber: 21
+                                                    }, this);
+                                                }),
+                                                galleryFiles.length < MAX_GALLERY_IMAGES && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                    onClick: handleAddNewGallerySlot,
+                                                    className: "w-24 h-24 border-2 border-dashed border-cgreen rounded-lg flex items-center justify-center cursor-pointer text-cgreen text-4xl",
+                                                    children: "+"
+                                                }, void 0, false, {
+                                                    fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
+                                                    lineNumber: 540,
+                                                    columnNumber: 19
+                                                }, this)
+                                            ]
+                                        }, void 0, true, {
+                                            fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
+                                            lineNumber: 483,
+                                            columnNumber: 15
+                                        }, this)
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
+                                    lineNumber: 479,
+                                    columnNumber: 13
+                                }, this)
+                            ]
+                        }, void 0, true, {
+                            fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
+                            lineNumber: 448,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4241,13 +4545,13 @@ const EditCar = ()=>{
                                                     children: "*"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                    lineNumber: 485,
+                                                    lineNumber: 553,
                                                     columnNumber: 28
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 484,
+                                            lineNumber: 552,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -4260,178 +4564,15 @@ const EditCar = ()=>{
                                             className: "w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 487,
+                                            lineNumber: 555,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                    lineNumber: 483,
-                                    columnNumber: 13
+                                    lineNumber: 551,
+                                    columnNumber: 11
                                 }, this),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "sm:ml-16",
-                                    children: [
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                            className: "block font-medium text-gray-700 mb-2",
-                                            children: "صورة غلاف المنتج"
-                                        }, void 0, false, {
-                                            fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 498,
-                                            columnNumber: 15
-                                        }, this),
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
-                                            type: "file",
-                                            accept: "image/*",
-                                            ref: inputRef,
-                                            onChange: handleImageChange,
-                                            className: "hidden"
-                                        }, void 0, false, {
-                                            fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 503,
-                                            columnNumber: 15
-                                        }, this),
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                            onClick: handleClick,
-                                            className: "w-64 h-40 border-2 border-dashed border-cgreen rounded-lg flex items-center justify-center cursor-pointer bg-cwhite overflow-hidden",
-                                            children: preview ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
-                                                src: preview,
-                                                alt: "preview",
-                                                width: 256,
-                                                height: 160,
-                                                className: "object-cover w-full h-full"
-                                            }, void 0, false, {
-                                                fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                lineNumber: 517,
-                                                columnNumber: 19
-                                            }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                className: "text-cgreen text-4xl",
-                                                children: "+"
-                                            }, void 0, false, {
-                                                fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                lineNumber: 525,
-                                                columnNumber: 19
-                                            }, this)
-                                        }, void 0, false, {
-                                            fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 512,
-                                            columnNumber: 15
-                                        }, this)
-                                    ]
-                                }, void 0, true, {
-                                    fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                    lineNumber: 497,
-                                    columnNumber: 13
-                                }, this),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
-                                    type: "hidden",
-                                    ...register("gallery")
-                                }, void 0, false, {
-                                    fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                    lineNumber: 531,
-                                    columnNumber: 13
-                                }, this),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "sm:ml-16",
-                                    children: [
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                            className: "block font-medium text-gray-700 mb-2",
-                                            children: "صور المنتج"
-                                        }, void 0, false, {
-                                            fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 533,
-                                            columnNumber: 15
-                                        }, this),
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                            className: "flex flex-wrap gap-4",
-                                            children: [
-                                                galleryFiles.map((img, index)=>{
-                                                    const previewUrl = img instanceof File ? URL.createObjectURL(img) : img;
-                                                    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                        className: "relative w-24 h-24 border-2 border-cgreen rounded-lg overflow-hidden cursor-pointer",
-                                                        children: [
-                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
-                                                                type: "file",
-                                                                accept: "image/*",
-                                                                className: "hidden",
-                                                                onChange: (e)=>handleGalleryChange(e, index),
-                                                                ref: (el)=>{
-                                                                    inputRefs.current[index] = el;
-                                                                }
-                                                            }, void 0, false, {
-                                                                fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                                lineNumber: 546,
-                                                                columnNumber: 23
-                                                            }, this),
-                                                            previewUrl && previewUrl !== "" ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
-                                                                src: previewUrl,
-                                                                alt: `Gallery image ${index + 1}`,
-                                                                fill: true,
-                                                                style: {
-                                                                    objectFit: "cover"
-                                                                },
-                                                                onClick: ()=>triggerFileInput(index),
-                                                                onLoad: ()=>img instanceof File && URL.revokeObjectURL(previewUrl)
-                                                            }, void 0, false, {
-                                                                fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                                lineNumber: 556,
-                                                                columnNumber: 25
-                                                            }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                                onClick: ()=>triggerFileInput(index),
-                                                                className: "flex justify-center items-center w-full h-full text-cgreen text-4xl",
-                                                                children: "+"
-                                                            }, void 0, false, {
-                                                                fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                                lineNumber: 568,
-                                                                columnNumber: 25
-                                                            }, this),
-                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                                                type: "button",
-                                                                onClick: ()=>handleRemoveImage(index),
-                                                                className: "absolute top-0 right-0 bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center",
-                                                                children: "×"
-                                                            }, void 0, false, {
-                                                                fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                                lineNumber: 575,
-                                                                columnNumber: 23
-                                                            }, this)
-                                                        ]
-                                                    }, index, true, {
-                                                        fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                        lineNumber: 542,
-                                                        columnNumber: 21
-                                                    }, this);
-                                                }),
-                                                galleryFiles.length < 5 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                    onClick: handleAddNewGallerySlot,
-                                                    className: "w-24 h-24 border-2 border-dashed border-cgreen rounded-lg flex items-center justify-center cursor-pointer text-cgreen text-4xl",
-                                                    children: "+"
-                                                }, void 0, false, {
-                                                    fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                    lineNumber: 586,
-                                                    columnNumber: 19
-                                                }, this)
-                                            ]
-                                        }, void 0, true, {
-                                            fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 536,
-                                            columnNumber: 15
-                                        }, this)
-                                    ]
-                                }, void 0, true, {
-                                    fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                    lineNumber: 532,
-                                    columnNumber: 13
-                                }, this)
-                            ]
-                        }, void 0, true, {
-                            fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                            lineNumber: 482,
-                            columnNumber: 11
-                        }, this),
-                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            className: "grid grid-cols-1 md:grid-cols-2 gap-6 mb-6",
-                            children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                     className: "sm:ml-16",
                                     children: [
@@ -4444,13 +4585,13 @@ const EditCar = ()=>{
                                                     children: "*"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                    lineNumber: 603,
+                                                    lineNumber: 568,
                                                     columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 601,
+                                            lineNumber: 566,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
@@ -4458,7 +4599,7 @@ const EditCar = ()=>{
                                             name: "city",
                                             value: formData.city || "",
                                             onChange: handleInputChange,
-                                            className: "mt-1  w-full p-3 border-2 rounded-lg bg-cwhite text-gray-700 focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200",
+                                            className: "mt-1 w-full p-3 border-2 rounded-lg bg-cwhite text-gray-700 focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200",
                                             style: {
                                                 borderColor: "#277F60"
                                             },
@@ -4468,7 +4609,7 @@ const EditCar = ()=>{
                                                     children: "اختر الإدخال"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                    lineNumber: 615,
+                                                    lineNumber: 578,
                                                     columnNumber: 17
                                                 }, this),
                                                 __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$signup$2f$step2$2f$syrianGovernorates$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["syrianGovernorates"].map((gov)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -4476,19 +4617,19 @@ const EditCar = ()=>{
                                                         children: gov.name
                                                     }, gov.value, false, {
                                                         fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                        lineNumber: 617,
+                                                        lineNumber: 580,
                                                         columnNumber: 19
                                                     }, this))
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 605,
+                                            lineNumber: 570,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                    lineNumber: 600,
+                                    lineNumber: 565,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4503,13 +4644,13 @@ const EditCar = ()=>{
                                                     children: "*"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                    lineNumber: 626,
+                                                    lineNumber: 588,
                                                     columnNumber: 25
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 625,
+                                            lineNumber: 587,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -4521,19 +4662,19 @@ const EditCar = ()=>{
                                             placeholder: "المنطقة"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 628,
+                                            lineNumber: 590,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                    lineNumber: 624,
+                                    lineNumber: 586,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                            lineNumber: 599,
+                            lineNumber: 550,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4546,7 +4687,7 @@ const EditCar = ()=>{
                                         children: "تفاصيل العنوان"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                        lineNumber: 640,
+                                        lineNumber: 602,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -4557,18 +4698,18 @@ const EditCar = ()=>{
                                         placeholder: "تفاصيل العنوان"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                        lineNumber: 643,
+                                        lineNumber: 605,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                lineNumber: 639,
+                                lineNumber: 601,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                            lineNumber: 638,
+                            lineNumber: 600,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4585,13 +4726,13 @@ const EditCar = ()=>{
                                                 children: "*"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                lineNumber: 655,
+                                                lineNumber: 617,
                                                 columnNumber: 28
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                        lineNumber: 654,
+                                        lineNumber: 616,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("textarea", {
@@ -4603,24 +4744,24 @@ const EditCar = ()=>{
                                         placeholder: "ادخل وصف المنتج هنا"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                        lineNumber: 657,
+                                        lineNumber: 619,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                lineNumber: 653,
+                                lineNumber: 615,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                            lineNumber: 652,
+                            lineNumber: 614,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                    lineNumber: 448,
+                    lineNumber: 411,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
@@ -4631,7 +4772,7 @@ const EditCar = ()=>{
                             children: "سعر المنتج"
                         }, void 0, false, {
                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                            lineNumber: 671,
+                            lineNumber: 632,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -4639,7 +4780,7 @@ const EditCar = ()=>{
                             children: "حدد سعر الإعلان أو اختر إذا كان قابل للتفاوض، وسيساعد المستخدمين على معرفة القيمة بسهولة."
                         }, void 0, false, {
                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                            lineNumber: 674,
+                            lineNumber: 635,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4656,13 +4797,13 @@ const EditCar = ()=>{
                                                 children: "*"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                lineNumber: 682,
+                                                lineNumber: 643,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                        lineNumber: 680,
+                                        lineNumber: 641,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -4675,18 +4816,18 @@ const EditCar = ()=>{
                                         placeholder: "ادخل سعر المنتج"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                        lineNumber: 684,
+                                        lineNumber: 645,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                lineNumber: 679,
+                                lineNumber: 640,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                            lineNumber: 678,
+                            lineNumber: 639,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4701,13 +4842,13 @@ const EditCar = ()=>{
                                             children: "*"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 697,
+                                            lineNumber: 658,
                                             columnNumber: 25
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                    lineNumber: 696,
+                                    lineNumber: 657,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4726,20 +4867,20 @@ const EditCar = ()=>{
                                                     className: "accent-cgreen"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                    lineNumber: 701,
+                                                    lineNumber: 662,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                     children: "سعر قابل للتفاوض"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                    lineNumber: 710,
+                                                    lineNumber: 671,
                                                     columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 700,
+                                            lineNumber: 661,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
@@ -4754,38 +4895,38 @@ const EditCar = ()=>{
                                                     className: "accent-cgreen"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                    lineNumber: 713,
+                                                    lineNumber: 674,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                     children: "سعر ثابت"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                    lineNumber: 721,
+                                                    lineNumber: 682,
                                                     columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 712,
+                                            lineNumber: 673,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                    lineNumber: 699,
+                                    lineNumber: 660,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                            lineNumber: 695,
+                            lineNumber: 656,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                    lineNumber: 670,
+                    lineNumber: 631,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
@@ -4796,8 +4937,8 @@ const EditCar = ()=>{
                             children: "تفاصيل السيارة"
                         }, void 0, false, {
                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                            lineNumber: 727,
-                            columnNumber: 9
+                            lineNumber: 688,
+                            columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                             className: "grid grid-cols-1 md:grid-cols-2 gap-6",
@@ -4814,21 +4955,21 @@ const EditCar = ()=>{
                                                     children: "*"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                    lineNumber: 732,
-                                                    columnNumber: 13
+                                                    lineNumber: 693,
+                                                    columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 731,
-                                            columnNumber: 13
+                                            lineNumber: 691,
+                                            columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
                                             required: true,
                                             name: "car.brand",
                                             value: formData.car?.brand || "",
                                             onChange: handleCarInputChange,
-                                            className: "mt-1  w-full p-3 py-3.5 border-2 rounded-lg bg-cwhite text-gray-700 focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200",
+                                            className: "mt-1 w-full p-3 py-3.5 border-2 rounded-lg bg-cwhite text-gray-700 focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200",
                                             style: {
                                                 borderColor: "#277F60"
                                             },
@@ -4839,28 +4980,28 @@ const EditCar = ()=>{
                                                     children: "اختر الماركة"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                    lineNumber: 743,
-                                                    columnNumber: 15
+                                                    lineNumber: 704,
+                                                    columnNumber: 17
                                                 }, this),
                                                 __TURBOPACK__imported__module__$5b$project$5d2f$app$2f28$public$292f$newpost$2f$components$2f$CarForm$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["BRAND_CHOICES"].map(([value, label])=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
                                                         value: value,
                                                         children: label
                                                     }, value, false, {
                                                         fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                        lineNumber: 745,
-                                                        columnNumber: 17
+                                                        lineNumber: 706,
+                                                        columnNumber: 19
                                                     }, this))
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 734,
-                                            columnNumber: 13
+                                            lineNumber: 695,
+                                            columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                    lineNumber: 730,
-                                    columnNumber: 11
+                                    lineNumber: 690,
+                                    columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                     className: "sm:ml-16",
@@ -4870,8 +5011,8 @@ const EditCar = ()=>{
                                             children: "الموديل"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 752,
-                                            columnNumber: 13
+                                            lineNumber: 713,
+                                            columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
                                             name: "car.model",
@@ -4881,14 +5022,14 @@ const EditCar = ()=>{
                                             dir: "rtl"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 753,
-                                            columnNumber: 13
+                                            lineNumber: 714,
+                                            columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                    lineNumber: 751,
-                                    columnNumber: 11
+                                    lineNumber: 712,
+                                    columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                     className: "sm:ml-16",
@@ -4902,14 +5043,14 @@ const EditCar = ()=>{
                                                     children: "*"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                    lineNumber: 765,
-                                                    columnNumber: 15
+                                                    lineNumber: 725,
+                                                    columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 763,
-                                            columnNumber: 13
+                                            lineNumber: 723,
+                                            columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
                                             required: true,
@@ -4921,14 +5062,14 @@ const EditCar = ()=>{
                                             dir: "rtl"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 767,
-                                            columnNumber: 13
+                                            lineNumber: 727,
+                                            columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                    lineNumber: 762,
-                                    columnNumber: 11
+                                    lineNumber: 722,
+                                    columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                     className: "sm:ml-16",
@@ -4938,8 +5079,8 @@ const EditCar = ()=>{
                                             children: "الأداء"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 779,
-                                            columnNumber: 13
+                                            lineNumber: 738,
+                                            columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
                                             type: "number",
@@ -4951,14 +5092,14 @@ const EditCar = ()=>{
                                             placeholder: "مثال: 150 حصان"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 780,
-                                            columnNumber: 13
+                                            lineNumber: 739,
+                                            columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                    lineNumber: 778,
-                                    columnNumber: 11
+                                    lineNumber: 737,
+                                    columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                     className: "sm:ml-16",
@@ -4968,14 +5109,14 @@ const EditCar = ()=>{
                                             children: "اللون"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 792,
-                                            columnNumber: 13
+                                            lineNumber: 750,
+                                            columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
                                             name: "car.color",
                                             value: formData.car?.color || "",
                                             onChange: handleCarInputChange,
-                                            className: "mt-1  w-full p-3 py-3.5 border-2 rounded-lg bg-cwhite text-gray-700 focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200",
+                                            className: "mt-1 w-full p-3 py-3.5 border-2 rounded-lg bg-cwhite text-gray-700 focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200",
                                             style: {
                                                 borderColor: "#277F60"
                                             },
@@ -4986,28 +5127,28 @@ const EditCar = ()=>{
                                                     children: "اختر اللون"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                    lineNumber: 801,
-                                                    columnNumber: 15
+                                                    lineNumber: 759,
+                                                    columnNumber: 17
                                                 }, this),
                                                 __TURBOPACK__imported__module__$5b$project$5d2f$app$2f28$public$292f$newpost$2f$components$2f$CarForm$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["COLOR_CHOICES"].map(([value, label])=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
                                                         value: value,
                                                         children: label
                                                     }, value, false, {
                                                         fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                        lineNumber: 803,
-                                                        columnNumber: 17
+                                                        lineNumber: 761,
+                                                        columnNumber: 19
                                                     }, this))
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 793,
-                                            columnNumber: 13
+                                            lineNumber: 751,
+                                            columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                    lineNumber: 791,
-                                    columnNumber: 11
+                                    lineNumber: 749,
+                                    columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                     className: "sm:ml-16",
@@ -5021,14 +5162,14 @@ const EditCar = ()=>{
                                                     children: "*"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                    lineNumber: 813,
-                                                    columnNumber: 15
+                                                    lineNumber: 770,
+                                                    columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 811,
-                                            columnNumber: 13
+                                            lineNumber: 768,
+                                            columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
                                             required: true,
@@ -5036,21 +5177,21 @@ const EditCar = ()=>{
                                             name: "car.first_registration",
                                             value: formData.car?.first_registration || "",
                                             onChange: handleCarInputChange,
-                                            className: "mt-1  w-full p-3 py-3.5 border-2 rounded-lg bg-cwhite text-gray-700 focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200",
+                                            className: "mt-1 w-full p-3 py-3.5 border-2 rounded-lg bg-cwhite text-gray-700 focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200",
                                             style: {
                                                 borderColor: "#277F60"
                                             },
                                             dir: "rtl"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 815,
-                                            columnNumber: 13
+                                            lineNumber: 772,
+                                            columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                    lineNumber: 810,
-                                    columnNumber: 11
+                                    lineNumber: 767,
+                                    columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                     className: "sm:ml-16",
@@ -5060,29 +5201,29 @@ const EditCar = ()=>{
                                             children: "تاريخ الفحص الفني"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 828,
-                                            columnNumber: 13
+                                            lineNumber: 784,
+                                            columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
                                             type: "date",
                                             name: "car.hu",
                                             value: formData.car?.hu || "",
                                             onChange: handleCarInputChange,
-                                            className: "mt-1  w-full p-3 py-3.5 border-2 rounded-lg bg-cwhite text-gray-700 focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200",
+                                            className: "mt-1 w-full p-3 py-3.5 border-2 rounded-lg bg-cwhite text-gray-700 focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200",
                                             style: {
                                                 borderColor: "#277F60"
                                             },
                                             dir: "rtl"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 831,
-                                            columnNumber: 13
+                                            lineNumber: 787,
+                                            columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                    lineNumber: 827,
-                                    columnNumber: 11
+                                    lineNumber: 783,
+                                    columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                     className: "sm:ml-16",
@@ -5096,14 +5237,14 @@ const EditCar = ()=>{
                                                     children: "*"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                    lineNumber: 846,
-                                                    columnNumber: 15
+                                                    lineNumber: 800,
+                                                    columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 844,
-                                            columnNumber: 13
+                                            lineNumber: 798,
+                                            columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
                                             required: true,
@@ -5114,14 +5255,14 @@ const EditCar = ()=>{
                                             dir: "rtl"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 848,
-                                            columnNumber: 13
+                                            lineNumber: 802,
+                                            columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                    lineNumber: 843,
-                                    columnNumber: 11
+                                    lineNumber: 797,
+                                    columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                     className: "sm:ml-16",
@@ -5135,14 +5276,14 @@ const EditCar = ()=>{
                                                     children: "*"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                    lineNumber: 861,
-                                                    columnNumber: 15
+                                                    lineNumber: 814,
+                                                    columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 859,
-                                            columnNumber: 13
+                                            lineNumber: 812,
+                                            columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
                                             required: true,
@@ -5153,20 +5294,20 @@ const EditCar = ()=>{
                                             dir: "rtl"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 863,
-                                            columnNumber: 13
+                                            lineNumber: 816,
+                                            columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                    lineNumber: 858,
-                                    columnNumber: 11
+                                    lineNumber: 811,
+                                    columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                            lineNumber: 729,
-                            columnNumber: 9
+                            lineNumber: 689,
+                            columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                             className: "space-y-4 mt-6",
@@ -5183,14 +5324,14 @@ const EditCar = ()=>{
                                                     children: "*"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                    lineNumber: 879,
-                                                    columnNumber: 15
+                                                    lineNumber: 830,
+                                                    columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 877,
-                                            columnNumber: 13
+                                            lineNumber: 828,
+                                            columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                             className: "flex flex-wrap gap-4 mt-2",
@@ -5207,32 +5348,32 @@ const EditCar = ()=>{
                                                             className: "accent-cgreen"
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                            lineNumber: 888,
-                                                            columnNumber: 19
+                                                            lineNumber: 838,
+                                                            columnNumber: 21
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                             children: label
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                            lineNumber: 897,
-                                                            columnNumber: 19
+                                                            lineNumber: 847,
+                                                            columnNumber: 21
                                                         }, this)
                                                     ]
                                                 }, value, true, {
                                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                    lineNumber: 884,
-                                                    columnNumber: 17
+                                                    lineNumber: 834,
+                                                    columnNumber: 19
                                                 }, this))
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 882,
-                                            columnNumber: 13
+                                            lineNumber: 832,
+                                            columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                    lineNumber: 876,
-                                    columnNumber: 11
+                                    lineNumber: 827,
+                                    columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                     className: "sm:ml-16 bg-cwhite rounded-md p-2 shadow-md",
@@ -5246,14 +5387,14 @@ const EditCar = ()=>{
                                                     children: "*"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                    lineNumber: 905,
-                                                    columnNumber: 15
+                                                    lineNumber: 855,
+                                                    columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 903,
-                                            columnNumber: 13
+                                            lineNumber: 853,
+                                            columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                             className: "flex flex-wrap gap-4 mt-2",
@@ -5270,32 +5411,32 @@ const EditCar = ()=>{
                                                             className: "accent-cgreen"
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                            lineNumber: 914,
-                                                            columnNumber: 19
+                                                            lineNumber: 863,
+                                                            columnNumber: 21
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                             children: label
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                            lineNumber: 923,
-                                                            columnNumber: 19
+                                                            lineNumber: 872,
+                                                            columnNumber: 21
                                                         }, this)
                                                     ]
                                                 }, value, true, {
                                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                    lineNumber: 910,
-                                                    columnNumber: 17
+                                                    lineNumber: 859,
+                                                    columnNumber: 19
                                                 }, this))
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 908,
-                                            columnNumber: 13
+                                            lineNumber: 857,
+                                            columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                    lineNumber: 902,
-                                    columnNumber: 11
+                                    lineNumber: 852,
+                                    columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                     className: "sm:ml-16 bg-cwhite rounded-md p-2 shadow-md",
@@ -5305,8 +5446,8 @@ const EditCar = ()=>{
                                             children: "عدد الأبواب"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 931,
-                                            columnNumber: 13
+                                            lineNumber: 878,
+                                            columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                             className: "flex flex-wrap gap-4 mt-2",
@@ -5322,32 +5463,32 @@ const EditCar = ()=>{
                                                             className: "accent-cgreen"
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                            lineNumber: 941,
-                                                            columnNumber: 19
+                                                            lineNumber: 887,
+                                                            columnNumber: 21
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                             children: label
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                            lineNumber: 949,
-                                                            columnNumber: 19
+                                                            lineNumber: 895,
+                                                            columnNumber: 21
                                                         }, this)
                                                     ]
                                                 }, value, true, {
                                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                    lineNumber: 937,
-                                                    columnNumber: 17
+                                                    lineNumber: 883,
+                                                    columnNumber: 19
                                                 }, this))
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 935,
-                                            columnNumber: 13
+                                            lineNumber: 881,
+                                            columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                    lineNumber: 929,
-                                    columnNumber: 11
+                                    lineNumber: 877,
+                                    columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                     className: "sm:ml-16 bg-cwhite rounded-md p-2 shadow-md",
@@ -5357,8 +5498,8 @@ const EditCar = ()=>{
                                             children: "المواد الداخلية"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 957,
-                                            columnNumber: 13
+                                            lineNumber: 901,
+                                            columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                             className: "flex flex-wrap gap-4 mt-2",
@@ -5374,32 +5515,32 @@ const EditCar = ()=>{
                                                             className: "accent-cgreen"
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                            lineNumber: 967,
-                                                            columnNumber: 19
+                                                            lineNumber: 910,
+                                                            columnNumber: 21
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                             children: label
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                            lineNumber: 975,
-                                                            columnNumber: 19
+                                                            lineNumber: 918,
+                                                            columnNumber: 21
                                                         }, this)
                                                     ]
                                                 }, value, true, {
                                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                    lineNumber: 963,
-                                                    columnNumber: 17
+                                                    lineNumber: 906,
+                                                    columnNumber: 19
                                                 }, this))
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 961,
-                                            columnNumber: 13
+                                            lineNumber: 904,
+                                            columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                    lineNumber: 955,
-                                    columnNumber: 11
+                                    lineNumber: 900,
+                                    columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                     className: "sm:ml-16 bg-cwhite rounded-md p-2 shadow-md",
@@ -5413,21 +5554,20 @@ const EditCar = ()=>{
                                                     children: "*"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                    lineNumber: 985,
-                                                    columnNumber: 15
+                                                    lineNumber: 926,
+                                                    columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 983,
-                                            columnNumber: 13
+                                            lineNumber: 924,
+                                            columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                            className: "flex flex-wrap gap-2 mt-2 ",
+                                            className: "flex flex-wrap gap-2 mt-2",
                                             children: __TURBOPACK__imported__module__$5b$project$5d2f$app$2f28$public$292f$newpost$2f$components$2f$CarForm$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["FUEL_CHOICES"].map(([value, label])=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                                     className: "flex items-center gap-1 ml-2 text-gray-700 cursor-pointer",
                                                     children: [
-                                                        " ",
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
                                                             required: true,
                                                             type: "radio",
@@ -5438,32 +5578,32 @@ const EditCar = ()=>{
                                                             className: "accent-cgreen"
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                            lineNumber: 994,
-                                                            columnNumber: 19
+                                                            lineNumber: 934,
+                                                            columnNumber: 21
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                             children: label
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                            lineNumber: 1003,
-                                                            columnNumber: 19
+                                                            lineNumber: 943,
+                                                            columnNumber: 21
                                                         }, this)
                                                     ]
                                                 }, value, true, {
                                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                    lineNumber: 989,
-                                                    columnNumber: 17
+                                                    lineNumber: 930,
+                                                    columnNumber: 19
                                                 }, this))
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 987,
-                                            columnNumber: 13
+                                            lineNumber: 928,
+                                            columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                    lineNumber: 981,
-                                    columnNumber: 11
+                                    lineNumber: 923,
+                                    columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                     className: "sm:ml-16 bg-cwhite rounded-md p-2 shadow-md",
@@ -5473,8 +5613,8 @@ const EditCar = ()=>{
                                             children: "نوع السيارة"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 1010,
-                                            columnNumber: 13
+                                            lineNumber: 949,
+                                            columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                             className: "flex flex-wrap gap-4 mt-2",
@@ -5490,32 +5630,32 @@ const EditCar = ()=>{
                                                             className: "accent-cgreen"
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                            lineNumber: 1020,
-                                                            columnNumber: 19
+                                                            lineNumber: 958,
+                                                            columnNumber: 21
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                             children: label
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                            lineNumber: 1028,
-                                                            columnNumber: 19
+                                                            lineNumber: 966,
+                                                            columnNumber: 21
                                                         }, this)
                                                     ]
                                                 }, value, true, {
                                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                    lineNumber: 1016,
-                                                    columnNumber: 17
+                                                    lineNumber: 954,
+                                                    columnNumber: 19
                                                 }, this))
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 1014,
-                                            columnNumber: 13
+                                            lineNumber: 952,
+                                            columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                    lineNumber: 1008,
-                                    columnNumber: 11
+                                    lineNumber: 948,
+                                    columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                     className: "sm:ml-16 bg-cwhite rounded-md p-2 shadow-md",
@@ -5525,11 +5665,11 @@ const EditCar = ()=>{
                                             children: "أنظمة الحماية"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 1035,
-                                            columnNumber: 13
+                                            lineNumber: 972,
+                                            columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                            className: "flex flex-wrap gap-2 mt-2 ",
+                                            className: "flex flex-wrap gap-2 mt-2",
                                             children: __TURBOPACK__imported__module__$5b$project$5d2f$app$2f28$public$292f$newpost$2f$components$2f$CarForm$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["PROTECTION_CHOICES"].map(([value, label])=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                                     className: "flex items-center gap-1 ml-2 text-gray-700 cursor-pointer",
                                                     children: [
@@ -5542,26 +5682,26 @@ const EditCar = ()=>{
                                                             onChange: handleCarInputChange
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                            lineNumber: 1044,
-                                                            columnNumber: 19
+                                                            lineNumber: 981,
+                                                            columnNumber: 21
                                                         }, this),
                                                         label
                                                     ]
                                                 }, value, true, {
                                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                    lineNumber: 1040,
-                                                    columnNumber: 17
+                                                    lineNumber: 977,
+                                                    columnNumber: 19
                                                 }, this))
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 1038,
-                                            columnNumber: 13
+                                            lineNumber: 975,
+                                            columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                    lineNumber: 1034,
-                                    columnNumber: 11
+                                    lineNumber: 971,
+                                    columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                     className: "sm:ml-16 bg-cwhite rounded-md p-2 shadow-md",
@@ -5571,11 +5711,11 @@ const EditCar = ()=>{
                                             children: "المميزات الخارجية"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 1059,
-                                            columnNumber: 13
+                                            lineNumber: 995,
+                                            columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                            className: "flex flex-wrap gap-2 mt-2 ",
+                                            className: "flex flex-wrap gap-2 mt-2",
                                             children: __TURBOPACK__imported__module__$5b$project$5d2f$app$2f28$public$292f$newpost$2f$components$2f$CarForm$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["EXTERNAL_FEATURES_CHOICES"].map(([value, label])=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                                     className: "flex items-center gap-1 ml-2 text-gray-700 cursor-pointer",
                                                     children: [
@@ -5588,26 +5728,26 @@ const EditCar = ()=>{
                                                             onChange: handleCarInputChange
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                            lineNumber: 1068,
-                                                            columnNumber: 19
+                                                            lineNumber: 1004,
+                                                            columnNumber: 21
                                                         }, this),
                                                         label
                                                     ]
                                                 }, value, true, {
                                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                    lineNumber: 1064,
-                                                    columnNumber: 17
+                                                    lineNumber: 1000,
+                                                    columnNumber: 19
                                                 }, this))
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 1062,
-                                            columnNumber: 13
+                                            lineNumber: 998,
+                                            columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                    lineNumber: 1058,
-                                    columnNumber: 11
+                                    lineNumber: 994,
+                                    columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                     className: "sm:ml-16 bg-cwhite rounded-md p-2 shadow-md",
@@ -5617,11 +5757,11 @@ const EditCar = ()=>{
                                             children: "المميزات الداخلية"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 1083,
-                                            columnNumber: 13
+                                            lineNumber: 1018,
+                                            columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                            className: "flex flex-wrap gap-2 mt-2 ",
+                                            className: "flex flex-wrap gap-2 mt-2",
                                             children: __TURBOPACK__imported__module__$5b$project$5d2f$app$2f28$public$292f$newpost$2f$components$2f$CarForm$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["INTERNAL_FEATURES_CHOICES"].map(([value, label])=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                                     className: "flex items-center gap-1 ml-2 text-gray-700 cursor-pointer",
                                                     children: [
@@ -5634,46 +5774,46 @@ const EditCar = ()=>{
                                                             onChange: handleCarInputChange
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                            lineNumber: 1092,
-                                                            columnNumber: 19
+                                                            lineNumber: 1027,
+                                                            columnNumber: 21
                                                         }, this),
                                                         label
                                                     ]
                                                 }, value, true, {
                                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                    lineNumber: 1088,
-                                                    columnNumber: 17
+                                                    lineNumber: 1023,
+                                                    columnNumber: 19
                                                 }, this))
                                         }, void 0, false, {
                                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                            lineNumber: 1086,
-                                            columnNumber: 13
+                                            lineNumber: 1021,
+                                            columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                    lineNumber: 1082,
-                                    columnNumber: 11
+                                    lineNumber: 1017,
+                                    columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                            lineNumber: 875,
-                            columnNumber: 9
+                            lineNumber: 826,
+                            columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("hr", {
                             className: "mt-6 mb-3 text-clightgray"
                         }, void 0, false, {
                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                            lineNumber: 1107,
-                            columnNumber: 9
+                            lineNumber: 1041,
+                            columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                             className: "flex justify-end max-sm:flex-col max-sm:justify-center max-sm:items-center max-sm:gap-4 mb-5",
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                     type: "button",
-                                    onClick: ()=>window.location.href = "/perview",
+                                    onClick: ()=>window.location.href = "/preview",
                                     className: "mt-8 ml-6 max-sm:ml-0 text-white rounded",
                                     children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                         className: "flex items-center group outline-2 outline-cgreen text-gray-800 hover:bg-chgreen hover:outline-chgreen hover:text-cwhite py-3 px-12 max-sm:px-[55px] rounded text-xl transition-all duration-300",
@@ -5681,61 +5821,61 @@ const EditCar = ()=>{
                                             "معاينة",
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$search$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Search$3e$__["Search"], {}, void 0, false, {
                                                 fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                                lineNumber: 1117,
-                                                columnNumber: 15
+                                                lineNumber: 1050,
+                                                columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                        lineNumber: 1115,
-                                        columnNumber: 13
+                                        lineNumber: 1048,
+                                        columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                    lineNumber: 1110,
-                                    columnNumber: 11
+                                    lineNumber: 1043,
+                                    columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                     type: "submit",
                                     className: "mt-8 ml-6 max-sm:ml-0 text-white rounded",
                                     children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                         className: "bg-cgreen hover:bg-chgreen py-3 px-32 max-md:px-20 rounded text-xl transition-all duration-300",
-                                        children: isPending ? "جارٍ النشر ..." : "إعادة نشر"
+                                        children: isPending ? "جارٍ التعديل ..." : "تعديل"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                        lineNumber: 1125,
-                                        columnNumber: 13
+                                        lineNumber: 1057,
+                                        columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                                    lineNumber: 1121,
-                                    columnNumber: 11
+                                    lineNumber: 1053,
+                                    columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                            lineNumber: 1108,
-                            columnNumber: 9
+                            lineNumber: 1042,
+                            columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-                    lineNumber: 726,
+                    lineNumber: 687,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-            lineNumber: 383,
+            lineNumber: 354,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/app/(public)/editpost/editCar/[id]/page.tsx",
-        lineNumber: 382,
+        lineNumber: 353,
         columnNumber: 5
     }, this);
 };
-_s(EditCar, "qks5VmJeLSRJ0UQdhBDxa2aPtnk=", false, function() {
+_s(EditCar, "wWEGoJxM4SCfv44G//G0/cCJlmc=", false, function() {
     return [
         __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$hook$2d$form$2f$dist$2f$index$2e$esm$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useForm"],
         __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useParams"],

@@ -7,6 +7,12 @@ import {
 } from "@/app/types/authTypes";
 import axiosInstance from "../loginservices/api";
 
+// Add Post Favorites
+export const  addPostFav = async (post_id: number) => {
+  const response = await axiosInstance.post(`accounts/favorites/${post_id}/toggle/`);
+  return response.data; 
+};
+
 // Change Password Dash
 export const changePasswordDash = async (data: changePasswordDashType) => {
   const response = await axiosInstance.post(
@@ -48,11 +54,6 @@ export const feedbackEmail = async (data: feedbackEmailType) => {
   return response.data;
 };
 
-// Send Account Info
-// export const setUserInfo = async (data: setUserInfoType) => {
-//   const response = await axiosInstance.patch("accounts/dashboard/", data);
-//   return response.data;
-// };
 
 export const setUserInfo = async (formData : FormData) => {
   const response = await axiosInstance.patch(

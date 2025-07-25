@@ -33,8 +33,6 @@ export default function LandForm({ Gcategory, Gsubcategory }: PostFormProps) {
     formState: { errors },
   } = useForm<LandPostPayload>({});
 
-
-
   const [notification, setNotification] = useState<{
     message: string;
     type: "success" | "error";
@@ -42,11 +40,11 @@ export default function LandForm({ Gcategory, Gsubcategory }: PostFormProps) {
   const createLandPost = useCreateLandPost(setNotification);
   const { isPending: isLoading } = createLandPost;
 
-  ////////////////////////////////  // //////////////////////////////////////
-
+  // COVER IMAGE -------------------------------------------------
   const coverImage = watch("cover_image");
   const [preview, setPreview] = useState<string | null>(null);
-  const inputRef = useRef<HTMLInputElement>(null);
+  const inputRef = useRef<HTMLInputElement | null>(null);
+
   useEffect(() => {
     if (coverImage instanceof File) {
       const objectUrl = URL.createObjectURL(coverImage);
@@ -64,6 +62,7 @@ export default function LandForm({ Gcategory, Gsubcategory }: PostFormProps) {
         shouldValidate: true,
         shouldDirty: true,
       });
+      e.target.value = ""; // إعادة تعيين قيمة الـ input
     }
   };
 
@@ -71,54 +70,80 @@ export default function LandForm({ Gcategory, Gsubcategory }: PostFormProps) {
     inputRef.current?.click();
   };
 
-  // if (data.cover_image) {
-  //   if (data.cover_image instanceof File) {
-  //     formData.append("cover_image", data.cover_image);
-  //   } else if (typeof data.cover_image === "string") {
-  //     formData.append("cover_image", data.cover_image);
-  //   }
-  // }
+  // GALLERY -------------------------------------------------
+  const MAX_GALLERY_IMAGES = 7;
+  const [galleryFiles, setGalleryFiles] = useState<(File | string)[]>([]);
+  const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
+  const galleryInputRef = useRef<HTMLInputElement | null>(null);
 
-  {
-    /* <div className="sm:ml-16">
-<label className="block font-medium text-gray-700 mb-2">
-  صورة غلاف المنتج
-</label>
+  // دالة للتعامل مع تغيير الصور في المعرض
+  const handleGalleryChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    index: number
+  ) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setGalleryFiles((prev) => {
+        const newGallery = [...prev];
+        newGallery[index] = file;
+        setValue("gallery", newGallery, {
+          shouldValidate: true,
+          shouldDirty: true,
+        });
+        return newGallery;
+      });
+      e.target.value = ""; // إعادة تعيين قيمة الـ input
+    }
+  };
 
-<input
-  type="file"
-  accept="image/*"
-  ref={inputRef}
-  onChange={handleImageChange}
-  className="hidden"
-/>
+  // دالة لإزالة صورة من المعرض
+  const handleRemoveImage = (index: number) => {
+    setGalleryFiles((prev) => {
+      const newGallery = prev.filter((_, i) => i !== index);
+      setValue("gallery", newGallery, {
+        shouldValidate: true,
+        shouldDirty: true,
+      });
+      return newGallery;
+    });
+  };
 
-<div
-  onClick={handleClick}
-  className="w-64 h-40 border-2 border-dashed border-cgreen rounded-lg flex items-center justify-center cursor-pointer bg-cwhite overflow-hidden"
->
-  {preview ? (
-    <Image
-      src={preview}
-      alt="preview"
-      width={256}
-      height={160}
-      className="object-cover w-full h-full"
-    />
-  ) : (
-    <span className="text-cgreen text-4xl">+</span>
-  )}
-</div>
-</div> */
-  }
+  // دالة لإضافة صورة جديدة
+  const handleNewGalleryImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file && galleryFiles.length < MAX_GALLERY_IMAGES) {
+      setGalleryFiles((prev) => {
+        const newGallery = [...prev, file];
+        setValue("gallery", newGallery, {
+          shouldValidate: true,
+          shouldDirty: true,
+        });
+        return newGallery;
+      });
+      e.target.value = ""; // إعادة تعيين قيمة الـ input
+    }
+  };
 
-  ////////////////////////////////  // //////////////////////////////////////
+  // دالة لفتح نافذة اختيار الملفات
+  const handleAddNewGallerySlot = () => {
+    if (galleryFiles.length < MAX_GALLERY_IMAGES) {
+      galleryInputRef.current?.click();
+    }
+  };
+
+  // دالة لتحريك إدخال الصورة
+  const triggerFileInput = (index: number) => {
+    inputRefs.current[index]?.click();
+  };
+
+  // -------------------------------------------------
+
   const [isSearch, setIsSearch] = useState<boolean | undefined>(false);
-  
+
   const onSubmit = (data: LandPostPayload) => {
     console.log("daTA: ", data);
     const formData = new FormData();
-    
+
     formData.append("offer_type", data.offer_type ?? "sell");
     formData.append("title", data.title ?? "");
     formData.append("description", data.description ?? "");
@@ -128,14 +153,13 @@ export default function LandForm({ Gcategory, Gsubcategory }: PostFormProps) {
     formData.append("hood", data.hood ?? "");
     formData.append("detailed_location", data.detailed_location ?? "");
 
-  if (data.cover_image) {
-    if (data.cover_image instanceof File) {
-      formData.append("cover_image", data.cover_image);
-    } else if (typeof data.cover_image === "string") {
-      formData.append("cover_image", data.cover_image);
+    if (data.cover_image) {
+      if (data.cover_image instanceof File) {
+        formData.append("cover_image", data.cover_image);
+      } else if (typeof data.cover_image === "string") {
+        formData.append("cover_image", data.cover_image);
+      }
     }
-  }
-
 
     formData.append("category", Gcategory);
     formData.append("subcategory", Gsubcategory);
@@ -147,24 +171,14 @@ export default function LandForm({ Gcategory, Gsubcategory }: PostFormProps) {
       offer_type: data.outdoorspace.offer_type,
     };
 
-    formData.append(
-      "outdoorspace_details ",
-      JSON.stringify(outdoorspace_details)
-    );
+    formData.append("outdoorspace_details", JSON.stringify(outdoorspace_details));
 
-    if (data.gallery && data.gallery.length > 0) {
-      if (
-        typeof globalThis.FileList !== "undefined" &&
-        data.gallery instanceof globalThis.FileList
-      ) {
-        Array.from(data.gallery).forEach((img: File) => {
+    if (galleryFiles && galleryFiles.length > 0) {
+      galleryFiles.forEach((img) => {
+        if (img instanceof File) {
           formData.append("gallery", img);
-        });
-      } else if (Array.isArray(data.gallery)) {
-        (data.gallery as string[]).forEach((img) => {
-          formData.append("gallery", img);
-        });
-      }
+        }
+      });
     }
 
     createLandPost.mutate(formData);
@@ -172,191 +186,252 @@ export default function LandForm({ Gcategory, Gsubcategory }: PostFormProps) {
 
   return (
     <form
-    onSubmit={handleSubmit(onSubmit)}
-    className="w-full mx-auto space-y-10"
-  >
-    {/* ------------- Noti -------------- */}
-    {notification && (
-      <Notification
-        message={notification.message}
-        type={notification.type}
-        onClose={() => setNotification(null)}
-      />
-    )}
+      onSubmit={handleSubmit(onSubmit)}
+      className="w-full mx-auto space-y-10"
+    >
+      {/* ------------- Noti -------------- */}
+      {notification && (
+        <Notification
+          message={notification.message}
+          type={notification.type}
+          onClose={() => setNotification(null)}
+        />
+      )}
 
-    {/* معلومات أساسية */}
-    <section className="bg-white rounded-2xl shadow-lg border border-gray-200 p-8 mb-6 ">
-      <h2 className="font-bold text-xl text-gray-800 mb-2 text-right">
-        معلومات أساسية
-      </h2>
-      <p className="text-gray-600 mb-6 text-right">
-        أدخل معلومات الإعلان الأساسية لتظهر بوضوح للمشترين، مثل العنوان والوصف
-        العام والموقع.
-      </p>
-      <div className=" mb-6 sm:ml-16 border-b border-clightgray">
-        {/* SEARCH || SELL */}
-        <h3 className="font-medium mb-3 mt-6 text-lg text-gray-700">
-          نوع المنشور
-          <span className="text-red-500 text-xl mr-1">*</span>
-        </h3>
-        <div className="w-full mt-2 max-w-sm  border-2 border-clightgray p-1.5 rounded-xl mb-6 flex">
-          <Button
-            type="button"
-            className="w-1/2 text-6 font-semibold"
-            variant={isSearch === false ? "primary" : "none"}
-            onClick={() => {
-              setIsSearch(false);
-              setValue("offer_type", "sell");
-            }}
-          >
-            أنا أعرض
-          </Button>
-          <Button
-            type="button"
-            className="w-1/2 text-6 font-semibold"
-            variant={isSearch === true ? "primary" : "none"}
-            onClick={() => {
-              setIsSearch(true);
-              setValue("offer_type", "search");
-            }}
-          >
-            أنا أبحث
-          </Button>
-        </div>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-        <div className="sm:ml-16">
-          <label className="block font-medium text-gray-700">
-            اسم المنتج
+      {/* معلومات أساسية */}
+      <section className="bg-white rounded-2xl shadow-lg border border-gray-200 p-8 mb-6">
+        <h2 className="font-bold text-xl text-gray-800 mb-2 text-right">
+          معلومات أساسية
+        </h2>
+        <p className="text-gray-600 mb-6 text-right">
+          أدخل معلومات الإعلان الأساسية لتظهر بوضوح للمشترين، مثل العنوان والوصف
+          العام والموقع.
+        </p>
+        <div className="mb-6 sm:ml-16 border-b border-clightgray">
+          {/* SEARCH || SELL */}
+          <h3 className="font-medium mb-3 mt-6 text-lg text-gray-700">
+            نوع المنشور
             <span className="text-red-500 text-xl mr-1">*</span>
-          </label>
-          <input
-            required
-            {...register("title")}
-            type="text"
-            placeholder="اسم المنتج"
-            className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
-          />
+          </h3>
+          <div className="w-full mt-2 max-w-sm border-2 border-clightgray p-1.5 rounded-xl mb-6 flex">
+            <Button
+              type="button"
+              className="w-1/2 text-6 font-semibold"
+              variant={isSearch === false ? "primary" : "none"}
+              onClick={() => {
+                setIsSearch(false);
+                setValue("offer_type", "sell");
+              }}
+            >
+              أنا أعرض
+            </Button>
+            <Button
+              type="button"
+              className="w-1/2 text-6 font-semibold"
+              variant={isSearch === true ? "primary" : "none"}
+              onClick={() => {
+                setIsSearch(true);
+                setValue("offer_type", "search");
+              }}
+            >
+              أنا أبحث
+            </Button>
+          </div>
         </div>
+        
+        <span className="text-lg max-sm:text-sm border p-2 bg-cgreen text-cwhite rounded-md">
+          ملاحظة: يوجد زر معاينة المنشور في الأسفل
+        </span>
 
-<div className="sm:ml-16">
-<label className="block font-medium text-gray-700 mb-2">
-  صورة غلاف المنتج
-</label>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-6">
 
-<input
-  type="file"
-  accept="image/*"
-  ref={inputRef}
-  onChange={handleImageChange}
-  className="hidden"
-/>
 
-<div
-  onClick={handleClick}
-  className="w-64 h-40 border-2 border-dashed border-cgreen rounded-lg flex items-center justify-center cursor-pointer bg-cwhite overflow-hidden"
->
-  {preview ? (
-    <Image
-      src={preview}
-      alt="preview"
-      width={256}
-      height={160}
-      className="object-cover w-full h-full"
-    />
-  ) : (
-    <span className="text-cgreen text-4xl">+</span>
-  )}
-</div>
-</div> 
-        <div className="sm:ml-16">
-          <label className="block font-medium text-gray-700">
-            صور المنتج
-          </label>
-          <input
-            type="file"
-            multiple
-            {...register("gallery")}
-            className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
-          />
-        </div>
+          <div className="sm:ml-16">
+            <label className="block font-medium text-gray-700 mb-2">
+              صورة غلاف المنتج
+            </label>
+            <input
+              type="file"
+              accept="image/*"
+              ref={inputRef}
+              onChange={handleImageChange}
+              className="hidden"
+            />
+            <div
+              onClick={handleClick}
+              className="w-64 h-40 border-2 border-dashed border-cgreen rounded-lg flex items-center justify-center cursor-pointer bg-cwhite overflow-hidden"
+            >
+              {preview ? (
+                <Image
+                  src={preview}
+                  alt="preview"
+                  width={256}
+                  height={160}
+                  className="object-cover w-full h-full"
+                />
+              ) : (
+                <span className="text-cgreen text-4xl">+</span>
+              )}
+            </div>
+          </div>
 
-        <div className="sm:ml-16">
-          <label className="block font-medium text-gray-700">
-            المحافظة
-            <span className="text-red-500 text-xl mr-1">*</span>
-          </label>
-          <select
-            required
-            {...register("city")}
-            className="mt-1  w-full p-3 border-2 rounded-lg bg-cwhite text-gray-700 focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200"
-            style={{
-              borderColor: "#277F60", // لون الحدود
-            }}
-          >
-            <option value="">اختر الإدخال</option>
-            {syrianGovernorates.map((gov) => (
-              <option key={gov.value} value={gov.value}>
-                {gov.name}
-              </option>
-            ))}
-          </select>
-        </div>
+          <div className="sm:ml-16">
+            <label className="block font-medium text-gray-700 mb-2">
+              صور المنتج
+            </label>
+            <div className="flex flex-wrap gap-4">
+              <input
+                type="file"
+                accept="image/*"
+                className="hidden"
+                onChange={handleNewGalleryImage}
+                ref={galleryInputRef}
+              />
+              {galleryFiles.map((img, index) => {
+                const previewUrl =
+                  img instanceof File ? URL.createObjectURL(img) : img;
 
-        <div className="sm:ml-16">
-          <label className="block font-medium text-gray-700">
-            المنطقة
-            <span className="text-red-500 text-xl mr-1">*</span>
-          </label>
-          <input
-            required
-            {...register("hood")}
-            className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
-            placeholder="المنطقة"
-          />
-          {errors.hood && (
-            <p className="text-red-600 text-sm mt-1">
-              {String(errors.hood.message)}
-            </p>
-          )}
+                return (
+                  <div
+                    key={index}
+                    className="relative max-sm:w-32 w-24 h-24 border-2 border-cgreen rounded-lg overflow-hidden cursor-pointer"
+                  >
+                    <input
+                      type="file"
+                      accept="image/*"
+                      className="hidden"
+                      onChange={(e) => handleGalleryChange(e, index)}
+                      ref={(el) => {
+                        inputRefs.current[index] = el;
+                      }}
+                    />
+                    {previewUrl && img !== "" ? (
+                      <Image
+                        src={previewUrl}
+                        alt={`Gallery image ${index + 1}`}
+                        fill
+                        style={{ objectFit: "cover" }}
+                        onClick={() => triggerFileInput(index)}
+                        onLoad={() =>
+                          img instanceof File && URL.revokeObjectURL(previewUrl)
+                        }
+                      />
+                    ) : (
+                      <div
+                        onClick={() => triggerFileInput(index)}
+                        className="flex justify-center items-center w-full h-full text-cgreen text-4xl"
+                      >
+                        +
+                      </div>
+                    )}
+                    <button
+                      type="button"
+                      onClick={() => handleRemoveImage(index)}
+                      className="absolute top-0 right-0 bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center"
+                    >
+                      ×
+                    </button>
+                  </div>
+                );
+              })}
+              {galleryFiles.length < MAX_GALLERY_IMAGES && (
+                <div
+                  onClick={handleAddNewGallerySlot}
+                  className="w-24 h-24 border-2 border-dashed border-cgreen rounded-lg flex items-center justify-center cursor-pointer text-cgreen text-4xl"
+                >
+                  +
+                </div>
+              )}
+            </div>
+          </div>
+          <div className="sm:ml-16">
+            <label className="block font-medium text-gray-700">
+              اسم المنتج
+              <span className="text-red-500 text-xl mr-1">*</span>
+            </label>
+            <input
+              required
+              {...register("title")}
+              type="text"
+              placeholder="اسم المنتج"
+              className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
+            />
+          </div>
+          <div className="sm:ml-16">
+            <label className="block font-medium text-gray-700">
+              المحافظة
+              <span className="text-red-500 text-xl mr-1">*</span>
+            </label>
+            <select
+              required
+              {...register("city")}
+              className="mt-1 w-full p-3 border-2 rounded-lg bg-cwhite text-gray-700 focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200"
+              style={{
+                borderColor: "#277F60",
+              }}
+            >
+              <option value="">اختر الإدخال</option>
+              {syrianGovernorates.map((gov) => (
+                <option key={gov.value} value={gov.value}>
+                  {gov.name}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className="sm:ml-16">
+            <label className="block font-medium text-gray-700">
+              المنطقة
+              <span className="text-red-500 text-xl mr-1">*</span>
+            </label>
+            <input
+              required
+              {...register("hood")}
+              className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
+              placeholder="المنطقة"
+            />
+            {errors.hood && (
+              <p className="text-red-600 text-sm mt-1">
+                {String(errors.hood.message)}
+              </p>
+            )}
+          </div>
         </div>
-      </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6 sm:ml-16">
-        <div className="flex flex-col gap-2 md:col-span-2">
-          <label className="block font-medium text-gray-700">
-            تفاصيل العنوان
-          </label>
-          <input
-            {...register("detailed_location")}
-            className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
-            placeholder="تفاصيل العنوان"
-          />
-          {errors.detailed_location && (
-            <p className="text-red-600 text-sm mt-1">
-              {String(errors.detailed_location.message)}
-            </p>
-          )}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6 sm:ml-16">
+          <div className="flex flex-col gap-2 md:col-span-2">
+            <label className="block font-medium text-gray-700">
+              تفاصيل العنوان
+            </label>
+            <input
+              {...register("detailed_location")}
+              className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
+              placeholder="تفاصيل العنوان"
+            />
+            {errors.detailed_location && (
+              <p className="text-red-600 text-sm mt-1">
+                {String(errors.detailed_location.message)}
+              </p>
+            )}
+          </div>
+          <div className="flex flex-col gap-2 md:col-span-2">
+            <label className="block font-medium text-gray-700">
+              وصف المنتج
+              <span className="text-red-500 text-xl mr-1">*</span>
+            </label>
+            <textarea
+              required
+              {...register("description")}
+              className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
+              placeholder="ادخل وصف المنتج هنا"
+            />
+            {errors.description && (
+              <p className="text-red-600 text-sm mt-1">
+                {String(errors.description.message)}
+              </p>
+            )}
+          </div>
         </div>
-        <div className="flex flex-col gap-2 md:col-span-2">
-          <label className="block font-medium text-gray-700">
-            وصف المنتج
-            <span className="text-red-500 text-xl mr-1">*</span>
-          </label>
-          <textarea
-            required
-            {...register("description")}
-            className="w-full mt-1 px-4 py-3 rounded-lg border-2 border-cgreen bg-cwhite text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cgreen focus:border-transparent transition duration-200 shadow-sm"
-            placeholder="ادخل وصف المنتج هنا"
-          />
-          {errors.description && (
-            <p className="text-red-600 text-sm mt-1">
-              {String(errors.description.message)}
-            </p>
-          )}
-        </div>
-      </div>
-    </section>
+      </section>
 
       {/* سعر المنتج */}
       <section className="bg-white rounded-2xl shadow-lg border border-gray-200 p-8">
@@ -412,7 +487,7 @@ export default function LandForm({ Gcategory, Gsubcategory }: PostFormProps) {
         </div>
       </section>
 
-      {/* --------------------------------------------------------------------- */}
+      {/* تفاصيل الأرض */}
       <section className="rounded-2xl shadow-lg border bg-white border-gray-200 p-8 mb-6 w-full">
         <h2 className="text-xl font-bold mb-4">تفاصيل الأرض</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -424,7 +499,7 @@ export default function LandForm({ Gcategory, Gsubcategory }: PostFormProps) {
             <select
               required
               {...register("outdoorspace.offer_type")}
-              className="mt-2  w-full p-3 py-3.5 border-2 rounded-lg bg-cwhite text-cdarkgray focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200"
+              className="mt-2 w-full p-3 py-3.5 border-2 rounded-lg bg-cwhite text-cdarkgray focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200"
               style={{
                 borderColor: "#277F60",
               }}
@@ -447,7 +522,7 @@ export default function LandForm({ Gcategory, Gsubcategory }: PostFormProps) {
             <select
               required
               {...register("outdoorspace.land_type")}
-              className="mt-2  w-full p-3 py-3.5 border-2 rounded-lg bg-cwhite text-cdarkgray focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200"
+              className="mt-2 w-full p-3 py-3.5 border-2 rounded-lg bg-cwhite text-cdarkgray focus:outline-none focus:ring-1 focus:ring-cgreen focus:border-transparent transition duration-200"
               style={{
                 borderColor: "#277F60",
               }}
@@ -487,12 +562,13 @@ export default function LandForm({ Gcategory, Gsubcategory }: PostFormProps) {
             />
           </div>
         </div>
+
         <hr className="mt-6 mb-3 text-clightgray" />
         <div className="flex justify-end max-sm:flex-col max-sm:justify-center max-sm:items-center max-sm:gap-4 mb-5">
           {/* زر "معاينة" */}
           <button
+            type="button" // تغيير إلى button لمنع إرسال النموذج
             onClick={() => (window.location.href = "/perview")}
-            type="submit"
             className="mt-8 ml-6 max-sm:ml-0 text-white rounded"
           >
             <span className="flex items-center group outline-2 outline-cgreen text-gray-800 hover:bg-chgreen hover:outline-chgreen hover:text-cwhite py-3 px-12 max-sm:px-[55px] rounded text-xl transition-all duration-300">
