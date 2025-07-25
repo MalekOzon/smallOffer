@@ -697,7 +697,7 @@ const HomePage = ()=>{
                                         isFav: false,
                                         imageUrl: ad.cover_image ?? __TURBOPACK__imported__module__$5b$project$5d2f$public$2f$resourses$2f$placeholderPost$2e$svg$2e$mjs__$7b$__IMAGE__$3d3e$__$225b$project$5d2f$public$2f$resourses$2f$placeholderPost$2e$svg__$28$static__in__ecmascript$2922$__$7d$__$5b$app$2d$ssr$5d$__$28$structured__image__object$2c$__ecmascript$29$__["default"],
                                         id: ad.id,
-                                        subcat: ad.subcategory,
+                                        subcat: ad.subcategory ?? "",
                                         offer_type: ad.offer_type,
                                         fav: ad.fav
                                     }, ad.id, false, {
