@@ -776,8 +776,9 @@ const AdsPage = ()=>{
                                 isFav: false,
                                 imageUrl: ad.cover_image ?? __TURBOPACK__imported__module__$5b$project$5d2f$public$2f$resourses$2f$placeholderPost$2e$svg$2e$mjs__$7b$__IMAGE__$3d3e$__$225b$project$5d2f$public$2f$resourses$2f$placeholderPost$2e$svg__$28$static__in__ecmascript$2922$__$7d$__$5b$app$2d$ssr$5d$__$28$structured__image__object$2c$__ecmascript$29$__["default"],
                                 id: ad.id,
-                                subcat: ad.subcategory,
-                                offer_type: ad.offer_type
+                                subcat: ad.subcategory ?? "",
+                                offer_type: ad.offer_type,
+                                fav: ad.fav
                             }, ad.id, false, {
                                 fileName: "[project]/app/dashboard/ads/page.tsx",
                                 lineNumber: 34,
@@ -798,7 +799,7 @@ const AdsPage = ()=>{
                                 children: "السابق"
                             }, void 0, false, {
                                 fileName: "[project]/app/dashboard/ads/page.tsx",
-                                lineNumber: 52,
+                                lineNumber: 53,
                                 columnNumber: 11
                             }, this),
                             Array.from({
@@ -810,7 +811,7 @@ const AdsPage = ()=>{
                                     children: i + 1
                                 }, i + 1, false, {
                                     fileName: "[project]/app/dashboard/ads/page.tsx",
-                                    lineNumber: 61,
+                                    lineNumber: 62,
                                     columnNumber: 13
                                 }, this)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -820,13 +821,13 @@ const AdsPage = ()=>{
                                 children: "التالي"
                             }, void 0, false, {
                                 fileName: "[project]/app/dashboard/ads/page.tsx",
-                                lineNumber: 75,
+                                lineNumber: 76,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/dashboard/ads/page.tsx",
-                        lineNumber: 51,
+                        lineNumber: 52,
                         columnNumber: 9
                     }, this)
                 ]
