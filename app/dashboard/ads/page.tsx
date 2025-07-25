@@ -41,7 +41,7 @@ const AdsPage = () => {
               isFav={false}
               imageUrl={ad.cover_image ?? placeholderPost }
               id={ad.id}
-              subcat={ad.subcategory}
+              subcat={ad.subcategory ?? ""}
               offer_type={ad.offer_type}
             />
           ))}
