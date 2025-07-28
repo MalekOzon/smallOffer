@@ -13,14 +13,14 @@ interface GenericPostFormProps {
   Gsubcategory: string;
 }
 
-export const EXTERNAL_FEATURES_CHOICES = [
+export const EXTERNAL_FEATURES_CHOICES:[string , string][]  = [
   ["alloy_wheels", "عجلات معدنية"],
   ["xenon_headlights", "مصابيح أمامية زينون"],
   ["parking_assist", "مساعدة ركن سيارة"],
   ["trailer_hitch", "وصلة مقطورة"],
 ];
 
-export const INTERNAL_FEATURES_CHOICES = [
+export const INTERNAL_FEATURES_CHOICES :[string , string][] = [
   ["ac", "تكييف"],
   ["navigation", "نظام ملاحة"],
   ["radio_tuner", "راديو/موالف"],
@@ -32,17 +32,17 @@ export const INTERNAL_FEATURES_CHOICES = [
   ["non_smoking", "مركبة خالية من التدخين"],
 ];
 
-export const PROTECTION_CHOICES = [
+export const PROTECTION_CHOICES :[string , string][] = [
   ["service_book", "تم صيانة دفتر الخدمة"],
   ["abs", "نظام المكابح المانعة للانزلاق ABS"],
 ];
 
-export const STATUS_CHOICES = [
+export const STATUS_CHOICES :[string , string][] = [
   ["damaged", "متضررة"],
   ["undamaged", "غير متضررة"],
 ];
 
-export const FUEL_CHOICES = [
+export const FUEL_CHOICES:[string , string][]  = [
   ["gasoline", "بنزين"],
   ["diesel", "ديزل"],
   ["electric", "كهربائي"],
@@ -51,12 +51,12 @@ export const FUEL_CHOICES = [
   ["cng", "الغاز الطبيعي"],
 ];
 
-export const GEARBOX_CHOICES = [
+export const GEARBOX_CHOICES :[string , string][] = [
   ["manual", "غيار يدوي"],
   ["automatic", "غيار أوتوماتيك"],
 ];
 
-export const TYPE_CHOICES = [
+export const TYPE_CHOICES:[string , string][]  = [
   ["small_car", "سيارة صغيرة"],
   ["limousine", "ليموزين"],
   ["station", "ستيشن"],
@@ -66,14 +66,14 @@ export const TYPE_CHOICES = [
   ["other", "أنواع أخرى"],
 ];
 
-export const DOORS_CHOICES = [
+export const DOORS_CHOICES:[string , string][]  = [
   ["two_three", "2/3"],
   ["four_five", "4/5"],
   ["six_seven", "6/7"],
   ["other_doors", "عدد مختلف من الأبواب"],
 ];
 
-export const COLOR_CHOICES = [
+export const COLOR_CHOICES :[string , string][] = [
   ["beige", "بيج"],
   ["blue", "أزرق"],
   ["brown", "بني"],
@@ -90,7 +90,7 @@ export const COLOR_CHOICES = [
   ["other", "ألوان أخرى"],
 ];
 
-export const INTERNAL_MATERIALS_CHOICES = [
+export const INTERNAL_MATERIALS_CHOICES :[string , string][] = [
   ["full_leather", "جلد كامل"],
   ["partial_leather", "جلد جزئي"],
   ["fabric", "قماش"],
@@ -98,7 +98,7 @@ export const INTERNAL_MATERIALS_CHOICES = [
   ["other_materials", "مواد أخرى"],
 ];
 
-export const BRAND_CHOICES = [
+export const BRAND_CHOICES :[string , string][] = [
   ["alfa_romeo", "ألفا روميو"],
   ["audi", "أودي"],
   ["bmw", "بي ام دبليو"],

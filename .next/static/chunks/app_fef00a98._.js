@@ -1252,8 +1252,8 @@ function useAddPostFav() {
             }
         }["useAddPostFav.useMutation"],
         onSuccess: {
-            "useAddPostFav.useMutation": ()=>{
-                console.log("تمت إضافة الإعلان إلى المفضلة");
+            "useAddPostFav.useMutation": (data)=>{
+                console.log(`تم ${data.status === "added" ? "إضافة" : "إزالة"} الإعلان إلى المفضلة`);
             }
         }["useAddPostFav.useMutation"],
         onSettled: {

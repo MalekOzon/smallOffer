@@ -1204,8 +1204,8 @@ function useAddPostFav() {
         onError: ()=>{
             console.log("حدث خطأ في المفضلة");
         },
-        onSuccess: ()=>{
-            console.log("تمت إضافة الإعلان إلى المفضلة");
+        onSuccess: (data)=>{
+            console.log(`تم ${data.status === "added" ? "إضافة" : "إزالة"} الإعلان إلى المفضلة`);
         },
         onSettled: ()=>{
             queryClient.invalidateQueries({

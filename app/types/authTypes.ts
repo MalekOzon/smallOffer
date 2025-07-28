@@ -129,3 +129,6 @@ export type UserAdsResponse = {
   previous: string | null;
   results: Ad[];
 };
+
+
+

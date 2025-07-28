@@ -9,7 +9,7 @@ import React, { useState } from 'react';
 import  placeholderPost  from "../../../public/resourses/placeholderPost.svg"
 const AdsPage = () => {
   const [page, setPage] = useState(1);
-  const pageSize = 10;
+  const pageSize = 8;
   const { data, isLoading, isFetching } = useGetUserPosts(page,pageSize);
   console.log("DATA::   ",data)
   

@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { AxiosError } from "axios";
-import {  ApartmentPostPayload, CarPostPayload, ElectronicsPostPayload, GenericPostPayload, HousePostPayload, LandPostPayload, MobilePostPayload, PublicProfileInfoType } from "./postType";
-import { getApartmentPostId, getCarPostId, getElectronicPostId, getGenericPostId, getHousePostId, getMobilePostId, getOutdoorSpacePostId, getPublicPage } from "./postApi";
+import {  AdPreview, ApartmentPostPayload, CarPostPayload, ElectronicsPostPayload, GenericPostPayload, HousePostPayload, LandPostPayload, MobilePostPayload, PublicProfileInfoType } from "./postType";
+import { getApartmentPostId, getCarPostId, getElectronicPostId, getGenericPostId, getHousePostId, getMobilePostId, getOutdoorSpacePostId, getPostDetail, getPublicPage } from "./postApi";
 
 //  Get Generic Post ID
 export function useGetGenericPostId(id?: string) {
@@ -80,13 +80,22 @@ export function useGetOutdoorSpacePostId(id?: string) {
   });
 }
 
-// getPublicProfileInfo
 //  Get Public profile Info
 export function useGetPublicPage(username: string , page?: number , page_size?: number) {
   return useQuery<PublicProfileInfoType, AxiosError>({
     queryKey: ["accounts/posts/", username , page],
     queryFn: () => getPublicPage(username!, page ?? 1, page_size ?? 10),
     enabled: !!username,
+    staleTime: 1000 * 60 * 5,
+  });
+}
+
+//  Get Post Detail Info
+export function useGetPostDetail(category: string , id: string ) {
+  console.log("cat from qq " ,category)
+  return useQuery<AdPreview, AxiosError>({
+    queryKey: ["accounts/posts/", category , id],
+    queryFn: () => getPostDetail(category, id ),
     staleTime: 1000 * 60 * 5,
   });
 }

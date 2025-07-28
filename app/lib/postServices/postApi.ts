@@ -1,5 +1,6 @@
 import axiosInstance from "../loginservices/api";
 import {
+  AdPreview,
   ApartmentPostPayload,
   CarPostPayload,
   ElectronicsPostPayload,
@@ -270,3 +271,46 @@ export const getPublicPage = async (
   );
   return res.data;
 };
+
+// Get Post detail
+export const getPostDetail = async (
+  category: string,
+  id: string,
+) => {
+  console.log("cata= ",category)
+  const res = await axiosInstance.get<AdPreview>(
+    `accounts/posts/${category}/${id}/`
+  );
+  console.log("resrrrr " ,res.data)
+  return res.data;
+};
+
+
+// ابلاغ
+export const createReport = async (formData: FormData , username :string) => {
+  const response = await axiosInstance.post(
+    `accounts/report-user/${username}/`,
+    formData,
+    {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    }
+  );
+  return response.data;
+};
+
+// تقييم
+export const createRate = async (formData: FormData , username :string) => {
+  const response = await axiosInstance.post(
+    `accounts/rate-user/${username}/`,
+    formData,
+    {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    }
+  );
+  return response.data;
+};
+

@@ -80,6 +80,8 @@ __turbopack_context__.s({
     "createLandPost": (()=>createLandPost),
     "createMobilePost": (()=>createMobilePost),
     "createPost": (()=>createPost),
+    "createRate": (()=>createRate),
+    "createReport": (()=>createReport),
     "editApartmentForm": (()=>editApartmentForm),
     "editCarForm": (()=>editCarForm),
     "editElectronicsForm": (()=>editElectronicsForm),
@@ -94,7 +96,8 @@ __turbopack_context__.s({
     "getHousePostId": (()=>getHousePostId),
     "getMobilePostId": (()=>getMobilePostId),
     "getOutdoorSpacePostId": (()=>getOutdoorSpacePostId),
-    "getPublicProfileInfo": (()=>getPublicProfileInfo)
+    "getPostDetail": (()=>getPostDetail),
+    "getPublicPage": (()=>getPublicPage)
 });
 var __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$lib$2f$loginservices$2f$api$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/app/lib/loginservices/api.ts [app-ssr] (ecmascript)");
 ;
@@ -238,9 +241,31 @@ const editOutdoor_spaceForm = async (formData, id)=>{
     });
     return response.data;
 };
-const getPublicProfileInfo = async (username, page, page_size)=>{
+const getPublicPage = async (username, page, page_size)=>{
     const res = await __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$lib$2f$loginservices$2f$api$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].get(`accounts/users/${username}/posts/cards/?page=${page}&page_size=${page_size}&ordering=-created_at`);
     return res.data;
+};
+const getPostDetail = async (category, id)=>{
+    console.log("cata= ", category);
+    const res = await __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$lib$2f$loginservices$2f$api$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].get(`accounts/posts/${category}/${id}/`);
+    console.log("resrrrr ", res.data);
+    return res.data;
+};
+const createReport = async (formData, username)=>{
+    const response = await __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$lib$2f$loginservices$2f$api$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].post(`accounts/report-user/${username}/`, formData, {
+        headers: {
+            "Content-Type": "multipart/form-data"
+        }
+    });
+    return response.data;
+};
+const createRate = async (formData, username)=>{
+    const response = await __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$lib$2f$loginservices$2f$api$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].post(`accounts/rate-user/${username}/`, formData, {
+        headers: {
+            "Content-Type": "multipart/form-data"
+        }
+    });
+    return response.data;
 };
 }}),
 "[project]/app/lib/postServices/postMutations.ts [app-ssr] (ecmascript)": ((__turbopack_context__) => {
@@ -255,7 +280,9 @@ __turbopack_context__.s({
     "useCreateHousePost": (()=>useCreateHousePost),
     "useCreateLandPost": (()=>useCreateLandPost),
     "useCreateMobilePost": (()=>useCreateMobilePost),
-    "useCreatePost": (()=>useCreatePost)
+    "useCreatePost": (()=>useCreatePost),
+    "useCreateRate": (()=>useCreateRate),
+    "useCreateReport": (()=>useCreateReport)
 });
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$tanstack$2f$react$2d$query$2f$build$2f$modern$2f$useMutation$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/@tanstack/react-query/build/modern/useMutation.js [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$tanstack$2f$react$2d$query$2f$build$2f$modern$2f$QueryClientProvider$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/@tanstack/react-query/build/modern/QueryClientProvider.js [app-ssr] (ecmascript)");
@@ -600,6 +627,102 @@ function useCreateMobilePost(setNotification) {
             queryClient.invalidateQueries({
                 queryKey: [
                     "accounts/posts/mobile/"
+                ]
+            });
+        }
+    });
+}
+function useCreateReport(setNotification) {
+    const queryClient = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$tanstack$2f$react$2d$query$2f$build$2f$modern$2f$QueryClientProvider$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useQueryClient"])();
+    return (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$tanstack$2f$react$2d$query$2f$build$2f$modern$2f$useMutation$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useMutation"])({
+        mutationFn: ({ formData, username })=>(0, __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$lib$2f$postServices$2f$postApi$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["createReport"])(formData, username),
+        onMutate: ()=>{
+            console.log("جاري الابلاغ   ...");
+        },
+        onError: (error)=>{
+            console.log("خطا ف ي الابلاغ", error);
+            if (__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].isAxiosError(error)) {
+                console.log("Response status:", error.response?.status);
+                console.log("Response data:", error.response?.data);
+                console.log("Response headers:", error.response?.headers);
+                const detail = error.response?.data?.detail;
+                const errors = error.response?.data?.errors;
+                let messages = errors ? (0, __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$lib$2f$loginservices$2f$mutations$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["extractMessages"])(errors) : [];
+                if (!messages.length) {
+                    messages = (0, __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$lib$2f$loginservices$2f$mutations$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["extractMessages"])(error.response?.data || {});
+                }
+                console.log("messages: ", messages);
+                const fallbackMessage = detail || "حدث خطأ غير معروف.";
+                const finalMessage = messages.length ? messages.join("\n") : fallbackMessage;
+                setNotification({
+                    message: finalMessage,
+                    type: "error"
+                });
+            } else {
+                setNotification({
+                    message: "حدث خطأ أثناء الاتصال بالسيرفر.",
+                    type: "error"
+                });
+            }
+        },
+        onSuccess: (data)=>{
+            setNotification({
+                message: data.detail,
+                type: "success"
+            });
+        },
+        onSettled: ()=>{
+            queryClient.invalidateQueries({
+                queryKey: [
+                    "accounts/report-user"
+                ]
+            });
+        }
+    });
+}
+function useCreateRate(setNotification) {
+    const queryClient = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$tanstack$2f$react$2d$query$2f$build$2f$modern$2f$QueryClientProvider$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useQueryClient"])();
+    return (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$tanstack$2f$react$2d$query$2f$build$2f$modern$2f$useMutation$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useMutation"])({
+        mutationFn: ({ formData, username })=>(0, __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$lib$2f$postServices$2f$postApi$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["createRate"])(formData, username),
+        onMutate: ()=>{
+            console.log("جاري Rate   ...");
+        },
+        onError: (error)=>{
+            console.log("خطا ف ي rate", error);
+            if (__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].isAxiosError(error)) {
+                console.log("Response status:", error.response?.status);
+                console.log("Response data:", error.response?.data);
+                console.log("Response headers:", error.response?.headers);
+                const detail = error.response?.data?.detail;
+                const errors = error.response?.data?.errors;
+                let messages = errors ? (0, __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$lib$2f$loginservices$2f$mutations$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["extractMessages"])(errors) : [];
+                if (!messages.length) {
+                    messages = (0, __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$lib$2f$loginservices$2f$mutations$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["extractMessages"])(error.response?.data || {});
+                }
+                console.log("messages: ", messages);
+                const fallbackMessage = detail || "حدث خطأ غير معروف.";
+                const finalMessage = messages.length ? messages.join("\n") : fallbackMessage;
+                setNotification({
+                    message: finalMessage,
+                    type: "error"
+                });
+            } else {
+                setNotification({
+                    message: "حدث خطأ أثناء الاتصال بالسيرفر.",
+                    type: "error"
+                });
+            }
+        },
+        onSuccess: (data)=>{
+            setNotification({
+                message: data.detail,
+                type: "success"
+            });
+        },
+        onSettled: ()=>{
+            queryClient.invalidateQueries({
+                queryKey: [
+                    "accounts/rate-user"
                 ]
             });
         }

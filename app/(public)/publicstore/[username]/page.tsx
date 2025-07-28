@@ -10,6 +10,9 @@ import placeholderPost from "../../../../public/resourses/placeholderPost.svg";
 import type { Ad } from "@/app/types/authTypes";
 import Link from "next/link";
 import { useGetPublicPage } from "@/app/lib/postServices/postQueries";
+import Notification from "@/app/components/ui/Notification";
+import ReportStoreModal from "./ReportStoreModal";
+import RateStoreModal from "./RateStoreModal";
 
 const Star = ({ filled }: { filled: boolean }) => (
   <svg
@@ -51,6 +54,13 @@ type PublicUser = {
 };
 
 const PublicStore = () => {
+  const [showReportModal, setShowReportModal] = useState(false);
+  const [showRateModal, setShowRateModal] = useState(false);
+  const [notification, setNotification] = useState<{
+    message: string;
+    type: "success" | "error";
+  } | null>(null);
+
   // استدعاء جميع الهوكات في أعلى المكون
   const params = useParams();
   const [page, setPage] = useState(1);
@@ -59,12 +69,16 @@ const PublicStore = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [user, setUser] = useState<PublicUser | null>(null);
 
-  const username = Array.isArray(params.username) ? params.username[0] : params.username;
+  const username = Array.isArray(params.username)
+    ? params.username[0]
+    : params.username;
 
-  // التحقق المبكر من username
   const pageSize = 8;
-  const { data, error: postError, isLoading: isFetchingPosts } = useGetPublicPage(username!, page, pageSize);
-
+  const {
+    data,
+    error: postError,
+    isLoading: isFetchingPosts,
+  } = useGetPublicPage(username!, page, pageSize);
 
   useEffect(() => {
     if (!data) return;
@@ -96,7 +110,18 @@ const PublicStore = () => {
   }, [data, page]);
 
   if (postError) {
-    return <div className="text-center text-red-500 py-12">حدث خطأ أثناء جلب البيانات. حاول مرة أخرى.</div>;
+    return (
+      <div className="text-center text-red-500 py-12">
+        حدث خطأ أثناء جلب البيانات. حاول مرة أخرى.
+      </div>
+    );
+  }
+  if (!username) {
+    return (
+      <div className="text-center text-red-500 py-12">
+        لم يتم تحديد اسم المستخدم.
+      </div>
+    );
   }
 
   if (isFetchingPosts && page === 1) return <SkeletonNotificationSettings />;
@@ -125,6 +150,15 @@ const PublicStore = () => {
 
   return (
     <div className="w-full flex flex-col justify-between items-start px-8 py-6 gap-8 rtl">
+      {/* ------------- Noti -------------- */}
+      {notification && (
+        <Notification
+          message={notification.message}
+          type={notification.type}
+          onClose={() => setNotification(null)}
+        />
+      )}
+
       {/* User Info & Store Info */}
       <div className="flex w-full max-md:flex-col justify-between gap-8">
         {/* Right: User Info */}
@@ -169,6 +203,7 @@ const PublicStore = () => {
             <button
               type="button"
               aria-label="إبلاغ عن المتجر"
+              onClick={() => setShowReportModal(true)}
               className="flex-1 py-2 border border-cgreen text-cgreen rounded-md font-semibold hover:bg-cgreen hover:text-white transition"
             >
               إبلاغ
@@ -176,6 +211,7 @@ const PublicStore = () => {
             <button
               type="button"
               aria-label="تقييم المتجر"
+              onClick={() => setShowRateModal(true)}
               className="flex-1 py-2 bg-cgreen text-white rounded-md font-semibold hover:bg-chgreen transition"
             >
               تقييم المتجر
@@ -251,6 +287,19 @@ const PublicStore = () => {
           </Link>
         </div>
       </div>
+
+      <ReportStoreModal
+        isOpen={showReportModal}
+        onClose={() => setShowReportModal(false)}
+        username={username}
+        setNotification={setNotification}
+      />
+      <RateStoreModal
+        isOpen={showRateModal}
+        onClose={() => setShowRateModal(false)}
+        username={username}
+        setNotification={setNotification}
+      />
     </div>
   );
 };

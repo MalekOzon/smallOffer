@@ -103,14 +103,13 @@ const AdCard: FC<AdCardProps> = ({
     );
   }
 
-  console.log("FAV ", isFavorite , id);
 
   return (
     <div className="block h-64 ">
       <div className="rounded-xl h-full border border-gray-200 bg-cwhite overflow-hidden shadow-sm hover:shadow-md transition duration-200 flex flex-col">
         {/* الصورة */}
         <div className="relative h-full ">
-          <Link href={`/previewpost/${id}`}>
+          <Link href={`/preview/${subcat}/${id}`}>
             {imageUrl ? (
               <Image src={imageUrl} alt={title} fill className="object-cover" />
             ) : null}
