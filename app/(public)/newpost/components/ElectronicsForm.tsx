@@ -202,7 +202,7 @@ const handlePreview = () => {
     hood: data.hood,
     offer_type: data.offer_type,
     subcategory: Gsubcategory, // بما أن هذا قادم من props
-    electronics: data.electronics
+    electronics: data.electronics 
   };
   localStorage.setItem("previewData", JSON.stringify(sendData));
 };
