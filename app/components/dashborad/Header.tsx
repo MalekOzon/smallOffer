@@ -169,14 +169,14 @@ const Header = ({ onMenuClick }: { onMenuClick?: () => void }) => {
               </div>
             )}
 
-            <ul className="text-sm text-gray-700">
+            <ul className="w-56 text-sm text-gray-700">
               <li>
                 <Link
                   href="/dashboard/profile"
                   onClick={() => isMobile && setMenuOpen(false)}
-                  className="flex items-center px-4 py-2 hover:bg-gray-100"
+                  className="flex font-semibold items-center px-4 py-2 hover:bg-gray-100"
                 >
-                  <Settings size={16} className="ml-2" />
+                  <Settings size={20} className="ml-2 text-cgreen" />
                   تعديل المعلومات الشخصية
                 </Link>
               </li>
@@ -184,18 +184,18 @@ const Header = ({ onMenuClick }: { onMenuClick?: () => void }) => {
                 <Link
                   href="/dashboard/change-password"
                   onClick={() => isMobile && setMenuOpen(false)}
-                  className="flex items-center px-4 py-2 hover:bg-gray-100"
+                  className="flex items-center font-semibold px-4 py-2 hover:bg-gray-100"
                 >
-                  <Lock size={16} className="ml-2" />
+                  <Lock size={20} className="ml-2 text-cgreen" />
                   تغيير كلمة المرور
                 </Link>
               </li>
               <li>
                 <button
                   onClick={handleLogout}
-                  className="w-full flex items-center px-4 py-2 text-red-600 hover:bg-red-50"
+                  className="w-full flex font-semibold items-center px-4 py-2 text-red-600 hover:bg-red-50"
                 >
-                  <LogOut size={16} className="ml-2" />
+                  <LogOut size={20} className="ml-2" />
                   تسجيل الخروج
                 </button>
               </li>

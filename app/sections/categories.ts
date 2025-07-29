@@ -1,4 +1,9 @@
 import houses from "../../public/resourses/houses.svg"
+import bio from "../../public/resourses/bio.svg"
+import paper from "../../public/resourses/paper.svg"
+import desk from "../../public/resourses/desk.svg"
+import zoom from "../../public/resourses/zoom.svg"
+import other from "../../public/resourses/other.svg"
 import fashion from "../../public/resourses/fashion.svg"
 import mobile from "../../public/resourses/mobile.svg"
 import service from "../../public/resourses/service.svg"
@@ -137,21 +142,20 @@ export const categories = [
   },
   {
     name: "وظائف",
-    icon: bag,
+    icon: building,
     slug: "jobs",
     items: [
-      { label: "برمجة وتقنية", icon: cook, slug: "it", href: "/categories/learning/cooking" },
-      { label: "صناعي وحرفي", icon: cook, slug: "craftsman", href: "/categories/learning/cooking" },
+      { label: "برمجة وتقنية", icon: laptop, slug: "it", href: "/categories/learning/cooking" },
+      { label: "صناعي وحرفي", icon: art, slug: "craftsman", href: "/categories/learning/cooking" },
       { label: "مطاعم وكافيهات", icon: cook, slug: "resturants", href: "/categories/learning/cooking" },
-      { label: "نقل وتوصيل", icon: cook, slug: "delivery", href: "/categories/learning/cooking" },
-      { label: "تعليم وتدريس", icon: cook, slug: "teaching", href: "/categories/learning/cooking" },
-      { label: "أعمال حرة", icon: cook, slug: "free", href: "/categories/learning/cooking" },
-      { label: "بناء وإعمار", icon: cook, slug: "construction", href: "/categories/learning/cooking" },
-      { label: "الطب والصحة", icon: cook, slug: "medical", href: "/categories/learning/cooking" },
-      { label: "مكاتب", icon: cook, slug: "offices", href: "/categories/learning/cooking" },
-      { label: "تصميم وإعلام", icon: cook, slug: "design-media", href: "/categories/learning/cooking" },
-      { label: "أعمال أخرى", icon: cook, slug: "other", href: "/categories/learning/cooking" },
-
+      { label: "نقل وتوصيل", icon: truck, slug: "delivery", href: "/categories/learning/cooking" },
+      { label: "تعليم وتدريس", icon: books, slug: "teaching", href: "/categories/learning/cooking" },
+      { label: "أعمال حرة", icon: paper, slug: "free", href: "/categories/learning/cooking" },
+      { label: "بناء وإعمار", icon: building, slug: "construction", href: "/categories/learning/cooking" },
+      { label: "الطب والصحة", icon: bio, slug: "medical", href: "/categories/learning/cooking" },
+      { label: "مكاتب", icon: desk, slug: "offices", href: "/categories/learning/cooking" },
+      { label: "تصميم وإعلام", icon: zoom, slug: "design-media", href: "/categories/learning/cooking" },
+      { label: "أعمال أخرى", icon: other, slug: "other", href: "/categories/learning/cooking" },
     ],
   },
 ];

@@ -222,7 +222,7 @@ export default function SettingsPage() {
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full bg-cgreen mt-2 text-white px-4 py-2 rounded-md  hover:bg-chgreen transition font-medium"
+            className="hover:scale-105 transition-all duration-150 w-[95%] flex justify-center items-center mx-auto py-3 bg-cgreen text-white text-6 font-semibold rounded-md hover:bg-chgreen disabled:opacity-60 "
           >
             {isLoading ? "جاري الحفظ..." : "حفظ الإعدادات"}
           </button>
@@ -280,7 +280,7 @@ export default function SettingsPage() {
             <button
               type="submit"
               disabled={isLoadingSend}
-              className="w-full absolute bottom-0 bg-cgreen hover:bg-chgreen text-white py-2 rounded-md font-medium transition"
+              className="w-full hover:scale-105 absolute bottom-0 bg-cgreen hover:bg-chgreen text-white py-3 rounded-md font-medium transition"
             >
               {isLoadingSend ? "جاري الحفظ..." : "إرسال رسالة الآن"}
             </button>
@@ -299,7 +299,7 @@ export default function SettingsPage() {
           <button
             type="button"
             onClick={() => setShowDeleteConfirm(true)}
-            className="flex max-sm:mt-4 bg-red-400 hover:bg-red-500 text-white py-2 px-4 rounded-md font-medium transition gap-2"
+            className="flex hover:scale-105 max-sm:mt-4 bg-red-400 hover:bg-red-500 text-white py-2 px-4 rounded-md font-medium transition gap-2"
           >
             <Trash className="w-5 h-5" />
             حذف حسابي نهائيًا

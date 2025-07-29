@@ -705,7 +705,7 @@ const EditProfilePage = () => {
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full py-3 bg-cgreen text-white text-6 font-semibold rounded-md hover:bg-chgreen disabled:opacity-60 transition"
+            className="hover:scale-105 transition-all duration-150 w-[95%] flex justify-center items-center mx-auto py-3 bg-cgreen text-white text-6 font-semibold rounded-md hover:bg-chgreen disabled:opacity-60 "
           >
             {isLoading ? "جاري الحفظ..." : "حفظ التعديلات"}
           </button>

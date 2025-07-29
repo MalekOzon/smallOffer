@@ -17,11 +17,29 @@ import {
   STATUS_CHOICES,
   TYPE_CHOICES,
 } from "@/app/(public)/newpost/components/CarForm";
+import {
+  FURNITURE_CHOICES,
+  GENERAL_CHARACTERISTICS,
+} from "@/app/(public)/newpost/components/ApartmentForm";
+import { HOUSE_CHOICES } from "@/app/(public)/newpost/components/HouseForm";
+import { Eye, Heart, Share2 } from "lucide-react";
+import { useEffect, useState } from "react";
+import { useAddPostFav } from "@/app/lib/dashboardServices/dashboardMutation";
+import clsx from "clsx";
 
 export default function PostPreviewPage() {
   const params = useParams();
   const category = typeof params.category === "string" ? params.category : "";
   const id = typeof params.id === "string" ? params.id : "";
+
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(window.location.href).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1500); // يرجع الحالة بعد 1.5 ثانية
+    });
+  };
 
   let isCar = false;
   let isApartment = false;
@@ -41,8 +59,16 @@ export default function PostPreviewPage() {
     cat = "apartment";
   } else if (category === "houses") {
     isHouse = true;
-    cat = "houses";
-  } else if (category === "tablets" || category === "pc" || category === "games" || category === "tv" || category === "audio_video_accessories" || category === "parts_accessories" || category === "home_appliances"  ) {
+    cat = "house";
+  } else if (
+    category === "tablets" ||
+    category === "pc" ||
+    category === "games" ||
+    category === "tv" ||
+    category === "audio_video_accessories" ||
+    category === "parts_accessories" ||
+    category === "home_appliances"
+  ) {
     isElec = true;
     cat = "electronics";
   } else if (category === "outdoor-space") {
@@ -54,6 +80,35 @@ export default function PostPreviewPage() {
   console.log("cat  ", cat);
 
   const { data, isLoading, error } = useGetPostDetail(cat, id);
+  const [isFavorite, setIsFavorite] = useState<string | undefined>(undefined);
+
+  useEffect(() => {
+    if (data?.fav !== undefined) {
+      setIsFavorite(data.fav); // "added" أو "removed"
+    }
+  }, [data?.fav]);
+  
+  const addPostFavMutation = useAddPostFav();
+  
+  function handleFavClick() {
+    if (!id) return;
+  
+    addPostFavMutation.mutate(
+      { post_id: Number(id) },
+      {
+        onSuccess: (res) => {
+          // إذا كانت الحالة الجديدة موجودة في الاستجابة
+          if (res.status === "added" || res.status === "removed") {
+            setIsFavorite(res.status);
+          }
+        },
+        onError: () => {
+          console.error("فشل في تحديث المفضلة");
+        },
+      }
+    );
+  }
+  
 
   // التعامل مع حالات التحميل والأخطاء
   if (isLoading) return <div>جاري التحميل...</div>;
@@ -127,6 +182,55 @@ export default function PostPreviewPage() {
     );
     return translatedFeatures.join(", ");
   }
+  // ------------------------------------------------
+  function translateFURNITURE_CHOICESApa(features: string[]): string {
+    const featuresMap = new Map(FURNITURE_CHOICES);
+    const translatedFeatures = features.map(
+      (feature) => featuresMap.get(feature) || feature
+    );
+    return translatedFeatures.join(", ");
+  }
+
+  function translateGENERAL_CHARACTERISTICSApa(features: string[]): string {
+    const featuresMap = new Map(GENERAL_CHARACTERISTICS);
+    const translatedFeatures = features.map(
+      (feature) => featuresMap.get(feature) || feature
+    );
+    return translatedFeatures.join(", ");
+  }
+  // ------------------------------------------------
+
+  function translatetHOUSE_CHOICES(brand: string): string {
+    const colorMap = new Map(HOUSE_CHOICES);
+    return colorMap.get(brand) || brand;
+  }
+  // ------------------------------------------------
+  function translatetSTATUS_CHOICESELEC(brand: string): string {
+    const sss: [string, string][] = [
+      ["new", "جديد"],
+      ["used_very_good", "مستعمل جيد جداً"],
+      ["working_good", "يعمل بشكل جيد"],
+      ["defective", "عيب (يحتاج صيانة)"],
+    ];
+    const colorMap = new Map(sss);
+    return colorMap.get(brand) || brand;
+  }
+
+  // ------------------------------------------------
+  function translatetTYPE_CHOICESLAND(brand: string): string {
+    const sd: [string, string][] = [
+      ["residential_plot", "قطعة أرض للبناء"],
+      ["garden", "حديقة"],
+      ["agriculture_forest", "زراعة / غابات"],
+      ["other_property", "عقارات وحدائق أخرى"],
+    ];
+    const colorMap = new Map(sd);
+    return colorMap.get(brand) || brand;
+  }
+
+  
+
+
 
   return (
     <main className=" gap-6 p-4  ">
@@ -135,7 +239,31 @@ export default function PostPreviewPage() {
         <div className="space-y-4 max-w-[90%] max-sm:max-w-full   mt-10">
           <div className="flex justify-between max-lg:flex-col">
             <h1 className="text-3xl font-bold ">{data.title}</h1>
-            <div>ayghj</div>
+            <div className="flex gap-2 justify-center items-center max-lg:justify-end max-lg:mt-3">
+            <button
+              onClick={handleFavClick}
+              className={` rounded-md  group `}
+            >
+              <Heart
+                className={clsx(
+                  "h-[44px] w-9 transition-colors rounded-md p-1 max-sm:mt-2",
+                  isFavorite == "added" 
+                    ? "bg-cgreen text-white group-hover:bg-green-100 group-hover:text-cgreen"
+                    : "bg-green-100 text-cgreen group-hover:bg-cgreen group-hover:text-white"
+                )}
+              />
+            </button>
+              <div
+                onClick={handleCopy}
+                className="cursor-pointer h-[44px] bg-green-100 text-cgreen flex gap-2 rounded-md p-2 text-lg w-[40px] max-sm:mt-2 hover:bg-green-200"
+              >
+                <Share2 />
+                {copied && <span className="text-lg text-center ">✅</span>}
+              </div>
+              <div className="bg-green-100 text-cgreen flex gap-2 rounded-md p-2 text-lg w-[80px] max-sm:mt-2 ">
+                <Eye /> {data.views}
+              </div>
+            </div>
           </div>
           <Link
             href={`/publicstore/${data.username}`}
@@ -319,7 +447,7 @@ export default function PostPreviewPage() {
               data.apartment.furniture.length > 0 && (
                 <li className="my-3 text-lg">
                   <strong>الأثاث: </strong>
-                  {data.apartment.furniture}
+                  {translateFURNITURE_CHOICESApa(data.apartment.furniture)}
                 </li>
               )}
 
@@ -327,14 +455,16 @@ export default function PostPreviewPage() {
               data.apartment.general_characteristics.length > 0 && (
                 <li className="my-3 text-lg">
                   <strong>حالة المبنى: </strong>
-                  {data.apartment.general_characteristics}
+                  {translateGENERAL_CHARACTERISTICSApa(
+                    data.apartment.general_characteristics
+                  )}
                 </li>
               )}
 
             {data.apartment.offer_type && (
               <li className="my-3 text-lg">
                 <strong>نوع العرض: </strong>
-                {data.apartment.offer_type}
+                {data.apartment.offer_type === "sale" ? "شراء" : "ايجار"}
               </li>
             )}
 
@@ -377,8 +507,8 @@ export default function PostPreviewPage() {
             )}
             {data.house.house_type && (
               <li className="my-3 text-lg">
-                <strong> متاح من تاريخ: </strong>
-                {data.house.house_type}
+                <strong>نوع المنزل :</strong>
+                {translatetHOUSE_CHOICES(data.house.house_type)}
               </li>
             )}
             {data.house.bath && (
@@ -399,7 +529,7 @@ export default function PostPreviewPage() {
               data.house.furniture.length > 0 && (
                 <li className="my-3 text-lg">
                   <strong>الأثاث: </strong>
-                  {data.house.furniture}
+                  {translateFURNITURE_CHOICESApa(data.house.furniture)}
                 </li>
               )}
 
@@ -407,14 +537,16 @@ export default function PostPreviewPage() {
               data.house.general_characteristics.length > 0 && (
                 <li className="my-3 text-lg">
                   <strong>حالة المبنى: </strong>
-                  {data.house.general_characteristics}
+                  {translateGENERAL_CHARACTERISTICSApa(
+                    data.house.general_characteristics
+                  )}
                 </li>
               )}
 
             {data.house.offer_type && (
               <li className="my-3 text-lg">
                 <strong>نوع العرض: </strong>
-                {data.house.offer_type}
+                {data.house.offer_type === "sale" ? "شراء" : "ايجار"}
               </li>
             )}
 
@@ -452,7 +584,7 @@ export default function PostPreviewPage() {
             {data.electronics.status && (
               <li className="my-3 text-lg">
                 <strong> نوع الجهاز: </strong>
-                {data.electronics.status}
+                {translatetSTATUS_CHOICESELEC(data.electronics.status)}
               </li>
             )}
           </ul>
@@ -483,14 +615,14 @@ export default function PostPreviewPage() {
             {data.outdoorspace.land_type && (
               <li className="my-3 text-lg">
                 <strong> نوع الأرض: </strong>
-                {data.outdoorspace.land_type}
+                {translatetTYPE_CHOICESLAND(data.outdoorspace.land_type)}
               </li>
             )}
 
             {data.outdoorspace.offer_type && (
               <li className="my-3 text-lg">
                 <strong> نوع العرض: </strong>
-                {data.outdoorspace.offer_type}
+                {data.outdoorspace.offer_type === "sale" ? "شراء" : "ايجار"}
               </li>
             )}
           </ul>

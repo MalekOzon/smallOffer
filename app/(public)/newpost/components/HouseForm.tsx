@@ -13,7 +13,7 @@ interface PostFormProps {
   Gsubcategory: string;
 }
 
-export const FURNITURE_CHOICES = [
+export const FURNITURE_CHOICES  :[string , string][]  = [
   ["furnished-semi/furnished", "مفروش/مفروش جزئيا"],
   ["balcony", "شرفة"],
   ["equipped_kitchen", "مطبخ مجهز"],
@@ -22,7 +22,7 @@ export const FURNITURE_CHOICES = [
   ["ground_floor", "الصول بدون درج"],
   ["underfloor_heating", "التدفئة تحت الارضية"],
 ];
-export const GENERAL_CHARACTERISTICS = [
+export const GENERAL_CHARACTERISTICS :[string , string][] = [
   ["old_building", "مبنى قديم"],
   ["new_building", "مبنى جديد"],
   ["elevator", "مصعد"],
@@ -34,14 +34,14 @@ export const GENERAL_CHARACTERISTICS = [
   ["landmark", "نصب تذكاري"],
   ["currently_rented", "مؤجر حاليا"],
 ];
-export const HOUSE_CHOICES = [
+export const HOUSE_CHOICES :[string , string][] = [
   ["house", "منزل منفصل"],
   ["building", "مبنى سكني"],
   ["farm", "مزرعة"],
   ["villa", "فيلا"],
   ["other", " أنواع أخرى"],
 ];
-export const OFFER_TYPE_CHOICES = [
+export const OFFER_TYPE_CHOICES :[string , string][]  = [
   ["sale", "شراء"],
   ["rent", "ايجار"],
 ];

@@ -2,12 +2,24 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
-import { Search, X, Menu, Heart, AlertCircle, ChevronDown } from "lucide-react";
+import {
+  Search,
+  X,
+  Menu,
+  Heart,
+  AlertCircle,
+  ChevronDown,
+  Settings,
+  LogOut,
+  MessageCircle,
+  StoreIcon,
+} from "lucide-react";
 import { useLogout } from "@/app/lib/loginservices/mutations";
 import Notification from "../components/ui/Notification";
 import userAvatar from "../../public/resourses/userAvatar.svg";
 import { useGetUserInfo } from "../lib/dashboardServices/dashboardQueries";
 import { categories } from "./categories";
+import { easeInOut, motion } from "framer-motion";
 
 const Navbar = () => {
   const [isMobile, setIsMobile] = useState(false);
@@ -126,6 +138,32 @@ const Navbar = () => {
     rowConfig.first + rowConfig.second
   );
 
+  const sidebarVariants = {
+    hidden: { x: '-100%' },
+    visible: {
+      x: 0,
+      transition: {
+        duration: 0.3,
+        ease: easeInOut, // ✅ لا تستخدم string
+        when: 'beforeChildren',
+        staggerChildren: 0.08,
+        delayChildren: 0.2,
+      },
+    },
+    exit: {
+      x: '-100%',
+      transition: {
+        duration: 0.3,
+        ease: easeInOut,
+      },
+    },
+  };
+
+  const listItemVariants = {
+    hidden: { opacity: 0, x: -20 },
+    visible: { opacity: 1, x: 0 },
+  };
+
   return (
     <>
       {/* Header */}
@@ -148,26 +186,25 @@ const Navbar = () => {
                     {getUserInfo.data?.username}
                   </span>
                   <div className="w-14 h-14 rounded-full overflow-hidden border-1 border-cgreen mr-2">
-                      {
-                      typeof getUserInfo.data?.profile_image === "string" &&
-                      getUserInfo.data?.profile_image !== "" ? (
-                        <Image
-                          src={getUserInfo.data?.profile_image}
-                          alt="User Avatar"
-                          width={120}
-                          height={120}
-                          className="object-cover  w-full h-full"
-                        />
-                      ) : (
-                        <Image
-                          src={userAvatar} // صورة افتراضية تحفظها داخل public/
-                          alt="Default Avatar"
-                          width={96}
-                          height={96}
-                          className="object-cover "
-                        />
-                      )}
-                    </div>
+                    {typeof getUserInfo.data?.profile_image === "string" &&
+                    getUserInfo.data?.profile_image !== "" ? (
+                      <Image
+                        src={getUserInfo.data?.profile_image}
+                        alt="User Avatar"
+                        width={120}
+                        height={120}
+                        className="object-cover  w-full h-full"
+                      />
+                    ) : (
+                      <Image
+                        src={userAvatar} // صورة افتراضية تحفظها داخل public/
+                        alt="Default Avatar"
+                        width={96}
+                        height={96}
+                        className="object-cover "
+                      />
+                    )}
+                  </div>
                 </div>
                 {/* القائمة المنسدلة للموبايل */}
                 {showMenu && (
@@ -179,6 +216,7 @@ const Navbar = () => {
                           onClick={() => setShowMenu(false)}
                           className="flex items-center px-4 py-2 hover:bg-gray-100"
                         >
+                          <StoreIcon size={20} className="ml-1 text-cgreen" />
                           متجري
                         </Link>
                       </li>
@@ -188,6 +226,10 @@ const Navbar = () => {
                           onClick={() => setShowMenu(false)}
                           className="flex items-center px-4 py-2 hover:bg-gray-100"
                         >
+                          <MessageCircle
+                            size={20}
+                            className="ml-1 text-cgreen"
+                          />
                           رسائلي
                         </Link>
                       </li>
@@ -197,6 +239,7 @@ const Navbar = () => {
                           onClick={() => setShowMenu(false)}
                           className="flex items-center px-4 py-2 hover:bg-gray-100"
                         >
+                          <Settings size={20} className="ml-1 text-cgreen" />
                           تعديل المعلومات الشخصية
                         </Link>
                       </li>
@@ -208,6 +251,7 @@ const Navbar = () => {
                           }}
                           className="w-full flex items-center px-4 py-2 text-red-600 hover:bg-red-50"
                         >
+                          <LogOut size={20} className="ml-1" />
                           تسجيل الخروج
                         </button>
                       </li>
@@ -289,8 +333,7 @@ const Navbar = () => {
                 >
                   <div className="flex items-center cursor-pointer select-none">
                     <div className="w-14 h-14 rounded-full overflow-hidden border-1 border-cgreen">
-                      {
-                      typeof getUserInfo.data?.profile_image === "string" &&
+                      {typeof getUserInfo.data?.profile_image === "string" &&
                       getUserInfo.data?.profile_image !== "" ? (
                         <Image
                           src={getUserInfo.data?.profile_image}
@@ -317,7 +360,7 @@ const Navbar = () => {
                     </span>
                   </div>
                   {showMenu && (
-                    <div className="absolute top-full left-0 w-56 bg-cwhite border border-gray-200 rounded-md shadow-lg z-50">
+                    <div className="absolute top-full left-0 w-60 bg-cwhite border border-gray-200 rounded-md shadow-lg z-50">
                       <ul className="text-sm text-gray-700">
                         <li>
                           <Link
@@ -325,6 +368,7 @@ const Navbar = () => {
                             onClick={() => setShowMenu(false)}
                             className="flex text-6 items-center  px-4 py-2 hover:bg-gray-100"
                           >
+                            <StoreIcon size={20} className="ml-1 text-cgreen" />
                             متجري
                           </Link>
                         </li>
@@ -334,6 +378,10 @@ const Navbar = () => {
                             onClick={() => setShowMenu(false)}
                             className="flex  text-6  items-center  px-4 py-2 hover:bg-gray-100"
                           >
+                            <MessageCircle
+                              size={20}
+                              className="ml-1 text-cgreen"
+                            />
                             رسائلي
                           </Link>
                         </li>
@@ -343,6 +391,7 @@ const Navbar = () => {
                             onClick={() => setShowMenu(false)}
                             className="flex text-6  items-center  px-4 py-2 hover:bg-gray-100"
                           >
+                            <Settings size={20} className="ml-1 text-cgreen" />
                             تعديل المعلومات الشخصية
                           </Link>
                         </li>
@@ -354,6 +403,7 @@ const Navbar = () => {
                             }}
                             className="w-full flex  text-6  items-center px-4 py-2 text-red-600 hover:bg-red-50"
                           >
+                            <LogOut size={20} className="ml-1" />
                             تسجيل الخروج
                           </button>
                         </li>
@@ -429,9 +479,14 @@ const Navbar = () => {
 
       {/* Sidebar (Mobile Only) */}
       {isMobile && isSidebarOpen && (
-        <div
+        <motion.div
           ref={sidebarRef}
-          className="fixed inset-y-0 left-0 w-full bg-cwhite shadow-lg z-50 transform translate-x-0 transition-transform ease-in-out duration-300 overflow-y-auto"
+          variants={sidebarVariants}
+          initial="hidden"
+          animate="visible"
+          exit="exit"
+          transition={{ duration: 0.3, ease: "easeInOut" }}
+          className="fixed inset-y-0 left-0 w-full bg-cwhite shadow-lg z-50 overflow-y-auto"
         >
           <div className="flex flex-col justify-between items-center p-4 border-b border-cdarkgray">
             <Link
@@ -441,7 +496,7 @@ const Navbar = () => {
               Small Offer
             </Link>
             <div className="flex w-full justify-between items-center ">
-              <h3 className="text-xl font-bold  ">الفئات</h3>
+              <h3 className="text-xl font-bold">الفئات</h3>
               <button
                 onClick={() => setIsSidebarOpen(false)}
                 className="text-cdarkgray outline rounded-full p-1 "
@@ -450,9 +505,19 @@ const Navbar = () => {
               </button>
             </div>
           </div>
-          <ul className="p-4 space-y-4 mt-4">
+
+          <motion.ul
+            className="p-4 space-y-4 mt-4"
+            variants={sidebarVariants}
+            initial="hidden"
+            animate="visible"
+          >
             {categories.map((cat, idx) => (
-              <li key={idx} className="py-4 text-xl ">
+              <motion.li
+                key={idx}
+                variants={listItemVariants}
+                className="py-4 text-xl"
+              >
                 <Link
                   href={cat.slug || "#"}
                   onClick={() => setIsSidebarOpen(false)}
@@ -461,26 +526,19 @@ const Navbar = () => {
                   <Image src={cat.icon} alt={cat.name} width={26} height={26} />
                   <span>{cat.name}</span>
                 </Link>
-              </li>
+              </motion.li>
             ))}
-            <li>
+
+            <motion.li variants={listItemVariants}>
               <button
                 onClick={() => setIsSidebarOpen(false)}
                 className="w-full bg-cgreen text-white py-2 rounded-lg font-semibold hover:bg-chgreen transition"
               >
                 تصفح كل الإعلانات
               </button>
-            </li>
-          </ul>
-        </div>
-      )}
-
-      {/* Overlay for Sidebar */}
-      {isMobile && isSidebarOpen && (
-        <div
-          className="fixed inset-0 bg-black bg-opacity-50 z-40"
-          onClick={() => setIsSidebarOpen(false)}
-        ></div>
+            </motion.li>
+          </motion.ul>
+        </motion.div>
       )}
 
       {/* Navigation Categories (Desktop Only) */}

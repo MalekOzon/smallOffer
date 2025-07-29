@@ -13,6 +13,7 @@ import { useGetPublicPage } from "@/app/lib/postServices/postQueries";
 import Notification from "@/app/components/ui/Notification";
 import ReportStoreModal from "./ReportStoreModal";
 import RateStoreModal from "./RateStoreModal";
+import { motion } from "framer-motion";
 
 const Star = ({ filled }: { filled: boolean }) => (
   <svg
@@ -149,7 +150,7 @@ const PublicStore = () => {
   const stars = Array.from({ length: 5 }, (_, i) => i < Math.round(rating));
 
   return (
-    <div className="w-full flex flex-col justify-between items-start px-8 py-6 gap-8 rtl">
+    <div className="w-full flex flex-col justify-between items-start px-8 py-6 gap-8  overflow-hidden">
       {/* ------------- Noti -------------- */}
       {notification && (
         <Notification
@@ -162,7 +163,12 @@ const PublicStore = () => {
       {/* User Info & Store Info */}
       <div className="flex w-full max-md:flex-col justify-between gap-8">
         {/* Right: User Info */}
-        <div className="flex max-md:flex-col items-center w-full md:w-1/2 gap-4 justify-center md:pr-12">
+        <motion.div
+          initial={{ x: "+100%" }}
+          animate={{ x: "0" }}
+          transition={{ duration: 1.5, ease: "easeInOut" }}
+          className="flex max-md:flex-col items-center w-full md:w-1/2 gap-4 justify-center md:pr-12"
+        >
           <div className="rounded-full overflow-hidden border-2 border-cgreen w-36 h-36 shrink-0">
             <Image
               src={user?.profile_image || userAvatar}
@@ -186,10 +192,15 @@ const PublicStore = () => {
               <span className="font-bold mx-1">{rating.toFixed(1)}</span>
             </div>
           </div>
-        </div>
+        </motion.div>
 
         {/* Left: Store Info */}
-        <div className="shadow-xl rounded-xl px-6 py-2 w-full md:w-[45%] md:ml-10 flex flex-col gap-6 border border-gray-100 bg-cwhite">
+        <motion.div
+          initial={{ x: "-100%" }}
+          animate={{ x: "0" }}
+          transition={{ duration: 1.5, ease: "easeInOut" }}
+          className="overflow-hidden shadow-xl rounded-xl px-6 py-2 w-full md:w-[45%] md:ml-10 flex flex-col gap-6 border border-gray-100 bg-cwhite"
+        >
           <div className="flex items-center gap-2 text-gray-600 text-lg">
             <MapPin size={20} />
             <span className="text-xl">{user?.city || "---"}</span>
@@ -204,7 +215,7 @@ const PublicStore = () => {
               type="button"
               aria-label="إبلاغ عن المتجر"
               onClick={() => setShowReportModal(true)}
-              className="flex-1 py-2 border border-cgreen text-cgreen rounded-md font-semibold hover:bg-cgreen hover:text-white transition"
+              className="flex-1 hover:scale-105 py-2 border border-cgreen text-cgreen rounded-md font-semibold hover:bg-cgreen hover:text-white transition"
             >
               إبلاغ
             </button>
@@ -212,12 +223,12 @@ const PublicStore = () => {
               type="button"
               aria-label="تقييم المتجر"
               onClick={() => setShowRateModal(true)}
-              className="flex-1 py-2 bg-cgreen text-white rounded-md font-semibold hover:bg-chgreen transition"
+              className="flex-1 hover:scale-105 py-2 bg-cgreen text-white rounded-md font-semibold hover:bg-chgreen transition"
             >
               تقييم المتجر
             </button>
           </div>
-        </div>
+        </motion.div>
       </div>
       <div className="md:hidden w-full">
         <Link href="/contact">
@@ -258,16 +269,34 @@ const PublicStore = () => {
                 </div>
                 {hasMore && mappedAds.length > 0 && (
                   <div className="text-center mt-6">
-                    <button
+                    <motion.button
                       onClick={() => {
                         setIsLoading(true);
                         setPage((p) => p + 1);
                       }}
                       disabled={isLoading}
-                      className="px-4 py-2 rounded-md border border-gray-300 text-gray-700 hover:bg-gray-100 transition"
+                      className="px-4 py-2 rounded-md border border-gray-300 relative overflow-hidden"
+                      initial={{
+                        background:
+                          "linear-gradient(to right, #fff 100%, #277F60 100%)",
+                        color: "#374151", // Equivalent to text-gray-700
+                      }}
+                      whileHover={{
+                        background:
+                          "linear-gradient(to right, #277F60 100%, #277F60 100%)",
+                        color: "#ffffff", // Equivalent to text-white
+                        transition: { duration: 0.5, ease: "easeInOut" },
+                      }}
+                      animate={{
+                        background:
+                          "linear-gradient(to right, #fff 100%, #277F60 100%)",
+                        color: "#374151",
+                      }}
                     >
-                      {isLoading ? "جاري التحميل..." : "تحميل المزيد"}
-                    </button>
+                      <span className="relative z-10">
+                        {isLoading ? "جاري التحميل..." : "تحميل المزيد"}
+                      </span>
+                    </motion.button>
                   </div>
                 )}
               </div>

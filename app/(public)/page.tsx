@@ -10,7 +10,7 @@ import  placeholderPost  from "../../public/resourses/placeholderPost.svg"
 const HomePage = () => {
 
   const [page, setPage] = useState(1);
-  const pageSize = 10;
+  const pageSize = 4;
   const [ads, setAds] = useState<Ad[]>([]);
   const { data, isLoading, isFetching } = useGetUserPosts(page, pageSize);
   const [hasMore, setHasMore] = useState(true);
@@ -134,23 +134,7 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-cgreen">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl font-bold text-white mb-4">
-            جاهز للبدء؟
-          </h2>
-          <p className="text-blue-100 mb-8 text-lg">
-            انضم إلينا اليوم وابدأ في بيع وشراء المنتجات بسهولة
-          </p>
-          <Link 
-            href="/signup"
-            className="bg-white text-cgreen px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition duration-300"
-          >
-            إنشاء حساب جديد
-          </Link>
-        </div>
-      </section>
+
     </div>
   );
 };

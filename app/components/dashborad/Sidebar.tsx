@@ -1,5 +1,5 @@
 "use client";
-
+import { motion } from "framer-motion"
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
@@ -62,37 +62,58 @@ export function SidebarContent({ onNavigate }: { onNavigate?: () => void }) {
 
       {/* عناصر التنقل */}
       <nav className="flex flex-col items-start gap-2 flex-1 mt-4">
-        {navItems.map(({ label, href, icon: Icon }) => {
-          const isActive = pathname === href;
-          return (
+      {navItems.map(({ label, href, icon: Icon }, index) => {
+        const isActive = pathname === href;
+
+        // تأثير الظهور التدريجي لكل عنصر
+        const itemVariants = {
+          hidden: { opacity: 0, y: 20 },
+          visible: { opacity: 1, y: 0, transition: { delay: index * 0.1 } },
+        };
+
+        return (
+          <motion.div
+          className="w-full"
+            key={href}
+            variants={itemVariants}
+            initial="hidden"
+            animate="visible"
+            whileHover={{ scale: 1.05 }} // تأثير عند التحويم
+            whileTap={{ scale: 0.95 }} // تأثير عند النقر
+          >
             <Link
-              key={href}
               href={href}
               onClick={onNavigate}
               className={`w-full flex items-center px-4 py-4 my-2 rounded-md transition-all 
                 ${
                   isActive
-                    ? "bg-cgreen text-white font-semibold"
-                    : "text-gray-700 hover:bg-gray-100"
+                    ? 'bg-cgreen text-white font-semibold'
+                    : 'text-gray-700 hover:bg-gray-100'
                 }`}
             >
               <Icon size={20} className="ml-2" />
               <span>{label}</span>
             </Link>
-          );
-        })}
-      </nav>
+          </motion.div>
+        );
+      })}
+    </nav>
 
       {/* تسجيل الخروج */}
       <div className="pt-4 border-t flex justify-center">
-        <button
-          onClick={handleLogout}
-          className="flex items-center justify-center gap-1 text-red-600 px-3 py-2 rounded-md hover:bg-red-50 transition-all"
-        >
-          <LogOut size={18} />
-          <span className="text-sm w-[100px] font-semibold">تسجيل الخروج</span>
-        </button>
-      </div>
+      {/* لف الزر داخل motion.button */}
+      <motion.button
+        onClick={handleLogout}
+        className="flex items-center justify-center gap-1 text-red-600 px-3 py-2 rounded-md hover:bg-red-50 transition-all"
+        whileHover={{ scale: 1.05 }} // تأثير عند التحويم
+        whileTap={{ scale: 0.95 }} // تأثير عند النقر
+        initial={{ opacity: 0, y: 20 }} // الحالة الابتدائية
+        animate={{ opacity: 1, y: 0, transition: { duration: 0.5 } }} // الحركة عند الظهور
+      >
+        <LogOut size={18} />
+        <span className="text-sm w-[100px] font-semibold">تسجيل الخروج</span>
+      </motion.button>
+    </div>
 
       {/* إشعار */}
       {notification && (
@@ -125,7 +146,7 @@ export function SidebarContent({ onNavigate }: { onNavigate?: () => void }) {
               <button
                 onClick={confirmLogout}
                 disabled={isLoading}
-                className="w-full sm:w-auto font-semibold px-6 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 transition disabled:opacity-50"
+                className="w-full hover:scale-105 sm:w-auto font-semibold px-6 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 transition disabled:opacity-50"
               >
                 {isLoading ? (
                   <span className="flex justify-center items-center gap-2">
@@ -137,7 +158,7 @@ export function SidebarContent({ onNavigate }: { onNavigate?: () => void }) {
               </button>
               <button
                 onClick={cancelLogout}
-                className="w-full sm:w-auto font-semibold px-6 py-2 border border-cgreen text-chgreen rounded-md hover:bg-green-50 transition"
+                className="w-full hover:scale-105 sm:w-auto font-semibold px-6 py-2 border border-cgreen text-chgreen rounded-md hover:bg-green-50 transition"
               >
                 إلغاء الأمر
               </button>

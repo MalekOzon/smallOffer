@@ -105,7 +105,7 @@ const AdCard: FC<AdCardProps> = ({
 
 
   return (
-    <div className="block h-64 ">
+    <div className="block h-64 hover:scale-105 transition-all duration-300">
       <div className="rounded-xl h-full border border-gray-200 bg-cwhite overflow-hidden shadow-sm hover:shadow-md transition duration-200 flex flex-col">
         {/* الصورة */}
         <div className="relative h-full ">
@@ -131,7 +131,7 @@ const AdCard: FC<AdCardProps> = ({
             >
               <Heart
                 className={clsx(
-                  "w-8 h-8 transition-colors rounded-md p-1",
+                  "w-8 h-8 transition-colors rounded-md p-1  ",
                   isFavorite == "added" 
                     ? "bg-cgreen text-white group-hover:bg-cwhite group-hover:text-cgreen"
                     : "bg-cwhite text-cgreen group-hover:bg-cgreen group-hover:text-white"

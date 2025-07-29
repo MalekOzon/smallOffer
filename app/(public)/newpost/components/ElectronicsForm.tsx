@@ -13,7 +13,7 @@ interface PostFormProps {
   Gsubcategory: string;
 }
 
-export const STATUS_CHOICES = [
+export const STATUS_CHOICES  :[string , string][]  = [
   ["new", "جديد"],
   ["used_very_good", "مستعمل جيد جداً"],
   ["working_good", "يعمل بشكل جيد"],
