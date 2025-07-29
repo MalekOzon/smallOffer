@@ -76,7 +76,6 @@ function ResetPasswordForm() {
       new_password: data.password,
     });
 
-    console.log("json:", jsonData);
     resetPassword.mutate(JSON.parse(jsonData));
   };
 

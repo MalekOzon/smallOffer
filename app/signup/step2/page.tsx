@@ -74,7 +74,6 @@ const Page = () => {
   const { emailSignupContext } = useEmail();
 
   const onSubmit: SubmitHandler<FormData> = (data) => {
-    console.log("Data: ", data);
 
     const phoneNumberWithout0: string =
       data.phoneCode +

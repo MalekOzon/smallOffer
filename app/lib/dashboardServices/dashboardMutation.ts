@@ -244,7 +244,6 @@ export function useSetUserInfo(
     },
 
     onSuccess: (data) => {
-      console.log("data: ",data)
       setNotification({
         message: data.detail,
         type: "success",

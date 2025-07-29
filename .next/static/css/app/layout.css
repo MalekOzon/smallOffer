@@ -1643,13 +1643,6 @@
       }
     }
   }
-  .group-hover\:text-cwhite {
-    &:is(:where(.group):hover *) {
-      @media (hover: hover) {
-        color: var(--color-cwhite);
-      }
-    }
-  }
   .group-hover\:text-white {
     &:is(:where(.group):hover *) {
       @media (hover: hover) {

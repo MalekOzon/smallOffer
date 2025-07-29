@@ -11,6 +11,8 @@ import { useEditGenericForm } from "@/app/lib/postServices/editPostMutation";
 import SkeletonNotificationSettings from "@/app/components/ui/SkeletonNotificationSettings";
 import Image from "next/image";
 import { useForm } from "react-hook-form";
+import { useUrl } from "@/app/lib/context/URLProvider";
+import { Search } from "lucide-react";
 
 const EditGeneric = () => {
   const {
@@ -241,13 +243,7 @@ const EditGeneric = () => {
       }
     }
 
-    console.log("📋 Gallery content ");
-    const galleryItems = form.getAll("gallery");
-    galleryItems.forEach((item, index) => {
-      if (item instanceof File) {
-        console.log(`[${index}]  ${item.name}`);
-      }
-    });
+
 
     editGenericForm.mutate({ formData: form, id });
   };
@@ -267,12 +263,30 @@ const EditGeneric = () => {
     return null;
   }
 
-  // تحديث preview لو جت بيانات موجودة كسلسلة نصية (رابط صورة من السيرفر مثلا)
   useEffect(() => {
     if (formData.cover_image && typeof formData.cover_image === "string") {
       setPreview(formData.cover_image);
     }
   }, [formData.cover_image]);
+
+
+  const { urlSaveContext } = useUrl();
+  const handlePreview = () => {
+    const data = formData;
+    const sendData = {
+      title: data.title,
+      description: data.description,
+      city: data.city,
+      cover_image: data.cover_image,
+      gallery: data.gallery,
+      hood: data.hood,
+      offer_type: data.offer_type,
+      subcategory: data.subcategory,
+    };
+    localStorage.setItem("previewData", JSON.stringify(sendData));
+  };
+
+
 
   if (isLoading) return <SkeletonNotificationSettings />;
 
@@ -634,11 +648,15 @@ const EditGeneric = () => {
             {/* زر "معاينة" */}
             <button
               type="button"
-              onClick={() => (window.location.href = "/preview")}
+              onClick={() => {
+                handlePreview(); // Execute any additional logic
+                window.open(urlSaveContext, "_blank"); // Replace with your URL
+              }}
               className="mt-8 ml-6 max-sm:ml-0 text-white rounded"
             >
               <span className="flex items-center group outline-2 outline-cgreen text-gray-800 hover:bg-chgreen hover:outline-chgreen hover:text-cwhite py-3 px-12 max-sm:px-[55px] rounded text-xl transition-all duration-300">
                 معاينة
+                <Search />
               </span>
             </button>
             {/* زر "إعادة نشر" */}

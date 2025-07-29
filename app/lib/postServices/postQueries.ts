@@ -92,7 +92,6 @@ export function useGetPublicPage(username: string , page?: number , page_size?: 
 
 //  Get Post Detail Info
 export function useGetPostDetail(category: string , id: string ) {
-  console.log("cat from qq " ,category)
   return useQuery<AdPreview, AxiosError>({
     queryKey: ["accounts/posts/", category , id],
     queryFn: () => getPostDetail(category, id ),

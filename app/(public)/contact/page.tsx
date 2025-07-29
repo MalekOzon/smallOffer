@@ -14,7 +14,6 @@ const ContactPage = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // هنا يمكن إضافة منطق إرسال النموذج
-    console.log("Form submitted:", formData);
     alert("تم إرسال رسالتك بنجاح! سنتواصل معك قريباً.");
     setFormData({ name: "", email: "", subject: "", message: "" });
   };

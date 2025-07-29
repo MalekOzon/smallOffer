@@ -1,17 +1,44 @@
 "use client";
-import { BRAND_CHOICES, COLOR_CHOICES, DOORS_CHOICES, EXTERNAL_FEATURES_CHOICES, FUEL_CHOICES, GEARBOX_CHOICES, INTERNAL_FEATURES_CHOICES, INTERNAL_MATERIALS_CHOICES, PROTECTION_CHOICES, STATUS_CHOICES, TYPE_CHOICES } from "@/app/(public)/newpost/components/CarForm";
+
+import {
+  BRAND_CHOICES,
+  COLOR_CHOICES,
+  DOORS_CHOICES,
+  EXTERNAL_FEATURES_CHOICES,
+  FUEL_CHOICES,
+  GEARBOX_CHOICES,
+  INTERNAL_FEATURES_CHOICES,
+  INTERNAL_MATERIALS_CHOICES,
+  PROTECTION_CHOICES,
+  STATUS_CHOICES,
+  TYPE_CHOICES,
+} from "@/app/(public)/newpost/components/CarForm";
+
 import Button from "@/app/components/ui/Button";
+
 import Notification from "@/app/components/ui/Notification";
+
 import SkeletonNotificationSettings from "@/app/components/ui/SkeletonNotificationSettings";
+import { useUrl } from "@/app/lib/context/URLProvider";
+
 import { useEditCarForm } from "@/app/lib/postServices/editPostMutation";
+
 import { useGetCarPostId } from "@/app/lib/postServices/postQueries";
+
 import { CarPostPayload } from "@/app/lib/postServices/postType";
+
 import { categories } from "@/app/sections/categories";
+
 import { syrianGovernorates } from "@/app/signup/step2/syrianGovernorates";
+
 import { Search } from "lucide-react";
+
 import Image from "next/image";
+
 import { useParams } from "next/navigation";
+
 import React, { useEffect, useRef, useState } from "react";
+
 import { useForm } from "react-hook-form";
 
 const EditCar = () => {
@@ -27,7 +54,6 @@ const EditCar = () => {
 
   const params = useParams();
   const id = params.id as string | undefined;
-
   const getPostDetail = useGetCarPostId(id);
   const { data, isLoading } = getPostDetail;
 
@@ -41,11 +67,9 @@ const EditCar = () => {
 
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
-
   const MAX_GALLERY_IMAGES = 7; // تماشياً مع EditGeneric، EditMobile، EditHouse، و EditElectronics
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
   const galleryInputRef = useRef<HTMLInputElement | null>(null);
-
   const [galleryFiles, setGalleryFiles] = useState<(File | string)[]>([]);
 
   // دالة للتعامل مع تغيير صورة الغلاف
@@ -221,7 +245,9 @@ const EditCar = () => {
       const newCar: CarPostPayload["car"] = { ...baseCar };
       if (type === "checkbox") {
         const checked = (e.target as HTMLInputElement).checked;
-        const arr = Array.isArray(newCar[key]) ? [...(newCar[key] as string[])] : [];
+        const arr = Array.isArray(newCar[key])
+          ? [...(newCar[key] as string[])]
+          : [];
         if (checked) {
           if (!arr.includes(value)) arr.push(value);
         } else {
@@ -230,7 +256,11 @@ const EditCar = () => {
         }
         (newCar[key] as unknown) = arr;
       } else if (type === "number") {
-        if (key === "mileage" || key === "first_registration" || key === "performance") {
+        if (
+          key === "mileage" ||
+          key === "first_registration" ||
+          key === "performance"
+        ) {
           (newCar[key] as unknown) = value === "" ? 0 : Number(value);
         } else {
           (newCar[key] as unknown) = value;
@@ -256,7 +286,6 @@ const EditCar = () => {
       setNotification({ message: "معرف الإعلان غير صالح.", type: "error" });
       return;
     }
-
     const data = formData;
     const form = new FormData();
     form.append("offer_type", data.offer_type ?? "sell");
@@ -270,8 +299,13 @@ const EditCar = () => {
     form.append("subcategory", data.subcategory ?? "");
     form.append("detailed_location", data.detailed_location ?? "");
 
-    if (data.cover_image instanceof File) {
-      form.append("cover_image", data.cover_image);
+    if (data.cover_image) {
+      if (data.cover_image instanceof File) {
+        form.append("cover_image", data.cover_image);
+      } else if (typeof data.cover_image === "string") {
+        const file = await convertURLtoFile(data.cover_image);
+        form.append("cover_image", file);
+      }
     }
 
     for (const img of galleryFiles) {
@@ -282,14 +316,6 @@ const EditCar = () => {
         form.append("gallery", file);
       }
     }
-
-    console.log("📋 Gallery content ");
-    const galleryItems = form.getAll("gallery");
-    galleryItems.forEach((item, index) => {
-      if (item instanceof File) {
-        console.log(`[${index}]  ${item.name}`);
-      }
-    });
 
     const carDetails = {
       fuel_type: data.car?.fuel_type,
@@ -308,7 +334,9 @@ const EditCar = () => {
         : [],
       status: data.car?.status,
       number_of_doors: data.car?.number_of_doors,
-      protection: Array.isArray(data.car?.protection) ? data.car?.protection : [],
+      protection: Array.isArray(data.car?.protection)
+        ? data.car?.protection
+        : [],
       gearbox: data.car?.gearbox,
       environmental_sticker: data.car?.environmental_sticker,
       internal_features: Array.isArray(data.car?.internal_features)
@@ -328,8 +356,8 @@ const EditCar = () => {
         }
       }
     });
-    form.append("car_details", JSON.stringify(cleanCarDetails));
 
+    form.append("car_details", JSON.stringify(cleanCarDetails));
     editCarForm.mutate({ formData: form, id });
   };
 
@@ -346,6 +374,23 @@ const EditCar = () => {
     }
     return null;
   }
+
+  const { urlSaveContext } = useUrl();
+  const handlePreview = () => {
+    const data = formData;
+    const sendData = {
+      title: data.title,
+      description: data.description,
+      city: data.city,
+      cover_image: data.cover_image,
+      gallery: data.gallery,
+      hood: data.hood,
+      offer_type: data.offer_type,
+      subcategory: data.subcategory,
+      car: data.car
+    };
+    localStorage.setItem("previewData", JSON.stringify(sendData));
+  };
 
   if (isLoading) return <SkeletonNotificationSettings />;
 
@@ -366,7 +411,10 @@ const EditCar = () => {
           </h1>
           <p className="text-gray-600 flex justify-start max-sm:block">
             بنشرك تعديلاتك فإنك توافق على{" "}
-            <a href="#" className="text-cgreen underline hover:text-chgreen mx-1">
+            <a
+              href="#"
+              className="text-cgreen underline hover:text-chgreen mx-1"
+            >
               سياسة النشر
             </a>{" "}
             الخاصة بـ small-offer
@@ -441,12 +489,10 @@ const EditCar = () => {
               </Button>
             </div>
           </div>
-          
-        <span className="text-lg max-sm:text-sm border p-2 bg-cgreen text-cwhite rounded-md">
-          ملاحظة: يوجد زر معاينة المنشور في الأسفل
-        </span>
+          <span className="text-lg max-sm:text-sm border p-2 bg-cgreen text-cwhite rounded-md">
+            ملاحظة: يوجد زر معاينة المنشور في الأسفل
+          </span>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-6">
-
             <div className="sm:ml-16">
               <label className="block font-medium text-gray-700 mb-2">
                 صورة غلاف المنتج
@@ -491,7 +537,6 @@ const EditCar = () => {
                 {galleryFiles.map((img, index) => {
                   const previewUrl =
                     img instanceof File ? URL.createObjectURL(img) : img;
-
                   return (
                     <div
                       key={index}
@@ -548,7 +593,7 @@ const EditCar = () => {
             </div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-          <div className="sm:ml-16">
+            <div className="sm:ml-16">
               <label className="block font-medium text-gray-700">
                 اسم المنتج <span className="text-red-500 text-xl mr-1">*</span>
               </label>
@@ -983,7 +1028,10 @@ const EditCar = () => {
                       type="checkbox"
                       value={value}
                       name="car.protection"
-                      checked={Array.isArray(formData.car?.protection) && formData.car.protection.includes(value)}
+                      checked={
+                        Array.isArray(formData.car?.protection) &&
+                        formData.car.protection.includes(value)
+                      }
                       onChange={handleCarInputChange}
                     />
                     {label}
@@ -1006,7 +1054,10 @@ const EditCar = () => {
                       type="checkbox"
                       value={value}
                       name="car.external_features"
-                      checked={Array.isArray(formData.car?.external_features) && formData.car.external_features.includes(value)}
+                      checked={
+                        Array.isArray(formData.car?.external_features) &&
+                        formData.car.external_features.includes(value)
+                      }
                       onChange={handleCarInputChange}
                     />
                     {label}
@@ -1029,7 +1080,10 @@ const EditCar = () => {
                       type="checkbox"
                       value={value}
                       name="car.internal_features"
-                      checked={Array.isArray(formData.car?.internal_features) && formData.car.internal_features.includes(value)}
+                      checked={
+                        Array.isArray(formData.car?.internal_features) &&
+                        formData.car.internal_features.includes(value)
+                      }
                       onChange={handleCarInputChange}
                     />
                     {label}
@@ -1040,9 +1094,12 @@ const EditCar = () => {
           </div>
           <hr className="mt-6 mb-3 text-clightgray" />
           <div className="flex justify-end max-sm:flex-col max-sm:justify-center max-sm:items-center max-sm:gap-4 mb-5">
-            <button
+          <button
               type="button"
-              onClick={() => (window.location.href = "/preview")}
+              onClick={() => {
+                handlePreview(); // Execute any additional logic
+                window.open(urlSaveContext, "_blank"); // Replace with your URL
+              }}
               className="mt-8 ml-6 max-sm:ml-0 text-white rounded"
             >
               <span className="flex items-center group outline-2 outline-cgreen text-gray-800 hover:bg-chgreen hover:outline-chgreen hover:text-cwhite py-3 px-12 max-sm:px-[55px] rounded text-xl transition-all duration-300">

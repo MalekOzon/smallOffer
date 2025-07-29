@@ -57,7 +57,6 @@ const ChangePasswordPage = () => {
       old_password: data.currentPassword,
       new_password: data.newPassword,
     });
-    console.log("json: ", jsonData);
     ChangePasswordDash.mutate(JSON.parse(jsonData));
   };
 

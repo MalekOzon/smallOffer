@@ -59,7 +59,6 @@ export default function SettingsPage() {
 
   useEffect(() => {
     if (isSuccess && data) {
-      console.log("✅ done", data);
       setSpecialMessages(Boolean(data.receive_private_messages));
       setActivityNotifications(Boolean(data.receive_activity_notifications));
       setOffersUpdates(Boolean(data.receive_offers));
@@ -78,7 +77,6 @@ export default function SettingsPage() {
       receive_activity_notifications: activityNotifications,
       receive_offers: offersUpdates,
     });
-    console.log("json: ", jsonData);
     EmailNotificationsDash.mutate(JSON.parse(jsonData));
   };
   // ------------------------------------------------------------------------------------------------------------------
@@ -108,7 +106,6 @@ export default function SettingsPage() {
       email: data.email,
       message: data.message
     });
-    console.log("json: ", jsonData);
     feedbackEmail.mutate(JSON.parse(jsonData));
   };
 
@@ -125,7 +122,6 @@ export default function SettingsPage() {
     const jsonData = JSON.stringify({
       password: passwordOnDelete,
     });
-    console.log("json: ", jsonData);
     deleteAccount.mutate(JSON.parse(jsonData));
   };
 

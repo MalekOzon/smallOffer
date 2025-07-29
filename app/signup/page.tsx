@@ -69,7 +69,6 @@ export default function ContactForm() {
       password: data.password,
       is_company: isCompany,
     });
-    console.log("json:", jsonData);
     createUserFirstMutation.mutate(JSON.parse(jsonData));
   };
 

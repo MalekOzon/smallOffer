@@ -18,9 +18,7 @@ export function useCreatePost(setNotification: NotificationSetter) {
     onError: (error: unknown) => {
       console.log("خطا في انشاء اعلان جديد", error);
       if (axios.isAxiosError(error)) {
-        console.log("Response status:", error.response?.status);
-        console.log("Response data:", error.response?.data);
-        console.log("Response headers:", error.response?.headers);
+
         
         const detail = error.response?.data?.detail;
         const errors = error.response?.data?.errors;
@@ -28,7 +26,6 @@ export function useCreatePost(setNotification: NotificationSetter) {
         if (!messages.length) {
           messages = extractMessages(error.response?.data || {});
         }
-        console.log("messages: ", messages);
         const fallbackMessage = detail || "حدث خطأ غير معروف.";
         const finalMessage = messages.length ? messages.join("\n") : fallbackMessage;
         setNotification({
@@ -64,9 +61,7 @@ export function useCreateCarPost(setNotification: NotificationSetter) {
     onError: (error: unknown) => {
       console.log("خطا في انشاء اعلان سيارة", error);
       if (axios.isAxiosError(error)) {
-        console.log("Response status:", error.response?.status);
-        console.log("Response data:", error.response?.data);
-        console.log("Response headers:", error.response?.headers);
+
         
         const detail = error.response?.data?.detail;
         const errors = error.response?.data?.errors;
@@ -74,7 +69,6 @@ export function useCreateCarPost(setNotification: NotificationSetter) {
         if (!messages.length) {
           messages = extractMessages(error.response?.data || {});
         }
-        console.log("messages: ", messages);
         const fallbackMessage = detail || "حدث خطأ غير معروف.";
         const finalMessage = messages.length ? messages.join("\n") : fallbackMessage;
         setNotification({
@@ -111,17 +105,13 @@ export function useCreateElectronicsPost(setNotification: NotificationSetter) {
     onError: (error: unknown) => {
       console.log("جاري إنشاء إعلان إلكترونيات جديد...");
       if (axios.isAxiosError(error)) {
-        console.log("Response status:", error.response?.status);
-        console.log("Response data:", error.response?.data);
-        console.log("Response headers:", error.response?.headers);
-        
+
         const detail = error.response?.data?.detail;
         const errors = error.response?.data?.errors;
         let messages = errors ? extractMessages(errors) : [];
         if (!messages.length) {
           messages = extractMessages(error.response?.data || {});
         }
-        console.log("messages: ", messages);
         const fallbackMessage = detail || "حدث خطأ غير معروف.";
         const finalMessage = messages.length ? messages.join("\n") : fallbackMessage;
         setNotification({
@@ -158,9 +148,7 @@ export function useCreateHousePost(setNotification: NotificationSetter) {
     onError: (error: unknown) => {
       console.log("خطا في انشاء اعلان منزل", error);
       if (axios.isAxiosError(error)) {
-        console.log("Response status:", error.response?.status);
-        console.log("Response data:", error.response?.data);
-        console.log("Response headers:", error.response?.headers);
+
         
         const detail = error.response?.data?.detail;
         const errors = error.response?.data?.errors;
@@ -168,7 +156,6 @@ export function useCreateHousePost(setNotification: NotificationSetter) {
         if (!messages.length) {
           messages = extractMessages(error.response?.data || {});
         }
-        console.log("messages: ", messages);
         const fallbackMessage = detail || "حدث خطأ غير معروف.";
         const finalMessage = messages.length ? messages.join("\n") : fallbackMessage;
         setNotification({
@@ -205,9 +192,7 @@ export function useCreateLandPost(setNotification: NotificationSetter) {
     onError: (error: unknown) => {
       console.log("خطا في انشاء اعلان أرض", error);
       if (axios.isAxiosError(error)) {
-        console.log("Response status:", error.response?.status);
-        console.log("Response data:", error.response?.data);
-        console.log("Response headers:", error.response?.headers);
+
         
         const detail = error.response?.data?.detail;
         const errors = error.response?.data?.errors;
@@ -215,7 +200,6 @@ export function useCreateLandPost(setNotification: NotificationSetter) {
         if (!messages.length) {
           messages = extractMessages(error.response?.data || {});
         }
-        console.log("messages: ", messages);
         const fallbackMessage = detail || "حدث خطأ غير معروف.";
         const finalMessage = messages.length ? messages.join("\n") : fallbackMessage;
         setNotification({
@@ -253,9 +237,7 @@ export function useCreateApartmentPost(setNotification: NotificationSetter) {
     onError: (error: unknown) => {
       console.log("خطا في انشاء اعلان شقة", error);
       if (axios.isAxiosError(error)) {
-        console.log("Response status:", error.response?.status);
-        console.log("Response data:", error.response?.data);
-        console.log("Response headers:", error.response?.headers);
+
         
         const detail = error.response?.data?.detail;
         const errors = error.response?.data?.errors;
@@ -263,7 +245,6 @@ export function useCreateApartmentPost(setNotification: NotificationSetter) {
         if (!messages.length) {
           messages = extractMessages(error.response?.data || {});
         }
-        console.log("messages: ", messages);
         const fallbackMessage = detail || "حدث خطأ غير معروف.";
         const finalMessage = messages.length ? messages.join("\n") : fallbackMessage;
         setNotification({
@@ -301,9 +282,7 @@ export function useCreateMobilePost(setNotification: NotificationSetter) {
     onError: (error: unknown) => {
       console.log("خطا في انشاء اعلان موبايل", error);
       if (axios.isAxiosError(error)) {
-        console.log("Response status:", error.response?.status);
-        console.log("Response data:", error.response?.data);
-        console.log("Response headers:", error.response?.headers);
+
         
         const detail = error.response?.data?.detail;
         const errors = error.response?.data?.errors;
@@ -311,7 +290,6 @@ export function useCreateMobilePost(setNotification: NotificationSetter) {
         if (!messages.length) {
           messages = extractMessages(error.response?.data || {});
         }
-        console.log("messages: ", messages);
         const fallbackMessage = detail || "حدث خطأ غير معروف.";
         const finalMessage = messages.length ? messages.join("\n") : fallbackMessage;
         setNotification({
@@ -348,9 +326,7 @@ export function useCreateReport(setNotification: NotificationSetter) {
     onError: (error: unknown) => {
       console.log("خطا ف ي الابلاغ", error);
       if (axios.isAxiosError(error)) {
-        console.log("Response status:", error.response?.status);
-        console.log("Response data:", error.response?.data);
-        console.log("Response headers:", error.response?.headers);
+
         
         const detail = error.response?.data?.detail;
         const errors = error.response?.data?.errors;
@@ -358,7 +334,6 @@ export function useCreateReport(setNotification: NotificationSetter) {
         if (!messages.length) {
           messages = extractMessages(error.response?.data || {});
         }
-        console.log("messages: ", messages);
         const fallbackMessage = detail || "حدث خطأ غير معروف.";
         const finalMessage = messages.length ? messages.join("\n") : fallbackMessage;
         setNotification({
@@ -396,9 +371,7 @@ export function useCreateRate(setNotification: NotificationSetter) {
     onError: (error: unknown) => {
       console.log("خطا ف ي rate", error);
       if (axios.isAxiosError(error)) {
-        console.log("Response status:", error.response?.status);
-        console.log("Response data:", error.response?.data);
-        console.log("Response headers:", error.response?.headers);
+
         
         const detail = error.response?.data?.detail;
         const errors = error.response?.data?.errors;
@@ -406,7 +379,6 @@ export function useCreateRate(setNotification: NotificationSetter) {
         if (!messages.length) {
           messages = extractMessages(error.response?.data || {});
         }
-        console.log("messages: ", messages);
         const fallbackMessage = detail || "حدث خطأ غير معروف.";
         const finalMessage = messages.length ? messages.join("\n") : fallbackMessage;
         setNotification({

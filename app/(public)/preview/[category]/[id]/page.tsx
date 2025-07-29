@@ -76,8 +76,6 @@ export default function PostPreviewPage() {
     cat = "outdoor-space";
   }
 
-  console.log("id  ", id);
-  console.log("cat  ", cat);
 
   const { data, isLoading, error } = useGetPostDetail(cat, id);
   const [isFavorite, setIsFavorite] = useState<string | undefined>(undefined);

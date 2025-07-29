@@ -58,7 +58,6 @@ export default function VerificationForm() {
       email: emailSignupContext,
       code: codeDigitsToString.split(",").join(""),
     });
-    console.log("json:", jsonData);
     validateUserFirstMutation.mutate(JSON.parse(jsonData));
   };
 
@@ -89,7 +88,6 @@ export default function VerificationForm() {
     const jsonData = JSON.stringify({
       email: emailSignupContext,
     });
-    console.log("jsonRESEND:", jsonData);
     ResendEmailCode.mutate(JSON.parse(jsonData));
   };
 

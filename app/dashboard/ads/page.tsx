@@ -5,16 +5,29 @@ import AdCard from '@/app/components/ui/AdCard';
 import SkeletonNotificationSettings from '@/app/components/ui/SkeletonNotificationSettings';
 import { useGetUserPosts } from '@/app/lib/dashboardServices/dashboardQueries';
 import { Ad } from '@/app/types/authTypes';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import  placeholderPost  from "../../../public/resourses/placeholderPost.svg"
+
+
 const AdsPage = () => {
+
+  useEffect(() => {
+    // منع التكرار عند التحديث المستمر
+    const hasReloaded = sessionStorage.getItem('hasReloaded');
+
+    if (!hasReloaded) {
+      sessionStorage.setItem('hasReloaded', 'true');
+      window.location.reload();
+    }
+  }, []);
+
+
   const [page, setPage] = useState(1);
   const pageSize = 8;
   const { data, isLoading, isFetching } = useGetUserPosts(page,pageSize);
-  console.log("DATA::   ",data)
+
   
   const totalPages = data ? Math.ceil(data.count / pageSize) : 1;
-  console.log("totalPages:" ,  data)
   if (isLoading) return <SkeletonNotificationSettings />;
 
   return (

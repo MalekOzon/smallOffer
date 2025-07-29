@@ -17,6 +17,7 @@ import {
 import Image from "next/image";
 import { Search } from "lucide-react";
 import { useForm } from "react-hook-form";
+import { useUrl } from "@/app/lib/context/URLProvider";
 
 const EditApartment = () => {
   const {
@@ -298,14 +299,6 @@ const EditApartment = () => {
       }
     }
 
-    console.log("📋 Gallery content ");
-    const galleryItems = form.getAll("gallery");
-    galleryItems.forEach((item, index) => {
-      if (item instanceof File) {
-        console.log(`[${index}]  ${item.name}`);
-      }
-    });
-
     const apartmentDetails = {
       real_estate_space: data.apartment?.real_estate_space,
       available_from: data.apartment?.available_from,
@@ -350,6 +343,25 @@ const EditApartment = () => {
     return null;
   }
 
+  
+  
+  const { urlSaveContext } = useUrl();
+  const handlePreview = () => {
+    const data = formData;
+    const sendData = {
+      title: data.title,
+      description: data.description,
+      city: data.city,
+      cover_image: data.cover_image,
+      gallery: data.gallery,
+      hood: data.hood,
+      offer_type: data.offer_type,
+      subcategory: data.subcategory,
+      apartment: data.apartment
+    };
+    localStorage.setItem("previewData", JSON.stringify(sendData));
+  };
+
   if (isLoading) return <SkeletonNotificationSettings />;
 
   return (
@@ -369,7 +381,10 @@ const EditApartment = () => {
           </h1>
           <p className="text-gray-600 flex justify-start max-sm:block">
             بنشرك تعديلاتك فإنك توافق على{" "}
-            <a href="#" className="text-cgreen underline hover:text-chgreen mx-1">
+            <a
+              href="#"
+              className="text-cgreen underline hover:text-chgreen mx-1"
+            >
               سياسة النشر
             </a>{" "}
             الخاصة بـ small-offer
@@ -444,11 +459,10 @@ const EditApartment = () => {
             </div>
           </div>
           <span className="text-lg max-sm:text-sm border p-2 bg-cgreen text-cwhite rounded-md">
-          ملاحظة: يوجد زر معاينة المنشور في الأسفل
-        </span>
+            ملاحظة: يوجد زر معاينة المنشور في الأسفل
+          </span>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-6">
-
             <div className="sm:ml-16">
               <label className="block font-medium text-gray-700 mb-2">
                 صورة غلاف المنتج
@@ -550,7 +564,7 @@ const EditApartment = () => {
             </div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-          <div className="sm:ml-16">
+            <div className="sm:ml-16">
               <label className="block font-medium text-gray-700">
                 اسم المنتج <span className="text-red-500 text-xl mr-1">*</span>
               </label>
@@ -866,7 +880,10 @@ const EditApartment = () => {
           <div className="flex justify-end max-sm:flex-col max-sm:justify-center max-sm:items-center max-sm:gap-4 mb-5">
             <button
               type="button"
-              onClick={() => (window.location.href = "/preview")}
+              onClick={() => {
+                handlePreview(); // Execute any additional logic
+                window.open(urlSaveContext, "_blank"); // Replace with your URL
+              }}
               className="mt-8 ml-6 max-sm:ml-0 text-white rounded"
             >
               <span className="flex items-center group outline-2 outline-cgreen text-gray-800 hover:bg-chgreen hover:outline-chgreen hover:text-cwhite py-3 px-12 max-sm:px-[55px] rounded text-xl transition-all duration-300">

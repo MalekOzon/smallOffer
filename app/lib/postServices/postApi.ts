@@ -277,11 +277,9 @@ export const getPostDetail = async (
   category: string,
   id: string,
 ) => {
-  console.log("cata= ",category)
   const res = await axiosInstance.get<AdPreview>(
     `accounts/posts/${category}/${id}/`
   );
-  console.log("resrrrr " ,res.data)
   return res.data;
 };
 

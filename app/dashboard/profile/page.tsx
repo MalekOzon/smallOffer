@@ -332,10 +332,7 @@ const EditProfilePage = () => {
         detailed_location: data.detailed_location || "",
         profile_image: data.profile_image || "",
       });
-      console.log("Reset values:", {
-        phoneCode: codeFromApi,
-        city: data.city,
-      });
+;
     }
   }, [data, reset]);
 

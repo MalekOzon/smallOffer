@@ -149,8 +149,9 @@ export type AdPreview = {
   hood?: string; // اختياري
   detailed_location?: string; // اختياري
   status?: 'accepted' | 'pending' | 'declined'; // اختياري
-  cover_image: string;
+  cover_image: string | File;
   category: string;
+  gallery?: (File | string)[];
   subcategory?: string;
   user_first_name?: string;
   user_last_name?: string;

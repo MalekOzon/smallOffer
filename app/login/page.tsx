@@ -38,12 +38,10 @@ export default function LoginPage() {
 
 
   const onSubmit: SubmitHandler<FormData> = (data) => {
-    console.log("data: ", data);
     const jsonData = JSON.stringify({
       identifier: data.identifier,
       password: data.password,
     });
-    console.log("json:", jsonData);
     loginUser.mutate(JSON.parse(jsonData));
   };
 

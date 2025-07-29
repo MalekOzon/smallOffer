@@ -258,9 +258,7 @@ export function useLogin(
 
         const messages = errors ? extractMessages(errors) : [];
 
-        console.log("detail: ", detail);
-        console.log("errors: ", errors);
-        console.log("messages: ", messages);
+
         
         const fallbackMessage = detail || "حدث خطأ غير معروف.";
         const finalMessage = messages.length
@@ -282,8 +280,7 @@ export function useLogin(
     onSuccess: (data) => {
       localStorage.setItem("accessToken", data.access);
       localStorage.setItem("refreshToken", data.refresh);
-      console.log("refresh: ", data.refresh);
-      console.log("access: ", data.access);
+
       setNotification({
         message: data.detail,
         type: "success",

@@ -1,17 +1,26 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { extractMessages } from "../loginservices/mutations";
-import { editApartmentForm, editCarForm, editElectronicsForm, editGenericForm, editHouseForm, editMobileForm, editOutdoor_spaceForm } from "./postApi";
+import {
+  editApartmentForm,
+  editCarForm,
+  editElectronicsForm,
+  editGenericForm,
+  editHouseForm,
+  editMobileForm,
+  editOutdoor_spaceForm,
+} from "./postApi";
 import { NotificationSetter } from "./postMutations";
-
-
+import { useRouter } from "next/navigation";
 
 // فورم خاص Generic
 export function useEditGenericForm(setNotification: NotificationSetter) {
   const queryClient = useQueryClient();
+  const router = useRouter(); // إنشاء مثيل للراوتر
 
   return useMutation({
-    mutationFn: ({ formData, id }: { formData: FormData; id: string }) => editGenericForm(formData, id),
+    mutationFn: ({ formData, id }: { formData: FormData; id: string }) =>
+      editGenericForm(formData, id),
 
     onMutate: () => {
       console.log("جاري تعديل إعلان  ...");
@@ -19,9 +28,7 @@ export function useEditGenericForm(setNotification: NotificationSetter) {
     onError: (error: unknown) => {
       console.log("خطا في تعديل اعلان ", error);
       if (axios.isAxiosError(error)) {
-        console.log("Response status:", error.response?.status);
-        console.log("Response data:", error.response?.data);
-        console.log("Response headers:", error.response?.headers);
+
 
         const detail = error.response?.data?.detail;
         const errors = error.response?.data?.errors;
@@ -29,9 +36,10 @@ export function useEditGenericForm(setNotification: NotificationSetter) {
         if (!messages.length) {
           messages = extractMessages(error.response?.data || {});
         }
-        console.log("messages: ", messages);
         const fallbackMessage = detail || "حدث خطأ غير معروف.";
-        const finalMessage = messages.length ? messages.join("\n") : fallbackMessage;
+        const finalMessage = messages.length
+          ? messages.join("\n")
+          : fallbackMessage;
         setNotification({
           message: finalMessage,
           type: "error",
@@ -45,9 +53,14 @@ export function useEditGenericForm(setNotification: NotificationSetter) {
     },
     onSuccess: (data) => {
       setNotification({ message: data.detail, type: "success" });
+      setTimeout(() => {
+        router.push("/dashboard/ads");
+      }, 2000);
     },
     onSettled: (variables) => {
-      queryClient.invalidateQueries({ queryKey: ["accounts/posts/generic/" + variables.id] });
+      queryClient.invalidateQueries({
+        queryKey: ["accounts/posts/generic/" + variables.id],
+      });
     },
   });
 }
@@ -55,19 +68,18 @@ export function useEditGenericForm(setNotification: NotificationSetter) {
 // فورم خاص CAr
 export function useEditCarForm(setNotification: NotificationSetter) {
   const queryClient = useQueryClient();
+  const router = useRouter(); // إنشاء مثيل للراوتر
 
   return useMutation({
-    mutationFn: ({ formData, id }: { formData: FormData; id: string }) => editCarForm(formData, id),
+    mutationFn: ({ formData, id }: { formData: FormData; id: string }) =>
+      editCarForm(formData, id),
 
     onMutate: () => {
       console.log("جاري تعديل إعلان  ...");
     },
     onError: (error: unknown) => {
-      console.log("خطا في تعديل اعلان ", error);
       if (axios.isAxiosError(error)) {
-        console.log("Response status:", error.response?.status);
-        console.log("Response data:", error.response?.data);
-        console.log("Response headers:", error.response?.headers);
+
 
         const detail = error.response?.data?.detail;
         const errors = error.response?.data?.errors;
@@ -75,9 +87,10 @@ export function useEditCarForm(setNotification: NotificationSetter) {
         if (!messages.length) {
           messages = extractMessages(error.response?.data || {});
         }
-        console.log("messages: ", messages);
         const fallbackMessage = detail || "حدث خطأ غير معروف.";
-        const finalMessage = messages.length ? messages.join("\n") : fallbackMessage;
+        const finalMessage = messages.length
+          ? messages.join("\n")
+          : fallbackMessage;
         setNotification({
           message: finalMessage,
           type: "error",
@@ -91,9 +104,14 @@ export function useEditCarForm(setNotification: NotificationSetter) {
     },
     onSuccess: (data) => {
       setNotification({ message: data.detail, type: "success" });
+      setTimeout(() => {
+        router.push("/dashboard/ads");
+      }, 2000);
     },
     onSettled: (variables) => {
-      queryClient.invalidateQueries({ queryKey: ["accounts/posts/cars/" + variables.id] });
+      queryClient.invalidateQueries({
+        queryKey: ["accounts/posts/cars/" + variables.id],
+      });
     },
   });
 }
@@ -101,9 +119,11 @@ export function useEditCarForm(setNotification: NotificationSetter) {
 // فورم خاص House
 export function useEditHouseForm(setNotification: NotificationSetter) {
   const queryClient = useQueryClient();
+  const router = useRouter(); // إنشاء مثيل للراوتر
 
   return useMutation({
-    mutationFn: ({ formData, id }: { formData: FormData; id: string }) => editHouseForm(formData, id),
+    mutationFn: ({ formData, id }: { formData: FormData; id: string }) =>
+      editHouseForm(formData, id),
 
     onMutate: () => {
       console.log("جاري تعديل إعلان  ...");
@@ -111,9 +131,7 @@ export function useEditHouseForm(setNotification: NotificationSetter) {
     onError: (error: unknown) => {
       console.log("خطا في تعديل اعلان ", error);
       if (axios.isAxiosError(error)) {
-        console.log("Response status:", error.response?.status);
-        console.log("Response data:", error.response?.data);
-        console.log("Response headers:", error.response?.headers);
+
 
         const detail = error.response?.data?.detail;
         const errors = error.response?.data?.errors;
@@ -121,9 +139,10 @@ export function useEditHouseForm(setNotification: NotificationSetter) {
         if (!messages.length) {
           messages = extractMessages(error.response?.data || {});
         }
-        console.log("messages: ", messages);
         const fallbackMessage = detail || "حدث خطأ غير معروف.";
-        const finalMessage = messages.length ? messages.join("\n") : fallbackMessage;
+        const finalMessage = messages.length
+          ? messages.join("\n")
+          : fallbackMessage;
         setNotification({
           message: finalMessage,
           type: "error",
@@ -137,20 +156,26 @@ export function useEditHouseForm(setNotification: NotificationSetter) {
     },
     onSuccess: (data) => {
       setNotification({ message: data.detail, type: "success" });
+      setTimeout(() => {
+        router.push("/dashboard/ads");
+      }, 2000);
     },
     onSettled: (variables) => {
-      queryClient.invalidateQueries({ queryKey: ["accounts/posts/house/" + variables.id] });
+      queryClient.invalidateQueries({
+        queryKey: ["accounts/posts/house/" + variables.id],
+      });
     },
   });
 }
 
-
 // فورم خاص Apartment
 export function useEditApartmentForm(setNotification: NotificationSetter) {
   const queryClient = useQueryClient();
+  const router = useRouter(); // إنشاء مثيل للراوتر
 
   return useMutation({
-    mutationFn: ({ formData, id }: { formData: FormData; id: string }) => editApartmentForm(formData, id),
+    mutationFn: ({ formData, id }: { formData: FormData; id: string }) =>
+      editApartmentForm(formData, id),
 
     onMutate: () => {
       console.log("جاري تعديل إعلان  ...");
@@ -158,9 +183,7 @@ export function useEditApartmentForm(setNotification: NotificationSetter) {
     onError: (error: unknown) => {
       console.log("خطا في تعديل اعلان ", error);
       if (axios.isAxiosError(error)) {
-        console.log("Response status:", error.response?.status);
-        console.log("Response data:", error.response?.data);
-        console.log("Response headers:", error.response?.headers);
+
 
         const detail = error.response?.data?.detail;
         const errors = error.response?.data?.errors;
@@ -168,9 +191,10 @@ export function useEditApartmentForm(setNotification: NotificationSetter) {
         if (!messages.length) {
           messages = extractMessages(error.response?.data || {});
         }
-        console.log("messages: ", messages);
         const fallbackMessage = detail || "حدث خطأ غير معروف.";
-        const finalMessage = messages.length ? messages.join("\n") : fallbackMessage;
+        const finalMessage = messages.length
+          ? messages.join("\n")
+          : fallbackMessage;
         setNotification({
           message: finalMessage,
           type: "error",
@@ -184,9 +208,14 @@ export function useEditApartmentForm(setNotification: NotificationSetter) {
     },
     onSuccess: (data) => {
       setNotification({ message: data.detail, type: "success" });
+      setTimeout(() => {
+        router.push("/dashboard/ads");
+      }, 2000);
     },
     onSettled: (variables) => {
-      queryClient.invalidateQueries({ queryKey: ["accounts/posts/apartment/" + variables.id] });
+      queryClient.invalidateQueries({
+        queryKey: ["accounts/posts/apartment/" + variables.id],
+      });
     },
   });
 }
@@ -194,9 +223,11 @@ export function useEditApartmentForm(setNotification: NotificationSetter) {
 // فورم خاص Mobile
 export function useEditMobileForm(setNotification: NotificationSetter) {
   const queryClient = useQueryClient();
+  const router = useRouter(); // إنشاء مثيل للراوتر
 
   return useMutation({
-    mutationFn: ({ formData, id }: { formData: FormData; id: string }) => editMobileForm(formData, id),
+    mutationFn: ({ formData, id }: { formData: FormData; id: string }) =>
+      editMobileForm(formData, id),
 
     onMutate: () => {
       console.log("جاري تعديل إعلان  ...");
@@ -204,9 +235,7 @@ export function useEditMobileForm(setNotification: NotificationSetter) {
     onError: (error: unknown) => {
       console.log("خطا في تعديل اعلان ", error);
       if (axios.isAxiosError(error)) {
-        console.log("Response status:", error.response?.status);
-        console.log("Response data:", error.response?.data);
-        console.log("Response headers:", error.response?.headers);
+
 
         const detail = error.response?.data?.detail;
         const errors = error.response?.data?.errors;
@@ -214,9 +243,10 @@ export function useEditMobileForm(setNotification: NotificationSetter) {
         if (!messages.length) {
           messages = extractMessages(error.response?.data || {});
         }
-        console.log("messages: ", messages);
         const fallbackMessage = detail || "حدث خطأ غير معروف.";
-        const finalMessage = messages.length ? messages.join("\n") : fallbackMessage;
+        const finalMessage = messages.length
+          ? messages.join("\n")
+          : fallbackMessage;
         setNotification({
           message: finalMessage,
           type: "error",
@@ -230,9 +260,14 @@ export function useEditMobileForm(setNotification: NotificationSetter) {
     },
     onSuccess: (data) => {
       setNotification({ message: data.detail, type: "success" });
+      setTimeout(() => {
+        router.push("/dashboard/ads");
+      }, 2000);
     },
     onSettled: (variables) => {
-      queryClient.invalidateQueries({ queryKey: ["accounts/posts/mobile/" + variables.id] });
+      queryClient.invalidateQueries({
+        queryKey: ["accounts/posts/mobile/" + variables.id],
+      });
     },
   });
 }
@@ -240,9 +275,11 @@ export function useEditMobileForm(setNotification: NotificationSetter) {
 // فورم خاص Outdoor_space
 export function useEditOutdoor_spaceForm(setNotification: NotificationSetter) {
   const queryClient = useQueryClient();
+  const router = useRouter(); // إنشاء مثيل للراوتر
 
   return useMutation({
-    mutationFn: ({ formData, id }: { formData: FormData; id: string }) => editOutdoor_spaceForm(formData, id),
+    mutationFn: ({ formData, id }: { formData: FormData; id: string }) =>
+      editOutdoor_spaceForm(formData, id),
 
     onMutate: () => {
       console.log("جاري تعديل إعلان  ...");
@@ -250,9 +287,7 @@ export function useEditOutdoor_spaceForm(setNotification: NotificationSetter) {
     onError: (error: unknown) => {
       console.log("خطا في تعديل اعلان ", error);
       if (axios.isAxiosError(error)) {
-        console.log("Response status:", error.response?.status);
-        console.log("Response data:", error.response?.data);
-        console.log("Response headers:", error.response?.headers);
+
 
         const detail = error.response?.data?.detail;
         const errors = error.response?.data?.errors;
@@ -260,9 +295,10 @@ export function useEditOutdoor_spaceForm(setNotification: NotificationSetter) {
         if (!messages.length) {
           messages = extractMessages(error.response?.data || {});
         }
-        console.log("messages: ", messages);
         const fallbackMessage = detail || "حدث خطأ غير معروف.";
-        const finalMessage = messages.length ? messages.join("\n") : fallbackMessage;
+        const finalMessage = messages.length
+          ? messages.join("\n")
+          : fallbackMessage;
         setNotification({
           message: finalMessage,
           type: "error",
@@ -276,9 +312,14 @@ export function useEditOutdoor_spaceForm(setNotification: NotificationSetter) {
     },
     onSuccess: (data) => {
       setNotification({ message: data.detail, type: "success" });
+      setTimeout(() => {
+        router.push("/dashboard/ads");
+      }, 2000);
     },
     onSettled: (variables) => {
-      queryClient.invalidateQueries({ queryKey: ["accounts/posts/outdoor-space/" + variables.id] });
+      queryClient.invalidateQueries({
+        queryKey: ["accounts/posts/outdoor-space/" + variables.id],
+      });
     },
   });
 }
@@ -286,9 +327,11 @@ export function useEditOutdoor_spaceForm(setNotification: NotificationSetter) {
 // فورم خاص Electronics
 export function useEditElectronicForm(setNotification: NotificationSetter) {
   const queryClient = useQueryClient();
+  const router = useRouter(); // إنشاء مثيل للراوتر
 
   return useMutation({
-    mutationFn: ({ formData, id }: { formData: FormData; id: string }) => editElectronicsForm(formData, id),
+    mutationFn: ({ formData, id }: { formData: FormData; id: string }) =>
+      editElectronicsForm(formData, id),
 
     onMutate: () => {
       console.log("جاري تعديل إعلان  ...");
@@ -296,9 +339,7 @@ export function useEditElectronicForm(setNotification: NotificationSetter) {
     onError: (error: unknown) => {
       console.log("خطا في تعديل اعلان ", error);
       if (axios.isAxiosError(error)) {
-        console.log("Response status:", error.response?.status);
-        console.log("Response data:", error.response?.data);
-        console.log("Response headers:", error.response?.headers);
+
 
         const detail = error.response?.data?.detail;
         const errors = error.response?.data?.errors;
@@ -306,9 +347,10 @@ export function useEditElectronicForm(setNotification: NotificationSetter) {
         if (!messages.length) {
           messages = extractMessages(error.response?.data || {});
         }
-        console.log("messages: ", messages);
         const fallbackMessage = detail || "حدث خطأ غير معروف.";
-        const finalMessage = messages.length ? messages.join("\n") : fallbackMessage;
+        const finalMessage = messages.length
+          ? messages.join("\n")
+          : fallbackMessage;
         setNotification({
           message: finalMessage,
           type: "error",
@@ -322,10 +364,14 @@ export function useEditElectronicForm(setNotification: NotificationSetter) {
     },
     onSuccess: (data) => {
       setNotification({ message: data.detail, type: "success" });
+      setTimeout(() => {
+        router.push("/dashboard/ads");
+      }, 2000);
     },
     onSettled: (variables) => {
-      queryClient.invalidateQueries({ queryKey: ["accounts/posts/electronics/" + variables.id] });
+      queryClient.invalidateQueries({
+        queryKey: ["accounts/posts/electronics/" + variables.id],
+      });
     },
   });
 }
-

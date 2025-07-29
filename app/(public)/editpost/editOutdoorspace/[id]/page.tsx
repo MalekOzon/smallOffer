@@ -15,6 +15,8 @@ import {
 } from "@/app/(public)/newpost/components/LandForm";
 import Image from "next/image";
 import { useForm } from "react-hook-form";
+import { Search } from "lucide-react";
+import { useUrl } from "@/app/lib/context/URLProvider";
 
 const EditOutdoorspace = () => {
   const {
@@ -270,13 +272,6 @@ const EditOutdoorspace = () => {
       }
     }
 
-    console.log("📋 Gallery content ");
-    const galleryItems = form.getAll("gallery");
-    galleryItems.forEach((item, index) => {
-      if (item instanceof File) {
-        console.log(`[${index}]  ${item.name}`);
-      }
-    });
 
     // Outdoorspace details
     const outdoorspaceDetails = {
@@ -302,6 +297,24 @@ const EditOutdoorspace = () => {
     }
     return null;
   }
+
+
+  const { urlSaveContext } = useUrl();
+  const handlePreview = () => {
+    const data = formData;
+    const sendData = {
+      title: data.title,
+      description: data.description,
+      city: data.city,
+      cover_image: data.cover_image,
+      gallery: data.gallery,
+      hood: data.hood,
+      offer_type: data.offer_type,
+      subcategory: data.subcategory,
+      outdoorspace: data.outdoorspace
+    };
+    localStorage.setItem("previewData", JSON.stringify(sendData));
+  };
 
   if (isLoading) return <SkeletonNotificationSettings />;
 
@@ -726,11 +739,15 @@ const EditOutdoorspace = () => {
             {/* زر "معاينة" */}
             <button
               type="button"
-              onClick={() => (window.location.href = "/preview")}
+              onClick={() => {
+                handlePreview(); // Execute any additional logic
+                window.open(urlSaveContext, "_blank"); // Replace with your URL
+              }}
               className="mt-8 ml-6 max-sm:ml-0 text-white rounded"
             >
               <span className="flex items-center group outline-2 outline-cgreen text-gray-800 hover:bg-chgreen hover:outline-chgreen hover:text-cwhite py-3 px-12 max-sm:px-[55px] rounded text-xl transition-all duration-300">
                 معاينة
+                <Search />
               </span>
             </button>
             {/* زر "تعديل" */}

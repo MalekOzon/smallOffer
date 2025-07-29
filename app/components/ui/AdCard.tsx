@@ -77,7 +77,6 @@ const AdCard: FC<AdCardProps> = ({
     ) {
       return `/editpost/editElectronics/${id}`;
     } else if (subcat === "mobiles") {
-      console.log("why ", subcat);
       return `/editpost/editMobile/${id}`;
     } else if (subcat === "apartments") {
       return `/editpost/editApartment/${id}`;
@@ -94,7 +93,6 @@ const AdCard: FC<AdCardProps> = ({
       {
         onSuccess: (res) => {
           setIsFavorite( res.status );
-          console.log("res= ", res.status ) 
         },
         onError: () => {
           console.error("فشل في تحديث المفضلة");

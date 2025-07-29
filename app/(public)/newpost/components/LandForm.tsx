@@ -7,6 +7,7 @@ import { useEffect, useRef, useState } from "react";
 import { Search } from "lucide-react";
 import Button from "@/app/components/ui/Button";
 import Image from "next/image";
+import { useUrl } from "@/app/lib/context/URLProvider";
 
 interface PostFormProps {
   Gcategory: string;
@@ -29,6 +30,7 @@ export default function LandForm({ Gcategory, Gsubcategory }: PostFormProps) {
     watch,
     register,
     handleSubmit,
+    getValues,
     setValue,
     formState: { errors },
   } = useForm<LandPostPayload>({});
@@ -141,7 +143,6 @@ export default function LandForm({ Gcategory, Gsubcategory }: PostFormProps) {
   const [isSearch, setIsSearch] = useState<boolean | undefined>(false);
 
   const onSubmit = (data: LandPostPayload) => {
-    console.log("daTA: ", data);
     const formData = new FormData();
 
     formData.append("offer_type", data.offer_type ?? "sell");
@@ -183,6 +184,33 @@ export default function LandForm({ Gcategory, Gsubcategory }: PostFormProps) {
 
     createLandPost.mutate(formData);
   };
+
+  const { urlSaveContext } = useUrl();
+const handlePreview = () => {
+  const data = getValues();
+  const previewCover =
+    data.cover_image instanceof File
+      ? URL.createObjectURL(data.cover_image)
+      : data.cover_image;
+  const previewGallery =
+    data.gallery?.map((img) =>
+      img instanceof File ? URL.createObjectURL(img) : img
+    ) || [];
+  const sendData = {
+    title: data.title,
+    description: data.description,
+    city: data.city,
+    cover_image: previewCover,
+    gallery: previewGallery,
+    hood: data.hood,
+    offer_type: data.offer_type,
+    price : data.price,
+
+    subcategory: Gsubcategory, // بما أن هذا قادم من props
+    outdoorspace: data.outdoorspace
+  };
+  localStorage.setItem("previewData", JSON.stringify(sendData));
+};
 
   return (
     <form
@@ -567,15 +595,18 @@ export default function LandForm({ Gcategory, Gsubcategory }: PostFormProps) {
         <div className="flex justify-end max-sm:flex-col max-sm:justify-center max-sm:items-center max-sm:gap-4 mb-5">
           {/* زر "معاينة" */}
           <button
-            type="button" // تغيير إلى button لمنع إرسال النموذج
-            onClick={() => (window.location.href = "/perview")}
-            className="mt-8 ml-6 max-sm:ml-0 text-white rounded"
-          >
-            <span className="flex items-center group outline-2 outline-cgreen text-gray-800 hover:bg-chgreen hover:outline-chgreen hover:text-cwhite py-3 px-12 max-sm:px-[55px] rounded text-xl transition-all duration-300">
-              <Search className="ml-1 text-cgreen group-hover:text-cwhite" />{" "}
-              معاينة
-            </span>
-          </button>
+              type="button"
+              onClick={() => {
+                handlePreview(); // Execute any additional logic
+                window.open(urlSaveContext, "_blank"); // Replace with your URL
+              }}
+              className="mt-8 ml-6 max-sm:ml-0 text-white rounded"
+            >
+              <span className="flex items-center group outline-2 outline-cgreen text-gray-800 hover:bg-chgreen hover:outline-chgreen hover:text-cwhite py-3 px-12 max-sm:px-[55px] rounded text-xl transition-all duration-300">
+                معاينة
+                <Search />
+              </span>
+            </button>
 
           {/* زر "نشر" */}
           <button

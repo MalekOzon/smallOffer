@@ -39,7 +39,6 @@ export default function ForgetPage() {
     const jsonData = JSON.stringify({
       email: data.email,
     });
-    console.log("json:", jsonData);
     createForgetPassword.mutate(JSON.parse(jsonData));
   };
 
@@ -50,7 +49,6 @@ export default function ForgetPage() {
     const jsonData = JSON.stringify({
       email: emailSignupContext,
     });
-    console.log("json URL:", jsonData);
     ResendEmailCode.mutate(JSON.parse(jsonData));
   };
 
