@@ -199,7 +199,6 @@ const handlePreview = () => {
     cover_image: previewCover,
     gallery: previewGallery,
     price : data.price,
-
     hood: data.hood,
     offer_type: data.offer_type,
     subcategory: Gsubcategory, // بما أن هذا قادم من props
