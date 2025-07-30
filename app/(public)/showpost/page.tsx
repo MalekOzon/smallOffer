@@ -1,5 +1,4 @@
 "use client";
-import ImageGallery from "./ImageGalleryShow";
 import Link from "next/link";
 import {
   BRAND_CHOICES,
@@ -22,6 +21,7 @@ import { HOUSE_CHOICES } from "@/app/(public)/newpost/components/HouseForm";
 import { Eye, Heart, Share2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { AdPreview } from "@/app/lib/postServices/postType";
+import ImageGalleryShow from "./ImageGalleryShow";
 
 export default function ShowPost() {
   const [data, setData] = useState<AdPreview>();
@@ -199,7 +199,7 @@ const allImages = [
   return (
     <main className=" gap-6 p-4  ">
       <div className="grid md:grid-cols-2  ">
-        <ImageGallery images={allImages} />
+        <ImageGalleryShow images={allImages} />
         <div className="space-y-4 max-w-[90%] max-sm:max-w-full   mt-10">
           <div className="flex justify-between max-lg:flex-col">
             <h1 className="text-3xl font-bold ">{data.title}</h1>

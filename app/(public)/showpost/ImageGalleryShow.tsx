@@ -6,13 +6,13 @@ interface ImageGalleryProps {
   images: { id: number; image: string }[];
 }
 
-export default function ImageGallery({ images }: ImageGalleryProps) {
+export default function ImageGalleryShow({ images }: ImageGalleryProps) {
   const [selected, setSelected] = useState(0);
 
   return (
     <div className="  flex flex-col gap-4 items-center shadow-md ml-4 ">
 
-    <div className="h-[70vh] max-md:h-[50vh] w-[90%] max-sm:w-full ">
+    <div className="h-[75vh] max-md:h-[50vh] w-[90%] max-sm:w-full ">
       <Image
         src={images[selected].image}
         alt={`صورة الإعلان ${selected + 1}`}

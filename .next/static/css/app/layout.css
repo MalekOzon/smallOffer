@@ -601,6 +601,9 @@
   .h-\[70vh\] {
     height: 70vh;
   }
+  .h-\[75vh\] {
+    height: 75vh;
+  }
   .h-\[85vh\] {
     height: 85vh;
   }
@@ -2196,9 +2199,19 @@
       display: none;
     }
   }
+  .max-md\:h-\[5vh\] {
+    @media (width < 48rem) {
+      height: 5vh;
+    }
+  }
   .max-md\:h-\[50vh\] {
     @media (width < 48rem) {
       height: 50vh;
+    }
+  }
+  .max-md\:h-\[55vh\] {
+    @media (width < 48rem) {
+      height: 55vh;
     }
   }
   .max-md\:w-\[350px\] {

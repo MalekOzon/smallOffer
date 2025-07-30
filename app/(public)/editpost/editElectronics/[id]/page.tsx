@@ -284,7 +284,7 @@ const EditElectronics = () => {
       description: data.description,
       city: data.city,
       cover_image: data.cover_image,
-      gallery: data.gallery,
+      gallery: galleryFiles.map((img) => (img instanceof File ? URL.createObjectURL(img) : img)),
       hood: data.hood,
       offer_type: data.offer_type,
       subcategory: data.subcategory,
