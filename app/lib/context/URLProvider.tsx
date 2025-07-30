@@ -10,7 +10,7 @@ interface UrlContextType {
 const UrlContext = createContext<UrlContextType | undefined>(undefined);
 
 export function UrlProvider({ children }: { children: React.ReactNode }) {
-  const [urlSaveContext, setUrlState] = useState<string>('http://localhost:3000/showpost');
+  const [urlSaveContext, setUrlState] = useState<string>('https://small-offer.vercel.app/showpost');
 
   // جلب البريد من localStorage عند التحميل الأولي
   useEffect(() => {
