@@ -1,7 +1,4 @@
 {
-  "/(public)/page": "app/(public)/page.js",
-  "/(public)/newpost/page": "app/(public)/newpost/page.js",
-  "/(public)/showpost/page": "app/(public)/showpost/page.js",
-  "/(public)/editpost/editCar/[id]/page": "app/(public)/editpost/editCar/[id]/page.js",
-  "/(public)/editpost/editMobile/[id]/page": "app/(public)/editpost/editMobile/[id]/page.js"
+  "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/(public)/page": "app/(public)/page.js"
 }

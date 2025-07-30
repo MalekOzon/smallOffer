@@ -2199,19 +2199,9 @@
       display: none;
     }
   }
-  .max-md\:h-\[5vh\] {
-    @media (width < 48rem) {
-      height: 5vh;
-    }
-  }
   .max-md\:h-\[50vh\] {
     @media (width < 48rem) {
       height: 50vh;
-    }
-  }
-  .max-md\:h-\[55vh\] {
-    @media (width < 48rem) {
-      height: 55vh;
     }
   }
   .max-md\:w-\[350px\] {
@@ -2774,11 +2764,6 @@
   .xl\:grid-cols-4 {
     @media (width >= 80rem) {
       grid-template-columns: repeat(4, minmax(0, 1fr));
-    }
-  }
-  .xl\:grid-cols-5 {
-    @media (width >= 80rem) {
-      grid-template-columns: repeat(5, minmax(0, 1fr));
     }
   }
   .xl\:flex-row {
