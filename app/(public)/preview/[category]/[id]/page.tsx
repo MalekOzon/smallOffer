@@ -113,10 +113,19 @@ export default function PostPreviewPage() {
   if (error) return <div>خطأ: {error.message}</div>;
   if (!data) return notFound();
 
-  const allImages = [
-    { id: 0, image: data.cover_image },
-    ...(data.gallery_images || []),
-  ];
+  const coverImageUrl =
+  typeof data.cover_image === "object" && data.cover_image instanceof File
+    ? URL.createObjectURL(data.cover_image)
+    : data.cover_image || ""; // Fallback to empty string if undefined
+
+const allImages = [
+  { id: 0, image: coverImageUrl },
+  ...(data.gallery?.map((img, index) => ({
+    id: index + 1,
+    image: typeof img === "object" && img instanceof File ? URL.createObjectURL(img) : img,
+  })) || []),
+];
+
 
   function translateBrand(brand: string): string {
     const brandMap = new Map(BRAND_CHOICES);
