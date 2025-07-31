@@ -40,10 +40,10 @@ const AdsPage = () => {
           <p className="text-gray-500 ">يمكنك إضافة منشور جديد من خلال الضغط على زر نشر جديد</p>
         </div>
       )}
-      {totalPages > 0 && 
+      {totalPages > 0 && !isLoading && 
       <div className="h-full px-4 pt-2 bg-gray-50 rounded-md max-sm:mt-2">
         <div className="grid gap-4 grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
-          {data?.results.map((ad: Ad) => (
+          {!isLoading && data?.results.map((ad: Ad) => (
             <AdCard
               key={ad.id}
               title={ad.title}
@@ -54,7 +54,7 @@ const AdsPage = () => {
               isFav={false}
               imageUrl={ad.cover_image ?? placeholderPost }
               id={ad.id}
-              subcat={ad.subcategory ?? ""}
+              subcat={ad.subcategory }
               offer_type={ad.offer_type}
               fav={ad.fav}
             />

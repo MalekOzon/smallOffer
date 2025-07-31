@@ -26,6 +26,7 @@ import { Eye, Heart, Share2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useAddPostFav } from "@/app/lib/dashboardServices/dashboardMutation";
 import clsx from "clsx";
+import SkeletonNotificationSettings from "@/app/components/ui/SkeletonNotificationSettings";
 
 export default function PostPreviewPage() {
   const params = useParams();
@@ -76,7 +77,6 @@ export default function PostPreviewPage() {
     cat = "outdoor-space";
   }
 
-
   const { data, isLoading, error } = useGetPostDetail(cat, id);
   const [isFavorite, setIsFavorite] = useState<string | undefined>(undefined);
 
@@ -85,12 +85,12 @@ export default function PostPreviewPage() {
       setIsFavorite(data.fav); // "added" أو "removed"
     }
   }, [data?.fav]);
-  
+
   const addPostFavMutation = useAddPostFav();
-  
+
   function handleFavClick() {
     if (!id) return;
-  
+
     addPostFavMutation.mutate(
       { post_id: Number(id) },
       {
@@ -106,25 +106,33 @@ export default function PostPreviewPage() {
       }
     );
   }
-  
 
   // التعامل مع حالات التحميل والأخطاء
-  if (isLoading) return <div>جاري التحميل...</div>;
+  if (isLoading)
+    return (
+      <div>
+        <SkeletonNotificationSettings />{" "}
+      </div>
+    );
   if (error) return <div>خطأ: {error.message}</div>;
   if (!data) return notFound();
 
-  const coverImageUrl =
-  typeof data.cover_image === "object" && data.cover_image instanceof File
-    ? URL.createObjectURL(data.cover_image)
-    : data.cover_image || ""; // Fallback to empty string if undefined
+  console.log("gallery raw", data.gallery);
 
-const allImages = [
-  { id: 0, image: coverImageUrl },
-  ...(data.gallery?.map((img, index) => ({
-    id: index + 1,
-    image: typeof img === "object" && img instanceof File ? URL.createObjectURL(img) : img,
-  })) || []),
-];
+  const coverImageUrl =
+    typeof data.cover_image === "object" && data.cover_image instanceof File
+      ? URL.createObjectURL(data.cover_image)
+      : data.cover_image || ""; // Fallback to empty string if undefined
+
+  const allImages = [
+    { id: 0, image: coverImageUrl },
+    ...(Array.isArray(data.gallery_images)
+      ? data.gallery_images.map((img, index) => ({
+          id: img.id ?? index + 1,
+          image: typeof img.image === "string" ? img.image : "",
+        }))
+      : []),
+  ];
 
 
   function translateBrand(brand: string): string {
@@ -235,10 +243,6 @@ const allImages = [
     return colorMap.get(brand) || brand;
   }
 
-  
-
-
-
   return (
     <main className=" gap-6 p-4  ">
       <div className="grid md:grid-cols-2  ">
@@ -247,19 +251,19 @@ const allImages = [
           <div className="flex justify-between max-lg:flex-col">
             <h1 className="text-3xl font-bold ">{data.title}</h1>
             <div className="flex gap-2 justify-center items-center max-lg:justify-end max-lg:mt-3">
-            <button
-              onClick={handleFavClick}
-              className={` rounded-md  group `}
-            >
-              <Heart
-                className={clsx(
-                  "h-[44px] w-9 transition-colors rounded-md p-1 max-sm:mt-2",
-                  isFavorite == "added" 
-                    ? "bg-cgreen text-white group-hover:bg-green-100 group-hover:text-cgreen"
-                    : "bg-green-100 text-cgreen group-hover:bg-cgreen group-hover:text-white"
-                )}
-              />
-            </button>
+              <button
+                onClick={handleFavClick}
+                className={` rounded-md  group `}
+              >
+                <Heart
+                  className={clsx(
+                    "h-[44px] w-9 transition-colors rounded-md p-1 max-sm:mt-2",
+                    isFavorite == "added"
+                      ? "bg-cgreen text-white group-hover:bg-green-100 group-hover:text-cgreen"
+                      : "bg-green-100 text-cgreen group-hover:bg-cgreen group-hover:text-white"
+                  )}
+                />
+              </button>
               <div
                 onClick={handleCopy}
                 className="cursor-pointer h-[44px] bg-green-100 text-cgreen flex gap-2 rounded-md p-2 text-lg w-[40px] max-sm:mt-2 hover:bg-green-200"

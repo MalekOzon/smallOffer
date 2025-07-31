@@ -140,8 +140,8 @@ const AdCard: FC<AdCardProps> = ({
         </div>
 
         {/* المحتوى */}
-        <Link href={`/previewpost/${id}`}>
-          <div className="p-3 flex flex-col justify-between gap-2 flex-grow">
+        <Link href={`/preview/${subcat}/${id}`}>
+        <div className="p-3 flex flex-col justify-between gap-2 flex-grow">
             <div className="flex justify-between items-center">
               <h3 className="text-sm font-bold truncate">
                 {offer_type === "search" && (

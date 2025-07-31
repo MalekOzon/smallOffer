@@ -113,7 +113,7 @@ export type Ad = {
   price: string;
   status: 'accepted' | 'pending' | 'declined';
   cover_image: string;
-  subcategory?: string;
+  subcategory: string;
   user_first_name?: string;
   user_last_name?: string;
   user_city?: string;

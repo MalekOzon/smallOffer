@@ -54,7 +54,7 @@ export default function DashboardHomePage() {
         )}
         {!isLoading && (
         <div className="max-sm:my-4 max-sm:w-[90%] max-sm:mx-4 grid gap-4 grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
-          {data?.results.slice(0, 4).map((ad: Ad) => (
+          {!isLoading && data!.results && data?.results.slice(0, 4).map((ad: Ad) => (
             <AdCard
             key={ad.id}
             title={ad.title}
@@ -65,7 +65,7 @@ export default function DashboardHomePage() {
             isFav={false}
             imageUrl={ad.cover_image ?? placeholderPost }
             id={ad.id}
-            subcat={ad.subcategory ?? ""}
+            subcat={ad.subcategory}
             offer_type={ad.offer_type}
             fav={ad.fav}
           />

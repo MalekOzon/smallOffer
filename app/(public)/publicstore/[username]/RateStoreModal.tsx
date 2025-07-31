@@ -1,6 +1,9 @@
 "use client";
 import React, { useState } from "react";
-import { NotificationSetter, useCreateRate } from "@/app/lib/postServices/postMutations";
+import {
+  NotificationSetter,
+  useCreateRate,
+} from "@/app/lib/postServices/postMutations";
 
 interface RateStoreModalProps {
   isOpen: boolean;
@@ -17,7 +20,12 @@ const rateOptions = [
   { score: 1, label: "سيء جدًا - تجربة سيئة ولا أنصح به" },
 ];
 
-const RateStoreModal = ({ isOpen, onClose, username, setNotification }: RateStoreModalProps) => {
+const RateStoreModal = ({
+  isOpen,
+  onClose,
+  username,
+  setNotification,
+}: RateStoreModalProps) => {
   const [selectedScore, setSelectedScore] = useState<number | null>(null);
   const mutation = useCreateRate(setNotification);
 
@@ -33,15 +41,21 @@ const RateStoreModal = ({ isOpen, onClose, username, setNotification }: RateStor
   return (
     <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
       <div className="bg-white w-full max-w-md md:max-w-2xl rounded-xl shadow-lg p-6 relative">
-
-        <h2 className="text-2xl font-bold text-center mb-2">تقييم هذا المتجر</h2>
+        <h2 className="text-2xl font-bold text-center mb-2">
+          تقييم هذا المتجر
+        </h2>
         <p className="text-gray-600 text-center mb-6 leading-relaxed">
-          شكرا لاستخدامك منصتنا! نرجو منك تقييم تجربتك مع البائع، فملاحظاتك تساعد الآخرين في اتخاذ قراراتهم وتُساهم في تحسين جودة المتاجر على منصتنا.
+          شكرا لاستخدامك منصتنا! نرجو منك تقييم تجربتك مع البائع، فملاحظاتك
+          تساعد الآخرين في اتخاذ قراراتهم وتُساهم في تحسين جودة المتاجر على
+          منصتنا.
         </p>
 
         <div className="space-y-3 mb-6">
           {rateOptions.map(({ score, label }) => (
-            <label key={score} className="flex items-center gap-2 cursor-pointer text-gray-700 mb-6">
+            <label
+              key={score}
+              className="flex items-center gap-2 cursor-pointer text-gray-700 mb-6"
+            >
               <input
                 type="radio"
                 name="rate"
@@ -51,7 +65,6 @@ const RateStoreModal = ({ isOpen, onClose, username, setNotification }: RateStor
                 className="accent-cgreen"
               />
               <span className="flex items-center gap-2">
-                <span>{label}</span>
                 <span className="flex gap-0.5">
                   {Array.from({ length: 5 }).map((_, i) => (
                     <svg
@@ -66,6 +79,7 @@ const RateStoreModal = ({ isOpen, onClose, username, setNotification }: RateStor
                     </svg>
                   ))}
                 </span>
+                <span>{label}</span>
               </span>
             </label>
           ))}
