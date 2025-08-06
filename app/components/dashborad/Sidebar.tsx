@@ -1,7 +1,7 @@
 "use client";
 import { motion } from "framer-motion"
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import {
   Home,
   List,
@@ -11,10 +11,7 @@ import {
   Settings,
   LogOut,
 } from "lucide-react";
-import Image from "next/image";
 import { useState } from "react";
-import alertCircle from "../../../public/resourses/alert-circle.svg";
-import { useLogout } from "@/app/lib/loginservices/mutations";
 import Notification from "../ui/Notification";
 
 const navItems = [
@@ -28,28 +25,13 @@ const navItems = [
 
 export function SidebarContent({ onNavigate }: { onNavigate?: () => void }) {
   const pathname = usePathname();
-  const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
   const [notification, setNotification] = useState<{
     message: string;
     type: "success" | "error";
   } | null>(null);
-
-  const logout = useLogout(setNotification);
-  const { isPending: isLoading } = logout;
-
-  const handleLogout = () => setShowLogoutConfirm(true);
-  const cancelLogout = () => setShowLogoutConfirm(false);
-
-  const confirmLogout = () => {
-    setShowLogoutConfirm(false);
-    const refreshToken = localStorage.getItem("refreshToken");
-    const jsonData = JSON.stringify({ refresh: refreshToken });
-    logout.mutate(JSON.parse(jsonData), {
-      onSuccess: () => {
-        window.location.href = "/";
-      },
-    });
-  };
+  
+  
+  const router = useRouter()
 
   return (
     <div className="w-full h-full bg-white  flex flex-col justify-between px-4 py-6">
@@ -103,15 +85,15 @@ export function SidebarContent({ onNavigate }: { onNavigate?: () => void }) {
       <div className="pt-4 border-t flex justify-center">
       {/* لف الزر داخل motion.button */}
       <motion.button
-        onClick={handleLogout}
-        className="flex items-center justify-center gap-1 text-red-600 px-3 py-2 rounded-md hover:bg-red-50 transition-all"
+        onClick={() => router.push('/')}
+        className="flex items-center justify-center gap-1 text-cgreen px-3 py-2 rounded-md hover:bg-chgreen hover:text-cwhite transition-all"
         whileHover={{ scale: 1.05 }} // تأثير عند التحويم
         whileTap={{ scale: 0.95 }} // تأثير عند النقر
         initial={{ opacity: 0, y: 20 }} // الحالة الابتدائية
         animate={{ opacity: 1, y: 0, transition: { duration: 0.5 } }} // الحركة عند الظهور
       >
         <LogOut size={18} />
-        <span className="text-sm w-[100px] font-semibold">تسجيل الخروج</span>
+        <span className="text-sm w-[100px] font-semibold">عودة للرئيسية</span>
       </motion.button>
     </div>
 
@@ -123,49 +105,7 @@ export function SidebarContent({ onNavigate }: { onNavigate?: () => void }) {
           onClose={() => setNotification(null)}
         />
       )}
-      {/* تأكيد تسجيل الخروج */}
-      {showLogoutConfirm && (
-        <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
-          <div className="bg-white w-full max-w-md sm:max-w-lg mx-4 p-6 sm:p-8 rounded-lg shadow-lg text-center">
-            <div className="flex justify-center mb-4">
-              <div className="w-16 h-16 sm:w-20 sm:h-20 bg-red-400 rounded-full flex items-center justify-center">
-                <Image
-                  src={alertCircle}
-                  alt="alertCircle"
-                  className="w-10 sm:w-12"
-                />
-              </div>
-            </div>
-            <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-2">
-              تسجيل الخروج
-            </h3>
-            <p className="text-gray-600 mb-6 text-sm sm:text-base">
-              هل أنت متأكد من تسجيل الخروج؟
-            </p>
-            <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
-              <button
-                onClick={confirmLogout}
-                disabled={isLoading}
-                className="w-full hover:scale-105 sm:w-auto font-semibold px-6 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 transition disabled:opacity-50"
-              >
-                {isLoading ? (
-                  <span className="flex justify-center items-center gap-2">
-                    جاري المعالجة...
-                  </span>
-                ) : (
-                  "تسجيل الخروج"
-                )}
-              </button>
-              <button
-                onClick={cancelLogout}
-                className="w-full hover:scale-105 sm:w-auto font-semibold px-6 py-2 border border-cgreen text-chgreen rounded-md hover:bg-green-50 transition"
-              >
-                إلغاء الأمر
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+
     </div>
   );
 }

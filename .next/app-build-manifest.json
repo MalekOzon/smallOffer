@@ -26,6 +26,26 @@
       "static/chunks/main-app.js",
       "static/chunks/app/login/page.js"
     ],
+    "/_not-found/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/_not-found/page.js"
+    ],
+    "/(public)/terms/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/(public)/terms/page.js"
+    ],
+    "/(public)/privacy/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/(public)/privacy/page.js"
+    ],
+    "/(public)/preview/[category]/[id]/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/(public)/preview/[category]/[id]/page.js"
+    ],
     "/dashboard/layout": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
@@ -36,50 +56,30 @@
       "static/chunks/main-app.js",
       "static/chunks/app/dashboard/page.js"
     ],
-    "/(public)/preview/[category]/[id]/page": [
+    "/(public)/editpost/editCar/[id]/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/(public)/preview/[category]/[id]/page.js"
+      "static/chunks/app/(public)/editpost/editCar/[id]/page.js"
     ],
     "/dashboard/ads/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/dashboard/ads/page.js"
     ],
-    "/_not-found/page": [
+    "/(public)/searchpost/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/_not-found/page.js"
+      "static/chunks/app/(public)/searchpost/page.js"
     ],
-    "/(public)/publicstore/[username]/page": [
+    "/dashboard/settings/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/(public)/publicstore/[username]/page.js"
-    ],
-    "/(public)/editpost/editCar/[id]/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/(public)/editpost/editCar/[id]/page.js"
-    ],
-    "/(public)/editpost/editMobile/[id]/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/(public)/editpost/editMobile/[id]/page.js"
+      "static/chunks/app/dashboard/settings/page.js"
     ],
     "/(public)/newpost/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/(public)/newpost/page.js"
-    ],
-    "/(public)/showpost/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/(public)/showpost/page.js"
-    ],
-    "/dashboard/favorites/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/dashboard/favorites/page.js"
     ]
   }
 }

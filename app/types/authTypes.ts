@@ -119,6 +119,7 @@ export type Ad = {
   user_city?: string;
   user_profile_image?: string;
   username?: string;
+  created_at? :string,
   fav: "added" | "removed"
 };
 

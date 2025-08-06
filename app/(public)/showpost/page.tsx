@@ -296,6 +296,11 @@ const allImages = [
                 <strong>اللون:</strong> {translateColor(data.car.color)}
               </li>
             )}
+            {data.car.model && (
+              <li className="my-3 text-lg">
+                <strong>الموديل:</strong> {(data.car.model)}
+              </li>
+            )}
             {data.car.car_type && (
               <li className="my-3 text-lg">
                 <strong>النوع:</strong>{" "}

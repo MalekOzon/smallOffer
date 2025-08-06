@@ -348,6 +348,18 @@ export default function PostPreviewPage() {
                 {translateBrand(data.car.brand)}
               </li>
             )}
+            {data.car.first_registration && (
+              <li className="my-3 text-lg">
+                <strong>تاريخ التسجيل الأول:</strong>
+                {data.car.first_registration}
+              </li>
+            )}
+            {data.car.model && (
+              <li className="my-3 text-lg">
+                <strong>الموديل:</strong>{" "}
+                {(data.car.model)}
+              </li>
+            )}
             {data.car.color && (
               <li className="my-3 text-lg">
                 <strong>اللون:</strong> {translateColor(data.car.color)}

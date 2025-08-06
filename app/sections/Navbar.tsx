@@ -20,6 +20,7 @@ import userAvatar from "../../public/resourses/userAvatar.svg";
 import { useGetUserInfo } from "../lib/dashboardServices/dashboardQueries";
 import { categories } from "./categories";
 import { easeInOut, motion } from "framer-motion";
+import { useRouter, useSearchParams } from "next/navigation";
 
 const Navbar = () => {
   const [isMobile, setIsMobile] = useState(false);
@@ -40,12 +41,32 @@ const Navbar = () => {
 
   const isLoggedIn = getUserInfo.data?.username;
 
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  // تهيئة searchText من sessionStorage أو searchParams
+  const [searchText, setSearchText] = useState(() => {
+    const savedSearch = sessionStorage.getItem("searchText");
+    const urlSearch = searchParams.get("search");
+    return urlSearch || savedSearch || "";
+  });
+
+  // حفظ searchText في sessionStorage عند التغيير
+  useEffect(() => {
+    if (searchText.trim()) {
+      sessionStorage.setItem("searchText", searchText);
+    } else {
+      sessionStorage.removeItem("searchText");
+    }
+  }, [searchText]);
+
   const confirmLogout = () => {
     setShowLogoutConfirm(false);
     const refreshToken = localStorage.getItem("refreshToken");
     const jsonData = JSON.stringify({ refresh: refreshToken });
     logout.mutate(JSON.parse(jsonData), {
       onSuccess: () => {
+        sessionStorage.removeItem("searchText"); // إزالة searchText عند تسجيل الخروج
         window.location.href = "/";
       },
     });
@@ -65,7 +86,6 @@ const Navbar = () => {
   // إعادة حساب مواقع القوائم المنسدلة عند تغيير حجم الشاشة
   useEffect(() => {
     const handleResize = () => {
-      // إجبار إعادة التصيير لتحديث مواقع القوائم المنسدلة
       setShowMenu(false);
     };
     window.addEventListener("resize", handleResize);
@@ -138,20 +158,26 @@ const Navbar = () => {
     rowConfig.first + rowConfig.second
   );
 
+  const handleSearch = () => {
+    if (searchText.trim()) {
+      router.push(`/searchpost?search=${encodeURIComponent(searchText)}`);
+    }
+  };
+
   const sidebarVariants = {
-    hidden: { x: '-100%' },
+    hidden: { x: "-100%" },
     visible: {
       x: 0,
       transition: {
         duration: 0.3,
-        ease: easeInOut, // ✅ لا تستخدم string
-        when: 'beforeChildren',
+        ease: easeInOut,
+        when: "beforeChildren",
         staggerChildren: 0.08,
         delayChildren: 0.2,
       },
     },
     exit: {
-      x: '-100%',
+      x: "-100%",
       transition: {
         duration: 0.3,
         ease: easeInOut,
@@ -169,7 +195,7 @@ const Navbar = () => {
       {/* Header */}
       <header className="bg-white shadow-sm w-full relative">
         {/* موبايل: خط أول */}
-        <div className="flex items-center justify-between p-2  md:hidden">
+        <div className="flex items-center justify-between p-2 md:hidden">
           {/* جزء المستخدم أو زر تسجيل الدخول */}
           <div
             className="flex items-center gap-2 relative md:hidden"
@@ -181,7 +207,7 @@ const Navbar = () => {
                   className="flex items-center cursor-pointer select-none"
                   onClick={() => setShowMenu((prev) => !prev)}
                 >
-                  <ChevronDown className="text-cdarkgray " />
+                  <ChevronDown className="text-cdarkgray" />
                   <span className="font-bold text-cdarkgray text-6 mr-1">
                     {getUserInfo.data?.username}
                   </span>
@@ -193,20 +219,19 @@ const Navbar = () => {
                         alt="User Avatar"
                         width={120}
                         height={120}
-                        className="object-cover  w-full h-full"
+                        className="object-cover w-full h-full"
                       />
                     ) : (
                       <Image
-                        src={userAvatar} // صورة افتراضية تحفظها داخل public/
+                        src={userAvatar}
                         alt="Default Avatar"
                         width={96}
                         height={96}
-                        className="object-cover "
+                        className="object-cover"
                       />
                     )}
                   </div>
                 </div>
-                {/* القائمة المنسدلة للموبايل */}
                 {showMenu && (
                   <div className="absolute top-full right-0 mt-2 w-56 bg-white border border-gray-200 rounded-md shadow-lg z-50">
                     <ul className="text-sm text-gray-700">
@@ -268,34 +293,40 @@ const Navbar = () => {
               </Link>
             )}
           </div>
-          {/* زر القلب */}
           <Link
             href="/dashboard/favorites"
             className="text-cdarkgray max-sm:ml-16"
           >
             <Heart />
           </Link>
-          {/* اللوغو */}
           <Link href="/" className="text-2xl font-bold text-cgreen">
             Small Offer
           </Link>
         </div>
         {/* موبايل: خط ثاني */}
         <div className="flex items-center justify-between px-4 pb-2 md:hidden">
-          {/* زر البحث */}
           <div className="flex-1">
             <div className="relative w-full">
               <input
                 type="text"
-                placeholder="اكتب هنا"
+                placeholder="ابحث هنا"
+                value={searchText}
+                onChange={(e) => setSearchText(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    handleSearch();
+                  }
+                }}
                 className="w-full pl-10 pr-4 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cgreen text-right"
               />
-              <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">
+              <span
+                onClick={handleSearch}
+                className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+              >
                 <Search size={22} />
               </span>
             </div>
           </div>
-          {/* زر القائمة */}
           <button
             onClick={() => setIsSidebarOpen(true)}
             className="text-gray-700 ml-3 mr-5"
@@ -304,19 +335,28 @@ const Navbar = () => {
             <Menu size={28} />
           </button>
         </div>
-
         {/* ديسكتوب: الهيدر القديم */}
         <div className="hidden md:flex items-center justify-between py-2 px-3">
           <Link href="/" className="text-2xl font-bold text-cgreen">
             Small Offer
           </Link>
           <div className="mx-6 relative flex-1 md:w-[40%] max-w-md">
-            <span className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400">
+            <span
+              onClick={handleSearch}
+              className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+            >
               <Search size={18} />
             </span>
             <input
               type="text"
-              placeholder="ابحث هنا ..."
+              placeholder="ابحث هنا"
+              value={searchText}
+              onChange={(e) => setSearchText(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  handleSearch();
+                }
+              }}
               className="w-full pl-10 pr-10 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cgreen"
             />
           </div>
@@ -340,15 +380,15 @@ const Navbar = () => {
                           alt="User Avatar"
                           width={120}
                           height={120}
-                          className="object-cover  w-full h-full"
+                          className="object-cover w-full h-full"
                         />
                       ) : (
                         <Image
-                          src={userAvatar} // صورة افتراضية تحفظها داخل public/
+                          src={userAvatar}
                           alt="Default Avatar"
                           width={96}
                           height={96}
-                          className="object-cover "
+                          className="object-cover"
                         />
                       )}
                     </div>
@@ -366,7 +406,7 @@ const Navbar = () => {
                           <Link
                             href="/dashboard"
                             onClick={() => setShowMenu(false)}
-                            className="flex text-6 items-center  px-4 py-2 hover:bg-gray-100"
+                            className="flex text-6 items-center px-4 py-2 hover:bg-gray-100"
                           >
                             <StoreIcon size={20} className="ml-1 text-cgreen" />
                             متجري
@@ -376,7 +416,7 @@ const Navbar = () => {
                           <Link
                             href="/dashboard/messages"
                             onClick={() => setShowMenu(false)}
-                            className="flex  text-6  items-center  px-4 py-2 hover:bg-gray-100"
+                            className="flex text-6 items-center px-4 py-2 hover:bg-gray-100"
                           >
                             <MessageCircle
                               size={20}
@@ -389,7 +429,7 @@ const Navbar = () => {
                           <Link
                             href="/dashboard/profile"
                             onClick={() => setShowMenu(false)}
-                            className="flex text-6  items-center  px-4 py-2 hover:bg-gray-100"
+                            className="flex text-6 items-center px-4 py-2 hover:bg-gray-100"
                           >
                             <Settings size={20} className="ml-1 text-cgreen" />
                             تعديل المعلومات الشخصية
@@ -401,7 +441,7 @@ const Navbar = () => {
                               setShowLogoutConfirm(true);
                               setShowMenu(false);
                             }}
-                            className="w-full flex  text-6  items-center px-4 py-2 text-red-600 hover:bg-red-50"
+                            className="w-full flex text-6 items-center px-4 py-2 text-red-600 hover:bg-red-50"
                           >
                             <LogOut size={20} className="ml-1" />
                             تسجيل الخروج
@@ -430,7 +470,6 @@ const Navbar = () => {
             )}
           </div>
         </div>
-
         {/* Notification */}
         {notification && (
           <div className="fixed top-5 right-5 z-[9999]">
@@ -441,7 +480,6 @@ const Navbar = () => {
             />
           </div>
         )}
-
         {/* Logout Confirmation */}
         {showLogoutConfirm && (
           <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
@@ -476,7 +514,6 @@ const Navbar = () => {
           </div>
         )}
       </header>
-
       {/* Sidebar (Mobile Only) */}
       {isMobile && isSidebarOpen && (
         <motion.div
@@ -495,19 +532,18 @@ const Navbar = () => {
             >
               Small Offer
             </Link>
-            <div className="flex w-full justify-between items-center ">
+            <div className="flex w-full justify-between items-center">
               <h3 className="text-xl font-bold">الفئات</h3>
               <button
                 onClick={() => setIsSidebarOpen(false)}
-                className="text-cdarkgray outline rounded-full p-1 "
+                className="text-cdarkgray outline rounded-full p-1"
               >
                 <X size={27} className="text-cgreen" />
               </button>
             </div>
           </div>
-
           <motion.ul
-            className="p-4 space-y-4 mt-4"
+            className="p-4 space-y-2 mt-4"
             variants={sidebarVariants}
             initial="hidden"
             animate="visible"
@@ -528,7 +564,6 @@ const Navbar = () => {
                 </Link>
               </motion.li>
             ))}
-
             <motion.li variants={listItemVariants}>
               <button
                 onClick={() => setIsSidebarOpen(false)}
@@ -540,7 +575,6 @@ const Navbar = () => {
           </motion.ul>
         </motion.div>
       )}
-
       {/* Navigation Categories (Desktop Only) */}
       {!isMobile && (
         <nav className="bg-cgray border-t border-b py-2 border-gray-200">
@@ -548,12 +582,12 @@ const Navbar = () => {
             {firstRow.map((cat, idx) => (
               <div
                 key={idx}
-                className="relative group w-full sm:w-auto text-center sm:text-left "
+                className="relative group w-full sm:w-auto text-center sm:text-left"
               >
                 <Link
                   href={cat.slug || "#"}
                   className="block sm:inline-block px-2 py-3 rounded-lg font-bold text-base transition-all duration-200
-                          bg-transparent text-cdarkgray group-hover:bg-cgreen group-hover:text-white "
+                          bg-transparent text-cdarkgray group-hover:bg-cgreen group-hover:text-white"
                 >
                   <div className="flex items-center justify-center sm:justify-start">
                     <Image
@@ -561,7 +595,7 @@ const Navbar = () => {
                       alt={cat.name}
                       width={24}
                       height={24}
-                      className=" mr-2 transition-all duration-200 group-hover:invert group-hover:brightness-0 group-hover:filter group-hover:drop-shadow group-hover:text-white"
+                      className="mr-2 transition-all duration-200 group-hover:invert group-hover:brightness-0 group-hover:filter group-hover:drop-shadow group-hover:text-white"
                       style={{
                         filter:
                           "brightness(0) saturate(100%) invert(56%) sepia(16%) saturate(1162%) hue-rotate(110deg) brightness(93%) contrast(92%)",
@@ -572,13 +606,11 @@ const Navbar = () => {
                     </span>
                   </div>
                 </Link>
-                {/* القائمة المنسدلة للصف الأول */}
                 <div
                   className={`absolute top-full ${
                     idx < 3 ? "right-0" : "left-0"
                   } w-[410px] bg-white border border-gray-200 rounded-lg shadow-lg z-50 invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-all duration-200`}
                 >
-                  {/* العنوان */}
                   <div className="p-4 border-b border-clightgray">
                     <h3 className="text-cgreen text-lg font-bold flex items-center gap-2">
                       <Image
@@ -594,13 +626,12 @@ const Navbar = () => {
                       {cat.name}
                     </h3>
                   </div>
-                  {/* العناصر */}
                   <ul className="p-4 grid grid-cols-2 gap-x-2 gap-y-3">
                     {cat.items.map((item, i) => (
                       <li key={i}>
                         <Link
                           href={item.href || "#"}
-                          className="flex items-center  text-cdarkgray hover:text-cgreen text-sm font-medium transition-all duration-200"
+                          className="flex items-center text-cdarkgray hover:text-cgreen text-sm font-medium transition-all duration-200"
                         >
                           <Image
                             src={item.icon}
@@ -617,16 +648,13 @@ const Navbar = () => {
                       </li>
                     ))}
                   </ul>
-                  {/* زر تصفح */}
                   <div className="px-4 pb-4">
                     <button className="w-full bg-cgreen text-white py-2 rounded-md font-semibold hover:bg-chgreen transition">
                       تصفح كل {cat.name}
                     </button>
                   </div>
-                  {/* سطر فاصل */}
                   <div className="border-t border-clightgray" />
-                  {/* تواصل معنا */}
-                  <div className="p-4 flex  items-center gap-2 text-sm text-gray-700">
+                  <div className="p-4 flex items-center gap-2 text-sm text-gray-700">
                     <p>لديك اقتراح؟ تواصل معنا واقترح تصنيف جديد.</p>
                     <button className="border border-cgreen text-cgreen px-4 py-1 rounded-md font-medium hover:bg-cgreen hover:text-white transition">
                       تواصل معنا
@@ -637,7 +665,7 @@ const Navbar = () => {
             ))}
           </div>
           {secondRow.length > 0 && (
-            <div className="flex flex-wrap items-center px-1 mt-2 ">
+            <div className="flex flex-wrap items-center px-1 mt-2">
               {secondRow.map((cat, idx) => (
                 <div
                   key={idx}
@@ -646,7 +674,7 @@ const Navbar = () => {
                   <Link
                     href={cat.slug || "#"}
                     className="block sm:inline-block px-1 py-3 rounded-lg font-bold text-base transition-all duration-200
-      bg-transparent text-cdarkgray group-hover:bg-cgreen group-hover:text-white "
+      bg-transparent text-cdarkgray group-hover:bg-cgreen group-hover:text-white"
                   >
                     <div className="flex items-center justify-center sm:justify-start">
                       <Image
@@ -654,7 +682,7 @@ const Navbar = () => {
                         alt={cat.name}
                         width={24}
                         height={24}
-                        className=" mr-2 transition-all duration-200 group-hover:invert group-hover:brightness-0 group-hover:filter group-hover:drop-shadow group-hover:text-white"
+                        className="mr-2 transition-all duration-200 group-hover:invert group-hover:brightness-0 group-hover:filter group-hover:drop-shadow group-hover:text-white"
                         style={{
                           filter:
                             "brightness(0) saturate(100%) invert(56%) sepia(16%) saturate(1162%) hue-rotate(110deg) brightness(93%) contrast(92%)",
@@ -665,9 +693,7 @@ const Navbar = () => {
                       </span>
                     </div>
                   </Link>
-                  {/* القائمة المنسدلة للصف الثاني */}
                   <div className="absolute top-full right-0 w-[410px] bg-white border border-gray-200 rounded-lg shadow-lg z-50 invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-all duration-200">
-                    {/* العنوان */}
                     <div className="p-4 border-b border-clightgray">
                       <h3 className="text-cgreen text-lg font-bold flex items-center gap-2">
                         <Image
@@ -675,7 +701,7 @@ const Navbar = () => {
                           alt={cat.name}
                           width={20}
                           height={20}
-                          className=" mr-2 transition-all duration-200 group-hover:invert group-hover:brightness-0 group-hover:filter group-hover:drop-shadow group-hover:text-white"
+                          className="mr-2 transition-all duration-200 group-hover:invert group-hover:brightness-0 group-hover:filter group-hover:drop-shadow group-hover:text-white"
                           style={{
                             filter:
                               "brightness(0) saturate(100%) invert(56%) sepia(16%) saturate(1162%) hue-rotate(110deg) brightness(93%) contrast(92%)",
@@ -684,13 +710,12 @@ const Navbar = () => {
                         {cat.name}
                       </h3>
                     </div>
-                    {/* العناصر */}
                     <ul className="p-4 grid grid-cols-2 gap-x-4 gap-y-3">
                       {cat.items.map((item, i) => (
                         <li key={i}>
                           <Link
                             href={item.href || "#"}
-                            className="flex items-center gap-2 text-cdarkgray  hover:text-cgreen text-sm font-medium transition-all duration-200"
+                            className="flex items-center gap-2 text-cdarkgray hover:text-cgreen text-sm font-medium transition-all duration-200"
                           >
                             <Image
                               src={item.icon}
@@ -707,16 +732,13 @@ const Navbar = () => {
                         </li>
                       ))}
                     </ul>
-                    {/* زر تصفح */}
                     <div className="px-4 pb-4">
                       <button className="w-full bg-cgreen text-white py-2 rounded-md font-semibold hover:bg-chgreen transition">
                         تصفح كل {cat.name}
                       </button>
                     </div>
-                    {/* سطر فاصل */}
                     <div className="border-t border-clightgray" />
-                    {/* تواصل معنا */}
-                    <div className="p-4 flex  items-center gap-2 text-sm text-gray-700">
+                    <div className="p-4 flex items-center gap-2 text-sm text-gray-700">
                       <p>لديك اقتراح؟ تواصل معنا واقترح تصنيف جديد.</p>
                       <button className="border border-cgreen text-cgreen px-4 py-1 rounded-md font-medium hover:bg-cgreen hover:text-white transition">
                         تواصل معنا

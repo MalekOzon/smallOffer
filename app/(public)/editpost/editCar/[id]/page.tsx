@@ -842,10 +842,8 @@ const EditCar = () => {
             <div className="sm:ml-16">
               <label className="block font-medium text-gray-700">
                 ملصق البيئة
-                <span className="text-red-500 text-xl mr-1">*</span>
               </label>
               <input
-                required
                 name="car.environmental_sticker"
                 value={formData.car?.environmental_sticker || ""}
                 onChange={handleCarInputChange}
@@ -856,10 +854,8 @@ const EditCar = () => {
             <div className="sm:ml-16">
               <label className="block font-medium text-gray-700">
                 فئة الملوثات
-                <span className="text-red-500 text-xl mr-1">*</span>
               </label>
               <input
-                required
                 name="car.class_of_pollutants"
                 value={formData.car?.class_of_pollutants || ""}
                 onChange={handleCarInputChange}

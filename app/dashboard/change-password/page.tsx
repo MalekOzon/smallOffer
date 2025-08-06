@@ -87,7 +87,7 @@ const ChangePasswordPage = () => {
               type={showCurrent ? "text" : "password"}
               placeholder="كلمة المرور الحالية"
               {...register("currentPassword")}
-              className={`mt-1 block w-full p-2.5 pr-10 text-sm border rounded-md focus:outline-none ${
+              className={`mt-1 block w-full p-2.5 pr-2 text-sm border rounded-md focus:outline-none ${
                 errors.currentPassword ? "border-red-500" : "border-gray-300"
               } placeholder:text-gray-400`}
             />
@@ -116,7 +116,7 @@ const ChangePasswordPage = () => {
               type={showNew ? "text" : "password"}
               placeholder="كلمة المرور الجديدة"
               {...register("newPassword")}
-              className={`mt-1 block w-full p-2.5 pr-10 text-sm border rounded-md focus:outline-none ${
+              className={`mt-1 block w-full p-2.5 pr-2 text-sm border rounded-md focus:outline-none ${
                 errors.newPassword ? "border-red-500" : "border-gray-300"
               } placeholder:text-gray-400`}
             />
@@ -145,7 +145,7 @@ const ChangePasswordPage = () => {
               type={showConfirm ? "text" : "password"}
               placeholder="تأكيد كلمة المرور"
               {...register("confirmPassword")}
-              className={`mt-1 block w-full p-2.5 pr-10 text-sm border rounded-md focus:outline-none ${
+              className={`mt-1 block w-full p-2.5 pr-2 text-sm border rounded-md focus:outline-none ${
                 errors.confirmPassword ? "border-red-500" : "border-gray-300"
               } placeholder:text-gray-400`}
             />

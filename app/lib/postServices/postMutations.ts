@@ -2,12 +2,14 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { createCarPost, createPost, createLandPost, createHousePost, createApartmentPost, createElectronicsPost, createMobilePost, createReport, createRate } from "./postApi";
 import { extractMessages } from "../loginservices/mutations";
+import { useRouter } from "next/navigation";
 
 export type NotificationSetter = (v: { message: string; type: "success" | "error" }) => void;
 
 // فورم عام
 export function useCreatePost(setNotification: NotificationSetter) {
   const queryClient = useQueryClient();
+  const router = useRouter(); // إنشاء مثيل للراوتر
 
   return useMutation({
     mutationFn: (formData: FormData) => createPost(formData),
@@ -40,8 +42,10 @@ export function useCreatePost(setNotification: NotificationSetter) {
       }
     },
     onSuccess: (data) => {
-      console.log("Done Global Form")
       setNotification({ message: data.detail, type: "success" });
+      setTimeout(() => {
+        router.push("/");
+      }, 2000);
     },
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: ["accounts/posts/generic/"] });
@@ -52,6 +56,7 @@ export function useCreatePost(setNotification: NotificationSetter) {
 // فورم خاص سيارات
 export function useCreateCarPost(setNotification: NotificationSetter) {
   const queryClient = useQueryClient();
+  const router = useRouter(); // إنشاء مثيل للراوتر
 
   return useMutation({
     mutationFn: (formData: FormData) => createCarPost(formData),
@@ -83,8 +88,10 @@ export function useCreateCarPost(setNotification: NotificationSetter) {
       }
     },
     onSuccess: (data) => {
-      console.log("Done CAR Form")
       setNotification({ message: data.detail, type: "success" });
+      setTimeout(() => {
+        router.push("/");
+      }, 2000);
     },
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: ["accounts/posts/cars/"] });
@@ -96,6 +103,7 @@ export function useCreateCarPost(setNotification: NotificationSetter) {
 // فورم خاص إلكترونيات
 export function useCreateElectronicsPost(setNotification: NotificationSetter) {
   const queryClient = useQueryClient();
+  const router = useRouter(); // إنشاء مثيل للراوتر
 
   return useMutation({
     mutationFn: (formData: FormData) => createElectronicsPost(formData),
@@ -126,8 +134,10 @@ export function useCreateElectronicsPost(setNotification: NotificationSetter) {
       }
     },
     onSuccess: (data) => {
-      console.log("Done الكترونياتForm")
       setNotification({ message: data.detail, type: "success" });
+      setTimeout(() => {
+        router.push("/");
+      }, 2000);
     },
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: ["accounts/posts/electronics/"] });
@@ -139,6 +149,7 @@ export function useCreateElectronicsPost(setNotification: NotificationSetter) {
 // فورم خاص منازل
 export function useCreateHousePost(setNotification: NotificationSetter) {
   const queryClient = useQueryClient();
+  const router = useRouter(); // إنشاء مثيل للراوتر
 
   return useMutation({
     mutationFn: (formData: FormData) => createHousePost(formData),
@@ -171,6 +182,9 @@ export function useCreateHousePost(setNotification: NotificationSetter) {
     },
     onSuccess: (data) => {
       setNotification({ message: data.detail, type: "success" });
+      setTimeout(() => {
+        router.push("/");
+      }, 2000);
     },
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: ["accounts/posts/houses/"] });
@@ -183,6 +197,7 @@ export function useCreateHousePost(setNotification: NotificationSetter) {
 // فورم خاص أراضي
 export function useCreateLandPost(setNotification: NotificationSetter) {
   const queryClient = useQueryClient();
+  const router = useRouter(); // إنشاء مثيل للراوتر
 
   return useMutation({
     mutationFn: (formData: FormData) => createLandPost(formData),
@@ -215,6 +230,9 @@ export function useCreateLandPost(setNotification: NotificationSetter) {
     },
     onSuccess: (data) => {
       setNotification({ message: data.detail, type: "success" });
+      setTimeout(() => {
+        router.push("/");
+      }, 2000);
     },
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: ["accounts/posts/outdoor-space/"] });
@@ -227,6 +245,7 @@ export function useCreateLandPost(setNotification: NotificationSetter) {
 // فورم خاص شقق
 export function useCreateApartmentPost(setNotification: NotificationSetter) {
   const queryClient = useQueryClient();
+  const router = useRouter(); // إنشاء مثيل للراوتر
 
   return useMutation({
     mutationFn: (formData: FormData) => createApartmentPost(formData),
@@ -260,6 +279,9 @@ export function useCreateApartmentPost(setNotification: NotificationSetter) {
     },
     onSuccess: (data) => {
       setNotification({ message: data.detail, type: "success" });
+      setTimeout(() => {
+        router.push("/");
+      }, 2000);
     },
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: ["accounts/posts/apartment/"] });
@@ -272,6 +294,7 @@ export function useCreateApartmentPost(setNotification: NotificationSetter) {
 // فورم خاص موبايلات
 export function useCreateMobilePost(setNotification: NotificationSetter) {
   const queryClient = useQueryClient();
+  const router = useRouter(); // إنشاء مثيل للراوتر
 
   return useMutation({
     mutationFn: (formData: FormData) => createMobilePost(formData),
@@ -305,6 +328,9 @@ export function useCreateMobilePost(setNotification: NotificationSetter) {
     },
     onSuccess: (data) => {
       setNotification({ message: data.detail, type: "success" });
+      setTimeout(() => {
+        router.push("/");
+      }, 2000);
     },
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: ["accounts/posts/mobile/"] });

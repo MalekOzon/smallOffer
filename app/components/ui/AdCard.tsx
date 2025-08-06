@@ -88,13 +88,16 @@ const AdCard: FC<AdCardProps> = ({
   const [isFavorite, setIsFavorite] = useState<string>(fav );
   const addPostFavMutation = useAddPostFav();
   function handleFavClick() {
+    const isFavPast = isFavorite;
+    setIsFavorite( isFavorite === "added" ? "removed" : "added" );
     addPostFavMutation.mutate(
       { post_id: id },
       {
-        onSuccess: (res) => {
-          setIsFavorite( res.status );
+        onSuccess: () => {
+
         },
         onError: () => {
+          setIsFavorite( isFavPast );
           console.error("فشل في تحديث المفضلة");
         },
       }
