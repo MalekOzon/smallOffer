@@ -258,7 +258,7 @@ const SearchWithSidebar = ({ searchTerm }: { searchTerm: string }) => {
                   <label
                     key={option.value}
                     className={`flex items-center gap-2 p-2 w-40 text-sm justify-center rounded cursor-pointer border transition-colors duration-200 ${
-                      extraFilters["apartment_details__offer_type"] ===
+                      extraFilters["car_details__gearbox"] ===
                         option.value ||
                       (option.value === "" &&
                         !extraFilters["car_details__gearbox"])
