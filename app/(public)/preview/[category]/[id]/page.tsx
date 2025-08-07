@@ -300,7 +300,7 @@ export default function PostPreviewPage() {
 
           <hr className="text-clightgray " />
 
-          <button className="w-full bg-cgreen text-white py-3 rounded hover:bg-chgreen transition">
+          <button className="w-full text-lg bg-cgreen text-white py-3 rounded hover:bg-chgreen transition">
             تواصل مع البائع
           </button>
         </div>

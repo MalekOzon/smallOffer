@@ -12,11 +12,11 @@ export default function ImageGallery({ images }: ImageGalleryProps) {
   return (
     <div className="  flex flex-col gap-4 items-center shadow-md ml-4 ">
 
-    <div className="h-[70vh] max-md:h-[50vh] w-[90%] max-sm:w-full ">
+    <div className="h-[70vh] max-md:h-[42vh] w-[90%] max-sm:w-full ">
       <Image
         src={images[selected].image}
         alt={`صورة الإعلان ${selected + 1}`}
-        className="w-full aspect-square object-fill rounded-lg shadow h-full "
+        className="w-full aspect-square object-contain rounded-lg shadow h-full "
         width={1000}
         height={100}
         />

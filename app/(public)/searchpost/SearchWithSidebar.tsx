@@ -26,6 +26,7 @@ const SearchWithSidebar = ({ searchTerm }: { searchTerm: string }) => {
   const [city, setCity] = useState("");
   const [priceFrom, setPriceFrom] = useState("");
   const [priceTo, setPriceTo] = useState("");
+  const [isSearch, setIsSearch] = useState("");
   const [ordering, setOrdering] = useState("-created_at");
 
   const [extraFilters, setExtraFilters] = useState<Record<string, string>>({});
@@ -49,6 +50,7 @@ const SearchWithSidebar = ({ searchTerm }: { searchTerm: string }) => {
     setCity("");
     setPriceFrom("");
     setPriceTo("");
+    setIsSearch("");
     setOrdering("-created_at");
     setExtraFilters({});
     const params = new URLSearchParams(searchTerm);
@@ -67,6 +69,7 @@ const SearchWithSidebar = ({ searchTerm }: { searchTerm: string }) => {
     params.forEach((value, key) => {
       if (key === "city") setCity(value);
       else if (key === "min_price") setPriceFrom(value);
+      else if (key === "offer_type") setIsSearch(value);
       else if (key === "max_price") setPriceTo(value);
       else if (key === "ordering") setOrdering(value);
       else if (key.includes("__")) {
@@ -116,7 +119,7 @@ const SearchWithSidebar = ({ searchTerm }: { searchTerm: string }) => {
         <select
           id="city"
           dir="rtl"
-          className="border border-clightgray w-full text-cdarkgray py-2.5 mt-1 focus:outline-none transition duration-200 rounded-lg"
+          className="w-full border p-2 rounded"
           value={city}
           onChange={(e) => setCity(e.target.value)}
         >
@@ -133,7 +136,37 @@ const SearchWithSidebar = ({ searchTerm }: { searchTerm: string }) => {
         </select>
       </div>
 
+
       <div>
+        <label className="block mb-1">نوع البوست</label>
+        <div className="flex gap-2">
+          {[
+            { value: "", label: "الكل" },
+            { value: "search", label: "أبحث عن" },
+            { value: "sell", label: "أعرض" },
+          ].map((option) => (
+            <label
+              key={option.value}
+              className={`flex items-center gap-2 p-2 w-40 justify-center text-sm rounded cursor-pointer border transition-colors duration-200 ${
+                isSearch === option.value || (option.value === "" && !isSearch)
+                  ? "bg-cgreen text-white border-cgreen"
+                  : "bg-gray-100 text-cdarkgray border-clightgray hover:bg-gray-200"
+              }`}
+            >
+              <input
+                type="radio"
+                name="offer_type"
+                value={option.value}
+                checked={isSearch === option.value || (option.value === "" && !isSearch)}
+                onChange={(e) => setIsSearch(e.target.value)}
+                className="hidden"
+              />
+              {option.label}
+            </label>
+          ))}
+        </div>
+      </div>
+      <div className="border-b-1 border-clightgray pb-3">
         <label className="block mb-1">السعر</label>
         <div className="flex gap-2">
           <input
@@ -225,7 +258,8 @@ const SearchWithSidebar = ({ searchTerm }: { searchTerm: string }) => {
                   <label
                     key={option.value}
                     className={`flex items-center gap-2 p-2 w-40 text-sm justify-center rounded cursor-pointer border transition-colors duration-200 ${
-                      extraFilters["apartment_details__offer_type"] === option.value ||
+                      extraFilters["apartment_details__offer_type"] ===
+                        option.value ||
                       (option.value === "" &&
                         !extraFilters["car_details__gearbox"])
                         ? "bg-cgreen text-white border-cgreen"
@@ -398,7 +432,8 @@ const SearchWithSidebar = ({ searchTerm }: { searchTerm: string }) => {
                   <label
                     key={option.value}
                     className={`flex items-center gap-2 p-2 w-40 text-sm justify-center rounded cursor-pointer border transition-colors duration-200 ${
-                      extraFilters["house_details__offer_type"] === option.value ||
+                      extraFilters["house_details__offer_type"] ===
+                        option.value ||
                       (option.value === "" &&
                         !extraFilters["house_details__offer_type"])
                         ? "bg-cgreen text-white border-cgreen"
@@ -410,7 +445,8 @@ const SearchWithSidebar = ({ searchTerm }: { searchTerm: string }) => {
                       name="gearbox"
                       value={option.value}
                       checked={
-                        extraFilters["house_details__offer_type"] === option.value ||
+                        extraFilters["house_details__offer_type"] ===
+                          option.value ||
                         (option.value === "" &&
                           !extraFilters["house_details__offer_type"])
                       }
@@ -468,7 +504,8 @@ const SearchWithSidebar = ({ searchTerm }: { searchTerm: string }) => {
                   <label
                     key={option.value}
                     className={`flex items-center gap-2 p-2 w-40 text-sm justify-center rounded cursor-pointer border transition-colors duration-200 ${
-                      extraFilters["apartment_details__offer_type"] === option.value ||
+                      extraFilters["apartment_details__offer_type"] ===
+                        option.value ||
                       (option.value === "" &&
                         !extraFilters["apartment_details__offer_type"])
                         ? "bg-cgreen text-white border-cgreen"
@@ -480,7 +517,8 @@ const SearchWithSidebar = ({ searchTerm }: { searchTerm: string }) => {
                       name="gearbox"
                       value={option.value}
                       checked={
-                        extraFilters["apartment_details__offer_type"] === option.value ||
+                        extraFilters["apartment_details__offer_type"] ===
+                          option.value ||
                         (option.value === "" &&
                           !extraFilters["apartment_details__offer_type"])
                       }
@@ -502,7 +540,9 @@ const SearchWithSidebar = ({ searchTerm }: { searchTerm: string }) => {
               <input
                 type="number"
                 className="w-full border p-2 rounded"
-                value={extraFilters["apartment_details__real_estate_space"] || ""}
+                value={
+                  extraFilters["apartment_details__real_estate_space"] || ""
+                }
                 onChange={(e) =>
                   handleExtraChange(
                     "apartment_details__real_estate_space",
@@ -549,7 +589,8 @@ const SearchWithSidebar = ({ searchTerm }: { searchTerm: string }) => {
                   <label
                     key={option.value}
                     className={`flex items-center gap-2 p-2 w-40 text-sm justify-center rounded cursor-pointer border transition-colors duration-200 ${
-                      extraFilters["outdoorspace_details__offer_type"] === option.value ||
+                      extraFilters["outdoorspace_details__offer_type"] ===
+                        option.value ||
                       (option.value === "" &&
                         !extraFilters["outdoorspace_details__offer_type"])
                         ? "bg-cgreen text-white border-cgreen"
@@ -561,7 +602,8 @@ const SearchWithSidebar = ({ searchTerm }: { searchTerm: string }) => {
                       name="gearbox"
                       value={option.value}
                       checked={
-                        extraFilters["outdoorspace_details__offer_type"] === option.value ||
+                        extraFilters["outdoorspace_details__offer_type"] ===
+                          option.value ||
                         (option.value === "" &&
                           !extraFilters["outdoorspace_details__offer_type"])
                       }
@@ -598,7 +640,10 @@ const SearchWithSidebar = ({ searchTerm }: { searchTerm: string }) => {
                 className="w-full border p-2 rounded"
                 value={extraFilters["outdoorspace_details__land_type"]}
                 onChange={(e) =>
-                  handleExtraChange("outdoorspace_details__land_type", e.target.value)
+                  handleExtraChange(
+                    "outdoorspace_details__land_type",
+                    e.target.value
+                  )
                 }
               >
                 <option value="">اختر النوع</option>
@@ -609,7 +654,6 @@ const SearchWithSidebar = ({ searchTerm }: { searchTerm: string }) => {
                 ))}
               </select>
             </div>
-            
           </>
         );
       default:
@@ -632,6 +676,7 @@ const SearchWithSidebar = ({ searchTerm }: { searchTerm: string }) => {
     if (city) params.set("city", city);
     if (priceFrom) params.set("min_price", priceFrom);
     if (priceTo) params.set("max_price", priceTo);
+    if (isSearch) params.set("offer_type", isSearch); // <- أضف هذا السطر
     if (ordering) params.set("ordering", ordering);
 
     // إضافة الفلاتر الإضافية

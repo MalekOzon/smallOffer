@@ -17,6 +17,7 @@ import alertCircle from "../../../public/resourses/alert-circle.svg";
 import { useLogout } from "@/app/lib/loginservices/mutations";
 import Notification from "../ui/Notification";
 import { useGetUserInfo } from "@/app/lib/dashboardServices/dashboardQueries";
+import { useRouter, useSearchParams } from "next/navigation";
 
 const Header = ({ onMenuClick }: { onMenuClick?: () => void }) => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -80,6 +81,19 @@ const Header = ({ onMenuClick }: { onMenuClick?: () => void }) => {
   }, [menuOpen, isMobile]);
 
   const getUserInfo = useGetUserInfo();
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const [searchText, setSearchText] = useState(() => {
+    const savedSearch = sessionStorage.getItem("searchText");
+    const urlSearch = searchParams.get("search");
+    return urlSearch || savedSearch || "";
+  });
+
+  const handleSearch = () => {
+    if (searchText.trim()) {
+      router.push(`/searchpost?search=${encodeURIComponent(searchText)}`);
+    }
+  };
 
   return (
     <header className="flex items-center justify-between px-4 py-2 bg-white  w-full relative">
@@ -91,21 +105,25 @@ const Header = ({ onMenuClick }: { onMenuClick?: () => void }) => {
       </div>
 
       {/* حقل البحث */}
-      <div className="mx-6 relative flex-1 md:w-[60%]">
-        <button className="block md:hidden text-gray-500">
+      <div className="relative w-full">
+        <input
+          type="text"
+          placeholder="ابحث هنا"
+          value={searchText}
+          onChange={(e) => setSearchText(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              handleSearch();
+            }
+          }}
+          className="w-full pl-10 pr-4 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cgreen text-right"
+        />
+        <span
+          onClick={handleSearch}
+          className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+        >
           <Search size={22} />
-        </button>
-
-        <div className="hidden md:block relative">
-          <span className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400">
-            <Search size={18} />
-          </span>
-          <input
-            type="text"
-            placeholder="ابحث هنا ..."
-            className="w-full pl-10 pr-10 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-        </div>
+        </span>
       </div>
 
       {/* المستخدم والقائمة المنسدلة */}

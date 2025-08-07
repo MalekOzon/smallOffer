@@ -158,9 +158,9 @@ const Navbar = () => {
     rowConfig.first + rowConfig.second
   );
 
-  const handleSearch = () => {
-    if (searchText.trim()) {
-      router.push(`/searchpost?search=${encodeURIComponent(searchText)}`);
+  const handleSearch = (value: string = searchText) => {
+    if (value.trim()) {
+      router.push(`/searchpost?search=${encodeURIComponent(value)}`);
     }
   };
 
@@ -320,7 +320,7 @@ const Navbar = () => {
                 className="w-full pl-10 pr-4 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cgreen text-right"
               />
               <span
-                onClick={handleSearch}
+                onClick={() => handleSearch()}
                 className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
               >
                 <Search size={22} />
@@ -342,7 +342,7 @@ const Navbar = () => {
           </Link>
           <div className="mx-6 relative flex-1 md:w-[40%] max-w-md">
             <span
-              onClick={handleSearch}
+              onClick={() => handleSearch()}
               className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400"
             >
               <Search size={18} />
@@ -555,8 +555,11 @@ const Navbar = () => {
                 className="py-4 text-xl"
               >
                 <Link
-                  href={cat.slug || "#"}
-                  onClick={() => setIsSidebarOpen(false)}
+                  href={`/searchpost?search=${encodeURIComponent(cat.name)}`}
+                  onClick={() => {
+                    setIsSidebarOpen(false);
+                    setSearchText(cat.name);
+                  }}
                   className="flex items-center gap-2 flex-grow"
                 >
                   <Image src={cat.icon} alt={cat.name} width={26} height={26} />
@@ -566,7 +569,10 @@ const Navbar = () => {
             ))}
             <motion.li variants={listItemVariants}>
               <button
-                onClick={() => setIsSidebarOpen(false)}
+                onClick={() => {
+                  setIsSidebarOpen(false);
+                  router.push("/searchpost");
+                }}
                 className="w-full bg-cgreen text-white py-2 rounded-lg font-semibold hover:bg-chgreen transition"
               >
                 تصفح كل الإعلانات
@@ -584,8 +590,11 @@ const Navbar = () => {
                 key={idx}
                 className="relative group w-full sm:w-auto text-center sm:text-left"
               >
-                <Link
-                  href={cat.slug || "#"}
+                <button
+                  onClick={() => {
+                    setSearchText(cat.name);
+                    handleSearch(cat.name);
+                  }}
                   className="block sm:inline-block px-2 py-3 rounded-lg font-bold text-base transition-all duration-200
                           bg-transparent text-cdarkgray group-hover:bg-cgreen group-hover:text-white"
                 >
@@ -605,7 +614,7 @@ const Navbar = () => {
                       {cat.name}
                     </span>
                   </div>
-                </Link>
+                </button>
                 <div
                   className={`absolute top-full ${
                     idx < 3 ? "right-0" : "left-0"
@@ -630,7 +639,10 @@ const Navbar = () => {
                     {cat.items.map((item, i) => (
                       <li key={i}>
                         <Link
-                          href={item.href || "#"}
+                          href={`/searchpost?search=${encodeURIComponent(
+                            item.label
+                          )}`}
+                          onClick={() => setSearchText(item.label)}
                           className="flex items-center text-cdarkgray hover:text-cgreen text-sm font-medium transition-all duration-200"
                         >
                           <Image
@@ -649,7 +661,13 @@ const Navbar = () => {
                     ))}
                   </ul>
                   <div className="px-4 pb-4">
-                    <button className="w-full bg-cgreen text-white py-2 rounded-md font-semibold hover:bg-chgreen transition">
+                    <button
+                      onClick={() => {
+                        setSearchText(cat.name);
+                        handleSearch(cat.name);
+                      }}
+                      className="w-full bg-cgreen text-white py-2 rounded-md font-semibold hover:bg-chgreen transition"
+                    >
                       تصفح كل {cat.name}
                     </button>
                   </div>
@@ -671,8 +689,11 @@ const Navbar = () => {
                   key={idx}
                   className="relative group w-full sm:w-auto text-center sm:text-left"
                 >
-                  <Link
-                    href={cat.slug || "#"}
+                  <button
+                    onClick={() => {
+                      setSearchText(cat.name);
+                      handleSearch(cat.name);
+                    }}
                     className="block sm:inline-block px-1 py-3 rounded-lg font-bold text-base transition-all duration-200
       bg-transparent text-cdarkgray group-hover:bg-cgreen group-hover:text-white"
                   >
@@ -692,7 +713,7 @@ const Navbar = () => {
                         {cat.name}
                       </span>
                     </div>
-                  </Link>
+                  </button>
                   <div className="absolute top-full right-0 w-[410px] bg-white border border-gray-200 rounded-lg shadow-lg z-50 invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-all duration-200">
                     <div className="p-4 border-b border-clightgray">
                       <h3 className="text-cgreen text-lg font-bold flex items-center gap-2">
@@ -714,7 +735,10 @@ const Navbar = () => {
                       {cat.items.map((item, i) => (
                         <li key={i}>
                           <Link
-                            href={item.href || "#"}
+                            href={`/searchpost?search=${encodeURIComponent(
+                              item.label
+                            )}`}
+                            onClick={() => setSearchText(item.label)}
                             className="flex items-center gap-2 text-cdarkgray hover:text-cgreen text-sm font-medium transition-all duration-200"
                           >
                             <Image
@@ -733,7 +757,13 @@ const Navbar = () => {
                       ))}
                     </ul>
                     <div className="px-4 pb-4">
-                      <button className="w-full bg-cgreen text-white py-2 rounded-md font-semibold hover:bg-chgreen transition">
+                      <button
+                        onClick={() => {
+                          setSearchText(cat.name);
+                          handleSearch(cat.name);
+                        }}
+                        className="w-full bg-cgreen text-white py-2 rounded-md font-semibold hover:bg-chgreen transition"
+                      >
                         تصفح كل {cat.name}
                       </button>
                     </div>

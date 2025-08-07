@@ -39,7 +39,7 @@ const SearchPage = () => {
       <SearchWithSidebar searchTerm={searchTerm} />
 
       <h1 className="text-xl font-bold mb-4 max-w-3xl">
-        {searchTerm ? `نتائج البحث عن: ${searchTerm}` : "أدخل كلمة للبحث"}
+        اختياراتنا : ( تتضمن إعلانات مدفوعة)
       </h1>
 
       {isLoading && page === 1 && <p>جاري تحميل النتائج...</p>}
@@ -58,7 +58,7 @@ const SearchPage = () => {
             city={ad.city}
             price={parseFloat(ad.price)}
             published={ad.status}
-            isFav={false}
+            isFav={true}
             imageUrl={ad.cover_image ?? placeholderPost}
             id={ad.id}
             subcat={ad.subcategory}
