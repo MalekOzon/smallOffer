@@ -1,14 +1,14 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useGetSearchRes } from "@/app/lib/searchServices/searchQueries";
 import AdCard from "@/app/components/ui/AdCard";
 import placeholderPost from "../../../public/resourses/placeholderPost.svg";
 import { Ad } from "@/app/types/authTypes";
 import SearchWithSidebar from "./SearchWithSidebar";
 
-const SearchPage = () => {
+function Search() {
   const searchParams = useSearchParams();
   const searchTerm = searchParams.toString();
   const [page, setPage] = useState(1);
@@ -81,4 +81,10 @@ const SearchPage = () => {
   );
 };
 
-export default SearchPage;
+export default function SearchPage() {
+  return (
+    <Suspense fallback={<div>جاري التحميل...</div>}>
+      <Search />
+    </Suspense>
+  );
+}

@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, Suspense } from "react";
 import {
   Search,
   X,
@@ -22,7 +22,7 @@ import { categories } from "./categories";
 import { easeInOut, motion } from "framer-motion";
 import { useRouter, useSearchParams } from "next/navigation";
 
-const Navbar = () => {
+function Navbar() {
   const [isMobile, setIsMobile] = useState(false);
   const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
   const [notification, setNotification] = useState<{
@@ -785,4 +785,11 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default function NavbarPage() {
+  return (
+    <Suspense fallback={<div>جاري التحميل...</div>}>
+      <Navbar />
+    </Suspense>
+  );
+}
+

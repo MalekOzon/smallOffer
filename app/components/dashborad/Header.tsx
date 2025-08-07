@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, Suspense } from "react";
 import {
   Search,
   Settings,
@@ -280,4 +280,10 @@ const Header = ({ onMenuClick }: { onMenuClick?: () => void }) => {
   );
 };
 
-export default Header;
+export default function HeaderPage() {
+  return (
+    <Suspense fallback={<div>جاري التحميل...</div>}>
+      <Header />
+    </Suspense>
+  );
+}
