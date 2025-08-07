@@ -98,7 +98,6 @@
     --color-cgray: #EAEAEA;
     --color-chgreen: #34A278;
     --color-cwhite: #FAFAFA;
-    --color-clemon: #F3E9DC;
     --color-clightgray: #CCCCCC ;
     --color-cdarkgray: #666666;
     --color-corange: #FF8541;
@@ -1056,9 +1055,6 @@
   }
   .border-cgreen {
     border-color: var(--color-cgreen);
-  }
-  .border-clemon {
-    border-color: var(--color-clemon);
   }
   .border-clightgray {
     border-color: var(--color-clightgray);
@@ -2223,19 +2219,9 @@
       display: none;
     }
   }
-  .max-md\:h-\[40vh\] {
-    @media (width < 48rem) {
-      height: 40vh;
-    }
-  }
   .max-md\:h-\[42vh\] {
     @media (width < 48rem) {
       height: 42vh;
-    }
-  }
-  .max-md\:h-\[45vh\] {
-    @media (width < 48rem) {
-      height: 45vh;
     }
   }
   .max-md\:h-\[50vh\] {

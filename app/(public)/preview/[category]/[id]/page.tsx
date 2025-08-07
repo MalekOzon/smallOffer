@@ -78,7 +78,7 @@ export default function PostPreviewPage() {
   }
 
   const { data, isLoading, error } = useGetPostDetail(cat, id);
-  const [isFavorite, setIsFavorite] = useState<string | undefined>(undefined);
+  const [isFavorite, setIsFavorite] = useState<string |boolean| undefined>(undefined);
 
   useEffect(() => {
     if (data?.fav !== undefined) {
@@ -97,7 +97,7 @@ export default function PostPreviewPage() {
         onSuccess: (res) => {
           // إذا كانت الحالة الجديدة موجودة في الاستجابة
           if (res.status === "added" || res.status === "removed") {
-            setIsFavorite(res.status);
+            setIsFavorite(res.status === "added" ? true : false);
           }
         },
         onError: () => {
@@ -117,7 +117,6 @@ export default function PostPreviewPage() {
   if (error) return <div>خطأ: {error.message}</div>;
   if (!data) return notFound();
 
-  console.log("gallery raw", data.gallery);
 
   const coverImageUrl =
     typeof data.cover_image === "object" && data.cover_image instanceof File
@@ -243,6 +242,8 @@ export default function PostPreviewPage() {
     return colorMap.get(brand) || brand;
   }
 
+  console.log("ISFFFF ",isFavorite)
+
   return (
     <main className=" gap-6 p-4  ">
       <div className="grid md:grid-cols-2  ">
@@ -258,7 +259,7 @@ export default function PostPreviewPage() {
                 <Heart
                   className={clsx(
                     "h-[44px] w-9 transition-colors rounded-md p-1 max-sm:mt-2",
-                    isFavorite == "added"
+                  (isFavorite )
                       ? "bg-cgreen text-white group-hover:bg-green-100 group-hover:text-cgreen"
                       : "bg-green-100 text-cgreen group-hover:bg-cgreen group-hover:text-white"
                   )}

@@ -18,6 +18,8 @@ const Favorites = () => {
   if (isLoading) return <SkeletonNotificationSettings />;
 
 
+  console.log("FFF ",data?.results)
+
   return (
     <div className="w-full  ">
       <Title title="المفضلة" isPostPage={false} />
@@ -47,8 +49,8 @@ const Favorites = () => {
               id={ad.id}
               subcat={ad.subcategory}
               offer_type={ad.offer_type}
-              fav="added"
-            />
+              fav={ad.fav ? "added" : "removed"}
+              />
             ))}
           </div>
 

@@ -14,7 +14,7 @@ function Search() {
   const [page, setPage] = useState(1);
   const [allResults, setAllResults] = useState<Ad[]>([]); // للاحتفاظ بجميع النتائج
 
-  console.log("searchTermBEFORE ", searchTerm);
+  console.log("all res  ", allResults);
 
 
 
@@ -63,8 +63,8 @@ function Search() {
             id={ad.id}
             subcat={ad.subcategory}
             offer_type={ad.offer_type}
-            fav={ad.fav}
-          />
+            fav={ad.fav ? "added" : "removed"}
+            />
         ))}
       </div>
 

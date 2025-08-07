@@ -1,6 +1,6 @@
 "use client";
 
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { Heart, MapPin, Pencil } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -85,11 +85,21 @@ const AdCard: FC<AdCardProps> = ({
     }
   }
 
+
+  useEffect(() => {
+    setIsFavorite(fav);
+  }, [fav]);
+
   const [isFavorite, setIsFavorite] = useState<string>(fav );
   const addPostFavMutation = useAddPostFav();
+
   function handleFavClick() {
     const isFavPast = isFavorite;
-    setIsFavorite( isFavorite === "added" ? "removed" : "added" );
+    const newFavState = isFavPast === "added" ? "removed" : "added";
+  
+    // ✅ التحديث الفوري في الواجهة
+    setIsFavorite(newFavState);
+  
     addPostFavMutation.mutate(
       { post_id: id },
       {
@@ -97,13 +107,17 @@ const AdCard: FC<AdCardProps> = ({
 
         },
         onError: () => {
-          setIsFavorite( isFavPast );
+          setIsFavorite(isFavPast);
           console.error("فشل في تحديث المفضلة");
         },
       }
     );
   }
 
+
+
+  console.log("fav ", isFavorite) 
+  console.log("title ", title) 
 
   return (
     <div className="block h-64 hover:scale-105 transition-all duration-300">
@@ -133,7 +147,7 @@ const AdCard: FC<AdCardProps> = ({
               <Heart
                 className={clsx(
                   "w-8 h-8 transition-colors rounded-md p-1  ",
-                  isFavorite == "added" 
+                  (isFavorite == "added" )
                     ? "bg-cgreen text-white group-hover:bg-cwhite group-hover:text-cgreen"
                     : "bg-cwhite text-cgreen group-hover:bg-cgreen group-hover:text-white"
                 )}

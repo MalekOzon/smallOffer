@@ -1,7 +1,6 @@
 {
   "/_not-found/page": "app/_not-found/page.js",
-  "/(public)/page": "app/(public)/page.js",
-  "/dashboard/page": "app/dashboard/page.js",
+  "/dashboard/favorites/page": "app/dashboard/favorites/page.js",
   "/(public)/searchpost/page": "app/(public)/searchpost/page.js",
-  "/(public)/preview/[category]/[id]/page": "app/(public)/preview/[category]/[id]/page.js",
-  "/(public)/s
+  "/(public)/preview/[category]/[id]/page": "app/(public)/preview/[category]/[id]/page.js"
+}
