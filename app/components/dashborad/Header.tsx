@@ -280,10 +280,10 @@ const Header = ({ onMenuClick }: { onMenuClick?: () => void }) => {
   );
 };
 
-export default function HeaderPage() {
+export default function HeaderPage({ onMenuClick }: { onMenuClick?: () => void }) {
   return (
     <Suspense fallback={<div>جاري التحميل...</div>}>
-      <Header />
+      <Header onMenuClick={onMenuClick} />
     </Suspense>
   );
 }
