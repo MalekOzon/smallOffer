@@ -1,3 +1,4 @@
+"use client"
 import { Users, Target, Award, Heart } from "lucide-react";
 
 const AboutPage = () => {
