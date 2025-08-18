@@ -5,7 +5,7 @@ import { syrianGovernorates } from "@/app/signup/step2/syrianGovernorates";
 import { useCreateLandPost } from "@/app/lib/postServices/postMutations";
 import { useEffect, useRef, useState } from "react";
 import { Search } from "lucide-react";
-import Button from "@/app/components/ui/Button";
+import { Button } from "@/app/components/ui/Button";
 import Image from "next/image";
 import { useUrl } from "@/app/lib/context/URLProvider";
 

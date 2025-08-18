@@ -18,7 +18,7 @@ type AdCardProps = {
   published?: "accepted" | "pending" | "declined";
   isFav: boolean;
   subcat: string;
-  fav: "added" | "removed"
+  fav: "added" | "removed" 
 };
 
 const AdCard: FC<AdCardProps> = ({
@@ -87,10 +87,10 @@ const AdCard: FC<AdCardProps> = ({
 
 
   useEffect(() => {
-    setIsFavorite(fav);
+    setIsFavorite(fav );
   }, [fav]);
 
-  const [isFavorite, setIsFavorite] = useState<string>(fav );
+  const [isFavorite, setIsFavorite] = useState<string | boolean>(fav );
   const addPostFavMutation = useAddPostFav();
 
   function handleFavClick() {
@@ -116,8 +116,8 @@ const AdCard: FC<AdCardProps> = ({
 
 
 
-  console.log("fav ", isFavorite) 
-  console.log("title ", title) 
+  // console.log("fav ", isFavorite) 
+  // console.log("title ", title) 
 
   return (
     <div className="block h-64 hover:scale-105 transition-all duration-300">

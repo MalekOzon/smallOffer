@@ -5,7 +5,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
-import Button from "@/app/components/ui/Button";
+import { Button } from "@/app/components/ui/Button";
 import SignPhoto from "@/app/components/resgister/SignPhoto";
 import HeaderSignup from "../../components/resgister/HeaderSignup";
 import { usePhone } from "@/app/lib/context/PhoneContext";

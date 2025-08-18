@@ -1,46 +1,89 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Mail, Phone, MapPin, Send } from "lucide-react";
-
+import contacImage from "../../../public/resourses/contacImage.svg";
+import Image from "next/image";
+import { useFeedbackEmail } from "@/app/lib/dashboardServices/dashboardMutation";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import z from "zod";
+import Notification from "@/app/components/ui/Notification";
+import FAQ from "@/app/components/main/FAQ";
 const ContactPage = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    subject: "",
-    message: "",
+  const contactSchema = z.object({
+    full_name: z.string().min(1, "الاسم مطلوب"),
+    email: z.string().email("البريد غير صالح"),
+    message: z.string().min(1, "الرسالة مطلوبة"),
+    title: z.string().min(1, "العنوان مطلوب"),
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // هنا يمكن إضافة منطق إرسال النموذج
-    alert("تم إرسال رسالتك بنجاح! سنتواصل معك قريباً.");
-    setFormData({ name: "", email: "", subject: "", message: "" });
-  };
+  type ContactFormValues = z.infer<typeof contactSchema>;
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
+  const {
+    register,
+    handleSubmit: handleContactSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<ContactFormValues>({
+    resolver: zodResolver(contactSchema),
+  });
+
+  // إرسال رسالة تواصل معنا
+  const [notification2, setNotification2] = useState<{
+    message: string;
+    type: "success" | "error";
+  } | null>(null);
+
+  const [showSuccessDialog, setShowSuccessDialog] = useState(false);
+
+  useEffect(() => {
+    if (notification2?.type === "success") {
+      setShowSuccessDialog(true);
+      reset(); // لتصفير النموذج
+      setTimeout(() => {
+        setShowSuccessDialog(false);
+      }, 3000);
+    }
+  }, [notification2, reset]);
+
+  const feedbackEmail = useFeedbackEmail(setNotification2);
+  const { isPending: isLoadingSend } = feedbackEmail;
+
+  const onSubmitContact = async (data: ContactFormValues) => {
+    const jsonData = JSON.stringify({
+      full_name: data.full_name,
+      email: data.email,
+      title: data.title,
+      message: data.message,
     });
+    feedbackEmail.mutate(JSON.parse(jsonData));
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen  mt-5">
       <div className="max-w-7xl mx-auto">
-        {/* Header */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">تواصل معنا</h1>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            نحن هنا لمساعدتك. لا تتردد في التواصل معنا لأي استفسار أو مساعدة
-          </p>
-        </div>
+        {/* Hero Section */}
+        <section className=" mx-10 flex justify-between h-full max-md:flex-col-reverse">
+          <div className="flex flex-col justify-center p-6  text-gray-800 w-1/2 max-md:w-full  ">
+            <h1 className="text-3xl font-bold max-md:text-2xl">تواصل معنا</h1>
+            <p className=" mt-2 text-xl max-md:w-full max-md:text-lg">
+              نحن هنا للإجابة على استفساراتك، ودعمك في مشاريعك، والاستماع إلى
+              أفكارك. لا تتردد في التواصل معنا، فكل رسالة هي بداية تعاون مميز.
+            </p>
+          </div>
+          <div>
+            <Image src={contacImage} alt="sora" width={1000} height={1000} />
+          </div>
+        </section>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 ">
           {/* Contact Information */}
-          <div className="bg-white rounded-lg shadow-lg p-8">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-6">معلومات التواصل</h2>
-            
+          <div className="bg-gray-50 rounded-lg shadow-lg p-8">
+            <h2 className="text-2xl font-semibold text-gray-900 mb-6">
+              معلومات التواصل
+            </h2>
+
             <div className="space-y-6">
               <div className="flex items-start">
                 <div className="flex-shrink-0">
@@ -49,7 +92,9 @@ const ContactPage = () => {
                   </div>
                 </div>
                 <div className="mr-4">
-                  <h3 className="text-lg font-medium text-gray-900">البريد الإلكتروني</h3>
+                  <h3 className="text-lg font-medium text-gray-900">
+                    البريد الإلكتروني
+                  </h3>
                   <p className="text-gray-600">info@small-offer.com</p>
                 </div>
               </div>
@@ -81,7 +126,9 @@ const ContactPage = () => {
 
             {/* Office Hours */}
             <div className="mt-8 pt-8 border-t border-gray-200">
-              <h3 className="text-lg font-medium text-gray-900 mb-4">ساعات العمل</h3>
+              <h3 className="text-lg font-medium text-gray-900 mb-4">
+                ساعات العمل
+              </h3>
               <div className="space-y-2 text-gray-600">
                 <p>الأحد - الخميس: 9:00 ص - 6:00 م</p>
                 <p>الجمعة - السبت: 10:00 ص - 4:00 م</p>
@@ -90,77 +137,114 @@ const ContactPage = () => {
           </div>
 
           {/* Contact Form */}
-          <div className="bg-white rounded-lg shadow-lg p-8">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-6">أرسل لنا رسالة</h2>
-            
-            <form onSubmit={handleSubmit} className="space-y-6">
+          <div className="bg-gray-50  rounded-lg shadow-lg p-8">
+            <h2 className="text-2xl font-semibold text-gray-900 mb-6">
+              أرسل لنا رسالة
+            </h2>
+            {/* ------------- Noti -------------- */}
+            {notification2 && (
+              <Notification
+                message={notification2.message}
+                type={notification2.type}
+                onClose={() => setNotification2(null)}
+              />
+            )}
+            <form
+              onSubmit={handleContactSubmit(onSubmitContact)}
+              className="space-y-6"
+            >
               <div>
-                <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+                <label
+                  htmlFor="name"
+                  className="block text-sm font-medium text-gray-700 mb-2"
+                >
                   الاسم الكامل
                 </label>
                 <input
                   type="text"
                   id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
+                  {...register("full_name")}
                   required
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   placeholder="أدخل اسمك الكامل"
                 />
+                {errors.full_name && (
+                  <p className="text-red-500 text-sm mt-1">
+                    {errors.full_name.message}
+                  </p>
+                )}
               </div>
 
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                <label
+                  htmlFor="email"
+                  className="block text-sm font-medium text-gray-700 mb-2"
+                >
                   البريد الإلكتروني
                 </label>
                 <input
                   type="email"
                   id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
+                  {...register("email")}
                   required
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   placeholder="أدخل بريدك الإلكتروني"
                 />
+                {errors.email && (
+                  <p className="text-red-500 text-sm mt-1">
+                    {errors.email.message}
+                  </p>
+                )}
               </div>
 
               <div>
-                <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-2">
+                <label
+                  htmlFor="subject"
+                  className="block text-sm font-medium text-gray-700 mb-2"
+                >
                   الموضوع
                 </label>
                 <input
                   type="text"
                   id="subject"
-                  name="subject"
-                  value={formData.subject}
-                  onChange={handleChange}
+                  {...register("title")}
                   required
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   placeholder="أدخل موضوع الرسالة"
                 />
+                {errors.title && (
+                  <p className="text-red-500 text-sm mt-1">
+                    {errors.title.message}
+                  </p>
+                )}
               </div>
 
               <div>
-                <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
+                <label
+                  htmlFor="message"
+                  className="block text-sm font-medium text-gray-700 mb-2"
+                >
                   الرسالة
                 </label>
                 <textarea
                   id="message"
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
+                  {...register("message")}
                   required
                   rows={5}
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   placeholder="اكتب رسالتك هنا..."
                 />
+                {errors.message && (
+                  <p className="text-red-500 text-sm mt-1">
+                    {errors.message.message}
+                  </p>
+                )}
               </div>
 
               <button
                 type="submit"
-                className="w-full bg-blue-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-blue-700 transition duration-300 flex items-center justify-center"
+                disabled={isLoadingSend}
+                className="w-full bg-cgreen text-white py-3 px-6 rounded-lg font-semibold hover:bg-chgreen transition duration-300 flex items-center justify-center"
               >
                 <Send className="w-5 h-5 ml-2" />
                 إرسال الرسالة
@@ -170,34 +254,44 @@ const ContactPage = () => {
         </div>
 
         {/* FAQ Section */}
-        <div className="mt-16 bg-white rounded-lg shadow-lg p-8">
-          <h2 className="text-2xl font-semibold text-gray-900 mb-6 text-center">الأسئلة الشائعة</h2>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="border border-gray-200 rounded-lg p-6">
-              <h3 className="text-lg font-medium text-gray-900 mb-2">كيف يمكنني إنشاء حساب؟</h3>
-              <p className="text-gray-600">يمكنك إنشاء حساب جديد من خلال الضغط على زر إنشاء حساب في الصفحة الرئيسية.</p>
-            </div>
-            
-            <div className="border border-gray-200 rounded-lg p-6">
-              <h3 className="text-lg font-medium text-gray-900 mb-2">كيف يمكنني نشر إعلان؟</h3>
-              <p className="text-gray-600">بعد تسجيل الدخول، يمكنك الذهاب إلى لوحة التحكم وإنشاء إعلان جديد.</p>
-            </div>
-            
-            <div className="border border-gray-200 rounded-lg p-6">
-              <h3 className="text-lg font-medium text-gray-900 mb-2">هل الخدمة مجانية؟</h3>
-              <p className="text-gray-600">نعم، الخدمة الأساسية مجانية تماماً. قد تكون هناك خدمات إضافية مدفوعة.</p>
-            </div>
-            
-            <div className="border border-gray-200 rounded-lg p-6">
-              <h3 className="text-lg font-medium text-gray-900 mb-2">كيف يمكنني التواصل مع البائع؟</h3>
-              <p className="text-gray-600">يمكنك التواصل مع البائع من خلال نظام الرسائل الداخلي في المنصة.</p>
-            </div>
-          </div>
+        <div className="mt-16 rounded-lg shadow-lg p-8 w-full ">
+          <h2 className="text-2xl font-semibold text-gray-900 mb-6 text-center">
+            الأسئلة الشائعة
+          </h2>
+          <FAQ />
         </div>
       </div>
+      {showSuccessDialog && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white w-full md:max-w-md max-md:w-[350px] p-6 rounded-xl text-center space-y-4">
+            <div className="flex justify-center">
+              <div className="w-16 h-16 bg-green-500 text-white rounded-full flex items-center justify-center">
+                <svg
+                  className="w-8 h-8"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M5 13l4 4L19 7"
+                  ></path>
+                </svg>
+              </div>
+            </div>
+            <h3 className="text-xl font-bold text-gray-800">
+              تم الإرسال بنجاح
+            </h3>
+            <p className="text-sm text-gray-600">
+              تم استلام الرد سنرد عليك بأقرب وقت ممكن
+            </p>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
 
-export default ContactPage; 
+export default ContactPage;

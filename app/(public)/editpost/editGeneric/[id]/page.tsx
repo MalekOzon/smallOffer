@@ -1,5 +1,4 @@
 "use client";
-import Button from "@/app/components/ui/Button";
 import Notification from "@/app/components/ui/Notification";
 import { useGetGenericPostId } from "@/app/lib/postServices/postQueries";
 import { GenericPostPayload } from "@/app/lib/postServices/postType";
@@ -13,6 +12,7 @@ import Image from "next/image";
 import { useForm } from "react-hook-form";
 import { useUrl } from "@/app/lib/context/URLProvider";
 import { Search } from "lucide-react";
+import { Button } from "@/app/components/ui/Button";
 
 const EditGeneric = () => {
   const {

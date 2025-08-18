@@ -1,5 +1,5 @@
 import Image from "next/image";
-import test from "../../../public/resourses/test.png";
+import horizental from "../../../public/resourses/horizental.svg";
 import Link from "next/link";
 
 const HeaderLogin = () => {
@@ -7,13 +7,9 @@ const HeaderLogin = () => {
     <div className="w-full flex px-10 my-2 h-14 mt-4">
       {/* ---Logo --- */}
       <div className="flex justify-start w-full">
-        <Image
-          src={test}
-          alt="Logo"
-          width={1000}
-          height={1000}
-          className="w-40 h-14"
-        />
+      <Link href="/" className="text-2xl mr-2 font-bold text-cgreen">
+            <Image src={horizental} width={100} height={100} alt="logo" />
+          </Link>
       </div>
 
       {/* --- لديك حساب؟ قم بتسجيل الدخول --- */}

@@ -13,6 +13,8 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import Notification from "../ui/Notification";
+import Image from "next/image";
+import horizental from "../../../public/resourses/horizental.svg"
 
 const navItems = [
   { label: "الرئيسية", href: "/dashboard", icon: Home },
@@ -36,10 +38,10 @@ export function SidebarContent({ onNavigate }: { onNavigate?: () => void }) {
   return (
     <div className="w-full h-full bg-white  flex flex-col justify-between px-4 py-6">
       {/* الشعار */}
-      <div className="mb-8 flex justify-center max-md:mt-10">
-        <Link href="/" className="text-2xl font-bold text-cgreen">
-          Small Offer
-        </Link>
+      <div className="mb-4 flex justify-center max-md:mt-10">
+      <Link href="/" className="text-2xl mr-2 font-bold text-cgreen">
+            <Image src={horizental} width={100} height={100} alt="logo" />
+          </Link>
       </div>
 
       {/* عناصر التنقل */}

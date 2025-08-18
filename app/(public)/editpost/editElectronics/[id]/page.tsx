@@ -5,7 +5,7 @@ import { useGetElectronicsPostId } from "@/app/lib/postServices/postQueries";
 import { useEditElectronicForm } from "@/app/lib/postServices/editPostMutation";
 import { ElectronicsPostPayload } from "@/app/lib/postServices/postType";
 import Notification from "@/app/components/ui/Notification";
-import Button from "@/app/components/ui/Button";
+import { Button } from "@/app/components/ui/Button";
 import { syrianGovernorates } from "@/app/signup/step2/syrianGovernorates";
 import { categories } from "@/app/sections/categories";
 import SkeletonNotificationSettings from "@/app/components/ui/SkeletonNotificationSettings";

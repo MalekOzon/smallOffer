@@ -4,7 +4,7 @@ import { useCreateMobilePost } from "@/app/lib/postServices/postMutations";
 import { syrianGovernorates } from "@/app/signup/step2/syrianGovernorates";
 import Notification from "@/app/components/ui/Notification";
 import { Search } from "lucide-react";
-import Button from "@/app/components/ui/Button";
+import { Button } from "@/app/components/ui/Button";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { useUrl } from "@/app/lib/context/URLProvider";

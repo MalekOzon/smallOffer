@@ -7,7 +7,7 @@ import { useCreatePost } from "@/app/lib/postServices/postMutations";
 import React, { useEffect, useRef, useState } from "react";
 import Notification from "@/app/components/ui/Notification";
 import { Search } from "lucide-react";
-import Button from "@/app/components/ui/Button";
+import { Button } from "@/app/components/ui/Button";
 import Image from "next/image";
 import { useUrl } from "@/app/lib/context/URLProvider";
 

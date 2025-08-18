@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { Eye, EyeOff } from "lucide-react"; // يمكنك استخدام أيقونات أخرى أو من Heroicons
 import ProgressSteps from "../components/ui/ProgressSteps";
-import Button from "../components/ui/Button";
+import { Button } from "@/app/components/ui/Button";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import Link from "next/link";

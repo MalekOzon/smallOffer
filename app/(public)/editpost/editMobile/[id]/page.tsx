@@ -5,7 +5,6 @@ import { useGetMobilePostId } from "@/app/lib/postServices/postQueries";
 import { useEditMobileForm } from "@/app/lib/postServices/editPostMutation";
 import { MobilePostPayload } from "@/app/lib/postServices/postType";
 import Notification from "@/app/components/ui/Notification";
-import Button from "@/app/components/ui/Button";
 import { syrianGovernorates } from "@/app/signup/step2/syrianGovernorates";
 import { categories } from "@/app/sections/categories";
 import SkeletonNotificationSettings from "@/app/components/ui/SkeletonNotificationSettings";
@@ -17,6 +16,7 @@ import Image from "next/image";
 import { useForm } from "react-hook-form";
 import { Search } from "lucide-react";
 import { useUrl } from "@/app/lib/context/URLProvider";
+import { Button } from "@/app/components/ui/Button";
 
 const EditMobile = () => {
   const {
@@ -423,7 +423,7 @@ const EditMobile = () => {
               <Button
                 type="button"
                 className="w-1/2 text-6 font-semibold"
-                variant={isSearch === true ? "primary" : "none"}
+                variant={isSearch === true ? "default" : "outline"}
                 onClick={() => handleOfferType("search")}
               >
                 أنا أبحث

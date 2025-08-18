@@ -14,7 +14,7 @@ import {
   TYPE_CHOICES,
 } from "@/app/(public)/newpost/components/CarForm";
 
-import Button from "@/app/components/ui/Button";
+import { Button } from "@/app/components/ui/Button";
 
 import Notification from "@/app/components/ui/Notification";
 

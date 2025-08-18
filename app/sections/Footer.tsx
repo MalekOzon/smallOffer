@@ -3,15 +3,17 @@ import Link from "next/link";
 import Image from "next/image";
 import android from "../../public/resourses/android.svg"
 import iphone from "../../public/resourses/iphone.svg"
-
+import horizental from "../../public/resourses/horizental.svg"
 const Footer = () => {
   return (
     <footer className="bg-gradient-to-b from-green-200 to-green-50 text-gray-800 py-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
           
-          <div>
-            <h1 className="text-2xl text-cgreen font-bold">Small Offer</h1>
+          <div className="flex flex-col justify-center items-center w-full mb-4">
+            <Link href="/">
+              <Image src={horizental} alt="logo" width={100} height={100} />
+            </Link>
             <span className="text-gray-700">قم بتحميل التطبيق الآن</span>
             <div className="flex gap-3 items-center justify-center mt-4">
               <button >

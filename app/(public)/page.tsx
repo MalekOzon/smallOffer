@@ -1,108 +1,132 @@
-'use client'
+"use client";
+import Image from "next/image";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+} from "../components/ui/carousel";
+import {
+  useGetExternalAd,
+  useGetInternalAd,
+} from "../lib/searchServices/searchQueries";
+import Autoplay from "embla-carousel-autoplay";
 import Link from "next/link";
-// import { useState, useEffect } from "react";
-// import { useGetUserPosts } from "../lib/dashboardServices/dashboardQueries";
-// import SkeletonNotificationSettings from "../components/ui/SkeletonNotificationSettings";
-// import AdCard from "../components/ui/AdCard";
-// import { Ad } from "../types/authTypes";
-// import  placeholderPost  from "../../public/resourses/placeholderPost.svg"
+import HoodAds from "../components/main/HoodAds";
+import Loader from "../components/ui/Loader";
+import LastAdInMain from "../components/main/LastAdInMain";
 
 const HomePage = () => {
+  const { data, isLoading } = useGetInternalAd();
+  const { data: dataEx, isLoading: isLoading2 } = useGetExternalAd();
 
-  // const [page, setPage] = useState(1);
-  // const pageSize = 4;
-  // const [ads, setAds] = useState<Ad[]>([]);
-  // const { data, isLoading, isFetching } = useGetUserPosts(page, pageSize);
-  // const [hasMore, setHasMore] = useState(true);
-
-  // useEffect(() => {
-  //   if (data && page === 1) {
-  //     setAds(data.results);
-  //     setHasMore(data.count > data.results.length);
-  //   } else if (data && page > 1) {
-  //     setAds((prev) => [...prev, ...data.results]);
-  //     setHasMore(ads.length + data.results.length < data.count);
-  //   }
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [data]);
-
-  // if (isLoading && page === 1) return <SkeletonNotificationSettings />;
+  if (isLoading || isLoading2) return <Loader />;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
-      {/* Hero Section */}
-      <section className="relative py-10 px-4 sm:px-6 lg:px-8">
+    <div className="my-10">
+      <div className="w-[80%] m-auto ">
+        <Carousel
+          dir="ltr"
+          opts={{
+            align: "start",
+            loop: true,
+            slidesToScroll: 1,
+          }}
+          plugins={[
+            Autoplay({
+              delay: 2000,
+            }),
+          ]}
+        >
+          <CarouselContent>
+            {data?.map((ad) => {
+              console.log("Rendering ad:", ad.id); // تأكيد التكرار
+              return (
+                <CarouselItem key={ad.id}>
+                  <div className="h-full bg-green-200 rounded-2xl p-8 flex max-md:flex-col-reverse items-center justify-between">
+                    <div className="flex-1 text-right md:pr-8 w-1/2 max-md:w-full max-md:mt-4">
+                      <h2 className="text-3xl font-bold text-gray-800 mb-4 max-md:text-lg w-full">
+                        {ad.title}
+                      </h2>
+                      <p className="text-lg text-gray-700 leading-relaxed">
+                        {ad.description}
+                      </p>
+                    </div>
+                    <div className="flex-1 flex justify-center w-1/2 max-md:w-full  bg-red-200">
+                      <Image
+                        src={ad.image}
+                        alt={ad.title}
+                        width={1000}
+                        height={1000}
+                        className="w-full h-60 object-fill rounded-lg"
+                      />
+                    </div>
+                  </div>
+                </CarouselItem>
+              );
+            })}
+          </CarouselContent>
+          {/* <CarouselNext className="absolute left-16 -top-10 size-12 " />
+          <CarouselPrevious className="absolute left-0 -top-10 size-12" /> */}
+        </Carousel>
+      </div>
 
+      <HoodAds />
 
+      <div className="w-[80%] m-auto mt-20">
+        <Carousel
+          dir="ltr"
+          opts={{
+            align: "start",
+            loop: true,
+            slidesToScroll: 1,
+          }}
+          plugins={[
+            Autoplay({
+              delay: 4000,
+            }),
+          ]}
+          className="w-full"
+        >
+          <CarouselContent className="">
+            {dataEx?.map((ad) => {
+              console.log("Rendering ad:", ad.id); // تأكيد التكرار
+              return (
+                <CarouselItem key={ad.id} className=" ">
+                  <Link href={ad.link} className=" bg-red-300">
+                    <div className="w-full  rounded-2xl flex items-center justify-center">
+                      <Image
+                        src={ad.image}
+                        alt="image"
+                        width={1000}
+                        height={1000}
+                        className="h-80 w-full object-fill rounded-lg"
+                      />
+                    </div>
+                  </Link>
+                </CarouselItem>
+              );
+            })}
+          </CarouselContent>
+          {/* <CarouselNext className="absolute left-16 -top-10 size-12 " />
+          <CarouselPrevious className="absolute left-0 -top-10 size-12" /> */}
+        </Carousel>
+      </div>
 
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center">
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
-              مرحباً بك في
-              <span className="text-cgreen block">منصة العروض الصغيرة</span>
-            </h1>
-            <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
-              اكتشف أفضل العروض والصفقات في منطقتك. بيع واشترِ بسهولة وأمان
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link 
-                href="/signup"
-                className="bg-cgreen text-white px-8 py-3 rounded-lg font-semibold hover:bg-chgreen transition duration-300"
-              >
-                ابدأ الآن
-              </Link>
-              <Link 
-                href="/about"
-                className="border border-cgreen text-cgreen px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition duration-300"
-              >
-                تعرف علينا
-              </Link>
-            </div>
-          </div>
+      <LastAdInMain />
+
+      <div className="space-y-5 rounded-4xl w-[80%] m-auto mt-20 bg-green-100 p-4 py-6 flex justify-center items-center flex-col">
+        <h1 className="text-3xl font-bold max-md:text-2xl">ماذا تنتظر ؟</h1>
+        <p className="text-lg text-cdarkgray font-semibold">
+          ابدأ بإعلانك اليوم وتمتع بترقية إعلاناتك مع خصم 10٪ لمدة 30 يومًا.
+        </p>
+        <div className="w-full flex items-center justify-center ">
+          <button className="bg-cgreen  text-white px-6 py-2 text-lg rounded-lg">
+            <Link href={`/newpost`}>نشر إعلان جديد</Link>
+          </button>
         </div>
-      </section>
-
-      {/* Features Section */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">
-            لماذا تختار منصتنا؟
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="text-center p-6">
-              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <svg className="w-8 h-8 text-cgreen" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-semibold mb-2">آمن وموثوق</h3>
-              <p className="text-gray-600">منصة آمنة لحماية بياناتك ومعاملاتك</p>
-            </div>
-            <div className="text-center p-6">
-              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-semibold mb-2">سريع وسهل</h3>
-              <p className="text-gray-600">واجهة سهلة الاستخدام لبيع وشراء سريع</p>
-            </div>
-            <div className="text-center p-6">
-              <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <svg className="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-semibold mb-2">مجتمع نشط</h3>
-              <p className="text-gray-600">انضم إلى مجتمع من البائعين والمشترين</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-
+      </div>
     </div>
   );
 };
 
-export default HomePage; 
+export default HomePage;

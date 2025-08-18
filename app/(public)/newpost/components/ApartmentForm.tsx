@@ -1,4 +1,4 @@
-  import Button from "@/app/components/ui/Button";
+import { Button } from "@/app/components/ui/Button";
   import Notification from "@/app/components/ui/Notification";
 import { useUrl } from "@/app/lib/context/URLProvider";
   import { useCreateApartmentPost } from "@/app/lib/postServices/postMutations";

@@ -5,7 +5,7 @@ import { useGetApartmentPostId } from "@/app/lib/postServices/postQueries";
 import { useEditApartmentForm } from "@/app/lib/postServices/editPostMutation";
 import { ApartmentPostPayload } from "@/app/lib/postServices/postType";
 import Notification from "@/app/components/ui/Notification";
-import Button from "@/app/components/ui/Button";
+import { Button } from "@/app/components/ui/Button";
 import { syrianGovernorates } from "@/app/signup/step2/syrianGovernorates";
 import { categories } from "@/app/sections/categories";
 import SkeletonNotificationSettings from "@/app/components/ui/SkeletonNotificationSettings";

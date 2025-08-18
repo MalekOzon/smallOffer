@@ -21,6 +21,7 @@ import { useGetUserInfo } from "../lib/dashboardServices/dashboardQueries";
 import { categories } from "./categories";
 import { easeInOut, motion } from "framer-motion";
 import { useRouter, useSearchParams } from "next/navigation";
+import horizental from "../../public/resourses/horizental.svg";
 
 function Navbar() {
   const [isMobile, setIsMobile] = useState(false);
@@ -45,18 +46,25 @@ function Navbar() {
   const searchParams = useSearchParams();
 
   // تهيئة searchText من sessionStorage أو searchParams
-  const [searchText, setSearchText] = useState(() => {
-    const savedSearch = sessionStorage.getItem("searchText");
+  const [searchText, setSearchText] = useState("");
+
+  useEffect(() => {
     const urlSearch = searchParams.get("search");
-    return urlSearch || savedSearch || "";
-  });
+    const savedSearch =
+      typeof window !== "undefined"
+        ? sessionStorage.getItem("searchText")
+        : null;
+    setSearchText(urlSearch || savedSearch || "");
+  }, [searchParams]);
 
   // حفظ searchText في sessionStorage عند التغيير
   useEffect(() => {
-    if (searchText.trim()) {
-      sessionStorage.setItem("searchText", searchText);
-    } else {
-      sessionStorage.removeItem("searchText");
+    if (typeof window !== "undefined") {
+      if (searchText.trim()) {
+        sessionStorage.setItem("searchText", searchText);
+      } else {
+        sessionStorage.removeItem("searchText");
+      }
     }
   }, [searchText]);
 
@@ -300,7 +308,7 @@ function Navbar() {
             <Heart />
           </Link>
           <Link href="/" className="text-2xl font-bold text-cgreen">
-            Small Offer
+            <Image src={horizental} width={100} height={100} alt="logo" />
           </Link>
         </div>
         {/* موبايل: خط ثاني */}
@@ -337,8 +345,8 @@ function Navbar() {
         </div>
         {/* ديسكتوب: الهيدر القديم */}
         <div className="hidden md:flex items-center justify-between py-2 px-3">
-          <Link href="/" className="text-2xl font-bold text-cgreen">
-            Small Offer
+          <Link href="/" className="text-2xl mr-2 font-bold text-cgreen">
+            <Image src={horizental} width={100} height={100} alt="logo" />
           </Link>
           <div className="mx-6 relative flex-1 md:w-[40%] max-w-md">
             <span
@@ -526,11 +534,8 @@ function Navbar() {
           className="fixed inset-y-0 left-0 w-full bg-cwhite shadow-lg z-50 overflow-y-auto"
         >
           <div className="flex flex-col justify-between items-center p-4 border-b border-cdarkgray">
-            <Link
-              href="/"
-              className="text-3xl w-full flex justify-center mb-4 font-bold text-cgreen"
-            >
-              Small Offer
+            <Link href="/" className="text-2xl font-bold text-cgreen">
+              <Image src={horizental} width={100} height={100} alt="logo" />{" "}
             </Link>
             <div className="flex w-full justify-between items-center">
               <h3 className="text-xl font-bold">الفئات</h3>
@@ -783,7 +788,7 @@ function Navbar() {
       )}
     </>
   );
-};
+}
 
 export default function NavbarPage() {
   return (
@@ -792,4 +797,3 @@ export default function NavbarPage() {
     </Suspense>
   );
 }
-

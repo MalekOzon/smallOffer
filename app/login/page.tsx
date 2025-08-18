@@ -4,13 +4,13 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 import HeaderLogin from "../components/resgister/HeaderLogin";
-import Button from "../components/ui/Button";
 import SignPhoto from "../components/resgister/SignPhoto";
 import { useLogin } from "../lib/loginservices/mutations";
 import { useState } from "react";
 import Notification from "../components/ui/Notification";
 import { Eye, EyeOff } from "lucide-react";
 import Link from "next/link";
+import { Button } from "../components/ui/Button";
 
 // Zod schema
 const formSchema = z.object({
@@ -134,9 +134,7 @@ export default function LoginPage() {
                 </button>
             </form>
             <Button
-              variant="none"
               className="underline mt-4 mb-6 text-cgreen w-full flex justify-center"
-              
             >
               <Link href="forgetpassword">
                 نسيت كلمة المرور
