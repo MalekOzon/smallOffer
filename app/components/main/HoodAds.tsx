@@ -11,7 +11,7 @@ import {
   CarouselPrevious,
 } from "../ui/carousel";
 import Link from "next/link";
-import LoadingSpinner from "../ui/LoadingSpinner";
+import Autoplay from "embla-carousel-autoplay";
 const HoodAds = () => {
   const { data: userData, isLoading: isUserLoading } = useGetUserInfo();
 
@@ -22,17 +22,11 @@ const HoodAds = () => {
     const isLoggedIn = !!userData?.username;
     if (!isLoggedIn) return "ordering=price";
     return selectedCategory === "الكل"
-      ? `city=${userData?.city || ''}`
-      : `city=${userData?.city || ''}&search=${selectedCategory}`;
+      ? `city=${userData?.city || ""}`
+      : `city=${userData?.city || ""}&search=${selectedCategory}`;
   }, [isUserLoading, userData, selectedCategory]);
 
-  if (searchQuery) {
-    console.log("searchQuery ", searchQuery);
-  }
-
-
   const { data } = useGetSearchRes(1, 15, searchQuery);
-
 
   const allCategories = [{ name: "الكل", slug: "all" }, ...categories];
 
@@ -57,20 +51,33 @@ const HoodAds = () => {
       <div>
         <h2 className="m-4 text-xl font-semibold">أبرز المنشورات بمنطقتك</h2>
         <div className=" p-4 h-[300px] w-full flex justify-center items-center">
-          {isUserLoading || !searchQuery ? (
-            <LoadingSpinner />
+          {!data || data.results.length == 0 ? (
+            <h1 className="text-lg font-semibold">
+              لا يوجد منشورات خاصة
+              <span className="text-cgreen"> ب{selectedCategory} </span>
+              في منطقتك
+            </h1>
           ) : (
             <Carousel
-              opts={{
-                align: "start",
-                slidesToScroll: 1,
-              }}
+            opts={{
+              align: "start",
+              loop: true,
+              slidesToScroll: 1,
+            }}
+            plugins={[
+              Autoplay({
+                delay: 2000,
+              }),
+            ]}
               dir="ltr"
               className="w-full h-full "
             >
               <CarouselContent className="w-full">
                 {data?.results?.map((ad) => (
-                  <CarouselItem key={ad.id} className="basis-1/4 max-sm:basis-1/2 max-md:basis-1/3 ">
+                  <CarouselItem
+                    key={ad.id}
+                    className="basis-1/4 max-sm:basis-1/2 max-md:basis-1/3 "
+                  >
                     <AdCard
                       key={ad.id}
                       title={ad.title}
@@ -94,12 +101,10 @@ const HoodAds = () => {
           )}
         </div>
       </div>
-      {searchQuery && (
+      {searchQuery && data && data.results.length > 0 && (
         <div className="w-full flex items-center justify-center">
           <button className="bg-cgreen  text-white px-6 py-2 text-lg rounded-lg">
-            <Link href={`/searchpost?${searchQuery}`}>
-              عرض المزيد
-            </Link>
+            <Link href={`/searchpost?${searchQuery}`}>عرض المزيد</Link>
           </button>
         </div>
       )}

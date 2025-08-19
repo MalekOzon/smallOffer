@@ -39,7 +39,6 @@ const HomePage = () => {
         >
           <CarouselContent>
             {data?.map((ad) => {
-              console.log("Rendering ad:", ad.id); // تأكيد التكرار
               return (
                 <CarouselItem key={ad.id}>
                   <div className="h-full bg-green-200 rounded-2xl p-8 flex max-md:flex-col-reverse items-center justify-between">
@@ -51,7 +50,7 @@ const HomePage = () => {
                         {ad.description}
                       </p>
                     </div>
-                    <div className="flex-1 flex justify-center w-1/2 max-md:w-full  bg-red-200">
+                    <div className="flex-1 flex justify-center w-1/2 max-md:w-full ">
                       <Image
                         src={ad.image}
                         alt={ad.title}
@@ -82,17 +81,16 @@ const HomePage = () => {
           }}
           plugins={[
             Autoplay({
-              delay: 4000,
+              delay: 2000,
             }),
           ]}
           className="w-full"
         >
           <CarouselContent className="">
             {dataEx?.map((ad) => {
-              console.log("Rendering ad:", ad.id); // تأكيد التكرار
               return (
                 <CarouselItem key={ad.id} className=" ">
-                  <Link href={ad.link} className=" bg-red-300">
+                  <Link href={ad.link} className=" ">
                     <div className="w-full  rounded-2xl flex items-center justify-center">
                       <Image
                         src={ad.image}
